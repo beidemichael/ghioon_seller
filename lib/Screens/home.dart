@@ -7,7 +7,7 @@ import 'package:ghioon_seller/Screens/HomeScreenWidets/products.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/store.dart';
 
 import '../Shared/customColors.dart';
-import 'HomeScreenWidets/Orders.dart';
+import 'HomeScreenWidets/orders.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
