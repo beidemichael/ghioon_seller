@@ -62,19 +62,20 @@ class _StoreState extends State<Store> {
               );
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 // height: ,
-          
+
                 decoration: BoxDecoration(
                   // border: Border.all(width: 1, color: Colors.black),
                   color: CustomColors().blue,
                   borderRadius: BorderRadius.circular(20.0),
                 ),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 12.0, horizontal: 30),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 12.0, horizontal: 30),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
