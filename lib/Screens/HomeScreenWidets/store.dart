@@ -1,8 +1,11 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/setting.dart';
 
 import '../../Shared/customColors.dart';
+import '../components/storeList.dart';
 
 class Store extends StatefulWidget {
   const Store({super.key});
@@ -14,6 +17,7 @@ class Store extends StatefulWidget {
 class _StoreState extends State<Store> {
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: Container(),
       appBar: PreferredSize(
@@ -24,10 +28,11 @@ class _StoreState extends State<Store> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Text('Store',
+                Text('Store',
                     style: TextStyle(
+                        fontFamily: 'Inter',
                         fontSize: 30.0,
-                        color: Colors.white,
+                        color: CustomColors().white,
                         fontWeight: FontWeight.w700)),
               ],
             ),
@@ -35,12 +40,12 @@ class _StoreState extends State<Store> {
             backgroundColor: CustomColors().blue,
             // automaticallyImplyLeading: false,
             elevation: 5,
-            shape: const RoundedRectangleBorder(
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(
                 bottom: Radius.circular(30),
               ),
             ),
-            iconTheme: const IconThemeData(color: Colors.white)),
+            iconTheme: IconThemeData(color: CustomColors().white)),
       ),
       body: Column(
         children: [
@@ -66,88 +71,41 @@ class _StoreState extends State<Store> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    const Text('My Store',
+                    Text('My Store',
                         style: TextStyle(
+                            fontFamily: 'Poppins',
                             fontSize: 30.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700)),
-                    const Text('Endale Abegazee',
+                            color: CustomColors().white,
+                            fontWeight: FontWeight.w600)),
+                    Text('Endale Abegazee',
                         style: TextStyle(
+                            fontFamily: 'Poppins',
                             fontSize: 18.0,
-                            color: Colors.white,
+                            color: CustomColors().white,
                             fontWeight: FontWeight.w400)),
-                    const Text('Id: G1547856',
+                    Text('Id: G1547856',
                         style: TextStyle(
                             fontSize: 17.0,
-                            color: Colors.white,
+                            color: CustomColors().white,
                             fontWeight: FontWeight.w200)),
                   ],
                 ),
               ),
             ),
           ),
-          StoreList(FontAwesomeIcons.solidUser, 'Customers'),
-          StoreList(FontAwesomeIcons.chartPie, 'Analytics'),
-          StoreList(FontAwesomeIcons.bullhorn, 'Maketing'),
+          StoreList(FontAwesomeIcons.solidUser, 'Customers', width),
+          StoreList(FontAwesomeIcons.chartPie, 'Analytics', width),
+          StoreList(FontAwesomeIcons.bullhorn, 'Maketing', width),
           GestureDetector(
-            onTap: (){
-               Navigator.push(
+              onTap: () {
+                Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const StoreSetting()),
                 );
-            },
-            child: StoreList(FontAwesomeIcons.gear, 'Setting')),
-          StoreList(FontAwesomeIcons.solidCircleQuestion, 'Support'),
+              },
+              child: StoreList(FontAwesomeIcons.gear, 'Setting', width)),
+          StoreList(FontAwesomeIcons.solidCircleQuestion, 'Support', width),
         ],
-      ),
-    );
-  }
-
-  Widget StoreList(IconData icon, String name) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 5),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        // height: ,
-
-        decoration: BoxDecoration(
-          border:
-              Border.all(width: 1, color: const Color.fromARGB(255, 224, 224, 224)),
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15.0),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                // ignore: prefer_const_literals_to_create_immutables
-                children: [
-                  Icon(
-                    icon,
-                    color: CustomColors().blue,
-                    size: 20,
-                  ),
-                  const SizedBox(
-                    width: 18,
-                  ),
-                  Text(name,
-                      style: const TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w500)),
-                ],
-              ),
-              Icon(
-                FontAwesomeIcons.angleRight,
-                color: CustomColors().blue,
-                size: 20,
-              ),
-            ],
-          ),
-        ),
       ),
     );
   }
