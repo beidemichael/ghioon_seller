@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/setting.dart';
 
 import '../../Shared/customColors.dart';
 
@@ -88,7 +89,14 @@ class _StoreState extends State<Store> {
           StoreList(FontAwesomeIcons.solidUser, 'Customers'),
           StoreList(FontAwesomeIcons.chartPie, 'Analytics'),
           StoreList(FontAwesomeIcons.bullhorn, 'Maketing'),
-          StoreList(FontAwesomeIcons.gear, 'Setting'),
+          GestureDetector(
+            onTap: (){
+               Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const StoreSetting()),
+                );
+            },
+            child: StoreList(FontAwesomeIcons.gear, 'Setting')),
           StoreList(FontAwesomeIcons.solidCircleQuestion, 'Support'),
         ],
       ),
