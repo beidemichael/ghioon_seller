@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../../Shared/customColors.dart';
+import '../components/option.dart';
 
 class Store extends StatefulWidget {
   const Store({super.key});
@@ -110,33 +111,15 @@ class _StoreState extends State<Store> {
                                       color: Colors.white,
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w300))
-
-                              // DropdownButton(
-                              //   // Initial Value
-                              //   value: dropdownvalue,
-
-                              //   // Down Arrow Icon
-                              //   icon: const Icon(Icons.keyboard_arrow_down),
-
-                              //   // Array list of items
-                              //   items: items.map((String items) {
-                              //     return DropdownMenuItem(
-                              //       value: items,
-                              //       child: Text(items),
-                              //     );
-                              //   }).toList(),
-                              //   // After selecting the desired option,it will
-                              //   // change button value to selected value
-                              //   onChanged: (String? newValue) {
-                              //     setState(() {
-                              //       dropdownvalue = newValue!;
-                              //     });
-                              //   },
-                              // ),
                             ]),
                       ],
                     ),
-                  ))
+                  )),
+              Option(width: width, title: 'Customers', icon: Icons.group),
+              Option(width: width, title: 'Analytics', icon: Icons.pie_chart),
+              Option(width: width, title: 'Marketing', icon: Icons.speaker),
+              Option(width: width, title: 'Settings', icon: Icons.settings),
+              Option(width: width, title: 'Support', icon: Icons.help),
             ],
           ),
         ));
