@@ -47,7 +47,7 @@ class _StoreState extends State<Store> {
             height: 20,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 8),
             child: Container(
               width: MediaQuery.of(context).size.width,
               // height: ,
@@ -85,47 +85,61 @@ class _StoreState extends State<Store> {
               ),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 10),
-            child: Container(
-              width: MediaQuery.of(context).size.width,
-              // height: ,
-
-              decoration: BoxDecoration(
-                border: Border.all(width: 1, color: Color.fromARGB(255, 224, 224, 224)),
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15.0),
-              ),
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        Icon(FontAwesomeIcons.solidUser,color: CustomColors().blue,size: 20,),
-                        SizedBox(width: 18,),
-                        const Text('Id: G1547856',
-                            style: TextStyle(
-                                fontSize: 20.0,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500)),
-                      ],
-                    ),
-                    Icon(
-                      FontAwesomeIcons.angleRight,
-                      color: CustomColors().blue,
-                      size: 20,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
+          StoreList(FontAwesomeIcons.solidUser, 'Customers'),
+          StoreList(FontAwesomeIcons.chartPie, 'Analytics'),
+          StoreList(FontAwesomeIcons.bullhorn, 'Maketing'),
+          StoreList(FontAwesomeIcons.gear, 'Setting'),
+          StoreList(FontAwesomeIcons.solidCircleQuestion, 'Support'),
         ],
+      ),
+    );
+  }
+
+  Widget StoreList(IconData icon, String name) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 5),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        // height: ,
+
+        decoration: BoxDecoration(
+          border:
+              Border.all(width: 1, color: const Color.fromARGB(255, 224, 224, 224)),
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 15.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                // ignore: prefer_const_literals_to_create_immutables
+                children: [
+                  Icon(
+                    icon,
+                    color: CustomColors().blue,
+                    size: 20,
+                  ),
+                  const SizedBox(
+                    width: 18,
+                  ),
+                  Text(name,
+                      style: const TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500)),
+                ],
+              ),
+              Icon(
+                FontAwesomeIcons.angleRight,
+                color: CustomColors().blue,
+                size: 20,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
