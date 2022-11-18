@@ -47,7 +47,7 @@ class _StoreSettingState extends State<StoreSetting> {
       ),
       body: Column(
         children: [
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           StoreList(FontAwesomeIcons.solidUser, 'Notification', width),
