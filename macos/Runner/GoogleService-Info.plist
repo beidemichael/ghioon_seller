@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>69046775842-7uletmtqgqg9vc7st4nna12p22p9flvj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.69046775842-7uletmtqgqg9vc7st4nna12p22p9flvj</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>69046775842-1hkcug6a8tmdnttk2tl50r1lsdttr2a8.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAZ4imgxZRx0A3EbgN3zS-vwggGBb32fAQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>69046775842</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.ghioonSeller</string>
+	<key>PROJECT_ID</key>
+	<string>ghioon-d8894</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ghioon-d8894.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:69046775842:ios:c34d7ece8ed3284e7c9a7b</string>
+</dict>
+</plist>

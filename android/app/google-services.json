@@ -1,0 +1,90 @@
+{
+  "project_info": {
+    "project_number": "69046775842",
+    "project_id": "ghioon-d8894",
+    "storage_bucket": "ghioon-d8894.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69046775842:android:f2a893dc4f2048267c9a7b",
+        "android_client_info": {
+          "package_name": "com.example.ghioon_registration"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69046775842-1hkcug6a8tmdnttk2tl50r1lsdttr2a8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ghioon_registration",
+            "certificate_hash": "2db82823f7cf93240b2b85f8517474a8194d9010"
+          }
+        },
+        {
+          "client_id": "69046775842-2qv144hebsa98tne1tjcjdosn3h7s43n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM4V9hvxC8IfEr8aGK1l87h6YJnAoD8PM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69046775842-2qv144hebsa98tne1tjcjdosn3h7s43n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "69046775842-en2cp6j7au9jdodrpvsj92gc2qhfcggq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ghioonRegistration"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69046775842:android:8f2151eef02c1ec67c9a7b",
+        "android_client_info": {
+          "package_name": "com.example.ghioon_seller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69046775842-2qv144hebsa98tne1tjcjdosn3h7s43n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDM4V9hvxC8IfEr8aGK1l87h6YJnAoD8PM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69046775842-2qv144hebsa98tne1tjcjdosn3h7s43n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "69046775842-en2cp6j7au9jdodrpvsj92gc2qhfcggq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ghioonRegistration"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
