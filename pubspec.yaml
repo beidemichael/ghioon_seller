@@ -33,15 +33,10 @@ dependencies:
   firebase_core: ^2.3.0
   flutter:
     sdk: flutter
+  flutter_launcher_icons: ^0.11.0
   font_awesome_flutter: ^10.2.1
 
 dev_dependencies:
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
   flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
@@ -49,6 +44,18 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 # The following section is specific to Flutter packages.
+flutter_icons:
+  android: true
+  ios: true
+  image_path_ios: "assets/Logo.png"
+  image_path_android: "assets/Logo.png"
+  adaptive_icon_background: "assets/splash3.png"
+  adaptive_icon_foreground: "assets/Logo.png"
+  web:
+    generate: true
+    image_path: "assets/Logo.png"
+    background_color: "#hexcode"
+    theme_color: "#hexcode"
 flutter:
 
   # The following line ensures that the Material Icons font is
@@ -80,7 +87,7 @@ flutter:
         - asset: assets/fonts/Inter-Regular.ttf
         - asset: assets/fonts/Inter-SemiBold.ttf
         - asset: assets/fonts/Inter-Thin.ttf
-        
+
     - family: Poppins
       fonts:
         - asset: assets/fonts/Poppins-Black.ttf
@@ -100,6 +107,5 @@ flutter:
         - asset: assets/fonts/Poppins-SemiBoldItalic.ttf
         - asset: assets/fonts/Poppins-Thin.ttf
         - asset: assets/fonts/Poppins-ThinItalic.ttf
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
