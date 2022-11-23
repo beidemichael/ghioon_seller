@@ -33,38 +33,36 @@ class BlueDashboardGrid extends StatelessWidget {
           ),
         ],
       ),
-      child: Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(title,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: width / 10,
-                      color: CustomColors().white,
-                      fontWeight: FontWeight.w600)),
-              const SizedBox(
-                height: 15,
-              ),
-              Icon(
-                icon,
-                color: CustomColors().white,
-                size: 50,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              Text(subTitle,
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: 'Poppins',
-                      fontSize: width / 20,
-                      color: CustomColors().white,
-                      fontWeight: FontWeight.w600))
-            ]),
-      ),
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: width / 10,
+                    color: CustomColors().white,
+                    fontWeight: FontWeight.w600)),
+            const SizedBox(
+              height: 15,
+            ),
+            Icon(
+              icon,
+              color: CustomColors().white,
+              size: 50,
+            ),
+            const SizedBox(
+              height: 15,
+            ),
+            Text(subTitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: width / 20,
+                    color: CustomColors().white,
+                    fontWeight: FontWeight.w600))
+          ]),
     );
   }
 }

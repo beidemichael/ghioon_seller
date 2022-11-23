@@ -3,11 +3,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/account.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/accountEdit.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/accountEdit.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/customers.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/marketing.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/setting.dart';
 
 import '../../Shared/customColors.dart';
 import '../components/storeList.dart';
+import 'StoreScreens/analytics.dart';
+import 'StoreScreens/support.dart';
 
 class Store extends StatefulWidget {
   const Store({super.key});
@@ -17,11 +21,22 @@ class Store extends StatefulWidget {
 }
 
 class _StoreState extends State<Store> {
+  support(BuildContext context) {
+    Support alert = Support();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: Container(),
+      drawer: Drawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
@@ -104,9 +119,30 @@ class _StoreState extends State<Store> {
               ),
             ),
           ),
-          StoreList(FontAwesomeIcons.solidUser, 'Customers', width),
-          StoreList(FontAwesomeIcons.chartPie, 'Analytics', width),
-          StoreList(FontAwesomeIcons.bullhorn, 'Maketing', width),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Customers()),
+                );
+              },
+              child: StoreList(FontAwesomeIcons.solidUser, 'Customers', width)),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Analytics()),
+                );
+              },
+              child: StoreList(FontAwesomeIcons.chartPie, 'Analytics', width)),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Marketing()),
+                );
+              },
+              child: StoreList(FontAwesomeIcons.bullhorn, 'Maketing', width)),
           GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -115,7 +151,12 @@ class _StoreState extends State<Store> {
                 );
               },
               child: StoreList(FontAwesomeIcons.gear, 'Setting', width)),
-          StoreList(FontAwesomeIcons.solidCircleQuestion, 'Support', width),
+          GestureDetector(
+              onTap: () {
+                support(context);
+              },
+              child: StoreList(
+                  FontAwesomeIcons.solidCircleQuestion, 'Support', width)),
         ],
       ),
     );

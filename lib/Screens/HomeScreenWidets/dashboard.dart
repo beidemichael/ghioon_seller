@@ -18,7 +18,7 @@ class _DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: Container(),
+      drawer: Drawer(),
       appBar: AppBar(
           centerTitle: true,
           title: Row(

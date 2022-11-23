@@ -35,6 +35,7 @@ dependencies:
     sdk: flutter
   flutter_launcher_icons: ^0.11.0
   font_awesome_flutter: ^10.2.1
+  google_fonts: ^3.0.1
 
 dev_dependencies:
   flutter_lints: ^2.0.0
@@ -65,6 +66,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/mockups/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -76,6 +78,11 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: IBMPlexSans
+      fonts:
+        - asset: assets/fonts/IBMPlexSans-Bold.ttf
+          weight: 700
+
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Black.ttf

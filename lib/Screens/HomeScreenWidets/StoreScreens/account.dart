@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/accountEdit.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/accountEdit.dart';
 
 import '../../../Shared/customColors.dart';
 

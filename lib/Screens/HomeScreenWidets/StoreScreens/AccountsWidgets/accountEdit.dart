@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Screens/components/textFormField.dart';
 
-import '../../../Shared/customColors.dart';
+import '../../../../Shared/customColors.dart';
 
 class AccountEdit extends StatefulWidget {
   const AccountEdit({super.key});
