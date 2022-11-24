@@ -1,8 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/firebase_options.dart';
+import 'package:provider/provider.dart';
 
-import 'Screens/home.dart';
+import 'Models/models.dart';
+import 'Screens/wrapper.dart';
+import 'Service/auth.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,10 +20,14 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+   return  MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: HomeScreen()
+        body: StreamProvider<UserAuth?>.value(
+          value: AuthServices().user,
+          initialData: null,
+          child: const Wrapper(),
+        ),
       ),
     );
   }
