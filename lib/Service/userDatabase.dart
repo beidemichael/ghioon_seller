@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../Models/models.dart';
+import 'package:ghioon_seller/Models/models.dart';
 
 class UserDatabaseService {
   var userUid;
