@@ -6,8 +6,7 @@ class AddProductService {
   final CollectionReference sellersCollection =
       FirebaseFirestore.instance.collection('Sellers');
 
-  Future registerInformation(
-    String productId,
+  Future addProduct(
     String name,
     String description,
     bool fixed,
@@ -33,7 +32,7 @@ class AddProductService {
             .doc(ref.id)
             .set({
               'created': Timestamp.now(),
-              'productId': productId,
+              'productId': ref.id,
               'name': name,
               'description': description,
               'fixed': fixed,

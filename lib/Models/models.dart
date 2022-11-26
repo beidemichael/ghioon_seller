@@ -49,7 +49,8 @@ class Product {
   String name;
   String description;
   bool fixed;
-  double price;
+  List<double> price;
+  List<int> range;
   double rating;
   String category;
   String image;
@@ -62,6 +63,7 @@ class Product {
     required this.description,
     required this.fixed,
     required this.price,
+    required this.range,
     required this.rating,
     required this.category,
     required this.image,
