@@ -3,6 +3,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Screens/components/BlueButton.dart';
+import 'package:ghioon_seller/Screens/components/image_picker.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 
 import '../../components/textFormField.dart';
@@ -75,12 +77,13 @@ class _AddProductState extends State<AddProduct> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
                 child: Row(children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.add_a_photo),
-                    color: CustomColors().blue,
-                    iconSize: 80,
-                  ),
+                  // IconButton(
+                  //   onPressed: () {},
+                  //   icon: Icon(Icons.add_a_photo),
+                  //   color: CustomColors().blue,
+                  //   iconSize: 80,
+                  // ),
+                  AddImage(),
                   Flexible(
                     child: ListView(
                       scrollDirection: Axis.horizontal,
@@ -366,9 +369,17 @@ class _AddProductState extends State<AddProduct> {
                                   ),
                                 ),
                               ),
+                        SizedBox(
+                          height: 15,
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              print('add product');
+                            },
+                            child: BlueButton(text: 'Continue'))
                       ]),
                 )),
-          )
+          ),
         ]),
       ),
     );
