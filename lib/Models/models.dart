@@ -35,3 +35,46 @@ class Categories {
     required this.documentId,
   });
 }
+
+class LastId {
+  int lastId;
+
+  LastId({
+    required this.lastId,
+  });
+}
+
+class Product {
+  String productId;
+  String name;
+  String description;
+  bool fixed;
+  double price;
+  double rating;
+  String category;
+  String image;
+  bool inStock;
+  int quantity;
+
+  Product({
+    required this.productId,
+    required this.name,
+    required this.description,
+    required this.fixed,
+    required this.price,
+    required this.rating,
+    required this.category,
+    required this.image,
+    required this.inStock,
+    required this.quantity,
+  });
+}
+
+class Review {
+  String productId;
+  List<String> reviews;
+  Review({
+    required this.productId,
+    required this.reviews,
+  });
+}
