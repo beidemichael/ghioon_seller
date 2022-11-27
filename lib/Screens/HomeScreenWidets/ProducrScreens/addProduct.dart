@@ -1,11 +1,16 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Models/addProductmodels.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/components.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
 import 'package:ghioon_seller/Screens/components/image_picker.dart';
+import 'package:ghioon_seller/Service/AddProductDatabase.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/textFormField.dart';
 
@@ -33,9 +38,13 @@ class _AddProductState extends State<AddProduct> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    var _range = context.watch<RangeData>().Ranges;
+    final appState = Provider.of<RangeData>(context);
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
@@ -83,7 +92,7 @@ class _AddProductState extends State<AddProduct> {
                   //   color: CustomColors().blue,
                   //   iconSize: 80,
                   // ),
-                  AddImage(),
+                  const AddImage(),
                   Flexible(
                     child: ListView(
                       scrollDirection: Axis.horizontal,
@@ -102,7 +111,7 @@ class _AddProductState extends State<AddProduct> {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Container(
@@ -117,7 +126,7 @@ class _AddProductState extends State<AddProduct> {
                             borderRadius: BorderRadius.circular(20.0),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Container(
@@ -137,7 +146,7 @@ class _AddProductState extends State<AddProduct> {
                   ),
                 ]),
               )),
-          SizedBox(height: 15),
+          const SizedBox(height: 15),
           Flexible(
             child: Container(
                 decoration: BoxDecoration(
@@ -157,7 +166,7 @@ class _AddProductState extends State<AddProduct> {
                             "Enter Product Name", productName, "Product Name"),
                         TextFormFieldProDescription(
                             "Description", description, "Description"),
-                        Text(
+                        const Text(
                           "Price",
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold),
@@ -188,7 +197,7 @@ class _AddProductState extends State<AddProduct> {
                                       color: Colors.grey.withOpacity(0.4),
                                       spreadRadius: 1,
                                       blurRadius: 2,
-                                      offset: Offset(
+                                      offset: const Offset(
                                           0, 3), // changes position of shadow
                                     ),
                                   ],
@@ -205,7 +214,7 @@ class _AddProductState extends State<AddProduct> {
                                 )),
                               ),
                             )),
-                            SizedBox(
+                            const SizedBox(
                               width: 15,
                             ),
                             Flexible(
@@ -232,7 +241,7 @@ class _AddProductState extends State<AddProduct> {
                                       color: Colors.grey.withOpacity(0.4),
                                       spreadRadius: 1,
                                       blurRadius: 2,
-                                      offset: Offset(
+                                      offset: const Offset(
                                           0, 3), // changes position of shadow
                                     ),
                                   ],
@@ -251,7 +260,7 @@ class _AddProductState extends State<AddProduct> {
                             )),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
                         fixed
@@ -261,7 +270,7 @@ class _AddProductState extends State<AddProduct> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
+                                      const Text(
                                         "Fixed Price",
                                         style: TextStyle(
                                             fontSize: 20,
@@ -271,13 +280,17 @@ class _AddProductState extends State<AddProduct> {
                                         children: [
                                           Expanded(
                                               child: TextFormFieldWithOutLabel(
-                                                  'New Price', fixedPrice)),
-                                          SizedBox(
+                                                  'New Price',
+                                                  fixedPrice,
+                                                  TextInputType.number)),
+                                          const SizedBox(
                                             width: 15,
                                           ),
                                           Expanded(
                                               child: TextFormFieldWithOutLabel(
-                                                  'Old Price', oldPrice))
+                                                  'Old Price',
+                                                  oldPrice,
+                                                  TextInputType.number))
                                         ],
                                       ),
                                       Row(
@@ -286,8 +299,9 @@ class _AddProductState extends State<AddProduct> {
                                               child: TextFormFieldWithOutIcon(
                                                   'Cost per Item',
                                                   cost,
-                                                  'Cost ')),
-                                          SizedBox(
+                                                  'Cost ',
+                                                  TextInputType.number)),
+                                          const SizedBox(
                                             width: 15,
                                           ),
                                           Expanded(
@@ -295,7 +309,7 @@ class _AddProductState extends State<AddProduct> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text(
+                                              const Text(
                                                 "Profit",
                                                 style: TextStyle(
                                                     fontSize: 22.0,
@@ -304,11 +318,11 @@ class _AddProductState extends State<AddProduct> {
                                                     fontWeight:
                                                         FontWeight.w500),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 15,
                                               ),
                                               Container(
-                                                child: Text("ETB 0",
+                                                child: const Text("ETB 0",
                                                     style: TextStyle(
                                                         fontSize: 30.0,
                                                         color: Color.fromARGB(
@@ -320,61 +334,201 @@ class _AddProductState extends State<AddProduct> {
                                           ))
                                         ],
                                       ),
-                                      InverntoryQty(Qty),
+                                      InventoryQty(Qty),
                                     ],
                                   ),
                                 ),
                               )
-                            : Flexible(
+                            : Expanded(
                                 child: Container(
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
-                                        "Range Price",
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                              child: TextFormFieldWithOutLabel(
-                                                  'From', productName)),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              "-",
-                                              style: TextStyle(fontSize: 30),
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            0, 8, 0, 8),
+                                        child: Row(children: [
+                                          const Text(
+                                            "Range Price",
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w500),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              appState.addToList(Range());
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                color: CustomColors().white,
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: CustomColors().blue),
+                                                borderRadius:
+                                                    BorderRadius.circular(35.0),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(3.0),
+                                                child: Icon(
+                                                    FontAwesomeIcons.plus,
+                                                    color: CustomColors().blue),
+                                              ),
                                             ),
                                           ),
-                                          Expanded(
-                                              child: TextFormFieldWithOutLabel(
-                                                  'To', productName)),
-                                          Padding(
-                                            padding: const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              "=",
-                                              style: TextStyle(fontSize: 30),
-                                            ),
+                                          SizedBox(
+                                            width: 10,
                                           ),
-                                          Expanded(
-                                              child: TextFormFieldWithOutLabel(
-                                                  'Price', productName))
-                                        ],
+                                          GestureDetector(
+                                            onTap: () {
+                                              appState.removeLast();
+                                            },
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                    width: 1,
+                                                    color: CustomColors().blue),
+                                                borderRadius:
+                                                    BorderRadius.circular(35.0),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(3.0),
+                                                child: Icon(
+                                                    FontAwesomeIcons.minus,
+                                                    color: CustomColors().blue),
+                                              ),
+                                            ),
+                                          )
+                                        ]),
                                       ),
-                                      InverntoryQty(Qty),
+                                      ListView.builder(
+                                          scrollDirection: Axis.vertical,
+                                          shrinkWrap: true,
+                                          itemCount: _range.length,
+                                          itemBuilder: (context, index) {
+                                            var currentStop = _range[index];
+                                            return Row(
+                                              children: [
+                                                Expanded(
+                                                    child:
+                                                        TextFormFieldWithOutLabel(
+                                                            'From',
+                                                            _range[index]
+                                                                .fromcontroller!,
+                                                            TextInputType
+                                                                .number)),
+                                                const Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    "-",
+                                                    style:
+                                                        TextStyle(fontSize: 30),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                    child:
+                                                        TextFormFieldWithOutLabel(
+                                                            'To',
+                                                            _range[index]
+                                                                .tocontroller!,
+                                                            TextInputType
+                                                                .number)),
+                                                const Padding(
+                                                  padding: EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    "=",
+                                                    style:
+                                                        TextStyle(fontSize: 30),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                    child:
+                                                        TextFormFieldWithOutLabel(
+                                                            'Price',
+                                                            _range[index]
+                                                                .pricecontroller!,
+                                                            TextInputType
+                                                                .number))
+                                              ],
+                                            );
+                                          }),
+                                      InventoryQty(Qty),
                                     ],
                                   ),
                                 ),
                               ),
-                        SizedBox(
+                        const SizedBox(
                           height: 15,
                         ),
                         GestureDetector(
-                            onTap: () {
-                              print('add product');
+                            onTap: () async {
+                              if (fixed) {
+                                print("fixed product");
+                                appState.priceList
+                                    .add(double.parse(fixedPrice.text));
+                                appState.rangeList
+                                    .add(int.parse(Qty.toString()));
+                                print(productName.text);
+                                print(description.text);
+                                print(appState.priceList);
+                                print(appState.rangeList);
+                                print(oldPrice.text);
+                                print(cost.text);
+                                print(Qty.toString());
+
+                                print(appState.rangeList);
+
+                                final user = FirebaseAuth.instance.currentUser;
+                                final phoneNumber = user!.phoneNumber;
+                                final userUid = user.uid;
+                                await AddProductService().addProduct(
+                                    productName.text,
+                                    description.text,
+                                    fixed,
+                                    appState.priceList,
+                                    appState.rangeList,
+                                    3.5,
+                                    'food',
+                                    'asdasd/asdasd/asda',
+                                    true,
+                                    Qty,
+                                    userUid);
+                                print('done');
+                              } else {
+                                print('add RAnge product');
+                                for (var i = 0; i < _range.length; i++) {
+                                  appState.priceList.add(double.parse(
+                                      _range[i].pricecontroller!.text));
+                                  appState.rangeList.add(
+                                      int.parse(_range[i].tocontroller!.text));
+                                }
+                                print(productName.text);
+                                print(description.text);
+                                print(appState.priceList);
+                                print(appState.rangeList);
+                                print(Qty.toString());
+
+                                final user = FirebaseAuth.instance.currentUser;
+                                final phoneNumber = user!.phoneNumber;
+                                final userUid = user.uid;
+                                AddProductService().addProduct(
+                                    productName.text,
+                                    description.text,
+                                    fixed,
+                                    appState.priceList,
+                                    appState.rangeList,
+                                    3.5,
+                                    'food',
+                                    'asdasd/asdasd/asda',
+                                    true,
+                                    Qty,
+                                    userUid);
+                              }
                             },
                             child: BlueButton(text: 'Continue'))
                       ]),
@@ -385,13 +539,13 @@ class _AddProductState extends State<AddProduct> {
     );
   }
 
-  Widget InverntoryQty(int Qty) {
+  Widget InventoryQty(int Qty) {
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      Text(
+      const Text(
         "Inventory (Qty)",
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
       ),
-      SizedBox(
+      const SizedBox(
         width: 15,
       ),
       Row(
@@ -414,11 +568,11 @@ class _AddProductState extends State<AddProduct> {
                     color: Colors.grey.withOpacity(0.4),
                     spreadRadius: 1,
                     blurRadius: 2,
-                    offset: Offset(0, 3), // changes position of shadow
+                    offset: const Offset(0, 3), // changes position of shadow
                   ),
                 ],
               ),
-              child: Center(
+              child: const Center(
                   child: Text(
                 "-",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
@@ -437,14 +591,14 @@ class _AddProductState extends State<AddProduct> {
                   color: Colors.grey.withOpacity(0.4),
                   spreadRadius: 1,
                   blurRadius: 2,
-                  offset: Offset(0, 3), // changes position of shadow
+                  offset: const Offset(0, 3), // changes position of shadow
                 ),
               ],
             ),
             child: Center(
                 child: Text(Qty.toString(),
-                    style:
-                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold))),
+                    style: const TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.bold))),
           ),
           GestureDetector(
             onTap: () {
@@ -464,11 +618,11 @@ class _AddProductState extends State<AddProduct> {
                       color: Colors.grey.withOpacity(0.4),
                       spreadRadius: 1,
                       blurRadius: 2,
-                      offset: Offset(0, 3), // changes position of shadow
+                      offset: const Offset(0, 3), // changes position of shadow
                     ),
                   ],
                 ),
-                child: Center(
+                child: const Center(
                   child: Text("+",
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),

@@ -23,7 +23,7 @@ class AddProductService {
         .where('userUid', isEqualTo: userUid)
         .get()
         .then((docs) async {
-      if (docs.docs.isEmpty) {
+      if (!docs.docs.isEmpty) {
         DocumentReference ref =
             await sellersCollection.doc(userUid).collection('Products').doc();
         return await sellersCollection
