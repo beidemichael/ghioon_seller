@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class RangePrice {
-  TextEditingController fromcontroller;
-  TextEditingController tocontroller;
-  TextEditingController pricecontroller;
-  RangePrice({
-    required this.fromcontroller,
-    required this.tocontroller,
-    required this.pricecontroller,
+class Range {
+  TextEditingController? fromcontroller;
+  TextEditingController? tocontroller;
+  TextEditingController? pricecontroller;
+  Range({
+    this.fromcontroller,
+    this.tocontroller,
+    this.pricecontroller,
   });
 }

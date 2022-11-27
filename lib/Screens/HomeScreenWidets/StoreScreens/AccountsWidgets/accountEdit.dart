@@ -119,23 +119,27 @@ class _AccountEditState extends State<AccountEdit> {
           physics: const BouncingScrollPhysics(
               parent: AlwaysScrollableScrollPhysics()),
           children: [
-            TextFormFieldWithOutIcon('Full Name', fullName, 'Name'),
+            TextFormFieldWithOutIcon(
+                'Full Name', fullName, 'Name', TextInputType.text),
             Row(
               children: [
                 Expanded(
-                    child: TextFormFieldWithOutIcon('Male', gender, 'Gender')),
+                    child: TextFormFieldWithOutIcon(
+                        'Male', gender, 'Gender', TextInputType.text)),
                 SizedBox(
                   width: 15,
                 ),
                 Expanded(
-                    child: TextFormFieldWithOutIcon(
-                        'Jan 1 2022', dateOfBirth, 'Date of Birth')),
+                    child: TextFormFieldWithOutIcon('Jan 1 2022', dateOfBirth,
+                        'Date of Birth', TextInputType.text)),
               ],
             ),
-            TextFormFieldWithOutIcon('Ghioon@gmail.com', email, 'Email'),
-            TextFormFieldWithOutIcon('+251912345678', phone, 'Phone'),
             TextFormFieldWithOutIcon(
-                'Jemo Michael, AA, Ethiopia', address, 'Address'),
+                'Ghioon@gmail.com', email, 'Email', TextInputType.text),
+            TextFormFieldWithOutIcon(
+                '+251912345678', phone, 'Phone', TextInputType.number),
+            TextFormFieldWithOutIcon('Jemo Michael, AA, Ethiopia', address,
+                'Address', TextInputType.text),
           ],
         ),
       ),
