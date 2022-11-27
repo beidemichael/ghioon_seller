@@ -41,8 +41,8 @@ Widget TextFormFieldWithIcon(String label, String hintText,
   );
 }
 
-Widget TextFormFieldWithOutIcon(
-    String hintText, TextEditingController control, String header) {
+Widget TextFormFieldWithOutIcon(String hintText, TextEditingController control,
+    String header, TextInputType keyboard) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 10.0),
     child: Column(
@@ -57,7 +57,7 @@ Widget TextFormFieldWithOutIcon(
           height: 5,
         ),
         TextFormField(
-          keyboardType: TextInputType.text,
+          keyboardType: keyboard,
           controller: control,
           //initialValue: autoAddress,
           validator: (value) {
@@ -91,14 +91,14 @@ Widget TextFormFieldWithOutIcon(
 
 //Text widget for with out header label
 Widget TextFormFieldWithOutLabel(
-    String hintText, TextEditingController control) {
+    String hintText, TextEditingController control, TextInputType keyboard) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 10.0),
     child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
-          keyboardType: TextInputType.text,
+          keyboardType: keyboard,
           controller: control,
           //initialValue: autoAddress,
           validator: (value) {
