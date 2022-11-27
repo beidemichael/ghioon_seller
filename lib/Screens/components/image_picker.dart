@@ -1,18 +1,20 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/components.dart';
 
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 class AddImage extends StatefulWidget {
   const AddImage({super.key});
 
   @override
-  State<AddImage> createState() => _AddImageState();
+  State<AddImage> createState() => AddImageState();
 }
 
-class _AddImageState extends State<AddImage> {
+class AddImageState extends State<AddImage> {
   File? image;
   final ImagePicker _picker = ImagePicker();
 
@@ -20,9 +22,13 @@ class _AddImageState extends State<AddImage> {
     final image = await _picker.pickImage(
       source: source,
     );
+
     if (image == null) return;
 
     final imageTemporary = File(image.path);
+    print(
+        "==========@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@======================================");
+    print(image.path);
 
     setState(() {
       this.image = imageTemporary;
