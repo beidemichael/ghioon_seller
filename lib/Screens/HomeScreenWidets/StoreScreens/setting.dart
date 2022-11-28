@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 
+import '../../../Service/auth.dart';
 import '../../components/storeList.dart';
 
 class StoreSetting extends StatefulWidget {
@@ -58,7 +59,12 @@ class _StoreSettingState extends State<StoreSetting> {
               FontAwesomeIcons.solidCircleQuestion, 'Help and Support', width),
           StoreList(FontAwesomeIcons.solidFile, 'Feedback', width),
           StoreList(FontAwesomeIcons.arrowsSpin, 'Upgrade', width),
-          StoreList(FontAwesomeIcons.rightFromBracket, 'Logout', width),
+          GestureDetector(
+              onTap: () {
+                AuthServices.signOut();
+              },
+              child: StoreList(
+                  FontAwesomeIcons.rightFromBracket, 'Logout', width)),
         ],
       ),
     );
