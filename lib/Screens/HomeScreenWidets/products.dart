@@ -34,14 +34,6 @@ class _ProductsState extends State<Products> {
                 const Text('Products',
                     style: TextStyle(
                         fontSize: 30.0,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        // shadows: <Shadow>[
-                        //   const Shadow(
-                        //     offset: Offset(0.0, 4.0),
-                        //     blurRadius: 3.0,
-                        //     color: Color.fromARGB(255, 190, 190, 190),
-                        //   ),
-                        // ],
                         color: Colors.white,
                         fontWeight: FontWeight.w700)),
               ],
@@ -104,11 +96,6 @@ class _ProductsState extends State<Products> {
               Expanded(
                 child: Column(
                   children: [
-                    // ShortProductGrid(
-                    //   width: width,
-                    //   title: "Collections",
-                    //   icon: FontAwesomeIcons.userGroup,
-                    // ),
                     GestureDetector(
                       onTap: () {
                         print("Collection");

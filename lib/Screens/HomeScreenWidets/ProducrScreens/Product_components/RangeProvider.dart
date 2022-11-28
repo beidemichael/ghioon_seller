@@ -7,6 +7,7 @@ final List<Range> initialData = [];
 class RangeData with ChangeNotifier {
   List<int> rangeList = [];
   List<double> priceList = [];
+  List<String> imageList = [];
 
   final from = TextEditingController();
   final to = TextEditingController();
@@ -14,14 +15,14 @@ class RangeData with ChangeNotifier {
   final from2 = TextEditingController();
   final to2 = TextEditingController();
   final price2 = TextEditingController();
-  //!  Search place
+
 //Controlling functions for search screen
 
   final List<Range> _range = initialData;
   List<Range> get Ranges => _range;
 
 //function to clear out all added ranges
-  removealladdress() {
+  removeallcontrollers() {
     _range.clear();
     from.clear();
     to.clear();
@@ -61,7 +62,9 @@ class RangeData with ChangeNotifier {
 //function to remove one range search bar from the list
 
   void removeLast() {
-    _range.removeLast();
+    if (_range.isNotEmpty) {
+      _range.removeLast();
+    }
     notifyListeners();
   }
 
@@ -73,6 +76,7 @@ class RangeData with ChangeNotifier {
 //function to clear out all added images
   removeallimages() {
     _image.clear();
+    imageList.clear();
 
     notifyListeners();
   }
@@ -87,14 +91,18 @@ class RangeData with ChangeNotifier {
 //point will stay on the last and can add ranges in the middle
 
   void addToImageList(ImageList image) {
+    print("add image");
     _image.add(ImageList());
+    print(_image);
     notifyListeners();
   }
 
 //function to remove one range search bar from the list
 
   void removeImage(ImageList image) {
-    _image.remove(image);
+    if (_image.isNotEmpty) {
+      _image.remove(image);
+    }
     notifyListeners();
   }
 }

@@ -27,10 +27,6 @@ class AddImageState extends State<AddImage> {
     if (image == null) return;
 
     final imageTemporary = File(image.path);
-    print(
-        "==========@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@======================================");
-    print(image.path);
-
     setState(() {
       this.image = imageTemporary;
     });
@@ -44,6 +40,7 @@ class AddImageState extends State<AddImage> {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<RangeData>(context);
     return SizedBox(
         height: 115,
         width: 115,

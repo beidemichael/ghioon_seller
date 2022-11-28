@@ -14,7 +14,7 @@ class AddProductService {
     List<int> range,
     double rating,
     String category,
-    String image,
+    List<String> image,
     bool inStock,
     int quantity,
     var userUid,

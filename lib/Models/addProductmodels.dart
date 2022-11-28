@@ -14,9 +14,7 @@ class Range {
 }
 
 class ImageList {
-  String? image;
-
-  ImageList({
-    this.image,
-  });
+  File? photo;
+  String? name;
+  ImageList({this.photo, this.name});
 }
