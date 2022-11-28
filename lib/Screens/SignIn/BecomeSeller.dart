@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
+import 'package:ghioon_seller/Service/lastId.dart';
 import 'package:ghioon_seller/Service/registerDatabase.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +33,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
   @override
   Widget build(BuildContext context) {
     final categories = Provider.of<List<Categories>>(context);
+    final lastid = Provider.of<List<LastId>>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -50,7 +52,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text('Become a driver',
+                  const Text('Become a Seller',
                       style: TextStyle(
                           fontSize: 38.0,
                           color: Colors.black,
@@ -60,8 +62,8 @@ class _BecomeSellerState extends State<BecomeSeller> {
                   ),
                   TextField('Full Name', 'sellerName', true),
                   TextField('Business Name', 'businessName', true),
-                  TextField('License Number', 'businessNo', false),
-                  TextField('Email', 'email', false),
+                  TextField('License Number(optional)', 'businessNo', false),
+                  TextField('Email(optional)', 'email', false),
                   const SizedBox(
                     height: 20,
                   ),
@@ -95,7 +97,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text('Select Vehicle Type',
+                                  const Text('Select Business Type',
                                       style: TextStyle(
                                           fontWeight: FontWeight.w200,
                                           fontSize: 20.0,
@@ -207,7 +209,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                             const SizedBox(
                               height: 20,
                             ),
-                            const Text('Please select Vehicle type.',
+                            const Text('Please select Business type.',
                                 style: TextStyle(
                                     fontSize: 18.0,
                                     color: Color.fromARGB(255, 255, 0, 0),
@@ -220,6 +222,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                       : Container(),
                   GestureDetector(
                       onTap: () async {
+                        int ghioonId = lastid[0].lastId + 1;
                         setState(() {
                           isLoading = true;
                           if (businessType == '') {
@@ -234,13 +237,16 @@ class _BecomeSellerState extends State<BecomeSeller> {
                             final phoneNumber = user!.phoneNumber;
                             final userUid = user.uid;
                             RegisterDatabaseService().registerInformation(
-                                sellerName,
-                                businessName,
-                                email,
-                                businessNo,
-                                businessType,
-                                phoneNumber.toString(),
-                                userUid);
+                              sellerName,
+                              businessName,
+                              email,
+                              businessNo,
+                              businessType,
+                              phoneNumber.toString(),
+                              ghioonId,
+                              userUid,
+                            );
+                            LastIdService().updateLastID(ghioonId);
                           }
                         }
 

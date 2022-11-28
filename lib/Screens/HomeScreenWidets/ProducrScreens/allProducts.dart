@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/addProductMan.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/components.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/addProduct.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/allProductMan.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:provider/provider.dart';
 
 class AllProduct extends StatefulWidget {
   const AllProduct({super.key});
@@ -16,6 +18,7 @@ class AllProduct extends StatefulWidget {
 class _AllProductState extends State<AllProduct> {
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<RangeData>(context);
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(70.0),
@@ -23,10 +26,12 @@ class _AllProductState extends State<AllProduct> {
               actions: [
                 GestureDetector(
                   onTap: () {
+                    appState.removealladdress();
+                    appState.addinit();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const AddProduct()),
+                          builder: (context) => const AddProductMan()),
                     );
                   },
                   child: Center(

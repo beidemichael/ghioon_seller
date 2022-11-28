@@ -3,7 +3,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import '../Models/models.dart';
+import 'package:ghioon_seller/Models/models.dart';
 
 class AuthServices {
   String? wholePhoneNumber;
@@ -44,7 +44,7 @@ class AuthServices {
     return firebaseApp;
   }
 
-  static signOut() async {
+  Future<void> signOut() async {
     try {
       // signout code
       await FirebaseAuth.instance.signOut();

@@ -12,6 +12,7 @@ class RegisterDatabaseService {
     String businessNo,
     String businessType,
     String phoneNumber,
+    int ghioonId,
     var userUid,
   ) async {
     sellersCollection
@@ -31,7 +32,8 @@ class RegisterDatabaseService {
               'userUid': userUid,
               'phoneNumber': phoneNumber,
               'approved': false,
-              'online': true
+              'online': true,
+              'GhioonId': 'GS' + ghioonId.toString()
             })
             .then((value) => print("Rgistration Info Added"))
             .catchError((error) => print("Failed to Register: $error"));

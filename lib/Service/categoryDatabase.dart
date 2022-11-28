@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
-
-import '../Models/models.dart';
+import 'package:ghioon_seller/Models/models.dart';
 
 class CategoryDatabaseService {
   var userUid;
   CategoryDatabaseService({this.userUid});
   final CollectionReference categoryCollection =
       FirebaseFirestore.instance.collection('Category');
-  List<Categories> _vehiclesListFromSnapshot(QuerySnapshot snapshot) {
+  List<Categories> _businessListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Categories(
         type: (doc.data() as dynamic)['type'] ?? '',
@@ -20,6 +19,6 @@ class CategoryDatabaseService {
   Stream<List<Categories>> get categories {
     return categoryCollection.snapshots().handleError((onError) {
       print(onError.toString());
-    }).map(_vehiclesListFromSnapshot);
+    }).map(_businessListFromSnapshot);
   }
 }

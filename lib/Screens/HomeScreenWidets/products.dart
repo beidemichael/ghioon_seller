@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/components.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/allProductMan.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/allProducts.dart';
 import 'package:ghioon_seller/Screens/components/LongProductGrid.dart';
 import 'package:ghioon_seller/Screens/components/ShortProductGrid.dart';
+import 'package:provider/provider.dart';
 
 import '../../Shared/customColors.dart';
 import '../components/storeList.dart';
@@ -67,13 +70,16 @@ class _ProductsState extends State<Products> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const AllProduct()),
+                              builder: (context) => const AllProductMan()),
                         );
                       },
-                      child: LongProductGrid(
-                        width: width,
-                        title: "All \n Products",
-                        icon: FontAwesomeIcons.tags,
+                      child: ChangeNotifierProvider(
+                        create: (context) => RangeData(),
+                        child: LongProductGrid(
+                          width: width,
+                          title: "All \n Products",
+                          icon: FontAwesomeIcons.tags,
+                        ),
                       ),
                     ),
                     const SizedBox(

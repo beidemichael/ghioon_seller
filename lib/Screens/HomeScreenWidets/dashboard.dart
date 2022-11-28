@@ -55,13 +55,13 @@ class _DashboardState extends State<Dashboard> {
                 Expanded(
                   child: WhiteDashboardGrid(
                     width: width,
-                    title: "125K",
+                    title: "125",
                     subTitle: 'Sales',
                     icon: FontAwesomeIcons.chartLine,
                   ),
                 ),
                 const SizedBox(
-                  width: 25,
+                  width: 10,
                 ),
                 Expanded(
                   child: BlueDashboardGrid(
@@ -74,7 +74,7 @@ class _DashboardState extends State<Dashboard> {
               ],
             ),
             const SizedBox(
-              height: 25,
+              height: 15,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -88,14 +88,14 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
                 const SizedBox(
-                  width: 25,
+                  width: 10,
                 ),
                 Expanded(
                   child: WhiteDashboardGrid(
                     width: width,
                     title: "150",
                     subTitle: 'Customers',
-                    icon: FontAwesomeIcons.person,
+                    icon: FontAwesomeIcons.peopleGroup,
                   ),
                 ),
               ],

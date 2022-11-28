@@ -4,6 +4,7 @@ import 'package:ghioon_seller/Shared/customColors.dart';
 
 import '../../../Service/auth.dart';
 import '../../components/storeList.dart';
+import 'package:ghioon_seller/Service//auth.dart';
 
 class StoreSetting extends StatefulWidget {
   const StoreSetting({super.key});
@@ -59,12 +60,7 @@ class _StoreSettingState extends State<StoreSetting> {
               FontAwesomeIcons.solidCircleQuestion, 'Help and Support', width),
           StoreList(FontAwesomeIcons.solidFile, 'Feedback', width),
           StoreList(FontAwesomeIcons.arrowsSpin, 'Upgrade', width),
-          GestureDetector(
-              onTap: () {
-                AuthServices.signOut();
-              },
-              child: StoreList(
-                  FontAwesomeIcons.rightFromBracket, 'Logout', width)),
+          StoreList(FontAwesomeIcons.rightFromBracket, 'Logout', width),
         ],
       ),
     );
