@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/addProductmodels.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/components.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
 import 'package:ghioon_seller/Screens/components/image_picker.dart';
 import 'package:ghioon_seller/Service/AddProductDatabase.dart';
@@ -43,6 +43,7 @@ class _AddProductState extends State<AddProduct> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     var _range = context.watch<RangeData>().Ranges;
+    var _images = context.watch<RangeData>().Images;
     final appState = Provider.of<RangeData>(context);
 
     return Scaffold(
@@ -85,66 +86,40 @@ class _AddProductState extends State<AddProduct> {
               ),
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(15, 10, 0, 10),
-                child: Row(children: [
-                  // IconButton(
-                  //   onPressed: () {},
-                  //   icon: Icon(Icons.add_a_photo),
-                  //   color: CustomColors().blue,
-                  //   iconSize: 80,
-                  // ),
-                  const AddImage(),
-                  Flexible(
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      physics: const BouncingScrollPhysics(
-                          parent: AlwaysScrollableScrollPhysics()),
-                      children: [
-                        Container(
-                          height: 100,
-                          width: 100,
+                child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: ListView.builder(
+                            scrollDirection: Axis.horizontal,
+                            physics: const BouncingScrollPhysics(
+                                parent: AlwaysScrollableScrollPhysics()),
+                            shrinkWrap: true,
+                            itemCount: _images.length,
+                            itemBuilder: (context, index) {
+                              var currentStop = _images[index];
+                              return AddImage(
+                                  imagefromList: _images[index].image);
+                            }),
+                      ),
+                      GestureDetector(
+                        onTap: () {
+                          print("add");
+                          appState.addToImageList(ImageList());
+                        },
+                        child: Container(
                           decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 1,
-                                color:
-                                    const Color.fromARGB(255, 207, 207, 207)),
-                            color: CustomColors().white,
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(20)),
+                          ),
+                          child: Icon(
+                            size: 80,
+                            Icons.add,
+                            color: CustomColors().blue,
                           ),
                         ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 1,
-                                color:
-                                    const Color.fromARGB(255, 207, 207, 207)),
-                            color: CustomColors().white,
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          height: 100,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                                width: 1,
-                                color:
-                                    const Color.fromARGB(255, 207, 207, 207)),
-                            color: CustomColors().white,
-                            borderRadius: BorderRadius.circular(20.0),
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ]),
+                      ),
+                    ]),
               )),
           const SizedBox(height: 15),
           Flexible(
@@ -500,7 +475,7 @@ class _AddProductState extends State<AddProduct> {
                                     userUid);
                                 print('done');
                               } else {
-                                print('add RAnge product');
+                                print('add Range product');
                                 for (var i = 0; i < _range.length; i++) {
                                   appState.priceList.add(double.parse(
                                       _range[i].pricecontroller!.text));

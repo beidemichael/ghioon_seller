@@ -64,4 +64,37 @@ class RangeData with ChangeNotifier {
     _range.removeLast();
     notifyListeners();
   }
+
+  //Controlling functions for add image
+
+  final List<ImageList> _image = [];
+  List<ImageList> get Images => _image;
+
+//function to clear out all added images
+  removeallimages() {
+    _image.clear();
+
+    notifyListeners();
+  }
+
+//function to add the first add image
+  addinitImages() {
+    _image.add(ImageList());
+    notifyListeners();
+  }
+
+//fuction to add a search bar on a button click, the last destination
+//point will stay on the last and can add ranges in the middle
+
+  void addToImageList(ImageList image) {
+    _image.add(ImageList());
+    notifyListeners();
+  }
+
+//function to remove one range search bar from the list
+
+  void removeImage(ImageList image) {
+    _image.remove(image);
+    notifyListeners();
+  }
 }

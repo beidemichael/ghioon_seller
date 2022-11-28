@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/components.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/allProductMan.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/allProducts.dart';
 import 'package:ghioon_seller/Screens/components/LongProductGrid.dart';

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Models/addProductmodels.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/addProductMan.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/components.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/addProduct.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/allProductMan.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
@@ -28,6 +29,7 @@ class _AllProductState extends State<AllProduct> {
                   onTap: () {
                     appState.removealladdress();
                     appState.addinit();
+
                     Navigator.push(
                       context,
                       MaterialPageRoute(

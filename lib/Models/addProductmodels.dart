@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class Range {
@@ -8,5 +10,13 @@ class Range {
     this.fromcontroller,
     this.tocontroller,
     this.pricecontroller,
+  });
+}
+
+class ImageList {
+  String? image;
+
+  ImageList({
+    this.image,
   });
 }
