@@ -1,14 +1,15 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/components.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/RangeProvider.dart';
 
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class AddImage extends StatefulWidget {
-  const AddImage({super.key});
+  String? imagefromList;
+  AddImage({super.key, this.imagefromList});
 
   @override
   State<AddImage> createState() => AddImageState();
@@ -26,16 +27,12 @@ class AddImageState extends State<AddImage> {
     if (image == null) return;
 
     final imageTemporary = File(image.path);
-    print(
-        "==========@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@======================================");
-    print(image.path);
-
     setState(() {
       this.image = imageTemporary;
     });
   }
 
-  removeiImage() {
+  removeImage() {
     setState(() {
       this.image = null;
     });
@@ -43,6 +40,7 @@ class AddImageState extends State<AddImage> {
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<RangeData>(context);
     return SizedBox(
         height: 115,
         width: 115,
@@ -81,7 +79,7 @@ class AddImageState extends State<AddImage> {
                               title: 'Remove',
                               onTap: () {
                                 Navigator.pop(context);
-                                removeiImage();
+                                removeImage();
                               })
                         ],
                       ),
