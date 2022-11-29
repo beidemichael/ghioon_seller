@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/RangeProvider.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/Product_components/allProductMan.dart';
+import 'package:ghioon_seller/Models/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/allProducts.dart';
 import 'package:ghioon_seller/Screens/components/LongProductGrid.dart';
 import 'package:ghioon_seller/Screens/components/ShortProductGrid.dart';
@@ -62,7 +61,7 @@ class _ProductsState extends State<Products> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const AllProductMan()),
+                              builder: (context) => const AllProduct()),
                         );
                       },
                       child: ChangeNotifierProvider(

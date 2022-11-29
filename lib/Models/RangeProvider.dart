@@ -9,39 +9,55 @@ class RangeData with ChangeNotifier {
   List<double> priceList = [];
   List<String> imageList = [];
 
-  final from = TextEditingController();
-  final to = TextEditingController();
-  final price = TextEditingController();
-  final from2 = TextEditingController();
-  final to2 = TextEditingController();
-  final price2 = TextEditingController();
+  final productName = TextEditingController();
+  final description = TextEditingController();
+  final fixedPrice = TextEditingController();
+  final oldPrice = TextEditingController();
+  final cost = TextEditingController();
+  final inventory = TextEditingController(text: "1");
+  bool fixed = true;
+  List<Range> Ranges = [];
 
-//Controlling functions for search screen
+  addInventory() {
+    //Qty = Qty + 1;
+    inventory.text = (int.parse(inventory.text) + 1).toString();
+    notifyListeners();
+  }
 
-  final List<Range> _range = initialData;
-  List<Range> get Ranges => _range;
+  minusInventory() {
+    //  Qty > 0 ? Qty = Qty - 1 : Qty = 0;
+    int.parse(inventory.text) > 1
+        ? inventory.text = (int.parse(inventory.text) - 1).toString()
+        : inventory.text = '1';
+    notifyListeners();
+  }
 
-//function to clear out all added ranges
+  switchFixed(bool fixedInput) {
+    fixed = !fixedInput;
+    notifyListeners();
+  }
+
   removeallcontrollers() {
-    _range.clear();
-    from.clear();
-    to.clear();
-    price.clear();
-    from2.clear();
-    to2.clear();
-    price2.clear();
+    Ranges.clear();
     notifyListeners();
   }
 
 //function to add the first searching bars
   addinit() {
-    _range.add(Range(
-      fromcontroller: from,
-      tocontroller: to,
-      pricecontroller: price,
-    ));
-    _range.add(Range(
-        fromcontroller: from2, tocontroller: to2, pricecontroller: price2));
+    Ranges.add(
+      Range(
+        fromcontroller: TextEditingController(),
+        tocontroller: TextEditingController(),
+        pricecontroller: TextEditingController(),
+      ),
+    );
+    Ranges.add(
+      Range(
+        fromcontroller: TextEditingController(),
+        tocontroller: TextEditingController(),
+        pricecontroller: TextEditingController(),
+      ),
+    );
     notifyListeners();
   }
 
@@ -49,21 +65,15 @@ class RangeData with ChangeNotifier {
 //point will stay on the last and can add ranges in the middle
 
   void addToList(Range range) {
-    final fromcontroller = TextEditingController();
-    final tocontroller = TextEditingController();
-    final pricecontroller = TextEditingController();
-    _range.add(Range(
-        fromcontroller: fromcontroller,
-        tocontroller: tocontroller,
-        pricecontroller: pricecontroller));
+    Ranges.add(range);
     notifyListeners();
   }
 
 //function to remove one range search bar from the list
 
   void removeLast() {
-    if (_range.isNotEmpty) {
-      _range.removeLast();
+    if (Ranges.isNotEmpty) {
+      Ranges.removeLast();
     }
     notifyListeners();
   }

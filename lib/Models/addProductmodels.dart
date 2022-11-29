@@ -7,9 +7,9 @@ class Range {
   TextEditingController? tocontroller;
   TextEditingController? pricecontroller;
   Range({
-    this.fromcontroller,
-    this.tocontroller,
-    this.pricecontroller,
+    required this.fromcontroller,
+    required this.tocontroller,
+    required this.pricecontroller,
   });
 }
 

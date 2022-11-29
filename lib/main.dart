@@ -4,6 +4,7 @@ import 'package:ghioon_seller/firebase_options.dart';
 import 'package:provider/provider.dart';
 
 import 'Models/models.dart';
+import 'Models/RangeProvider.dart';
 import 'Screens/wrapper.dart';
 import 'Service/auth.dart';
 
@@ -11,7 +12,16 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Firebase.apps;
-  runApp(MaterialApp(debugShowCheckedModeBanner: false, home: MyApp()));
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: ChangeNotifierProvider(
+        create: (context) => RangeData(),
+        child: const MyApp(),
+      ),
+    ),
+  );
+  
 }
 
 class MyApp extends StatelessWidget {
