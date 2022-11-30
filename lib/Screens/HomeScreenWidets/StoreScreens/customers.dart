@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/CustomerPages/ViewOnMap.dart';
 
 import '../../../Shared/customColors.dart';
 
@@ -9,7 +10,7 @@ class Customers extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-         appBar: PreferredSize(
+      appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
             centerTitle: true,
@@ -45,8 +46,16 @@ class Customers extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            container(MediaQuery.of(context).size.width,
-                FontAwesomeIcons.mapLocationDot, 'View on Map'),
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ViewOnMap()),
+                );
+              },
+              child: container(MediaQuery.of(context).size.width,
+                  FontAwesomeIcons.mapLocationDot, 'View on Map'),
+            ),
           ],
         ),
       ),

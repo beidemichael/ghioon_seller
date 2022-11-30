@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../../../../../Models/RangeProvider.dart';
 import '../../../../components/textFormField.dart';
 import '3,inventoryQty.dart';
+
 class FixedInputField extends StatefulWidget {
   const FixedInputField({super.key});
 
@@ -14,7 +15,7 @@ class FixedInputField extends StatefulWidget {
 class _FixedInputFieldState extends State<FixedInputField> {
   @override
   Widget build(BuildContext context) {
-   final appState = Provider.of<RangeData>(context);
+    final appState = Provider.of<RangeData>(context);
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,8 +40,8 @@ class _FixedInputFieldState extends State<FixedInputField> {
           Row(
             children: [
               Expanded(
-                  child: TextFormFieldWithOutIcon(
-                      'Cost per Item', appState.cost, 'Cost ', TextInputType.number)),
+                  child: TextFormFieldWithOutIcon('Cost per Item',
+                      appState.cost, 'Cost ', TextInputType.number)),
               const SizedBox(
                 width: 15,
               ),
@@ -59,7 +60,14 @@ class _FixedInputFieldState extends State<FixedInputField> {
                     height: 15,
                   ),
                   Container(
-                    child: const Text("ETB 0",
+                    child: Text(
+                        appState.fixedPrice.text.isNotEmpty ||
+                                appState.cost.text.isNotEmpty
+                            ? (double.parse(appState.fixedPrice.text) -
+                                    double.parse(appState.cost.text))
+                                .toString()
+                            : '0',
+                        //'abadb',
                         style: TextStyle(
                             fontSize: 30.0,
                             color: Color.fromARGB(255, 0, 0, 0),

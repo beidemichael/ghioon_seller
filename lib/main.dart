@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Models/MapProvider.dart';
 import 'package:ghioon_seller/firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -15,13 +16,19 @@ void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ChangeNotifierProvider(
-        create: (context) => RangeData(),
+      home: MultiProvider(
+        providers: [
+          ChangeNotifierProvider(
+            create: (context) => RangeData(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => MapProvider(),
+          ),
+        ],
         child: const MyApp(),
       ),
     ),
   );
-  
 }
 
 class MyApp extends StatelessWidget {
@@ -30,7 +37,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-   return  MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: StreamProvider<UserAuth?>.value(

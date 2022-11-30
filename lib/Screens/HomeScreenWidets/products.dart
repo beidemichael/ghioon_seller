@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/allProducts.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/collections.dart';
 import 'package:ghioon_seller/Screens/components/LongProductGrid.dart';
 import 'package:ghioon_seller/Screens/components/ShortProductGrid.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,7 @@ class _ProductsState extends State<Products> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Text('Products',
+                const Text('Collections',
                     style: TextStyle(
                         fontSize: 30.0,
                         color: Colors.white,
@@ -98,6 +99,11 @@ class _ProductsState extends State<Products> {
                     GestureDetector(
                       onTap: () {
                         print("Collection");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Collections()),
+                        );
                       },
                       child: Container(
                         height: width / 2,

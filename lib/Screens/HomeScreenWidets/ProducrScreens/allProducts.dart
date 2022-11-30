@@ -26,9 +26,10 @@ class _AllProductState extends State<AllProduct> {
                 GestureDetector(
                   onTap: () {
                     appState.removeallcontrollers();
+                    appState.removeallfixedcontrollers();
                     appState.removeallimages();
                     appState.addinit();
-                    appState.addToImageList(ImageList(name: 'a'));
+                    appState.addToImageList(ImageList(name: 'first'));
                     print("image added");
 
                     Navigator.push(

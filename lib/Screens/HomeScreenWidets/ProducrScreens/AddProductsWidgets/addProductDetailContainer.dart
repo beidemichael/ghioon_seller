@@ -51,8 +51,10 @@ class _addProductDetailState extends State<addProductDetail> {
                 Flexible(
                     child: GestureDetector(
                         onTap: () {
-                          Provider.of<RangeData>(context, listen: false)
-                              .switchFixed(appState.fixed);
+                          !appState.fixed
+                              ? Provider.of<RangeData>(context, listen: false)
+                                  .switchFixed(appState.fixed)
+                              : null;
                         },
                         child: FixedButton(fixed: appState.fixed))),
                 const SizedBox(
@@ -61,8 +63,10 @@ class _addProductDetailState extends State<addProductDetail> {
                 Flexible(
                     child: GestureDetector(
                         onTap: () {
-                          Provider.of<RangeData>(context, listen: false)
-                              .switchFixed(appState.fixed);
+                          appState.fixed
+                              ? Provider.of<RangeData>(context, listen: false)
+                                  .switchFixed(appState.fixed)
+                              : null;
                         },
                         child: RangeButton(fixed: appState.fixed))),
               ],
@@ -70,9 +74,7 @@ class _addProductDetailState extends State<addProductDetail> {
             const SizedBox(
               height: 10,
             ),
-            appState.fixed
-                ? const FixedInputField()
-                : const RangeInputField(),
+            appState.fixed ? const FixedInputField() : const RangeInputField(),
             const SizedBox(
               height: 15,
             ),
@@ -89,16 +91,16 @@ class _addProductDetailState extends State<addProductDetail> {
                       buildShowDialog(context, 'Ghioon',
                           "Are you sure you want to add the product?",
                           () async {
-                        Navigator.pop(context);
+                        // Navigator.pop(context);
 
                         showGeneralDialog(
+                          // useRootNavigator: false,
                           context: context,
                           barrierColor: Colors.black12
                               .withOpacity(0.6), // Background color
                           barrierDismissible: false,
                           barrierLabel: 'Dialog',
-                          transitionDuration:
-                              const Duration(milliseconds: 400),
+                          transitionDuration: const Duration(milliseconds: 400),
                           pageBuilder: (_, __, ___) {
                             return const Center(
                               child: SpinKitFadingCube(
@@ -113,8 +115,8 @@ class _addProductDetailState extends State<addProductDetail> {
                         print("fixed product");
                         appState.priceList
                             .add(double.parse(appState.fixedPrice.text));
-                        appState.rangeList.add(
-                            int.parse(appState.inventory.text.toString()));
+                        appState.rangeList
+                            .add(int.parse(appState.inventory.text.toString()));
                         for (var i = 0; i < appState.Images.length; i++) {
                           var uploadedPhoto = await uploadImage(
                               appState.Images[i].photo, user!.uid.toString());
@@ -146,12 +148,14 @@ class _addProductDetailState extends State<addProductDetail> {
                             int.parse(appState.inventory.text),
                             userUid);
                         print('done');
-                        Navigator.pop(context);
+                        //    Navigator.pop(context);
                         // ignore: use_build_context_synchronously
 
-                        buildShowDoneDialog(
-                            context, 'Traffic', "Report Sumbited", () {
-                          Navigator.pop(context);
+                        buildShowDoneDialog(context, 'Ghioon', "Product Added",
+                            () {
+                          //Navigator.of(context, rootNavigator: true).pop();
+                          // Navigator.of(context).pop();
+                          // Navigator.of(context).pop();
                           Navigator.pop(context);
                         });
                       }, //yesCallback
@@ -206,8 +210,7 @@ class _addProductDetailState extends State<addProductDetail> {
                                   appState.Images[i].photo,
                                   user!.uid.toString());
 
-                              appState.imageList
-                                  .add(uploadedPhoto.toString());
+                              appState.imageList.add(uploadedPhoto.toString());
                             }
                             print(appState.productName.text);
                             print(appState.description.text);

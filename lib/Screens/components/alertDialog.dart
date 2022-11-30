@@ -243,6 +243,7 @@ Future buildShowDialog(BuildContext context, String title, String text,
 Future buildShowDoneDialog(
     BuildContext context, String title, String text, VoidCallback yesCallBack) {
   return showDialog(
+      //useRootNavigator: false,
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(

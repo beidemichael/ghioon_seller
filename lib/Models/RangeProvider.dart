@@ -37,6 +37,14 @@ class RangeData with ChangeNotifier {
     notifyListeners();
   }
 
+  removeallfixedcontrollers() {
+    productName.clear();
+    description.clear();
+    fixedPrice.clear();
+    oldPrice.clear();
+    cost.clear();
+  }
+
   removeallcontrollers() {
     Ranges.clear();
     notifyListeners();
