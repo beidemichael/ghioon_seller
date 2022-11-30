@@ -5,7 +5,7 @@ import 'package:ghioon_seller/firebase_options.dart';
 import 'package:provider/provider.dart';
 
 import 'Models/models.dart';
-import 'Models/RangeProvider.dart';
+import 'Providers/RangeProvider.dart';
 import 'Screens/wrapper.dart';
 import 'Service/auth.dart';
 

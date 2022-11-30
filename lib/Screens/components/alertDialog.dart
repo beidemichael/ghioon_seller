@@ -186,7 +186,7 @@ Future buildShowDialog(BuildContext context, String title, String text,
                       flex: 1,
                       child: InkWell(
                         onTap: () {
-                          noCallBack();
+                          Navigator.of(context).pop();
                         },
                         child: Container(
                           padding: EdgeInsets.only(top: 20.0, bottom: 20.0),

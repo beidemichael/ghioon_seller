@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../Models/RangeProvider.dart';
+import '../../../../../Providers/RangeProvider.dart';
 import '../../../../../Models/addProductmodels.dart';
 import '../../../../../Shared/customColors.dart';
 import '../../../../components/textFormField.dart';
@@ -30,7 +30,7 @@ class _RangeInputFieldState extends State<RangeInputField> {
                 "Range Price",
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               GestureDetector(
@@ -53,7 +53,7 @@ class _RangeInputFieldState extends State<RangeInputField> {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               GestureDetector(
@@ -117,6 +117,16 @@ class _RangeInputFieldState extends State<RangeInputField> {
                   ],
                 );
               }),
+           Visibility(
+            visible: !appState.rangefilled,
+             child: const Center(
+               child: Text(
+                "Please fill all inputs",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300,color: Colors.red),
+                     ),
+             ),
+           ),
           InventoryQty(inventory: appState.inventory),
         ],
       ),

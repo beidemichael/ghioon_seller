@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../../../Models/RangeProvider.dart';
+import '../../../../../Providers/RangeProvider.dart';
 import '../../../../components/textFormField.dart';
 import '3,inventoryQty.dart';
 
@@ -77,6 +77,17 @@ class _FixedInputFieldState extends State<FixedInputField> {
               ))
             ],
           ),
+           Visibility(
+            visible: !appState.fixedFilled,
+             child: const Center(
+              child: Text(
+                "Please fill all inputs",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 18, fontWeight: FontWeight.w300, color: Colors.red),
+              ),
+                     ),
+           ),
           InventoryQty(inventory: appState.inventory),
         ],
       ),

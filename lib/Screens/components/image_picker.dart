@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:ghioon_seller/Models/RangeProvider.dart';
+import 'package:ghioon_seller/Providers/RangeProvider.dart';
 
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:image_picker/image_picker.dart';
