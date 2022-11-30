@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Models/addProductmodels.dart';
+import 'package:image_picker/image_picker.dart';
 
 final List<Range> initialData = [];
 
 class RangeData with ChangeNotifier {
-  List<int> rangeList = [];
+  List<int> rangeToList = [];
+  List<int> rangeFromList = [];
   List<double> priceList = [];
   List<String> imageList = [];
 
@@ -16,7 +20,12 @@ class RangeData with ChangeNotifier {
   final cost = TextEditingController();
   final inventory = TextEditingController(text: "1");
   bool fixed = true;
+
+  bool productDescriptionFilled = true;
+  bool fixedFilled = true;
+  bool rangefilled = true;
   List<Range> Ranges = [];
+  final ImagePicker _picker = ImagePicker();
 
   addInventory() {
     //Qty = Qty + 1;
@@ -34,6 +43,21 @@ class RangeData with ChangeNotifier {
 
   switchFixed(bool fixedInput) {
     fixed = !fixedInput;
+    notifyListeners();
+  }
+
+  switchproductDescriptionFilled(bool productDescriptionFilledInput) {
+    productDescriptionFilled = productDescriptionFilledInput;
+    notifyListeners();
+  }
+
+  switchfixedFilled(bool fixedFilledInput) {
+    fixedFilled = fixedFilledInput;
+    notifyListeners();
+  }
+
+  switchrangefilled(bool rangefilledInput) {
+    rangefilled = rangefilledInput;
     notifyListeners();
   }
 

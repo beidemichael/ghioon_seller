@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AddProductService {
+class AddProductDatabase {
   var userUid;
-  AddProductService({this.userUid});
+  AddProductDatabase({this.userUid});
   final CollectionReference sellersCollection =
       FirebaseFirestore.instance.collection('Sellers');
 
@@ -11,7 +11,8 @@ class AddProductService {
     String description,
     bool fixed,
     List<double> price,
-    List<int> range,
+    List<int> rangeTo,
+    List<int> rangeFrom,
     double rating,
     String category,
     List<String> image,

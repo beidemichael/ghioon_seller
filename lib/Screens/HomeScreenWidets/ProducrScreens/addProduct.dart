@@ -8,7 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/addProductmodels.dart';
-import 'package:ghioon_seller/Models/RangeProvider.dart';
+import 'package:ghioon_seller/Providers/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/AddProductsWidgets/addImageContainer.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
 import 'package:ghioon_seller/Screens/components/alert.dart';
@@ -83,7 +83,7 @@ class _AddProductState extends State<AddProduct> {
                   child: const AddImageContainer()),
               const SizedBox(height: 15),
               addProductDetail(),
-               const SizedBox(height: 15),
+              const SizedBox(height: 15),
             ]),
       ),
     );
