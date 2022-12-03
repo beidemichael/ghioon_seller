@@ -110,8 +110,8 @@ class AddProductDetailLogic {
       final user = FirebaseAuth.instance.currentUser;
 
       for (var i = 0; i < appState.Images.length; i++) {
-        var uploadedPhoto =
-            await uploadImage(appState.Images[i].photo, user!.uid.toString());
+        var uploadedPhoto = await uploadImage(
+            appState.Images[i].photo, user!.uid.toString(), 'Products');
 
         appState.imageList.add(uploadedPhoto.toString());
       }

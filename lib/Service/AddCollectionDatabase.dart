@@ -1,48 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class AddProductDatabase {
+class AddCollectionDatabase {
   var userUid;
-  AddProductDatabase({this.userUid});
-  final CollectionReference sellersProduct =
+  AddCollectionDatabase({this.userUid});
+  final CollectionReference sellersCollection =
       FirebaseFirestore.instance.collection('Sellers');
 
-  Future addProduct(
+  Future addCollection(
     String name,
     String description,
-    bool fixed,
-    List<double> price,
-    List<int> rangeTo,
-    List<int> rangeFrom,
-    double rating,
-    String category,
     List<String> image,
-    bool inStock,
-    int quantity,
     var userUid,
   ) async {
-    sellersProduct
+    sellersCollection
         .where('userUid', isEqualTo: userUid)
         .get()
         .then((docs) async {
       if (!docs.docs.isEmpty) {
         DocumentReference ref =
-            await sellersProduct.doc(userUid).collection('Products').doc();
-        return await sellersProduct
+            sellersCollection.doc(userUid).collection('Collections').doc();
+        return await sellersCollection
             .doc(userUid)
             .collection('Products')
             .doc(ref.id)
             .set({
               'created': Timestamp.now(),
-              'productId': ref.id,
+              'collectionId': ref.id,
               'name': name,
               'description': description,
-              'fixed': fixed,
-              'price': price,
-              'rating': rating,
-              'category': category,
               'image': image,
-              'isStock': inStock,
-              'quantity': quantity,
               'userUid': userUid,
             })
             .then((value) => print("Product Info Added"))
