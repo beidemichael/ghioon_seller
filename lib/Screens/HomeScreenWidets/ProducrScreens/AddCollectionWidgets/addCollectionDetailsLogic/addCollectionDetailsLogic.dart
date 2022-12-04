@@ -32,49 +32,20 @@ class AddCollectionLogic {
         appState.collectionDescription.text, appState.imageList, userUid);
   }
 
-  showDialog(BuildContext context) async {
+  addCollection(BuildContext context) async {
     final appState = Provider.of<CollectionData>(context, listen: false);
-    buildShowDialog(
-        context, 'Ghioon', "Are you sure you want to create new collection?",
-        () async {
-      //yesCallback
-      Navigator.pop(context);
 
-      showGeneralDialog(
-        context: context,
-        barrierColor: Colors.black12.withOpacity(0.6), // Background color
-        barrierDismissible: false,
-        barrierLabel: 'Dialog',
-        transitionDuration: const Duration(milliseconds: 400),
-        pageBuilder: (_, __, ___) {
-          return const Center(
-            child: SpinKitFadingCube(
-              color: Colors.white,
-              size: 50.0,
-            ),
-          );
-        },
-      );
-      final user = FirebaseAuth.instance.currentUser;
+    final user = FirebaseAuth.instance.currentUser;
 
-      //for (var i = 0; i < appState.collectionImage.length; i++) {
-      var uploadedPhoto = await uploadImage(appState.collectionImage[0].photo,
-          user!.uid.toString(), 'Collections');
+    var uploadedPhoto = await uploadImage(
+        appState.collectionImage[0].photo, user!.uid.toString(), 'Collections');
 
-      appState.imageList.add(uploadedPhoto.toString());
-      //}
+    appState.imageList.add(uploadedPhoto.toString());
+    //}
 
-      uploadToDatabase(context);
-      print('done');
-      Navigator.pop(context);
+    uploadToDatabase(context);
+    print('done');
 
-      buildShowDoneDialog(context, 'Ghioon', "Collection Added", () {
-        Navigator.pop(context);
-        Navigator.pop(context);
-      });
-    }, () {
-      // NoCallBack
-      Navigator.of(context).pop();
-    });
+    Navigator.pop(context);
   }
 }

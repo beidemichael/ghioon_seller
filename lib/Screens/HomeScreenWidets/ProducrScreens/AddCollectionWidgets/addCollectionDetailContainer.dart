@@ -5,6 +5,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/AddCollectionWidgets/addCollectionDetailsLogic/addCollectionDetailsLogic.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
+import 'package:ghioon_seller/Screens/components/alertDialog.dart';
 import 'package:ghioon_seller/Screens/components/textFormField.dart';
 import 'package:provider/provider.dart';
 
@@ -58,7 +59,25 @@ class _addCollectionDetailState extends State<addCollectionDetail> {
                   //If All fields are filled==>
 
                   if (appState.productDescriptionFilled) {
-                    AddCollectionLogic().showDialog(context);
+                    appState.isLoading = true;
+                    // AddProductDetailLogic().showDialog(context);
+
+                    PopupDialog alert = PopupDialog(
+                        "Are You Sure you want to add the product?", () {
+                      print(appState.isLoading);
+                      AddCollectionLogic()
+                          .addCollection(context)
+                          .then((value) => appState.isLoading = false);
+                    }, () {
+                      Navigator.pop(context);
+                    });
+
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return alert;
+                      },
+                    );
                   }
                 },
                 child: BlueButton(text: 'Add Collection'))

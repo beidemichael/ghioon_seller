@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 final List<Range> initialData = [];
 
 class RangeData with ChangeNotifier {
+  bool isLoading = false;
   List<int> rangeToList = [];
   List<int> rangeFromList = [];
   List<double> priceList = [];
@@ -64,6 +65,11 @@ class RangeData with ChangeNotifier {
 
   removeallcontrollers() {
     Ranges.clear();
+    productName.clear();
+    description.clear();
+    fixedPrice.clear();
+    oldPrice.clear();
+    cost.clear();
     notifyListeners();
   }
 

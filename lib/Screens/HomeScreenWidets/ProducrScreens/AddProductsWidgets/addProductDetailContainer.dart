@@ -34,86 +34,127 @@ class _addProductDetailState extends State<addProductDetail> {
     final appState = Provider.of<RangeData>(context);
 
     return Padding(
-      padding: const EdgeInsets.all(15.0),
-      child: ListView(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          children: [
-            TextFormFieldProduct(
-                "Enter Product Name", appState.productName, "Product Name"),
-            TextFormFieldProDescription(
-                "Description", appState.description, "Description"),
-            Visibility(
-              visible: !appState.productDescriptionFilled,
-              child: const Center(
-                child: Text(
-                  "Please fill all inputs",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w300,
-                      color: Colors.red),
+        padding: const EdgeInsets.all(15.0),
+        child: ListView(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            children: [
+              TextFormFieldProduct(
+                  "Enter Product Name", appState.productName, "Product Name"),
+              TextFormFieldProDescription(
+                  "Description", appState.description, "Description"),
+              Visibility(
+                visible: !appState.productDescriptionFilled,
+                child: const Center(
+                  child: Text(
+                    "Please fill all inputs",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w300,
+                        color: Colors.red),
+                  ),
                 ),
               ),
-            ),
-            const Text(
-              "Price",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
-            Row(
-              children: [
-                Flexible(
-                    child: GestureDetector(
-                        onTap: () {
-                          !appState.fixed
-                              ? Provider.of<RangeData>(context, listen: false)
-                                  .switchFixed(appState.fixed)
-                              : null;
-                        },
-                        child: FixedButton(fixed: appState.fixed))),
-                const SizedBox(
-                  width: 15,
-                ),
-                Flexible(
-                    child: GestureDetector(
-                        onTap: () {
-                          appState.fixed
-                              ? Provider.of<RangeData>(context, listen: false)
-                                  .switchFixed(appState.fixed)
-                              : null;
-                        },
-                        child: RangeButton(fixed: appState.fixed))),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            appState.fixed ? const FixedInputField() : const RangeInputField(),
-            const SizedBox(
-              height: 15,
-            ),
-            GestureDetector(
-                onTap: () async {
-                  //Check if Product Name and Description is filled
-                  AddProductDetailLogic()
-                      .checkProductNameandDescription(context);
-                  //Check if Range and Fixed fields are filled
-                  AddProductDetailLogic().checkFixedAndRange(context);
-                  //If All fields are filled==>
-                  if (appState.fixed) {
-                    if (appState.productDescriptionFilled &&
-                        appState.fixedFilled) {
-                      AddProductDetailLogic().showDialog(context);
+              const Text(
+                "Price",
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+              ),
+              Row(
+                children: [
+                  Flexible(
+                      child: GestureDetector(
+                          onTap: () {
+                            !appState.fixed
+                                ? Provider.of<RangeData>(context, listen: false)
+                                    .switchFixed(appState.fixed)
+                                : null;
+                          },
+                          child: FixedButton(fixed: appState.fixed))),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                  Flexible(
+                      child: GestureDetector(
+                          onTap: () {
+                            appState.fixed
+                                ? Provider.of<RangeData>(context, listen: false)
+                                    .switchFixed(appState.fixed)
+                                : null;
+                          },
+                          child: RangeButton(fixed: appState.fixed))),
+                ],
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              appState.fixed
+                  ? const FixedInputField()
+                  : const RangeInputField(),
+              const SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                  onTap: () async {
+                    print("loading");
+
+                    //Check if Product Name and Description is filled
+                    AddProductDetailLogic()
+                        .checkProductNameandDescription(context);
+                    //Check if Range and Fixed fields are filled
+                    AddProductDetailLogic().checkFixedAndRange(context);
+                    //If All fields are filled==>
+                    if (appState.fixed) {
+                      if (appState.productDescriptionFilled &&
+                          appState.fixedFilled) {
+                        appState.isLoading = true;
+                        // AddProductDetailLogic().showDialog(context);
+
+                        PopupDialog alert = PopupDialog(
+                            "Are You Sure you want to add the product?", () {
+                          print(appState.isLoading);
+                          AddProductDetailLogic()
+                              .addProduct(context)
+                              .then((value) => appState.isLoading = false);
+                        }, () {
+                          Navigator.pop(context);
+                        });
+
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          },
+                        );
+                      }
+                    } else {
+                      if (appState.productDescriptionFilled &&
+                          appState.rangefilled) {
+                        appState.isLoading = true;
+                        // AddProductDetailLogic().showDialog(context);
+
+                        PopupDialog alert = PopupDialog(
+                            "Are You Sure you want to add the product?", () {
+                          print(appState.isLoading);
+                          AddProductDetailLogic()
+                              .addProduct(context)
+                              .then((value) => appState.isLoading = false);
+                        }, () {
+                          Navigator.pop(context);
+                        });
+
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return alert;
+                          },
+                        );
+                      }
                     }
-                  } else {
-                    if (appState.productDescriptionFilled &&
-                        appState.rangefilled) {
-                      AddProductDetailLogic().showDialog(context);
-                    }
-                  }
-                },
-                child: BlueButton(text: 'Continue'))
-          ]),
-    );
+
+                    print("not loading");
+                  },
+                  child: BlueButton(text: 'Continue'))
+            ]));
   }
 }

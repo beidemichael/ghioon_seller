@@ -4,7 +4,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ghioon_seller/Screens/components/alertDialog.dart';
 import 'package:ghioon_seller/Service/uploadPhoto.dart';
 import 'package:provider/provider.dart';
-
+import 'dart:ui';
+import 'package:flutter/material.dart';
 import '../../../../../Providers/RangeProvider.dart';
 import '../../../../../Service/AddProductDatabase.dart';
 
@@ -32,7 +33,13 @@ class AddProductDetailLogic {
           appState.oldPrice.value.text.isNotEmpty &&
           appState.cost.value.text.isNotEmpty) {
         Provider.of<RangeData>(context, listen: false).switchfixedFilled(true);
+        appState.priceList.clear();
+        appState.rangeToList.clear();
+        appState.rangeFromList.clear();
         appState.priceList.add(double.parse(appState.fixedPrice.text));
+        appState.rangeToList.add(int.parse('1'));
+        appState.rangeFromList.add(int.parse('1'));
+
         print("fixed product");
       } else {
         Provider.of<RangeData>(context, listen: false).switchfixedFilled(false);
@@ -47,6 +54,9 @@ class AddProductDetailLogic {
             appState.Ranges[i].fromcontroller!.text.isNotEmpty) {
           Provider.of<RangeData>(context, listen: false)
               .switchrangefilled(true);
+          appState.priceList.clear();
+          appState.rangeToList.clear();
+          appState.rangeFromList.clear();
           for (var i = 0; i < appState.Ranges.length; i++) {
             appState.priceList
                 .add(double.parse(appState.Ranges[i].pricecontroller!.text));
@@ -84,49 +94,20 @@ class AddProductDetailLogic {
         userUid);
   }
 
-  showDialog(BuildContext context) async {
+  addProduct(BuildContext context) async {
     final appState = Provider.of<RangeData>(context, listen: false);
-    buildShowDialog(
-        context, 'Ghioon', "Are you sure you want to add the product?",
-        () async {
-      //yesCallback
-      Navigator.pop(context);
+    //appState.isLoading = true;
+    final user = FirebaseAuth.instance.currentUser;
+    for (var i = 0; i < appState.Images.length; i++) {
+      var uploadedPhoto = await uploadImage(
+          appState.Images[i].photo, user!.uid.toString(), 'Products');
 
-      showGeneralDialog(
-        context: context,
-        barrierColor: Colors.black12.withOpacity(0.6), // Background color
-        barrierDismissible: false,
-        barrierLabel: 'Dialog',
-        transitionDuration: const Duration(milliseconds: 400),
-        pageBuilder: (_, __, ___) {
-          return const Center(
-            child: SpinKitFadingCube(
-              color: Colors.white,
-              size: 50.0,
-            ),
-          );
-        },
-      );
-      final user = FirebaseAuth.instance.currentUser;
+      appState.imageList.add(uploadedPhoto.toString());
+    }
 
-      for (var i = 0; i < appState.Images.length; i++) {
-        var uploadedPhoto = await uploadImage(
-            appState.Images[i].photo, user!.uid.toString(), 'Products');
+    uploadToDatabase(context);
+    print('done');
 
-        appState.imageList.add(uploadedPhoto.toString());
-      }
-
-      uploadToDatabase(context);
-      print('done');
-      Navigator.pop(context);
-
-      buildShowDoneDialog(context, 'Ghioon', "Product Added", () {
-        Navigator.pop(context);
-        Navigator.pop(context);
-      });
-    }, () {
-      // NoCallBack
-      Navigator.of(context).pop();
-    });
+    Navigator.pop(context);
   }
 }

@@ -1,26 +1,12 @@
 import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ghioon_seller/Models/addProductmodels.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/AddProductsWidgets/addImageContainer.dart';
-import 'package:ghioon_seller/Screens/components/BlueButton.dart';
-import 'package:ghioon_seller/Screens/components/alert.dart';
-import 'package:ghioon_seller/Screens/components/alertDialog.dart';
-import 'package:ghioon_seller/Screens/components/image_picker.dart';
-import 'package:ghioon_seller/Service/AddProductDatabase.dart';
-import 'package:ghioon_seller/Service/uploadPhoto.dart';
+import 'package:ghioon_seller/Screens/components/loadingWidget.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
-import '../../components/textFormField.dart';
 import 'AddProductsWidgets/addProductDetailContainer.dart';
 
 class AddProduct extends StatefulWidget {
@@ -63,28 +49,41 @@ class _AddProductState extends State<AddProduct> {
             ),
             iconTheme: IconThemeData(color: CustomColors().white)),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: ListView(
-            shrinkWrap: true,
-            physics: const BouncingScrollPhysics(
-                parent: AlwaysScrollableScrollPhysics()),
-            children: [
-              const SizedBox(height: 20),
-              Container(
-                  height: height / 7,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 1,
-                        color: const Color.fromARGB(255, 207, 207, 207)),
-                    color: CustomColors().white,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: const AddImageContainer()),
-              const SizedBox(height: 15),
-              addProductDetail(),
-              const SizedBox(height: 15),
-            ]),
+      body: Stack(
+        children: [
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: ListView(
+                  shrinkWrap: true,
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
+                  children: [
+                    const SizedBox(height: 20),
+                    Container(
+                        height: height / 7,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1,
+                              color: const Color.fromARGB(255, 207, 207, 207)),
+                          color: CustomColors().white,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: const AddImageContainer()),
+                    const SizedBox(height: 15),
+                    addProductDetail(),
+                    const SizedBox(height: 15),
+                  ])),
+          Positioned(
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Visibility(
+                visible: appState.isLoading,
+                child: LoadingWidget(
+                    height: height, message: "Adding Product . . ."),
+              ))
+        ],
       ),
     );
   }

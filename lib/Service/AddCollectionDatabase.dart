@@ -21,7 +21,7 @@ class AddCollectionDatabase {
             sellersCollection.doc(userUid).collection('Collections').doc();
         return await sellersCollection
             .doc(userUid)
-            .collection('Products')
+            .collection('Collections')
             .doc(ref.id)
             .set({
               'created': Timestamp.now(),
@@ -31,8 +31,8 @@ class AddCollectionDatabase {
               'image': image,
               'userUid': userUid,
             })
-            .then((value) => print("Product Info Added"))
-            .catchError((error) => print("Failed to Add Product: $error"));
+            .then((value) => print("Collection  Added"))
+            .catchError((error) => print("Failed to Add Collection: $error"));
       }
     });
   }

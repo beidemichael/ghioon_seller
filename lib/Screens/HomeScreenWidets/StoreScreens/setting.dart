@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/Feedback.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 
 import '../../../Service/auth.dart';
@@ -58,7 +59,14 @@ class _StoreSettingState extends State<StoreSetting> {
           StoreList(FontAwesomeIcons.shield, 'Terms and Conditions', width),
           StoreList(
               FontAwesomeIcons.solidCircleQuestion, 'Help and Support', width),
-          StoreList(FontAwesomeIcons.solidFile, 'Feedback', width),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const FeedbackPage()),
+                );
+              },
+              child: StoreList(FontAwesomeIcons.solidFile, 'Feedback', width)),
           StoreList(FontAwesomeIcons.arrowsSpin, 'Upgrade', width),
           StoreList(FontAwesomeIcons.rightFromBracket, 'Logout', width),
         ],

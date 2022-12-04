@@ -6,6 +6,7 @@ import '../Models/addCollections.dart';
 
 class CollectionData with ChangeNotifier {
   File? Photo;
+  bool isLoading = false;
   final collectionName = TextEditingController();
   final collectionDescription = TextEditingController();
   bool productDescriptionFilled = true;
