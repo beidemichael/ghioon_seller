@@ -56,6 +56,7 @@ class Product {
   String image;
   bool inStock;
   int quantity;
+  String documentId;
 
   Product({
     required this.productId,
@@ -69,6 +70,7 @@ class Product {
     required this.image,
     required this.inStock,
     required this.quantity,
+    required this.documentId,
   });
 }
 

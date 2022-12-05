@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../Providers/RangeProvider.dart';
 import '../../../../Models/addProductmodels.dart';
-import '../../../../Service/AddProductDatabase.dart';
+import '../../../../Service/Product/AddProductDatabase.dart';
 import '../../../../Service/uploadPhoto.dart';
 import '../../../../Shared/customColors.dart';
 import '../../../components/BlueButton.dart';

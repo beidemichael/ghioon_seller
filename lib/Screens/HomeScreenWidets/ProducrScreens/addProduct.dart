@@ -1,26 +1,9 @@
 import 'dart:io';
-
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ghioon_seller/Models/addProductmodels.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/AddProductsWidgets/addImageContainer.dart';
-import 'package:ghioon_seller/Screens/components/BlueButton.dart';
-import 'package:ghioon_seller/Screens/components/alert.dart';
-import 'package:ghioon_seller/Screens/components/alertDialog.dart';
-import 'package:ghioon_seller/Screens/components/image_picker.dart';
-import 'package:ghioon_seller/Service/AddProductDatabase.dart';
-import 'package:ghioon_seller/Service/uploadPhoto.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
-
-import '../../components/textFormField.dart';
 import 'AddProductsWidgets/addProductDetailContainer.dart';
 
 class AddProduct extends StatefulWidget {

@@ -6,7 +6,7 @@ import 'package:ghioon_seller/Service/uploadPhoto.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../Providers/RangeProvider.dart';
-import '../../../../../Service/AddProductDatabase.dart';
+import '../../../../../Service/Product/AddProductDatabase.dart';
 
 class AddProductDetailLogic {
   checkProductNameandDescription(BuildContext context) {
@@ -47,14 +47,14 @@ class AddProductDetailLogic {
             appState.Ranges[i].fromcontroller!.text.isNotEmpty) {
           Provider.of<RangeData>(context, listen: false)
               .switchrangefilled(true);
-          for (var i = 0; i < appState.Ranges.length; i++) {
-            appState.priceList
-                .add(double.parse(appState.Ranges[i].pricecontroller!.text));
-            appState.rangeToList
-                .add(int.parse(appState.Ranges[i].tocontroller!.text));
-            appState.rangeFromList
-                .add(int.parse(appState.Ranges[i].fromcontroller!.text));
-          }
+          // for (var i = 0; i < appState.Ranges.length; i++) {
+          //   appState.priceList
+          //       .add(double.parse(appState.Ranges[i].pricecontroller!.text));
+          //   appState.rangeToList
+          //       .add(int.parse(appState.Ranges[i].tocontroller!.text));
+          //   appState.rangeFromList
+          //       .add(int.parse(appState.Ranges[i].fromcontroller!.text));
+          // }
           print('add Range product');
         } else {
           Provider.of<RangeData>(context, listen: false)
@@ -73,14 +73,19 @@ class AddProductDetailLogic {
         appState.productName.text,
         appState.description.text,
         appState.fixed,
-        appState.priceList,
-        appState.rangeToList,
-        appState.rangeFromList,
+        [0.0],
+        [0],
+        [0],
+        // appState.priceList,
+        // appState.rangeToList,
+        // appState.rangeFromList,
         5,
         'food',
-        appState.imageList,
+        // appState.imageList,
+        ['klk'],
         true,
-        int.parse(appState.inventory.text),
+        // int.parse(appState.inventory.text),
+        2,
         userUid);
   }
 
@@ -118,7 +123,7 @@ class AddProductDetailLogic {
 
       uploadToDatabase(context);
       print('done');
-      Navigator.pop(context);
+      // Navigator.pop(context);
 
       buildShowDoneDialog(context, 'Ghioon', "Product Added", () {
         Navigator.pop(context);
@@ -129,4 +134,4 @@ class AddProductDetailLogic {
       Navigator.of(context).pop();
     });
   }
-}
+} 
