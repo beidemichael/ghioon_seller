@@ -26,9 +26,12 @@ class _RangeInputFieldState extends State<RangeInputField> {
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
             child: Row(children: [
-              const Text(
+              Text(
                 "Range Price",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.w500,
+                    color: CustomColors().blue),
               ),
               const SizedBox(
                 width: 10,
@@ -117,16 +120,19 @@ class _RangeInputFieldState extends State<RangeInputField> {
                   ],
                 );
               }),
-           Visibility(
+          Visibility(
             visible: !appState.rangefilled,
-             child: const Center(
-               child: Text(
+            child: const Center(
+              child: Text(
                 "Please fill all inputs",
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300,color: Colors.red),
-                     ),
-             ),
-           ),
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.red),
+              ),
+            ),
+          ),
           InventoryQty(inventory: appState.inventory),
         ],
       ),

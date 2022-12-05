@@ -13,6 +13,7 @@ import 'package:ghioon_seller/Screens/components/BlueButton.dart';
 import 'package:ghioon_seller/Screens/components/alert.dart';
 import 'package:ghioon_seller/Screens/components/alertDialog.dart';
 import 'package:ghioon_seller/Screens/components/image_picker.dart';
+import 'package:ghioon_seller/Screens/components/loadingWidget.dart';
 import 'package:ghioon_seller/Service/uploadPhoto.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:image_picker/image_picker.dart';
@@ -80,9 +81,9 @@ class _AddProductState extends State<AddProduct> {
                           color: CustomColors().white,
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        child: const AddImageContainer()),
+                        child: const Center(child: AddImageContainer())),
                     const SizedBox(height: 15),
-                    addProductDetail(),
+                    const addProductDetail(),
                     const SizedBox(height: 15),
                   ])),
           Positioned(
