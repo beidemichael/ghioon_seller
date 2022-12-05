@@ -2,12 +2,14 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Models/addCollections.dart';
 import 'package:ghioon_seller/Models/addProductmodels.dart';
 import 'package:image_picker/image_picker.dart';
 
 final List<Range> initialData = [];
 
 class RangeData with ChangeNotifier {
+  bool isLoading = false;
   List<int> rangeToList = [];
   List<int> rangeFromList = [];
   List<double> priceList = [];
@@ -63,6 +65,11 @@ class RangeData with ChangeNotifier {
 
   removeallcontrollers() {
     Ranges.clear();
+    productName.clear();
+    description.clear();
+    fixedPrice.clear();
+    oldPrice.clear();
+    cost.clear();
     notifyListeners();
   }
 

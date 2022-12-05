@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Providers/MapProvider.dart';
+import 'package:ghioon_seller/Providers/CollectionProvider.dart';
+import 'package:ghioon_seller/Providers/FeedbackProvider.dart';
 import 'package:ghioon_seller/firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +25,12 @@ void main() async {
           ),
           ChangeNotifierProvider(
             create: (context) => MapProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => CollectionData(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => FeedbackData(),
           ),
         ],
         child: const MyApp(),

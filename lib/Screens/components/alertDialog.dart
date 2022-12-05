@@ -2,6 +2,7 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 import '../../../Shared/customColors.dart';
 
@@ -93,9 +94,9 @@ class PopupDialog extends StatelessWidget {
                     Expanded(
                       flex: 2,
                       child: InkWell(
-                        onTap: () {
-                          yesCallBack();
+                        onTap: () async {
                           Navigator.of(context).pop();
+                          yesCallBack();
                         },
                         child: Container(
                           padding:

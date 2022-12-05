@@ -1,41 +1,26 @@
-import 'dart:io';
-import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ghioon_seller/Models/addProductmodels.dart';
-import 'package:ghioon_seller/Providers/RangeProvider.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/AddProductsWidgets/addImageContainer.dart';
-import 'package:ghioon_seller/Screens/components/BlueButton.dart';
-import 'package:ghioon_seller/Screens/components/alert.dart';
-import 'package:ghioon_seller/Screens/components/alertDialog.dart';
-import 'package:ghioon_seller/Screens/components/image_picker.dart';
-import 'package:ghioon_seller/Service/uploadPhoto.dart';
+import 'package:ghioon_seller/Providers/CollectionProvider.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/AddCollectionWidgets/addCollectionDetailContainer.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/AddCollectionWidgets/addImageContainer.dart';
+import 'package:ghioon_seller/Screens/components/loadingWidget.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
-import '../../components/textFormField.dart';
-import 'AddProductsWidgets/addProductDetailContainer.dart';
-
-class AddProduct extends StatefulWidget {
-  const AddProduct({super.key});
+class AddCollections extends StatefulWidget {
+  const AddCollections({super.key});
 
   @override
-  State<AddProduct> createState() => _AddProductState();
+  State<AddCollections> createState() => _AddCollectionsState();
 }
 
-class _AddProductState extends State<AddProduct> {
-  File? image;
-
+class _AddCollectionsState extends State<AddCollections> {
+  @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    final appState = Provider.of<RangeData>(context);
-
+    final appState = Provider.of<CollectionData>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
@@ -45,7 +30,7 @@ class _AddProductState extends State<AddProduct> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Text('Add Products',
+                const Text('Add Collection',
                     style: TextStyle(
                         fontSize: 30.0,
                         color: Colors.white,
@@ -80,9 +65,9 @@ class _AddProductState extends State<AddProduct> {
                           color: CustomColors().white,
                           borderRadius: BorderRadius.circular(20.0),
                         ),
-                        child: const AddImageContainer()),
+                        child: const AddCollectionImageContainer()),
                     const SizedBox(height: 15),
-                    addProductDetail(),
+                    addCollectionDetail(),
                     const SizedBox(height: 15),
                   ])),
           Positioned(
@@ -93,7 +78,7 @@ class _AddProductState extends State<AddProduct> {
               child: Visibility(
                 visible: appState.isLoading,
                 child: LoadingWidget(
-                    height: height, message: "Adding Product . . ."),
+                    height: height, message: "Adding Collection . . ."),
               ))
         ],
       ),

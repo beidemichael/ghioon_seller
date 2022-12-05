@@ -20,7 +20,7 @@ class _ViewOnMapState extends State<ViewOnMap> {
     return Scaffold(
         body: Container(
             padding: EdgeInsets.all(10),
-            child: false //appState.initialPosition == null
+            child: appState.initialPosition == null
                 ? Container(
                     color: Colors.green,
                     child: Column(
@@ -57,9 +57,9 @@ class _ViewOnMapState extends State<ViewOnMap> {
                       onMapCreated: appState.onCreated,
                       onCameraMove: appState.onCameraMove,
                       initialCameraPosition: CameraPosition(
-                        target: LatLng(8.9930104, 38.6725714),
-                        // LatLng(appState.initialPosition.latitude,
-                        //     appState.initialPosition.longitude),
+                        target: //LatLng(8.9930104, 38.6725714),
+                            LatLng(appState.initialPosition.latitude,
+                                appState.initialPosition.longitude),
                         zoom: 14,
                       ),
                     ),
@@ -131,7 +131,7 @@ class _ViewOnMapState extends State<ViewOnMap> {
                                       SizedBox(
                                         width: 10,
                                       ),
-                                      Text("Where Do you want to Go?",
+                                      Text("Customers Locations",
                                           style: TextStyle(
                                               color: Colors.teal,
                                               fontSize: 15,

@@ -8,7 +8,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 class MapProvider with ChangeNotifier {
   var _initialPosition;
   var _lastPosition;
-  var googleAPIKey = "AIzaSyBD5YMIlSV4fvJMquxOnnKcfoywnmvr6SI";
+  var googleAPIKey = "AIzaSyCKHhU_vGRvfk99jH9BikS1hUtv7HRMK5I";
 
   bool isLatLngRequired = true;
   bool onMapVisibilty = true;
@@ -22,7 +22,7 @@ class MapProvider with ChangeNotifier {
   LatLng get lastPosition => _lastPosition;
 
   GoogleMapController? _mapController;
-  GoogleMapController? _mapController2;
+
   final Set<Marker> _routingmarkers = {};
 
   final Set<Marker> _markers = {};
@@ -30,14 +30,16 @@ class MapProvider with ChangeNotifier {
 
   final locationController = TextEditingController();
   final destinationController = TextEditingController();
-  List<TextEditingController> controller = [];
 
   GoogleMapController get mapController => _mapController!;
-  GoogleMapController get mapController2 => _mapController2!;
-  Set<Marker> get markers => _markers;
-  Set<Marker> get Routingmarkers => _routingmarkers;
-  Set<Polyline> get polyLines => _polyLines;
 
+  Set<Marker> get markers => _markers;
+
+  Set<Polyline> get polyLines => _polyLines;
+  MapProvider() {
+    _getUserLocation();
+    _loadingInitialPosition();
+  }
 // ! TO GET THE USERS LOCATION
   void _getUserLocation() async {
     print("GET POSITION");

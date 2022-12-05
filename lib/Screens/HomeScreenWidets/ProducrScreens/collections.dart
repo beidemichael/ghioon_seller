@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:ghioon_seller/Providers/CollectionProvider.dart';
+import 'package:ghioon_seller/Providers/RangeProvider.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/addCollections.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/addProduct.dart';
+import 'package:provider/provider.dart';
 
 class Collections extends StatefulWidget {
   const Collections({super.key});
@@ -16,6 +20,7 @@ class Collections extends StatefulWidget {
 class _CollectionsState extends State<Collections> {
   @override
   Widget build(BuildContext context) {
+    final collectionState = Provider.of<CollectionData>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
@@ -69,7 +74,16 @@ class _CollectionsState extends State<Collections> {
             ]),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        backgroundColor: CustomColors().blue,
+        onPressed: () {
+          collectionState.addinitCollectionImages();
+          collectionState.removeallimages();
+          collectionState.cleanallcontrollers();
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddCollections()),
+          );
+        },
         child: Center(
           child: Icon(
             FontAwesomeIcons.plus,

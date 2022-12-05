@@ -213,3 +213,49 @@ Widget TextFormFieldProDescription(
     ),
   );
 }
+
+//Text widget for feedback description in add product
+Widget TextFormFieldFeeDescription(
+    String hintText, TextEditingController control, String header) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 10.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextFormField(
+          maxLines: 20, // <-- SEE HERE
+          minLines: 15, // <-- SEE HERE
+          keyboardType: TextInputType.text,
+          controller: control,
+          //initialValue: autoAddress,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter some text';
+            }
+            return null;
+          },
+          style: TextStyle(fontSize: 20),
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: CustomColors().white,
+            hintText: hintText,
+            hintStyle: TextStyle(fontSize: 25),
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: const BorderSide(color: Color.fromARGB(255, 0, 0, 0)),
+              gapPadding: 10,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: CustomColors().blue),
+              gapPadding: 10,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
