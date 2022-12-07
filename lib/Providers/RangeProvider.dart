@@ -9,6 +9,8 @@ import 'package:image_picker/image_picker.dart';
 final List<Range> initialData = [];
 
 class RangeData with ChangeNotifier {
+  var  video ;
+  String  videoString = '' ;
   bool isLoading = false;
   List<int> rangeToList = [];
   List<int> rangeFromList = [];
@@ -28,6 +30,7 @@ class RangeData with ChangeNotifier {
   bool fixedFilled = true;
   bool rangefilled = true;
   bool videoSquare = true;
+  bool videoSubmited = false;
   bool videoLessThanSix = true;
   List<Range> Ranges = [];
   final ImagePicker _picker = ImagePicker();
@@ -115,7 +118,7 @@ class RangeData with ChangeNotifier {
   //Controlling functions for add image
 
   final List<ImageList> _image = [];
-  var  video ;
+  
   List<ImageList> get Images => _image;
   
 

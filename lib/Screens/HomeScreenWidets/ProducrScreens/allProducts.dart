@@ -1,11 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/addProductmodels.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/ProductDetail/productDetail.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/addProduct.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
+
+import '../../../Models/models.dart';
+import 'ProductDetail/productCard.dart';
 
 class AllProduct extends StatefulWidget {
   const AllProduct({super.key});
@@ -18,6 +23,7 @@ class _AllProductState extends State<AllProduct> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<RangeData>(context);
+    final products = Provider.of<List<Product>>(context);
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(70.0),
@@ -74,104 +80,30 @@ class _AllProductState extends State<AllProduct> {
         ),
         body: Padding(
           padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 0),
-          child: ListView(
-              physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
-              children: [
-                ProductList(
-                    title: "BeatsStudio3",
-                    stock: "22 Available",
-                    image: 'assets/images/head.png'),
-                ProductList(
-                    title: "BeatsStudio3",
-                    stock: "22 Available",
-                    image: 'assets/images/head.png'),
-                ProductList(
-                    title: "BeatsStudio3",
-                    stock: "22 Available",
-                    image: 'assets/images/head.png')
-              ]),
-        ));
-  }
-}
-
-class ProductList extends StatelessWidget {
-  const ProductList(
-      {Key? key, required this.title, required this.stock, required this.image})
-      : super(key: key);
-
-  final String title;
-  final String stock;
-  final String image;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(0, 0, 0, 10),
-      child: Container(
-        height: ScreenSize().ScreenWidth(context) / 3.5,
-        decoration: BoxDecoration(
-          border: Border.all(
-              width: 1, color: const Color.fromARGB(255, 224, 224, 224)),
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(15.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 2,
-              blurRadius: 3,
-              offset: const Offset(0, 2), // changes position of shadow
-            ),
-          ],
-        ),
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-          child: ListTile(
-            title: Text(
-              "BeatsStudio3",
-              style: TextStyle(
-                  fontFamily: 'Inter',
-                  fontSize: 24,
-                  color: CustomColors().blue,
-                  fontWeight: FontWeight.w700),
-            ),
-            leading: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8.0),
-                topRight: Radius.circular(8.0),
-              ),
-              child: Image.asset(image,
-                  // width: 60,
-                  //height: 150,
-                  fit: BoxFit.fill),
-            ), //Image.asset('assets/images/head.png'),
-
-            trailing: IconButton(
-              onPressed: () {},
-              icon: const Icon(FontAwesomeIcons.penToSquare),
-              iconSize: 40,
-              color: CustomColors().blue,
-            ),
-
-            subtitle: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-              child: Row(
-                children: [
-                  Text(
-                    stock,
-                    style: TextStyle(
-                        fontFamily: 'Inter',
-                        color: CustomColors().black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600),
+          child: Container(
+            height: MediaQuery.of(context).size.height,
+            child: ListView.builder(
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>  ProductDetail(product: products[index],)),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ProductList(
+                        title: products[index].name,
+                        stock: products[index].quantity.toString(),
+                        image: products[index].image),
                   ),
-                  const Text("."),
-                ],
-              ),
+                );
+              },
             ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 }

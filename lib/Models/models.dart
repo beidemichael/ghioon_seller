@@ -49,14 +49,16 @@ class Product {
   String name;
   String description;
   bool fixed;
-  List<double> price;
-  List<int> range;
+  List<dynamic> price;
+  List<dynamic> rangeFrom;
+  List<dynamic> rangeTo;
   double rating;
   String category;
-  String image;
+  List image;
   bool inStock;
   int quantity;
   String documentId;
+  String video;
 
   Product({
     required this.productId,
@@ -64,13 +66,15 @@ class Product {
     required this.description,
     required this.fixed,
     required this.price,
-    required this.range,
+    required this.rangeFrom,
+    required this.rangeTo,
     required this.rating,
     required this.category,
     required this.image,
     required this.inStock,
     required this.quantity,
     required this.documentId,
+    required this.video,
   });
 }
 

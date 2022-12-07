@@ -99,8 +99,7 @@ class _addProductDetailState extends State<addProductDetail> {
                     print("loading");
 
                     //Check if image is filled
-                    AddProductDetailLogic()
-                        .checkImage(context);
+                    AddProductDetailLogic().checkImage(context);
                     //Check if Product Name and Description is filled
                     AddProductDetailLogic()
                         .checkProductNameandDescription(context);
@@ -109,7 +108,9 @@ class _addProductDetailState extends State<addProductDetail> {
                     //If All fields are filled==>
                     if (appState.fixed) {
                       if (appState.productDescriptionFilled &&
-                          appState.fixedFilled) {
+                          appState.fixedFilled &&
+                          appState.videoLessThanSix &&
+                          appState.videoSquare) {
                         appState.isLoading = true;
                         // AddProductDetailLogic().showDialog(context);
 
@@ -132,7 +133,9 @@ class _addProductDetailState extends State<addProductDetail> {
                       }
                     } else {
                       if (appState.productDescriptionFilled &&
-                          appState.rangefilled) {
+                          appState.rangefilled &&
+                          appState.videoLessThanSix &&
+                          appState.videoSquare) {
                         appState.isLoading = true;
                         // AddProductDetailLogic().showDialog(context);
 

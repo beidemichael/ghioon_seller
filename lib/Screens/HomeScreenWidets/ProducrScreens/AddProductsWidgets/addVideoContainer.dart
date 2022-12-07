@@ -66,7 +66,7 @@ class _AddVideoContainerState extends State<AddVideoContainer> {
       });
 
     setState(() {
-      // appState.video = videoTemporary;
+      appState.video = _video;
     });
     Future.delayed(const Duration(milliseconds: 700), () {
       setState(() {
@@ -78,15 +78,12 @@ class _AddVideoContainerState extends State<AddVideoContainer> {
   }
 
   checkParameter() {
-    //  AddProductDetailLogic().checkVideo(context, false, false);
     final appState = Provider.of<RangeData>(context, listen: false);
-    print('************************************************');
+    appState.videoSubmited = true;
     if (_controller.value.size.height != _controller.value.size.width) {
       appState.videoSquare = false;
-      
     }
     if (_controller.value.duration.inSeconds > 5) {
-      
       appState.videoLessThanSix = false;
     }
   }
@@ -131,7 +128,7 @@ class _AddVideoContainerState extends State<AddVideoContainer> {
                             ),
                           ),
                           Text(
-                            'Duration: ' +
+                            'Video duration: ' +
                                 _controller.value.duration.inSeconds
                                     .toString() +
                                 ' Secs',

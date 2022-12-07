@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Providers/MapProvider.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Providers/FeedbackProvider.dart';
+import 'package:ghioon_seller/Service/Product/readProduct.dart';
 import 'package:ghioon_seller/firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -32,6 +33,10 @@ void main() async {
           ChangeNotifierProvider(
             create: (context) => FeedbackData(),
           ),
+          StreamProvider<List<Product>>.value(
+            initialData: [],
+            value: ReadProductDatabaseService().readProduct,
+          )
         ],
         child: const MyApp(),
       ),

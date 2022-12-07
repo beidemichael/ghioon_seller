@@ -116,6 +116,7 @@ class AddProductDetailLogic {
         5,
         'food',
         appState.imageList,
+        appState.videoString,
         true,
         int.parse(appState.inventory.text),
         userUid);
@@ -130,6 +131,11 @@ class AddProductDetailLogic {
           appState.Images[i].photo, user!.uid.toString(), 'Products');
 
       appState.imageList.add(uploadedPhoto.toString());
+    }
+    if (appState.videoSubmited) {
+      var uploadedVideo =
+          await uploadVideo(appState.video, user!.uid.toString(), 'Products');
+      appState.videoString = uploadedVideo.toString();
     }
 
     uploadToDatabase(context);
