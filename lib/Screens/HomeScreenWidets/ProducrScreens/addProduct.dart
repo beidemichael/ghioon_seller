@@ -21,6 +21,7 @@ import 'package:provider/provider.dart';
 
 import '../../components/textFormField.dart';
 import 'AddProductsWidgets/addProductDetailContainer.dart';
+import 'AddProductsWidgets/addVideoContainer.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});
@@ -36,6 +37,14 @@ class _AddProductState extends State<AddProduct> {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final appState = Provider.of<RangeData>(context);
+    Future pickVideo() async {
+      final video = await ImagePicker().pickVideo(source: ImageSource.gallery);
+      if (video == null) return;
+      final videoTemporary = File(video.path);
+      setState(() {
+        appState.video = videoTemporary;
+      });
+    }
 
     return Scaffold(
       appBar: PreferredSize(
@@ -82,6 +91,40 @@ class _AddProductState extends State<AddProduct> {
                           borderRadius: BorderRadius.circular(20.0),
                         ),
                         child: const Center(child: AddImageContainer())),
+                    const SizedBox(height: 15),
+                    Visibility(
+                      visible: !appState.imageFilled,
+                      child: const Center(
+                        child: Text(
+                          "Please add an image",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w300,
+                              color: Colors.red),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 15),
+                    GestureDetector(
+                      onTap: (){
+                         print('VideoSquare: '+appState.videoSquare.toString());
+                          print('VideoSix: '+appState.videoLessThanSix.toString());
+                      },
+                      child: Container(
+                        height: (width * .5) + 80,
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 1,
+                              color: const Color.fromARGB(255, 207, 207, 207)),
+                          color: CustomColors().white,
+                          borderRadius: BorderRadius.circular(20.0),
+                        ),
+                        child: const Center(
+                          child: AddVideoContainer(),
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 15),
                     const addProductDetail(),
                     const SizedBox(height: 15),

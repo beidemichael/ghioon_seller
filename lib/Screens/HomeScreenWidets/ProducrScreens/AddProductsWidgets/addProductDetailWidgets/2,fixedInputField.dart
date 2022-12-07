@@ -90,7 +90,7 @@ class _FixedInputFieldState extends State<FixedInputField> {
                                       .toString()
                                   : '0',
                               //'abadb',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontSize: 30.0,
                                   color: Color.fromARGB(255, 0, 0, 0),
                                   fontWeight: FontWeight.w500)),

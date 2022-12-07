@@ -98,6 +98,9 @@ class _addProductDetailState extends State<addProductDetail> {
                   onTap: () async {
                     print("loading");
 
+                    //Check if image is filled
+                    AddProductDetailLogic()
+                        .checkImage(context);
                     //Check if Product Name and Description is filled
                     AddProductDetailLogic()
                         .checkProductNameandDescription(context);

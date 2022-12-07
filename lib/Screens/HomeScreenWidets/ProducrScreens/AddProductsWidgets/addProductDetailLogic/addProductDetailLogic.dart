@@ -6,20 +6,47 @@ import 'package:ghioon_seller/Service/uploadPhoto.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
 import '../../../../../Providers/RangeProvider.dart';
 import '../../../../../Service/Product/AddProductDatabase.dart';
 
 class AddProductDetailLogic {
+  checkImage(BuildContext context) {
+    final appState = Provider.of<RangeData>(context, listen: false);
+    int emptyImage = 0;
+    for (var i = 0; i < appState.Images.length; i++) {
+      if (appState.Images[i].photo == null) {
+        emptyImage++;
+        if (appState.Images.length != 1) {
+          appState.Images.removeAt(i);
+        }
+      }
+    }
+    if (emptyImage == appState.Images.length) {
+      appState.imageFilled = false;
+    } else {
+      appState.imageFilled = true;
+    }
+    print('emptyImage: ' + emptyImage.toString());
+    print('appStateImage: ' + appState.Images.length.toString());
+  }
+
+  checkVideo(BuildContext context, bool videoSquare, bool videoLessThanSix) {
+    final appState = Provider.of<RangeData>(context, listen: false);
+
+    appState.videoLessThanSix = videoLessThanSix;
+
+    appState.videoSquare = videoSquare;
+  }
+
   checkProductNameandDescription(BuildContext context) {
     final appState = Provider.of<RangeData>(context, listen: false);
 
     if (appState.productName.value.text.isNotEmpty &&
         appState.description.value.text.isNotEmpty) {
-      Provider.of<RangeData>(context, listen: false)
-          .switchproductDescriptionFilled(true);
+      appState.productDescriptionFilled = true;
     } else {
-      Provider.of<RangeData>(context, listen: false)
-          .switchproductDescriptionFilled(false);
+      appState.productDescriptionFilled = false;
     }
   }
 
@@ -57,14 +84,14 @@ class AddProductDetailLogic {
           appState.priceList.clear();
           appState.rangeToList.clear();
           appState.rangeFromList.clear();
-          // for (var i = 0; i < appState.Ranges.length; i++) {
-          //   appState.priceList
-          //       .add(double.parse(appState.Ranges[i].pricecontroller!.text));
-          //   appState.rangeToList
-          //       .add(int.parse(appState.Ranges[i].tocontroller!.text));
-          //   appState.rangeFromList
-          //       .add(int.parse(appState.Ranges[i].fromcontroller!.text));
-          // }
+          for (var i = 0; i < appState.Ranges.length; i++) {
+            appState.priceList
+                .add(double.parse(appState.Ranges[i].pricecontroller!.text));
+            appState.rangeToList
+                .add(int.parse(appState.Ranges[i].tocontroller!.text));
+            appState.rangeFromList
+                .add(int.parse(appState.Ranges[i].fromcontroller!.text));
+          }
           print('add Range product');
         } else {
           Provider.of<RangeData>(context, listen: false)
@@ -83,19 +110,14 @@ class AddProductDetailLogic {
         appState.productName.text,
         appState.description.text,
         appState.fixed,
-        [0.0],
-        [0],
-        [0],
-        // appState.priceList,
-        // appState.rangeToList,
-        // appState.rangeFromList,
+        appState.priceList,
+        appState.rangeToList,
+        appState.rangeFromList,
         5,
         'food',
-        // appState.imageList,
-        ['klk'],
+        appState.imageList,
         true,
-        // int.parse(appState.inventory.text),
-        2,
+        int.parse(appState.inventory.text),
         userUid);
   }
 
@@ -110,10 +132,10 @@ class AddProductDetailLogic {
       appState.imageList.add(uploadedPhoto.toString());
     }
 
-      uploadToDatabase(context);
-      print('done');
-      Navigator.pop(context);
+    uploadToDatabase(context);
+    print('done');
+    Navigator.pop(context);
 
     Navigator.pop(context);
   }
-} 
+}

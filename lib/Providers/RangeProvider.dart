@@ -23,9 +23,12 @@ class RangeData with ChangeNotifier {
   final inventory = TextEditingController(text: "1");
   bool fixed = true;
 
+  bool imageFilled = true;
   bool productDescriptionFilled = true;
   bool fixedFilled = true;
   bool rangefilled = true;
+  bool videoSquare = true;
+  bool videoLessThanSix = true;
   List<Range> Ranges = [];
   final ImagePicker _picker = ImagePicker();
 
@@ -112,7 +115,9 @@ class RangeData with ChangeNotifier {
   //Controlling functions for add image
 
   final List<ImageList> _image = [];
+  var  video ;
   List<ImageList> get Images => _image;
+  
 
 //function to clear out all added images
   removeallimages() {

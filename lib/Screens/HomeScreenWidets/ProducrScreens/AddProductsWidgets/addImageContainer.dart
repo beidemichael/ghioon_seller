@@ -26,6 +26,7 @@ class _AddImageContainerState extends State<AddImageContainer> {
     final appState = Provider.of<RangeData>(context);
     var _images = context.watch<RangeData>().Images;
     Future pickImage(ImageSource source, int index) async {
+      final file = await ImagePicker().pickVideo(source: ImageSource.gallery);
       final image = await _picker.pickImage(
         source: source,
       );
@@ -113,12 +114,8 @@ class _AddImageContainerState extends State<AddImageContainer> {
                               Container(
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(20),
-                                  boxShadow: const <BoxShadow>[
-                                    BoxShadow(
-                                        color: Color.fromARGB(137, 95, 93, 93),
-                                        blurRadius: 5.0,
-                                        offset: Offset(0.0, 2))
-                                  ],
+                                  border: Border.all(
+                                      width: 1, color: CustomColors().blue),
                                 ),
                                 child: ClipRRect(
                                   borderRadius:
@@ -153,30 +150,34 @@ class _AddImageContainerState extends State<AddImageContainer> {
                               Positioned(
                                 top: 0,
                                 right: 0,
-                                child: SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      appState.removeImage(_images[index]);
-                                    },
-                                    child: Container(
-                                      height: 25,
-                                      width: 25,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(50),
-                                        color: CustomColors().white,
-                                        boxShadow: const <BoxShadow>[
-                                          BoxShadow(
-                                              color: Color.fromARGB(
-                                                  137, 95, 93, 93),
-                                              blurRadius: 2.0,
-                                              offset: Offset(0.0, 2))
-                                        ],
-                                      ),
-                                      child: Icon(
-                                        FontAwesomeIcons.xmark,
-                                        color: CustomColors().blue,
+                                child: Visibility(
+                                  visible: _images.length != 1,
+                                  child: SizedBox(
+                                    height: 30,
+                                    width: 30,
+                                    child: GestureDetector(
+                                      onTap: () {
+                                        appState.removeImage(_images[index]);
+                                      },
+                                      child: Container(
+                                        height: 25,
+                                        width: 25,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          color: CustomColors().white,
+                                          boxShadow: const <BoxShadow>[
+                                            BoxShadow(
+                                                color: Color.fromARGB(
+                                                    137, 95, 93, 93),
+                                                blurRadius: 2.0,
+                                                offset: Offset(0.0, 2))
+                                          ],
+                                        ),
+                                        child: Icon(
+                                          FontAwesomeIcons.xmark,
+                                          color: CustomColors().blue,
+                                        ),
                                       ),
                                     ),
                                   ),
