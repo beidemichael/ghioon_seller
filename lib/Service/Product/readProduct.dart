@@ -6,7 +6,7 @@ class ReadProductDatabaseService {
   ReadProductDatabaseService({this.userUid});
   final CollectionReference productCollection =
       FirebaseFirestore.instance.collection('Products');
-  List<Product> _userInfoListFromSnapshot(QuerySnapshot snapshot) {
+  List<Product> _productListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Product(
         productId: (doc.data() as dynamic)['productId'] ?? '',
@@ -32,6 +32,6 @@ class ReadProductDatabaseService {
     return productCollection
         .where('userUid', isEqualTo: userUid)
         .snapshots()
-        .map(_userInfoListFromSnapshot);
+        .map(_productListFromSnapshot);
   }
 }

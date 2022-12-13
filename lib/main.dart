@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Providers/MapProvider.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Providers/FeedbackProvider.dart';
+import 'package:ghioon_seller/Service/Collection/readCollection.dart';
 import 'package:ghioon_seller/Service/Product/readProduct.dart';
 import 'package:ghioon_seller/firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +37,15 @@ void main() async {
           ),
           StreamProvider<List<Product>>.value(
             initialData: [],
-            value: ReadProductDatabaseService().readProduct,
+            value: ReadProductDatabaseService(
+                    userUid: FirebaseAuth.instance.currentUser!.uid)
+                .readProduct,
+          ),
+          StreamProvider<List<Collection>>.value(
+            initialData: [],
+            value: ReadCollectionDatabaseService(
+                    userUid: FirebaseAuth.instance.currentUser!.uid)
+                .readCollection,
           )
         ],
         child: const MyApp(),

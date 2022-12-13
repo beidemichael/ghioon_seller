@@ -78,6 +78,22 @@ class Product {
   });
 }
 
+class Collection {
+  String collectionId;
+  String name;
+  String description;
+  List image;
+  String documentId;
+
+  Collection({
+    required this.collectionId,
+    required this.name,
+    required this.description,
+    required this.image,
+    required this.documentId,
+  });
+}
+
 class Review {
   String productId;
   List<String> reviews;

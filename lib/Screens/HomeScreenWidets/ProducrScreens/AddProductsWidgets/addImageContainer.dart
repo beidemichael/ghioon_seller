@@ -26,7 +26,7 @@ class _AddImageContainerState extends State<AddImageContainer> {
     final appState = Provider.of<RangeData>(context);
     var _images = context.watch<RangeData>().Images;
     Future pickImage(ImageSource source, int index) async {
-      final file = await ImagePicker().pickVideo(source: ImageSource.gallery);
+      // final file = await ImagePicker().pickVideo(source: ImageSource.gallery);
       final image = await _picker.pickImage(
         source: source,
       );

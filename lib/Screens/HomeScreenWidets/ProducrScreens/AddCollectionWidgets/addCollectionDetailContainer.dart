@@ -44,10 +44,6 @@ class _addCollectionDetailState extends State<addCollectionDetail> {
                 ),
               ),
             ),
-            const Text(
-              "Price",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-            ),
             const SizedBox(
               height: 10,
             ),

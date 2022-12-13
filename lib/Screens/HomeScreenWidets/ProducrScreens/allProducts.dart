@@ -83,6 +83,8 @@ class _AllProductState extends State<AllProduct> {
           child: Container(
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
               itemCount: products.length,
               itemBuilder: (context, index) {
                 return GestureDetector(
@@ -90,7 +92,9 @@ class _AllProductState extends State<AllProduct> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>  ProductDetail(product: products[index],)),
+                          builder: (context) => ProductDetail(
+                                product: products[index],
+                              )),
                     );
                   },
                   child: Padding(
