@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../Models/models.dart';
+
 class AddCollectionDatabase {
   var userUid;
   AddCollectionDatabase({this.userUid});
@@ -11,6 +13,7 @@ class AddCollectionDatabase {
     String description,
     List<String> image,
     var userUid,
+    List<Product> collectionItems,
   ) async {
     sellersCollection
         .where('userUid', isEqualTo: userUid)
@@ -30,6 +33,7 @@ class AddCollectionDatabase {
               'description': description,
               'image': image,
               'userUid': userUid,
+              'collectionItems': collectionItems,
             })
             .then((value) => print("Collection  Added"))
             .catchError((error) => print("Failed to Add Collection: $error"));

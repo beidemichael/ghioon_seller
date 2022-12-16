@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Models/models.dart';
 
 import '../Models/addCollections.dart';
 
@@ -9,6 +10,7 @@ class CollectionData with ChangeNotifier {
   bool isLoading = false;
   final collectionName = TextEditingController();
   final collectionDescription = TextEditingController();
+  final List<Product> collectionItems = [];
   bool productDescriptionFilled = true;
   List<String> imageList = [];
   final List<CollectionImage> _collectionimage = [];

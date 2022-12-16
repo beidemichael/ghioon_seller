@@ -5,6 +5,7 @@ import 'package:ghioon_seller/Providers/MapProvider.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Providers/FeedbackProvider.dart';
 import 'package:ghioon_seller/Service/Collection/readCollection.dart';
+import 'package:ghioon_seller/Service/Collection/readCollectionItems.dart';
 import 'package:ghioon_seller/Service/Product/readProduct.dart';
 import 'package:ghioon_seller/firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,12 @@ void main() async {
             value: ReadCollectionDatabaseService(
                     userUid: FirebaseAuth.instance.currentUser!.uid)
                 .readCollection,
+          ),
+          StreamProvider<List<CollectionItems>>.value(
+            initialData: [],
+            value: ReadCollectionItemsDatabaseService(
+                    userUid: FirebaseAuth.instance.currentUser!.uid)
+                .readCollectionItems,
           )
         ],
         child: const MyApp(),

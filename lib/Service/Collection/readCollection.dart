@@ -7,6 +7,7 @@ class ReadCollectionDatabaseService {
 
   final CollectionReference sellerCollection =
       FirebaseFirestore.instance.collection('Sellers');
+
   List<Collection> _userCollectionListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return Collection(

@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -6,7 +7,9 @@ import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/CollectionDetail/collectionDetailPage.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/CollectionDetail/collection_card.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/addCollections.dart';
+import 'package:ghioon_seller/Service/Collection/readCollectionItems.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
@@ -60,25 +63,6 @@ class _CollectionsState extends State<Collections> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 0),
-
-        // child: ListView(
-        //     physics: const BouncingScrollPhysics(
-        //         parent: AlwaysScrollableScrollPhysics()),
-        //     children: [
-        //       CollectionList(
-        //           title: "BeatsStudio3",
-        //           stock: "22 Available",
-        //           image: 'assets/images/head.png'),
-        //       CollectionList(
-        //           title: "BeatsStudio3",
-        //           stock: "22 Available",
-        //           image: 'assets/images/head.png'),
-        //       CollectionList(
-        //           title: "BeatsStudio3",
-        //           stock: "22 Available",
-        //           image: 'assets/images/head.png')
-        //     ]),
-
         child: collection.length == 0
             ? Center(
                 child: Text(
@@ -96,6 +80,10 @@ class _CollectionsState extends State<Collections> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
+                        ReadCollectionItemsDatabaseService(
+                          userUid: FirebaseAuth.instance.currentUser!.uid,
+                          docid: collection[index].collectionId,
+                        ).readCollectionItems;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -108,7 +96,7 @@ class _CollectionsState extends State<Collections> {
                         padding: const EdgeInsets.all(8.0),
                         child: CollectionList(
                             title: collection[index].name,
-                            stock: collection[index].description,
+                            desc: collection[index].description,
                             image: collection[index].image),
                       ),
                     );
@@ -132,143 +120,6 @@ class _CollectionsState extends State<Collections> {
             FontAwesomeIcons.plus,
             size: 25.0,
             color: CustomColors().white,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CollectionList extends StatelessWidget {
-  const CollectionList(
-      {Key? key, required this.title, required this.stock, required this.image})
-      : super(key: key);
-
-  final String title;
-  final String stock;
-  final List image;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: ScreenSize().ScreenWidth(context) / 3.5,
-      decoration: BoxDecoration(
-        border: Border.all(
-            width: 1, color: const Color.fromARGB(255, 224, 224, 224)),
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(15.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 3,
-            offset: const Offset(0, 2), // changes position of shadow
-          ),
-        ],
-      ),
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
-        child: ListTile(
-          title: Text(
-            title,
-            style: TextStyle(
-                fontFamily: 'Inter',
-                fontSize: 24,
-                color: CustomColors().blue,
-                fontWeight: FontWeight.w700),
-          ),
-
-          leading: image[0] != ''
-              ? ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    topRight: Radius.circular(8.0),
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: image[0],
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Center(
-                      child: Container(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.grey[300]!),
-                            value: downloadProgress.progress),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                )
-              : ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    topRight: Radius.circular(8.0),
-                  ),
-                  child: Icon(
-                    Icons.shop,
-                    size: 50,
-                  ),
-                ),
-
-          // leading: image[0] != ''
-          //     ? ClipRRect(
-          //         borderRadius: const BorderRadius.only(
-          //           topLeft: Radius.circular(8.0),
-          //           topRight: Radius.circular(8.0),
-          //         ),
-          //         child: CachedNetworkImage(
-          //           fit: BoxFit.cover,
-          //           imageUrl: image[0],
-          //           progressIndicatorBuilder:
-          //               (context, url, downloadProgress) => Center(
-          //             child: Container(
-          //               height: 20,
-          //               width: 20,
-          //               child: CircularProgressIndicator(
-          //                   valueColor: AlwaysStoppedAnimation<Color>(
-          //                       Colors.grey[300]!),
-          //                   value: downloadProgress.progress),
-          //             ),
-          //           ),
-          //           errorWidget: (context, url, error) => Icon(Icons.error),
-          //         ),
-          //       )
-          //     : SizedBox(
-          //         width: 100,
-          //         child: Center(
-          //           child: Icon(
-          //             Icons.newspaper_rounded,
-          //             size: 10,
-          //             color: Colors.grey[400],
-          //           ),
-          //         ),
-          //       ),
-
-          //Image.asset('assets/images/head.png'),
-
-          trailing: IconButton(
-            onPressed: () {},
-            icon: const Icon(FontAwesomeIcons.penToSquare),
-            iconSize: 40,
-            color: CustomColors().blue,
-          ),
-
-          subtitle: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
-            child: Row(
-              children: [
-                Text(
-                  stock,
-                  style: TextStyle(
-                      fontFamily: 'Inter',
-                      color: CustomColors().black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600),
-                ),
-                const Text("."),
-              ],
-            ),
           ),
         ),
       ),

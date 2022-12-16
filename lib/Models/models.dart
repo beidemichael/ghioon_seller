@@ -94,6 +94,13 @@ class Collection {
   });
 }
 
+class CollectionItems {
+  String name;
+  String image;
+
+  CollectionItems({required this.name, required this.image});
+}
+
 class Review {
   String productId;
   List<String> reviews;

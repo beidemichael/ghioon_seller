@@ -28,8 +28,12 @@ class AddCollectionLogic {
     final user = FirebaseAuth.instance.currentUser;
     final userUid = user!.uid;
 
-    await AddCollectionDatabase().addCollection(appState.collectionName.text,
-        appState.collectionDescription.text, appState.imageList, userUid);
+    await AddCollectionDatabase().addCollection(
+        appState.collectionName.text,
+        appState.collectionDescription.text,
+        appState.imageList,
+        userUid,
+        appState.collectionItems);
   }
 
   addCollection(BuildContext context) async {
