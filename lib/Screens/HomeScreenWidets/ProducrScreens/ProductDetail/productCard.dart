@@ -4,14 +4,20 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../../../Shared/constants.dart';
 import '../../../../Shared/customColors.dart';
+
 class ProductList extends StatelessWidget {
   const ProductList(
-      {Key? key, required this.title, required this.stock, required this.image})
+      {Key? key,
+      required this.title,
+      required this.stock,
+      required this.image,
+      required this.edit})
       : super(key: key);
 
   final String title;
   final String stock;
   final List image;
+  final bool edit;
 
   @override
   Widget build(BuildContext context) {
@@ -50,48 +56,52 @@ class ProductList extends StatelessWidget {
                 topRight: Radius.circular(8.0),
               ),
               child: Container(
-                  //image
-                  width: ScreenSize().ScreenWidth(context) / 3.5,
-                  height: ScreenSize().ScreenWidth(context) / 3.5,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                  ),
-                  child: image[0] != ''
-                      ? ClipRRect(
-                          child: CachedNetworkImage(
-                            fit: BoxFit.cover,
-                            imageUrl:image[0],
-                            progressIndicatorBuilder:
-                                (context, url, downloadProgress) => Center(
-                              child: Container(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.grey[300]!),
-                                    value: downloadProgress.progress),
-                              ),
-                            ),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
-                          ),
-                        )
-                      : Center(
-                          child: Icon(
-                            Icons.newspaper_rounded,
-                            size: 10,
-                            color: Colors.grey[400],
-                          ),
-                        ),
+                //image
+                width: ScreenSize().ScreenWidth(context) / 3.5,
+                height: ScreenSize().ScreenWidth(context) / 3.5,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
                 ),
+                child: image[0] != ''
+                    ? ClipRRect(
+                        child: CachedNetworkImage(
+                          fit: BoxFit.cover,
+                          imageUrl: image[0],
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) => Center(
+                            child: Container(
+                              height: 20,
+                              width: 20,
+                              child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.grey[300]!),
+                                  value: downloadProgress.progress),
+                            ),
+                          ),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error),
+                        ),
+                      )
+                    : Center(
+                        child: Icon(
+                          Icons.newspaper_rounded,
+                          size: 10,
+                          color: Colors.grey[400],
+                        ),
+                      ),
+              ),
             ), //Image.asset('assets/images/head.png'),
 
-            trailing: IconButton(
-              onPressed: () {},
-              icon: const Icon(FontAwesomeIcons.penToSquare),
-              iconSize: 40,
-              color: CustomColors().blue,
-            ),
+            trailing: edit
+                ? IconButton(
+                    onPressed: () {},
+                    icon: const Icon(FontAwesomeIcons.penToSquare),
+                    iconSize: 40,
+                    color: CustomColors().blue,
+                  )
+                : SizedBox(
+                    width: 5,
+                  ),
 
             subtitle: Padding(
               padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),

@@ -17,6 +17,8 @@ class CollectionData with ChangeNotifier {
   List<CollectionImage> get collectionImage =>
       _collectionimage; // image holder for collection image
 
+  List<Product> filtered = [];
+
   //function to add the first add image
   addinitCollectionImages() {
     _collectionimage.add(CollectionImage());

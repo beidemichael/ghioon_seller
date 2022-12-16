@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:provider/provider.dart';
+
+import '../../Providers/CollectionProvider.dart';
+import '../../Providers/RangeProvider.dart';
 
 Widget TextFormFieldWithIcon(String label, String hintText,
     TextEditingController control, IconData icon) {

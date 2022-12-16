@@ -100,9 +100,11 @@ class _AllProductState extends State<AllProduct> {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: ProductList(
-                        title: products[index].name,
-                        stock: products[index].quantity.toString(),
-                        image: products[index].image),
+                      title: products[index].name,
+                      stock: products[index].quantity.toString(),
+                      image: products[index].image,
+                      edit: true,
+                    ),
                   ),
                 );
               },

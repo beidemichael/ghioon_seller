@@ -37,15 +37,6 @@ class ReadCollectionItemsDatabaseService {
     print(docid);
     print(
         "2345678987654567898765456789098765456789098765456789098765456789//////////////////////////////////");
-    Future<List> a = sellerCollection
-        .doc(userUid)
-        .collection('Collections')
-        .doc(docid)
-        .collection('Products')
-        .snapshots()
-        .map(_collectionItemListFromSnapshot)
-        .toList();
-    print(a);
     return sellerCollection
         .doc(userUid)
         .collection('Collections')

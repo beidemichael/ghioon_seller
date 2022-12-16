@@ -75,7 +75,7 @@ class CollectionList extends StatelessWidget {
                 ),
           trailing: IconButton(
             onPressed: () {},
-            icon: const Icon(FontAwesomeIcons.penToSquare),
+            icon: const Icon(FontAwesomeIcons.chevronRight),
             iconSize: 40,
             color: CustomColors().blue,
           ),

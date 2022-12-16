@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/CollectionDetail/addProductToCollection.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/CollectionDetail/collection_card.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
@@ -25,6 +27,7 @@ class _CollectionDetailState extends State<CollectionDetail> {
         preferredSize: Size.fromHeight(70.0),
         child: AppBar(
             actions: [
+              Icon(FontAwesomeIcons.penToSquare),
               SizedBox(
                 width: 20,
               )
@@ -64,25 +67,33 @@ class _CollectionDetailState extends State<CollectionDetail> {
           SizedBox(
             height: 10,
           ),
-          Container(
-            height: ScreenSize().ScreenHeight(context) * 0.06,
-            width: ScreenSize().ScreenWidth(context) * 0.9,
-            decoration: BoxDecoration(
-              color: CustomColors().lightgrey,
-              borderRadius: BorderRadius.all(Radius.circular(50)),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(20.0, 0, 0, 0),
-              child: Row(children: [
-                Icon(Icons.search),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "Add product here",
-                  style: TextStyle(fontSize: 20, fontFamily: 'INTER'),
-                )
-              ]),
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddProToCollection()),
+              );
+            },
+            child: Container(
+              height: ScreenSize().ScreenHeight(context) * 0.06,
+              width: ScreenSize().ScreenWidth(context) * 0.9,
+              decoration: BoxDecoration(
+                color: CustomColors().lightgrey,
+                borderRadius: BorderRadius.all(Radius.circular(50)),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(20.0, 0, 0, 0),
+                child: Row(children: [
+                  Icon(Icons.search),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Add product here",
+                    style: TextStyle(fontSize: 20, fontFamily: 'INTER'),
+                  )
+                ]),
+              ),
             ),
           ),
           SizedBox(

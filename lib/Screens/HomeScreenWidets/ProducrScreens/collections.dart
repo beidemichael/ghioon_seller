@@ -80,10 +80,6 @@ class _CollectionsState extends State<Collections> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        ReadCollectionItemsDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser!.uid,
-                          docid: collection[index].collectionId,
-                        ).readCollectionItems;
                         Navigator.push(
                           context,
                           MaterialPageRoute(
