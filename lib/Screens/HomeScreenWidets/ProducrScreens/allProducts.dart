@@ -33,6 +33,7 @@ class _AllProductState extends State<AllProduct> {
                   onTap: () {
                     appState.removeallcontrollers();
                     appState.removeallimages();
+                    appState.removeSelectedValue();
                     appState.addinit();
                     appState.addToImageList(ImageList(name: 'first'));
                     print("image added");

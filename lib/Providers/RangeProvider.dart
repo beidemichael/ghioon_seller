@@ -9,8 +9,8 @@ import 'package:image_picker/image_picker.dart';
 final List<Range> initialData = [];
 
 class RangeData with ChangeNotifier {
-  var  video ;
-  String  videoString = '' ;
+  var video;
+  String videoString = '';
   bool isLoading = false;
   List<int> rangeToList = [];
   List<int> rangeFromList = [];
@@ -34,6 +34,19 @@ class RangeData with ChangeNotifier {
   bool videoLessThanSix = true;
   List<Range> Ranges = [];
   final ImagePicker _picker = ImagePicker();
+
+  //variables for dropdown
+  String? selectedValue = null;
+
+  List<DropdownMenuItem<String>> get dropdownItems {
+    List<DropdownMenuItem<String>> menuItems = [
+      DropdownMenuItem(child: Text("New"), value: "New"),
+      DropdownMenuItem(child: Text("Used-like new"), value: "Used-like new"),
+      DropdownMenuItem(child: Text("Used-good"), value: "Used-good"),
+      DropdownMenuItem(child: Text("Used-fair"), value: "Used-fair"),
+    ];
+    return menuItems;
+  }
 
   addInventory() {
     //Qty = Qty + 1;
@@ -79,6 +92,10 @@ class RangeData with ChangeNotifier {
     notifyListeners();
   }
 
+  removeSelectedValue() {
+    selectedValue = null;
+  }
+
 //function to add the first searching bars
   addinit() {
     Ranges.add(
@@ -118,9 +135,8 @@ class RangeData with ChangeNotifier {
   //Controlling functions for add image
 
   final List<ImageList> _image = [];
-  
+
   List<ImageList> get Images => _image;
-  
 
 //function to clear out all added images
   removeallimages() {

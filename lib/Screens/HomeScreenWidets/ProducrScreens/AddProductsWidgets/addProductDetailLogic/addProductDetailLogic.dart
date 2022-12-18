@@ -43,7 +43,8 @@ class AddProductDetailLogic {
     final appState = Provider.of<RangeData>(context, listen: false);
 
     if (appState.productName.value.text.isNotEmpty &&
-        appState.description.value.text.isNotEmpty) {
+        appState.description.value.text.isNotEmpty &&
+        appState.selectedValue != null) {
       appState.productDescriptionFilled = true;
     } else {
       appState.productDescriptionFilled = false;
@@ -113,6 +114,7 @@ class AddProductDetailLogic {
         appState.priceList,
         appState.rangeToList,
         appState.rangeFromList,
+        appState.selectedValue!,
         5,
         'food',
         appState.imageList,

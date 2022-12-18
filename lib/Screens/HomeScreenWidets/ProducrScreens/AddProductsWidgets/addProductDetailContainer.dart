@@ -43,6 +43,32 @@ class _addProductDetailState extends State<addProductDetail> {
                   "Enter Product Name", appState.productName, "Product Name"),
               TextFormFieldProDescription(
                   "Description", appState.description, "Description"),
+              DropdownButtonFormField(
+                  decoration: InputDecoration(
+                    hintText: 'Select Product Type',
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: CustomColors().blue, width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: CustomColors().white, width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    // filled: false,
+                    // fillColor: Colors.blueAccent,
+                  ),
+                  validator: (value) =>
+                      value == null ? "Select a country" : null,
+                  dropdownColor: Colors.white,
+                  value: appState.selectedValue,
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      appState.selectedValue = newValue!;
+                    });
+                  },
+                  items: appState.dropdownItems),
               Visibility(
                 visible: !appState.productDescriptionFilled,
                 child: const Center(
