@@ -13,6 +13,9 @@ class UserInformation {
   String businessName;
   String email;
   String businessNo;
+  List collections;
+  List collection_images;
+  List collection_description;
 
   UserInformation({
     required this.userName,
@@ -24,6 +27,9 @@ class UserInformation {
     required this.businessCategory,
     required this.businessName,
     required this.email,
+    required this.collections,
+    required this.collection_images,
+    required this.collection_description,
   });
 }
 

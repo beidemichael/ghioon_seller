@@ -30,6 +30,10 @@ class _BecomeSellerState extends State<BecomeSeller> {
   bool categoryOpen = false;
   bool businessTypeValid = true;
 
+  List collections = [];
+  List collection_description = [];
+  List collection_images = [];
+
   @override
   Widget build(BuildContext context) {
     final categories = Provider.of<List<Categories>>(context);
@@ -244,6 +248,9 @@ class _BecomeSellerState extends State<BecomeSeller> {
                               businessType,
                               phoneNumber.toString(),
                               ghioonId,
+                              collections,
+                              collection_description,
+                              collection_images,
                               userUid,
                             );
                             LastIdService().updateLastID(ghioonId);

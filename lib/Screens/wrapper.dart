@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/CheckRegisteration.dart';
@@ -21,7 +22,7 @@ class _WrapperState extends State<Wrapper> {
 
     return StreamProvider<List<UserInformation>>.value(
         value: UserDatabaseService(userUid: user?.uid).userInfo,
-        initialData: const [],
+        initialData: [],
         child: user == null ? SignInPage() : const CheckRegisteration());
   }
 }

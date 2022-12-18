@@ -42,25 +42,30 @@ class CollectionList extends StatelessWidget {
                 fontWeight: FontWeight.w700),
           ),
           leading: image[0] != ''
-              ? ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(8.0),
-                    topRight: Radius.circular(8.0),
-                  ),
-                  child: CachedNetworkImage(
-                    imageUrl: image[0],
-                    progressIndicatorBuilder:
-                        (context, url, downloadProgress) => Center(
-                      child: Container(
-                        height: 20,
-                        width: 20,
-                        child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                                Colors.grey[300]!),
-                            value: downloadProgress.progress),
-                      ),
+              ? SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(8.0),
+                      topRight: Radius.circular(8.0),
                     ),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
+                    child: CachedNetworkImage(
+                      imageUrl: image[0],
+                      fit: BoxFit.cover,
+                      progressIndicatorBuilder:
+                          (context, url, downloadProgress) => Center(
+                        child: Container(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  Colors.grey[300]!),
+                              value: downloadProgress.progress),
+                        ),
+                      ),
+                      //errorWidget: (context, url, error) => Icon(Icons.error),
+                    ),
                   ),
                 )
               : ClipRRect(

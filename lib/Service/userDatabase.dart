@@ -18,12 +18,19 @@ class UserDatabaseService {
         businessNo: (doc.data() as dynamic)['businessNo'] ?? '',
         email: (doc.data() as dynamic)['email'] ?? '',
         documentId: doc.reference.id,
+        collections: (doc.data() as dynamic)['collections'] ?? '',
+        collection_description:
+            (doc.data() as dynamic)['collection_description'] ?? '',
+        collection_images: (doc.data() as dynamic)['collection_images'] ?? '',
       );
     }).toList();
   }
 
   //orders lounges stream
   Stream<List<UserInformation>> get userInfo {
+    print(userUid);
+    print(
+        "5555555555555555555555555555555555555555555555555555555555555555555555555555555555555");
     return sellersCollection
         .where('userUid', isEqualTo: userUid)
         .snapshots()

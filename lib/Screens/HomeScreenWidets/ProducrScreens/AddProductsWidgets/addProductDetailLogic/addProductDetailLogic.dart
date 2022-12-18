@@ -44,7 +44,8 @@ class AddProductDetailLogic {
 
     if (appState.productName.value.text.isNotEmpty &&
         appState.description.value.text.isNotEmpty &&
-        appState.selectedValue != null) {
+        appState.selectedValue != null &&
+        appState.selectedCatagoryValue != null) {
       appState.productDescriptionFilled = true;
     } else {
       appState.productDescriptionFilled = false;

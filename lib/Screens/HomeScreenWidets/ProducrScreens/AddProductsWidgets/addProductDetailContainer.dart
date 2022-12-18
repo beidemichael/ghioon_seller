@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/AddProductsWidgets/addProductDetailWidgets/1,fixedButton.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/AddProductsWidgets/addProductDetailWidgets/1,rangeButton.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +33,11 @@ class _addProductDetailState extends State<addProductDetail> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<RangeData>(context);
-
+    final userInfo = Provider.of<List<UserInformation>>(context);
+    List<String> catagories = [];
+    for (int i = 0; i < userInfo[0].collections.length; i++) {
+      catagories.add(userInfo[0].collections[i]);
+    }
     return Padding(
         padding: const EdgeInsets.all(15.0),
         child: ListView(
@@ -48,7 +53,7 @@ class _addProductDetailState extends State<addProductDetail> {
                     hintText: 'Select Product Type',
                     enabledBorder: OutlineInputBorder(
                       borderSide:
-                          BorderSide(color: CustomColors().blue, width: 2),
+                          BorderSide(color: CustomColors().lightgrey, width: 2),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     border: OutlineInputBorder(
@@ -69,6 +74,43 @@ class _addProductDetailState extends State<addProductDetail> {
                     });
                   },
                   items: appState.dropdownItems),
+              SizedBox(
+                height: 10,
+              ),
+              DropdownButtonFormField(
+                decoration: InputDecoration(
+                  hintText: 'Select Product Catagory',
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: CustomColors().lightgrey, width: 2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: CustomColors().grey, width: 2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  // filled: false,
+                  // fillColor: Colors.blueAccent,
+                ),
+                validator: (value) => value == null ? "Select a country" : null,
+                dropdownColor: Colors.white,
+                value: appState.selectedCatagoryValue,
+                onChanged: (String? newValue) {
+                  setState(() {
+                    appState.selectedCatagoryValue = newValue!;
+                  });
+                },
+                items: catagories.toList().map((String items) {
+                  return DropdownMenuItem(
+                    value: items,
+                    child: Text(items),
+                  );
+                }).toList(),
+              ),
+              SizedBox(
+                height: 10,
+              ),
               Visibility(
                 visible: !appState.productDescriptionFilled,
                 child: const Center(

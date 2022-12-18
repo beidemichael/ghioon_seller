@@ -29,6 +29,10 @@ class _CollectionsState extends State<Collections> {
   Widget build(BuildContext context) {
     final collectionState = Provider.of<CollectionData>(context);
     final collection = Provider.of<List<Collection>>(context);
+    final userInfo = Provider.of<List<UserInformation>>(context);
+    print(userInfo[0].collection_images[0]);
+    print("9999999999999999999999999999999999999999999999999999999999999999");
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
@@ -63,7 +67,7 @@ class _CollectionsState extends State<Collections> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 0),
-        child: collection.length == 0
+        child: userInfo[0].collections.length == 0
             ? Center(
                 child: Text(
                 "No collections Found",
@@ -72,28 +76,28 @@ class _CollectionsState extends State<Collections> {
                 ),
               ))
             : Container(
-                height: MediaQuery.of(context).size.height,
+                // height: MediaQuery.of(context).size.height,
                 child: ListView.builder(
                   physics: const BouncingScrollPhysics(
                       parent: AlwaysScrollableScrollPhysics()),
-                  itemCount: collection.length,
+                  itemCount: userInfo[0].collections.length,
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CollectionDetail(
-                                    collection: collection[index],
-                                  )),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //       builder: (context) => CollectionDetail(
+                        //             collection: collection[index],
+                        //           )),
+                        // );
                       },
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CollectionList(
-                            title: collection[index].name,
-                            desc: collection[index].description,
-                            image: collection[index].image),
+                            title: userInfo[0].collections[index],
+                            desc: userInfo[0].collection_description[index],
+                            image: userInfo[0].collection_images),
                       ),
                     );
                   },

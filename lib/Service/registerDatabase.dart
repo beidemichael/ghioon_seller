@@ -13,6 +13,9 @@ class RegisterDatabaseService {
     String businessType,
     String phoneNumber,
     int ghioonId,
+    List collections,
+    List collection_description,
+    List collection_images,
     var userUid,
   ) async {
     sellersCollection
@@ -33,7 +36,10 @@ class RegisterDatabaseService {
               'phoneNumber': phoneNumber,
               'approved': false,
               'online': true,
-              'GhioonId': 'GS' + ghioonId.toString()
+              'GhioonId': 'GS' + ghioonId.toString(),
+              'collection_images': collection_images,
+              'collection_description': collection_description,
+              'collections': collections,
             })
             .then((value) => print("Rgistration Info Added"))
             .catchError((error) => print("Failed to Register: $error"));

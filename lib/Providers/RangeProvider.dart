@@ -37,6 +37,7 @@ class RangeData with ChangeNotifier {
 
   //variables for dropdown
   String? selectedValue = null;
+  String? selectedCatagoryValue = null;
 
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
@@ -94,6 +95,10 @@ class RangeData with ChangeNotifier {
 
   removeSelectedValue() {
     selectedValue = null;
+  }
+
+  removeSelectedCatagoryValue() {
+    selectedCatagoryValue = null;
   }
 
 //function to add the first searching bars
