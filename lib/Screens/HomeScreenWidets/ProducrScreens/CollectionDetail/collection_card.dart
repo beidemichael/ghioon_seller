@@ -10,7 +10,7 @@ class CollectionList extends StatelessWidget {
       : super(key: key);
   final String title;
   String desc;
-  var image;
+  String image;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class CollectionList extends StatelessWidget {
                 color: CustomColors().blue,
                 fontWeight: FontWeight.w700),
           ),
-          leading: image[0] != ''
+          leading: image != ''
               ? SizedBox(
                   width: 80,
                   height: 80,
@@ -51,7 +51,7 @@ class CollectionList extends StatelessWidget {
                       topRight: Radius.circular(8.0),
                     ),
                     child: CachedNetworkImage(
-                      imageUrl: image[0],
+                      imageUrl: image,
                       fit: BoxFit.cover,
                       progressIndicatorBuilder:
                           (context, url, downloadProgress) => Center(

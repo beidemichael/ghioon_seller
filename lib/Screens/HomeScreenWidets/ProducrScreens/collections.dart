@@ -30,8 +30,7 @@ class _CollectionsState extends State<Collections> {
     final collectionState = Provider.of<CollectionData>(context);
     final collection = Provider.of<List<Collection>>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
-    print(userInfo[0].collection_images[0]);
-    print("9999999999999999999999999999999999999999999999999999999999999999");
+    final appState = Provider.of<RangeData>(context);
 
     return Scaffold(
       appBar: PreferredSize(
@@ -67,42 +66,53 @@ class _CollectionsState extends State<Collections> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 0),
-        child: userInfo[0].collections.length == 0
+        child: userInfo == null
             ? Center(
-                child: Text(
-                "No collections Found",
-                style: TextStyle(
-                  fontSize: 25,
+                child: CircularProgressIndicator(
+                  backgroundColor: CustomColors().blue,
                 ),
-              ))
-            : Container(
-                // height: MediaQuery.of(context).size.height,
-                child: ListView.builder(
-                  physics: const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  itemCount: userInfo[0].collections.length,
-                  itemBuilder: (context, index) {
-                    return GestureDetector(
-                      onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) => CollectionDetail(
-                        //             collection: collection[index],
-                        //           )),
-                        // );
+              )
+            : userInfo[0].collections.length == 0
+                ? Center(
+                    child: Text(
+                    "No collections Found",
+                    style: TextStyle(
+                      fontSize: 25,
+                    ),
+                  ))
+                : Container(
+                    // height: MediaQuery.of(context).size.height,
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics()),
+                      itemCount: userInfo[0].collections.length,
+                      itemBuilder: (context, index) {
+                        return GestureDetector(
+                          onTap: () {
+                            appState.addSelectedCatagoryValue(
+                                userInfo[0].collections[index]);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CollectionDetail(
+                                    collection_name:
+                                        userInfo[0].collections[index],
+                                    collection_description: userInfo[0]
+                                        .collection_description[index]),
+                              ),
+                            );
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: CollectionList(
+                                title: userInfo[0].collections[index],
+                                desc: userInfo[0].collection_description[index],
+                                image: userInfo[0].collection_images[index]),
+                          ),
+                        );
                       },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: CollectionList(
-                            title: userInfo[0].collections[index],
-                            desc: userInfo[0].collection_description[index],
-                            image: userInfo[0].collection_images),
-                      ),
-                    );
-                  },
-                ),
-              ),
+                    ),
+                  ),
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: CustomColors().blue,

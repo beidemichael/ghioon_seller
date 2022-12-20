@@ -37,7 +37,11 @@ class _addProductDetailState extends State<addProductDetail> {
     List<String> catagories = [];
     for (int i = 0; i < userInfo[0].collections.length; i++) {
       catagories.add(userInfo[0].collections[i]);
+      print(userInfo[0].collections[i]);
+      print(catagories);
+      print("33333333333333333333333333333333333333333");
     }
+
     return Padding(
         padding: const EdgeInsets.all(15.0),
         child: ListView(
@@ -102,6 +106,9 @@ class _addProductDetailState extends State<addProductDetail> {
                   });
                 },
                 items: catagories.toList().map((String items) {
+                  print(items);
+                  print("33333333333333333333333333333333333333333");
+
                   return DropdownMenuItem(
                     value: items,
                     child: Text(items),

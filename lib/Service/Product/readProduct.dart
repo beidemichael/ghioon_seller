@@ -16,6 +16,8 @@ class ReadProductDatabaseService {
         price: (doc.data() as dynamic)['price'] ?? '',
         rangeFrom: (doc.data() as dynamic)['rangeFrom'] ?? '',
         rangeTo: (doc.data() as dynamic)['rangeTo'] ?? '',
+        Product_Type: (doc.data() as dynamic)['Product_Type'] ?? '',
+        Product_collection: (doc.data() as dynamic)['Product_collection'] ?? '',
         rating: (doc.data() as dynamic)['rating'] ?? '',
         video: (doc.data() as dynamic)['video'] ?? '',
         category: (doc.data() as dynamic)['category'] ?? '',

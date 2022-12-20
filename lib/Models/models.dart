@@ -58,6 +58,8 @@ class Product {
   List<dynamic> price;
   List<dynamic> rangeFrom;
   List<dynamic> rangeTo;
+  String Product_Type;
+  String Product_collection;
   double rating;
   String category;
   List image;
@@ -74,6 +76,8 @@ class Product {
     required this.price,
     required this.rangeFrom,
     required this.rangeTo,
+    required this.Product_Type,
+    required this.Product_collection,
     required this.rating,
     required this.category,
     required this.image,
@@ -101,10 +105,40 @@ class Collection {
 }
 
 class CollectionItems {
+  String productId;
   String name;
-  String image;
-
-  CollectionItems({required this.name, required this.image});
+  String description;
+  bool fixed;
+  List<dynamic> price;
+  List<dynamic> rangeFrom;
+  List<dynamic> rangeTo;
+  String Product_Type;
+  String Product_collection;
+  double rating;
+  String category;
+  List image;
+  bool inStock;
+  int quantity;
+  String documentId;
+  String video;
+  CollectionItems({
+    required this.productId,
+    required this.name,
+    required this.description,
+    required this.fixed,
+    required this.price,
+    required this.rangeFrom,
+    required this.rangeTo,
+    required this.Product_Type,
+    required this.Product_collection,
+    required this.rating,
+    required this.category,
+    required this.image,
+    required this.inStock,
+    required this.quantity,
+    required this.documentId,
+    required this.video,
+  });
 }
 
 class Review {

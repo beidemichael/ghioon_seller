@@ -10,9 +10,13 @@ import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
 
 class CollectionDetail extends StatefulWidget {
-  Collection collection;
+  String collection_name;
+  String collection_description;
 
-  CollectionDetail({super.key, required this.collection});
+  CollectionDetail(
+      {super.key,
+      required this.collection_name,
+      required this.collection_description});
 
   @override
   State<CollectionDetail> createState() => _CollectionDetailState();
@@ -37,7 +41,7 @@ class _CollectionDetailState extends State<CollectionDetail> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                Text(widget.collection.name,
+                Text(widget.collection_name,
                     style: TextStyle(
                         fontSize: 30.0,
                         color: Colors.white,
@@ -59,42 +63,10 @@ class _CollectionDetailState extends State<CollectionDetail> {
         padding: const EdgeInsets.fromLTRB(20.0, 10, 20, 0),
         child: Column(children: [
           Text(
-            widget.collection.description,
+            widget.collection_description,
             style: TextStyle(
                 fontSize: 22, fontFamily: 'INTER', fontWeight: FontWeight.w400),
             textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddProToCollection()),
-              );
-            },
-            child: Container(
-              height: ScreenSize().ScreenHeight(context) * 0.06,
-              width: ScreenSize().ScreenWidth(context) * 0.9,
-              decoration: BoxDecoration(
-                color: CustomColors().lightgrey,
-                borderRadius: BorderRadius.all(Radius.circular(50)),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(20.0, 0, 0, 0),
-                child: Row(children: [
-                  Icon(Icons.search),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    "Add product here",
-                    style: TextStyle(fontSize: 20, fontFamily: 'INTER'),
-                  )
-                ]),
-              ),
-            ),
           ),
           SizedBox(
             height: 10,
@@ -142,7 +114,7 @@ class _CollectionDetailState extends State<CollectionDetail> {
                             padding: const EdgeInsets.all(8.0),
                             child: CollectionList(
                                 title: collectionitems[index].name,
-                                image: collectionitems[index].image),
+                                image: collectionitems[index].image[index]),
                           ),
                         );
                       },

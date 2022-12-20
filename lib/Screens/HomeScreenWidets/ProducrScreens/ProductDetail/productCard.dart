@@ -99,8 +99,11 @@ class ProductList extends StatelessWidget {
                     iconSize: 40,
                     color: CustomColors().blue,
                   )
-                : SizedBox(
-                    width: 5,
+                : IconButton(
+                    onPressed: () {},
+                    icon: const Icon(FontAwesomeIcons.xmark),
+                    iconSize: 40,
+                    color: CustomColors().blue,
                   ),
 
             subtitle: Padding(

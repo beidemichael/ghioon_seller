@@ -116,6 +116,7 @@ class AddProductDetailLogic {
         appState.rangeToList,
         appState.rangeFromList,
         appState.selectedValue!,
+        appState.selectedCatagoryValue!,
         5,
         'food',
         appState.imageList,

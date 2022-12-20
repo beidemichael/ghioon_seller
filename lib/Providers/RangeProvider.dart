@@ -49,6 +49,8 @@ class RangeData with ChangeNotifier {
     return menuItems;
   }
 
+  String selected_collection = "";
+
   addInventory() {
     //Qty = Qty + 1;
     inventory.text = (int.parse(inventory.text) + 1).toString();
@@ -98,7 +100,11 @@ class RangeData with ChangeNotifier {
   }
 
   removeSelectedCatagoryValue() {
-    selectedCatagoryValue = null;
+    selectedCatagoryValue = '';
+  }
+
+  addSelectedCatagoryValue(String value) {
+    selectedCatagoryValue = value;
   }
 
 //function to add the first searching bars

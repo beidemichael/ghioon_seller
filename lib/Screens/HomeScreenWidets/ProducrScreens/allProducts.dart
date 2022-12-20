@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 
 import '../../../Models/models.dart';
 import 'ProductDetail/productCard.dart';
-import 'aDdproductPro.dart';
 
 class AllProduct extends StatefulWidget {
   const AllProduct({super.key});
@@ -35,7 +34,7 @@ class _AllProductState extends State<AllProduct> {
                     appState.removeallcontrollers();
                     appState.removeallimages();
                     appState.removeSelectedValue();
-                    appState.removeSelectedCatagoryValue();
+                    //appState.removeSelectedCatagoryValue();
                     appState.addinit();
                     appState.addToImageList(ImageList(name: 'first'));
                     print("image added");
@@ -44,7 +43,7 @@ class _AllProductState extends State<AllProduct> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const AddProductProvider()), //AddProduct()),
+                              const AddProduct()), //AddProductProvider()),
                     );
                   },
                   child: Center(

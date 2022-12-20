@@ -29,11 +29,11 @@ class AddCollectionLogic {
     final userUid = user!.uid;
 
     await AddCollectionDatabase().addCollection(
-        appState.collectionName.text,
-        appState.collectionDescription.text,
-        appState.imageList,
-        userUid,
-        appState.collectionItems);
+      appState.collectionName.text,
+      appState.collectionDescription.text,
+      appState.imageList,
+      userUid,
+    );
   }
 
   addCollection(BuildContext context) async {

@@ -13,7 +13,6 @@ class AddCollectionDatabase {
     String description,
     List<String> image,
     var userUid,
-    List<Product> collectionItems,
   ) async {
     sellersCollection
         .where('userUid', isEqualTo: userUid)
@@ -22,18 +21,13 @@ class AddCollectionDatabase {
       if (!docs.docs.isEmpty) {
         DocumentReference ref =
             sellersCollection.doc(userUid).collection('Collections').doc();
+        print("Trying 8888888888888888888888888888888888888");
         return await sellersCollection
             .doc(userUid)
-            .collection('Collections')
-            .doc(ref.id)
-            .set({
-              'created': Timestamp.now(),
-              'collectionId': ref.id,
-              'name': name,
-              'description': description,
-              'image': image,
-              'userUid': userUid,
-              'collectionItems': collectionItems,
+            .update({
+              'collections': FieldValue.arrayUnion([name]),
+              'collection_description': FieldValue.arrayUnion([description]),
+              'collection_images': FieldValue.arrayUnion([image[0]]),
             })
             .then((value) => print("Collection  Added"))
             .catchError((error) => print("Failed to Add Collection: $error"));

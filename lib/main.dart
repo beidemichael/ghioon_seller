@@ -7,6 +7,7 @@ import 'package:ghioon_seller/Providers/FeedbackProvider.dart';
 import 'package:ghioon_seller/Service/Collection/readCollection.dart';
 import 'package:ghioon_seller/Service/Collection/readCollectionItems.dart';
 import 'package:ghioon_seller/Service/Product/readProduct.dart';
+import 'package:ghioon_seller/Service/userDatabase.dart';
 import 'package:ghioon_seller/firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Firebase.apps;
+
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -48,12 +50,17 @@ void main() async {
                     userUid: FirebaseAuth.instance.currentUser!.uid)
                 .readCollection,
           ),
-          StreamProvider<List<CollectionItems>>.value(
+          StreamProvider<List<UserInformation>>.value(
             initialData: [],
-            value: ReadCollectionItemsDatabaseService(
-                    userUid: FirebaseAuth.instance.currentUser!.uid)
-                .readCollectionItems,
-          )
+            value: UserDatabaseService(
+                    userUid: FirebaseAuth.instance.currentUser?.uid)
+                .userInfo,
+          ),
+          // StreamProvider<List<CollectionItems>>.value(
+          //     initialData: [],
+          //     value: ReadCollectionItemsDatabaseService(
+          //             collection: appState.selectedCatagoryValue)
+          //         .readCollectionItems)
         ],
         child: const MyApp(),
       ),
