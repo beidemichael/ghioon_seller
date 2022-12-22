@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/addProductmodels.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/ProductDetail/productDetail.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/ProductDetail/productCard.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/addProduct.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Models/models.dart';
-import 'ProductDetail/productCard.dart';
+import 'ProductDetail/productDetail.dart';
 
 class AllProduct extends StatefulWidget {
   const AllProduct({super.key});
