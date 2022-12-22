@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/accountEdit.dart';
+import 'package:provider/provider.dart';
 
+import '../../../Models/models.dart';
 import '../../../Shared/customColors.dart';
 
 class Account extends StatefulWidget {
@@ -14,6 +16,7 @@ class Account extends StatefulWidget {
 class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
+    final userInfo = Provider.of<List<UserInformation>>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(280.0),
@@ -41,7 +44,7 @@ class _AccountState extends State<Account> {
                         ),
                         child: Center(
                           child: Icon(
-                            FontAwesomeIcons.edit,
+                            FontAwesomeIcons.penToSquare,
                             size: 25.0,
                             color: CustomColors().blue,
                           ),
@@ -76,7 +79,7 @@ class _AccountState extends State<Account> {
                         const SizedBox(
                           height: 30,
                         ),
-                        Text('Endale Abegazee',
+                        Text(userInfo[0].businessName, //'Endale Abegazee',
                             style: TextStyle(
                                 fontSize: 25.0,
                                 color: CustomColors().lightBlue,
@@ -104,7 +107,8 @@ class _AccountState extends State<Account> {
           physics: const BouncingScrollPhysics(
               parent: AlwaysScrollableScrollPhysics()),
           children: [
-            containerWidget('Endale Abegaze', 'Name'),
+            containerWidget(userInfo[0].businessName, 'Store Name'),
+            containerWidget(userInfo[0].userName, 'Owner Name'),
             Row(
               children: [
                 Expanded(
@@ -118,8 +122,8 @@ class _AccountState extends State<Account> {
                 ),
               ],
             ),
-            containerWidget('Ghioon@gmail.com', 'Email'),
-            containerWidget('+251912345678', 'Phone'),
+            containerWidget(userInfo[0].email, 'Email'),
+            containerWidget(userInfo[0].phoneNumber, 'Phone'),
             containerWidget('Jemo michael, AA', 'Address'),
           ],
         ),

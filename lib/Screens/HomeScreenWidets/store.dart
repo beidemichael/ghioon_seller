@@ -7,7 +7,9 @@ import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidg
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/customers.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/marketing.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/setting.dart';
+import 'package:provider/provider.dart';
 
+import '../../Models/models.dart';
 import '../../Shared/customColors.dart';
 import '../components/storeList.dart';
 import 'StoreScreens/analytics.dart';
@@ -34,6 +36,7 @@ class _StoreState extends State<Store> {
 
   @override
   Widget build(BuildContext context) {
+    final userInfo = Provider.of<List<UserInformation>>(context);
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
       drawer: Drawer(),
@@ -102,13 +105,13 @@ class _StoreState extends State<Store> {
                               fontSize: 30.0,
                               color: CustomColors().white,
                               fontWeight: FontWeight.w600)),
-                      Text('Endale Abegazee',
+                      Text(userInfo[0].userName,
                           style: TextStyle(
                               fontFamily: 'Poppins',
                               fontSize: 18.0,
                               color: CustomColors().white,
                               fontWeight: FontWeight.w400)),
-                      Text('Id: G1547856',
+                      Text('Id: ' + userInfo[0].GhioonId,
                           style: TextStyle(
                               fontSize: 17.0,
                               color: CustomColors().white,

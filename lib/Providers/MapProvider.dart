@@ -6,7 +6,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 //import 'package:google_maps_webservice/distance.dart';
 class MapProvider with ChangeNotifier {
-  var _initialPosition;
+  var _initialPosition = null;
   var _lastPosition;
   var googleAPIKey = "AIzaSyCKHhU_vGRvfk99jH9BikS1hUtv7HRMK5I";
 

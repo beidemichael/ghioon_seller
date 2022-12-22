@@ -53,12 +53,17 @@ class _ImagesListState extends State<ImagesList> {
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(8.0),
             topRight: Radius.circular(8.0),
+            bottomLeft: Radius.circular(20.0),
+            bottomRight: Radius.circular(20.0),
           ),
           child: Container(
             //image
             width: ScreenSize().ScreenWidth(context),
             height: ScreenSize().ScreenWidth(context),
             decoration: BoxDecoration(
+              borderRadius: const BorderRadius.only(
+                  bottomLeft: Radius.circular(10.0),
+                  bottomRight: Radius.circular(10.0)),
               color: Colors.grey[200],
             ),
             child: widget.product.image[ImageIndex] != ''

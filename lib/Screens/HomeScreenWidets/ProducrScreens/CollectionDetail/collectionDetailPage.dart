@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/CollectionDetail/addProductToCollection.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/CollectionDetail/collection_card.dart';
-import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
+
+import '../ProductDetail/productCard.dart';
+import '../ProductDetail/productDetail.dart';
 
 class CollectionDetail extends StatefulWidget {
   String collection_name;
@@ -109,12 +107,22 @@ class _CollectionDetailState extends State<CollectionDetail> {
                             //             collection: widget.collection.collectionItems.[index],
                             //           )),
                             // );
+                            //         Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //       builder: (context) => ProductDetail(
+                            //             product: collectionitems[index],,
+                            //           )),
+                            // );
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: CollectionList(
-                                title: collectionitems[index].name,
-                                image: collectionitems[index].image[index]),
+                            child: ProductList(
+                              title: collectionitems[index].name,
+                              stock: collectionitems[index].quantity.toString(),
+                              image: collectionitems[index].image,
+                              edit: false,
+                            ),
                           ),
                         );
                       },

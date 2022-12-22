@@ -9,15 +9,17 @@ class UserDatabaseService {
   List<UserInformation> _userInfoListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return UserInformation(
-        userName: (doc.data() as dynamic)['userName'] ?? '',
+        GhioonId: (doc.data() as dynamic)['GhioonId'] ?? '',
+        userName: (doc.data() as dynamic)['sellerName'] ?? '',
         phoneNumber: (doc.data() as dynamic)['phoneNumber'] ?? '',
-        userUid: (doc.data() as dynamic)['uderUid'] ?? '',
+        userUid: (doc.data() as dynamic)['userUid'] ?? '',
         approved: (doc.data() as dynamic)['approved'] ?? '',
         businessCategory: (doc.data() as dynamic)['businessCategory'] ?? '',
         businessName: (doc.data() as dynamic)['businessName'] ?? '',
         businessNo: (doc.data() as dynamic)['businessNo'] ?? '',
         email: (doc.data() as dynamic)['email'] ?? '',
         documentId: doc.reference.id,
+        online: (doc.data() as dynamic)['online'] ?? '',
         collections: (doc.data() as dynamic)['collections'] ?? '',
         collection_description:
             (doc.data() as dynamic)['collection_description'] ?? '',

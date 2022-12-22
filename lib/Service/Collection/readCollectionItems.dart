@@ -3,7 +3,8 @@ import 'package:ghioon_seller/Models/models.dart';
 
 class ReadCollectionItemsDatabaseService {
   var collection;
-  ReadCollectionItemsDatabaseService({this.collection});
+  var userUid;
+  ReadCollectionItemsDatabaseService({this.collection, this.userUid});
   final CollectionReference productCollection =
       FirebaseFirestore.instance.collection('Products');
   List<CollectionItems> _productListFromSnapshot(QuerySnapshot snapshot) {
@@ -33,6 +34,7 @@ class ReadCollectionItemsDatabaseService {
   Stream<List<CollectionItems>> get readCollectionItems {
     return productCollection
         .where('Product_collection', isEqualTo: collection)
+        .where('userUid', isEqualTo: userUid)
         .snapshots()
         .map(_productListFromSnapshot);
   }

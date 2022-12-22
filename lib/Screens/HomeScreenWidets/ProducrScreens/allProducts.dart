@@ -86,6 +86,7 @@ class _AllProductState extends State<AllProduct> {
           child: Container(
             height: MediaQuery.of(context).size.height,
             child: ListView.builder(
+              shrinkWrap: true,
               physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics()),
               itemCount: products.length,

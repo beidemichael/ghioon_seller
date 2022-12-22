@@ -4,6 +4,7 @@ class UserAuth {
 }
 
 class UserInformation {
+  String GhioonId;
   String userName;
   String phoneNumber;
   String userUid;
@@ -16,8 +17,10 @@ class UserInformation {
   List collections;
   List collection_images;
   List collection_description;
+  bool online;
 
   UserInformation({
+    required this.GhioonId,
     required this.userName,
     required this.phoneNumber,
     required this.userUid,
@@ -30,6 +33,7 @@ class UserInformation {
     required this.collections,
     required this.collection_images,
     required this.collection_description,
+    required this.online,
   });
 }
 

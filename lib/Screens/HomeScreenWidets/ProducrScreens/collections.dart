@@ -9,6 +9,7 @@ import 'package:ghioon_seller/Providers/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/CollectionDetail/collectionDetailPage.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/CollectionDetail/collection_card.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/addCollections.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/cOllectionaddPro.dart';
 import 'package:ghioon_seller/Service/Collection/readCollectionItems.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -94,11 +95,16 @@ class _CollectionsState extends State<Collections> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => CollectionDetail(
+                                builder: (context) => CollectionDetailProvider(
                                     collection_name:
                                         userInfo[0].collections[index],
                                     collection_description: userInfo[0]
                                         .collection_description[index]),
+                                // CollectionDetail(
+                                //     collection_name:
+                                //         userInfo[0].collections[index],
+                                //     collection_description: userInfo[0]
+                                //         .collection_description[index]),
                               ),
                             );
                           },
