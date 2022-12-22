@@ -44,6 +44,9 @@ class _ImagesListState extends State<ImagesList> {
 
   @override
   Widget build(BuildContext context) {
+    if (play == false) {
+      _controller.pause();
+    }
     return Stack(
       children: [
         ClipRRect(
@@ -154,16 +157,22 @@ class _ImagesListState extends State<ImagesList> {
                                             ? _controller.value.isInitialized
                                                 ? Stack(
                                                     children: [
-                                                      Container(
-                                                        color: Colors.red,
-                                                        width: 90,
-                                                        height: 90,
-                                                        child: AspectRatio(
-                                                          aspectRatio:
-                                                              _controller.value
-                                                                  .aspectRatio,
-                                                          child: VideoPlayer(
-                                                              _controller),
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(8.0),
+                                                        child: Container(
+                                                          color: Colors.red,
+                                                          width: 90,
+                                                          height: 90,
+                                                          child: AspectRatio(
+                                                            aspectRatio:
+                                                                _controller
+                                                                    .value
+                                                                    .aspectRatio,
+                                                            child: VideoPlayer(
+                                                                _controller),
+                                                          ),
                                                         ),
                                                       ),
                                                       Positioned(
@@ -171,11 +180,18 @@ class _ImagesListState extends State<ImagesList> {
                                                         right: 0,
                                                         top: 0,
                                                         bottom: 0,
-                                                        child: Container(
-                                                          color: Colors.black
-                                                              .withOpacity(0.2),
-                                                          width: 90,
-                                                          height: 90,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      8.0),
+                                                          child: Container(
+                                                            color: Colors.black
+                                                                .withOpacity(
+                                                                    0.2),
+                                                            width: 90,
+                                                            height: 90,
+                                                          ),
                                                         ),
                                                       ),
                                                       Positioned(
@@ -196,15 +212,20 @@ class _ImagesListState extends State<ImagesList> {
                                                       )
                                                     ],
                                                   )
-                                                : Container(
-                                                    color: Colors.white
-                                                        .withOpacity(0.5),
-                                                    width: 90,
-                                                    height: 90,
-                                                    child: const Center(
-                                                      child: SpinKitCircle(
-                                                        color: Colors.white,
-                                                        size: 25.0,
+                                                : ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                    child: Container(
+                                                      color: Colors.white
+                                                          .withOpacity(0.5),
+                                                      width: 90,
+                                                      height: 90,
+                                                      child: const Center(
+                                                        child: SpinKitCircle(
+                                                          color: Colors.white,
+                                                          size: 25.0,
+                                                        ),
                                                       ),
                                                     ),
                                                   )
