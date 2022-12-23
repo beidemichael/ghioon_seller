@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/allProducts.dart';
+import 'package:provider/provider.dart';
 
+import '../../Models/models.dart';
 import '../../Shared/customColors.dart';
 import '../components/BlueDashboardGrid copy.dart';
 import '../components/WhiteDashboardGrid.dart';
@@ -17,8 +20,9 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+     final products = Provider.of<List<Product>>(context);
     return Scaffold(
-      drawer: Drawer(),
+      // drawer: Drawer(),
       appBar: AppBar(
           centerTitle: true,
           title: Row(
@@ -55,7 +59,7 @@ class _DashboardState extends State<Dashboard> {
                 Expanded(
                   child: WhiteDashboardGrid(
                     width: width,
-                    title: "125",
+                    title: "0",
                     subTitle: 'Sales',
                     icon: FontAwesomeIcons.chartLine,
                   ),
@@ -66,7 +70,7 @@ class _DashboardState extends State<Dashboard> {
                 Expanded(
                   child: BlueDashboardGrid(
                     width: width,
-                    title: "10K",
+                    title: "0",
                     subTitle: 'Revenue',
                     icon: FontAwesomeIcons.coins,
                   ),
@@ -80,11 +84,21 @@ class _DashboardState extends State<Dashboard> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
-                  child: BlueDashboardGrid(
-                    width: width,
-                    title: "15",
-                    subTitle: 'Products',
-                    icon: FontAwesomeIcons.tag,
+                  child: GestureDetector(
+                    onTap: (){
+                        Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              const AllProduct()), //AddProductProvider()),
+                    );
+                    },
+                    child: BlueDashboardGrid(
+                      width: width,
+                      title: products.length.toString(),
+                      subTitle: 'Products',
+                      icon: FontAwesomeIcons.tag,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -93,7 +107,7 @@ class _DashboardState extends State<Dashboard> {
                 Expanded(
                   child: WhiteDashboardGrid(
                     width: width,
-                    title: "150",
+                    title: "0",
                     subTitle: 'Customers',
                     icon: FontAwesomeIcons.peopleGroup,
                   ),

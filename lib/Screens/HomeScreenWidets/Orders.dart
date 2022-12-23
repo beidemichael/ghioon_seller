@@ -50,7 +50,7 @@ class _OrdersState extends State<Orders> {
     return DefaultTabController(
       length: 4,
       child: Scaffold(
-        drawer: Drawer(),
+        // drawer: Drawer(),
         appBar: AppBar(
             centerTitle: true,
             title: Row(

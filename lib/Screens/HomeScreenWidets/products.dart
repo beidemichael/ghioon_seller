@@ -22,7 +22,7 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     return Scaffold(
-      drawer: Drawer(),
+      // drawer: Drawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
