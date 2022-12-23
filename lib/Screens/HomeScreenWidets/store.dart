@@ -42,7 +42,7 @@ class _StoreState extends State<Store> {
     return userInfo.isEmpty
         ? Loading()
         : Scaffold(
-      drawer: Drawer(),
+      // drawer: Drawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
         child: AppBar(
