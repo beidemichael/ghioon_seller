@@ -35,6 +35,7 @@ class RegisterDatabaseService {
               'userUid': userUid,
               'phoneNumber': phoneNumber,
               'approved': false,
+              'active': false,
               'online': true,
               'GhioonId': 'GS' + ghioonId.toString(),
               'collection_images': collection_images,

@@ -48,7 +48,7 @@ class _AddVideoContainerState extends State<AddVideoContainer> {
   @override
   void dispose() {
     super.dispose();
-    _controller.dispose();
+    // _controller.dispose();
   }
 
   pickVideo() async {

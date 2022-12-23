@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../Models/models.dart';
 import '../../Shared/customColors.dart';
+import '../../Shared/loading.dart';
 import '../components/storeList.dart';
 import 'StoreScreens/analytics.dart';
 import 'StoreScreens/support.dart';
@@ -38,7 +39,9 @@ class _StoreState extends State<Store> {
   Widget build(BuildContext context) {
     final userInfo = Provider.of<List<UserInformation>>(context);
     double width = MediaQuery.of(context).size.width;
-    return Scaffold(
+    return userInfo.isEmpty
+        ? Loading()
+        : Scaffold(
       drawer: Drawer(),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),

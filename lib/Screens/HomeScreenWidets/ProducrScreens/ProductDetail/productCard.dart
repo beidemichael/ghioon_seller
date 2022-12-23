@@ -26,7 +26,7 @@ class ProductList extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Container(
-        height: ScreenSize().ScreenWidth(context) / 3.5,
+        // height: ScreenSize().ScreenWidth(context) / 3.5,
         decoration: BoxDecoration(
           border: Border.all(
               width: 1, color: const Color.fromARGB(255, 224, 224, 224)),
@@ -42,7 +42,7 @@ class ProductList extends StatelessWidget {
           ],
         ),
         child: Padding(
-          padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
           child: ListTile(
             title: Text(
               title,
@@ -53,9 +53,8 @@ class ProductList extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             ),
             leading: ClipRRect(
-              borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(8.0),
-                topRight: Radius.circular(8.0),
+              borderRadius: const BorderRadius.all(
+                Radius.circular(8.0),
               ),
               child: Container(
                 //image
@@ -63,6 +62,9 @@ class ProductList extends StatelessWidget {
                 height: ScreenSize().ScreenWidth(context) / 3.5,
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(8.0),
+                  ),
                 ),
                 child: image[0] != ''
                     ? ClipRRect(
@@ -113,14 +115,14 @@ class ProductList extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    'Quantity: ' + stock.toString(),
+                    stock.toString(),
                     style: TextStyle(
                         fontFamily: 'Inter',
                         color: CustomColors().black,
                         fontSize: 18,
                         fontWeight: FontWeight.w600),
                   ),
-                  const Text("."),
+                  const Text(" In Stock"),
                 ],
               ),
             ),

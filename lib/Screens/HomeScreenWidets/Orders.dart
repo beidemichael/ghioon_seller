@@ -71,40 +71,42 @@ class _OrdersState extends State<Orders> {
             iconTheme: const IconThemeData(color: Colors.white)),
         body: TabBarView(
           children: [
-            Center(
-                child: Container(
-              color: Colors.grey[100],
-              child: ListView(
-                  physics: BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          print("Order Details");
-                        },
-                        child: ordersWidget(width: width)),
-                    ordersWidget(width: width),
-                    ordersWidget(width: width),
-                    ordersWidget(width: width),
-                  ]),
-            )),
-            Center(
-                child: Container(
-              color: Colors.blue[200],
-            )),
-            Center(
-                child: Container(
-              color: Colors.green[100],
-            )),
-            Center(
-                child: Container(
-              color: Colors.grey[200],
-            )),
+            EmptyScreen(context,'No orders yet.'),
+            EmptyScreen(context,'No pending orders yet.'),
+            EmptyScreen(context,'No cancelled orders yet.'),
+            EmptyScreen(context,'No completed orders yet.'),
           ],
         ),
       ),
     );
   }
+}
+
+Widget EmptyScreen(BuildContext context, text) {
+  return Container(
+    color: Colors.white,
+    height: MediaQuery.of(context).size.height,
+    child: Center(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Image.asset(
+            'assets/undraw_No_data_re_kwbl.png',
+            height: MediaQuery.of(context).size.height * .3,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(text,
+              style: TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w600)),
+        ],
+      ),
+    ),
+  );
 }
 
 class ordersWidget extends StatelessWidget {

@@ -153,3 +153,12 @@ class Review {
     required this.reviews,
   });
 }
+
+class Controller {
+  int sellerVersion;
+  String documentId;
+  Controller({
+    required this.sellerVersion,
+    required this.documentId,
+  });
+}

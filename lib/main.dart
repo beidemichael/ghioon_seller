@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'Models/models.dart';
 import 'Providers/RangeProvider.dart';
 import 'Screens/wrapper.dart';
+import 'Service/Controller/Controller.dart';
 import 'Service/auth.dart';
 
 void main() async {
@@ -55,6 +56,10 @@ void main() async {
             value: UserDatabaseService(
                     userUid: FirebaseAuth.instance.currentUser?.uid)
                 .userInfo,
+          ),
+          StreamProvider<List<Controller>>.value(
+            initialData: [],
+            value: ControllerDatabaseService().controller,
           ),
           // StreamProvider<List<CollectionItems>>.value(
           //     initialData: [],
