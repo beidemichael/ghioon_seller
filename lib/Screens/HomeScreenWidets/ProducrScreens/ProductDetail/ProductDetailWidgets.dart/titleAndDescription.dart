@@ -53,7 +53,7 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
                       child: Text(
                           widget.product.fixed == true
                               ? 'Fixed Price'
-                              : 'Range',
+                              : ' Price',
                           style: TextStyle(
                               fontSize: 20.0,
                               color: widget.product.fixed == true
@@ -84,6 +84,7 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
             ),
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
@@ -116,7 +117,7 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                padding: const EdgeInsets.fromLTRB(8, 8, 15, 0),
                 child: Container(
                   decoration: BoxDecoration(
                     color: Colors.orange.withOpacity(0.2),
@@ -141,14 +142,69 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
               ),
             ],
           ),
+          // widget.product.fixed == false
+          //     ? Padding(
+          //         padding: const EdgeInsets.all(8.0),
+          //         child: Text('Range Price',
+          //             style: TextStyle(
+          //                 fontSize: 22.0,
+          //                 fontFamily: 'Inter',
+          //                 color: CustomColors().black,
+          //                 fontWeight: FontWeight.w700)),
+          //       )
+          //     : const SizedBox(),
+          widget.product.fixed == false
+              ? Container(
+                  height: 80,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 8),
+                    child: ListView.builder(
+                        physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        scrollDirection: Axis.horizontal,
+                        itemCount: widget.product.rangeFrom.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                    'ETB ' +
+                                        widget.product.price[index].toString(),
+                                    style: TextStyle(
+                                        fontSize: 22.0,
+                                        fontFamily: 'Inter',
+                                        color: CustomColors().black,
+                                        fontWeight: FontWeight.bold)),
+                                Text(
+                                    widget.product.rangeFrom[index].toString() +
+                                        ' - ' +
+                                        widget.product.rangeTo[index]
+                                            .toString() +
+                                        ' pieces',
+                                    style: TextStyle(
+                                        fontSize: 15.0,
+                                        fontFamily: 'Inter',
+                                        color: CustomColors().grey,
+                                        fontWeight: FontWeight.w700)),
+                              ],
+                            ),
+                          );
+                        }),
+                  ),
+                )
+              : const SizedBox(
+                  height: 2,
+                ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(10.0, 15, 5, 5),
+            padding: const EdgeInsets.fromLTRB(10.0, 0, 5, 5),
             child: Text('Product Description',
                 style: TextStyle(
                     fontSize: 22.0,
                     fontFamily: 'Inter',
-                    color: CustomColors().black,
-                    fontWeight: FontWeight.w600)),
+                    color: CustomColors().blue,
+                    fontWeight: FontWeight.w700)),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -157,7 +213,7 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
                     fontSize: 16.0,
                     fontFamily: 'Poppins',
                     color: Color.fromARGB(255, 109, 109, 109),
-                    fontWeight: FontWeight.w500)),
+                    fontWeight: FontWeight.w400)),
           ),
         ],
       ),

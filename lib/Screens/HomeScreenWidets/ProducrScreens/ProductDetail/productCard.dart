@@ -48,7 +48,7 @@ class ProductList extends StatelessWidget {
               title,
               style: TextStyle(
                   fontFamily: 'Inter',
-                  fontSize: 24,
+                  fontSize: 20,
                   color: CustomColors().blue,
                   fontWeight: FontWeight.w700),
             ),
@@ -113,11 +113,11 @@ class ProductList extends StatelessWidget {
               child: Row(
                 children: [
                   Text(
-                    stock,
+                    'Quantity: ' + stock.toString(),
                     style: TextStyle(
                         fontFamily: 'Inter',
                         color: CustomColors().black,
-                        fontSize: 20,
+                        fontSize: 18,
                         fontWeight: FontWeight.w600),
                   ),
                   const Text("."),
