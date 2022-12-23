@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/accountEdit.dart';
+import 'package:ghioon_seller/Shared/loading.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Models/models.dart';
@@ -17,118 +18,121 @@ class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     final userInfo = Provider.of<List<UserInformation>>(context);
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(280.0),
-        child: Column(
-          children: [
-            AppBar(
-                actions: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const AccountEdit()),
-                      );
-                    },
-                    child: Center(
-                      child: Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          // border: Border.all(
-                          //     width: 1, color: Color.fromARGB(255, 255, 255, 255)),
-                          color: CustomColors().white,
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        child: Center(
-                          child: Icon(
-                            FontAwesomeIcons.penToSquare,
-                            size: 25.0,
-                            color: CustomColors().blue,
+    return userInfo.isEmpty
+        ? Loading()
+        : Scaffold(
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(280.0),
+              child: Column(
+                children: [
+                  AppBar(
+                      actions: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const AccountEdit()),
+                            );
+                          },
+                          child: Center(
+                            child: Container(
+                              height: 60,
+                              width: 60,
+                              decoration: BoxDecoration(
+                                // border: Border.all(
+                                //     width: 1, color: Color.fromARGB(255, 255, 255, 255)),
+                                color: CustomColors().white,
+                                borderRadius: BorderRadius.circular(30.0),
+                              ),
+                              child: Center(
+                                child: Icon(
+                                  FontAwesomeIcons.penToSquare,
+                                  size: 25.0,
+                                  color: CustomColors().blue,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 20,
-                  )
-                ],
-                toolbarHeight: 250,
-                centerTitle: true,
-                title: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    Column(
-                      children: [
-                        Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: CustomColors().darkBlue,
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            child: const Icon(
-                              FontAwesomeIcons.userLarge,
-                              size: 80.0,
-                              color: Colors.white,
-                            )),
                         const SizedBox(
-                          height: 30,
-                        ),
-                        Text(userInfo[0].businessName, //'Endale Abegazee',
-                            style: TextStyle(
-                                fontSize: 25.0,
-                                color: CustomColors().lightBlue,
-                                fontWeight: FontWeight.w500)),
+                          width: 20,
+                        )
                       ],
-                    ),
-                  ],
-                ),
-                // excludeHeaderSemantics: true,
-                backgroundColor: CustomColors().blue,
-                // automaticallyImplyLeading: false,
-                elevation: 5,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(30),
-                  ),
-                ),
-                iconTheme: IconThemeData(color: CustomColors().white)),
-          ],
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: ListView(
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
-          children: [
-            containerWidget(userInfo[0].businessName, 'Store Name'),
-            containerWidget(userInfo[0].userName, 'Owner Name'),
-            Row(
-              children: [
-                Expanded(
-                  child: containerWidget('Male', 'Gender'),
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                Expanded(
-                  child: containerWidget('Jan 1 2022', 'Date of birth'),
-                ),
-              ],
+                      toolbarHeight: 250,
+                      centerTitle: true,
+                      title: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        // ignore: prefer_const_literals_to_create_immutables
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                  height: 150,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: CustomColors().darkBlue,
+                                    borderRadius: BorderRadius.circular(100),
+                                  ),
+                                  child: const Icon(
+                                    FontAwesomeIcons.userLarge,
+                                    size: 80.0,
+                                    color: Colors.white,
+                                  )),
+                              const SizedBox(
+                                height: 30,
+                              ),
+                              Text(
+                                  userInfo[0].businessName, //'Endale Abegazee',
+                                  style: TextStyle(
+                                      fontSize: 25.0,
+                                      color: CustomColors().lightBlue,
+                                      fontWeight: FontWeight.w500)),
+                            ],
+                          ),
+                        ],
+                      ),
+                      // excludeHeaderSemantics: true,
+                      backgroundColor: CustomColors().blue,
+                      // automaticallyImplyLeading: false,
+                      elevation: 5,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(30),
+                        ),
+                      ),
+                      iconTheme: IconThemeData(color: CustomColors().white)),
+                ],
+              ),
             ),
-            containerWidget(userInfo[0].email, 'Email'),
-            containerWidget(userInfo[0].phoneNumber, 'Phone'),
-            containerWidget('Jemo michael, AA', 'Address'),
-          ],
-        ),
-      ),
-    );
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              child: ListView(
+                physics: const BouncingScrollPhysics(
+                    parent: AlwaysScrollableScrollPhysics()),
+                children: [
+                  containerWidget(userInfo[0].businessName, 'Store Name'),
+                  containerWidget(userInfo[0].userName, 'Owner Name'),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: containerWidget('Male', 'Gender'),
+                      ),
+                      const SizedBox(
+                        width: 15,
+                      ),
+                      Expanded(
+                        child: containerWidget('Jan 1 2022', 'Date of birth'),
+                      ),
+                    ],
+                  ),
+                  containerWidget(userInfo[0].email, 'Email'),
+                  containerWidget(userInfo[0].phoneNumber, 'Phone'),
+                  containerWidget('Jemo michael, AA', 'Address'),
+                ],
+              ),
+            ),
+          );
   }
 
   Widget textWidet(String text) {

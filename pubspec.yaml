@@ -46,6 +46,7 @@ dependencies:
   google_fonts: ^3.0.1
   google_maps_flutter: null
   image_picker: null
+  launch_review: ^3.0.1
   provider: ^6.0.4
   video_player: ^2.4.8
 
