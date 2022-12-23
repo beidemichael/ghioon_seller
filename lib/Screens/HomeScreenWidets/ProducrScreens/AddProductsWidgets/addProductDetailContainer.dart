@@ -35,11 +35,13 @@ class _addProductDetailState extends State<addProductDetail> {
     final appState = Provider.of<RangeData>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
     List<String> catagories = [];
-    for (int i = 0; i < userInfo[0].collections.length; i++) {
-      catagories.add(userInfo[0].collections[i]);
-      print(userInfo[0].collections[i]);
-      print(catagories);
-      print("33333333333333333333333333333333333333333");
+    if (userInfo.isNotEmpty) {
+      for (int i = 0; i < userInfo[0].collections.length; i++) {
+        catagories.add(userInfo[0].collections[i]);
+        print(userInfo[0].collections[i]);
+        print(catagories);
+        print("33333333333333333333333333333333333333333");
+      }
     }
 
     return Padding(

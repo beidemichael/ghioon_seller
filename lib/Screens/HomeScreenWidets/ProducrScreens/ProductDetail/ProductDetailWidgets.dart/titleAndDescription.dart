@@ -17,6 +17,7 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
@@ -28,118 +29,177 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
                     color: CustomColors().blue,
                     fontWeight: FontWeight.w700)),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 5, 15, 0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          widget.product.fixed
+              ? Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text('Price',
+                          style: TextStyle(
+                              fontSize: 18.0,
+                              fontFamily: 'Inter',
+                              color: CustomColors().grey,
+                              fontWeight: FontWeight.w700)),
+                      Text('ETB ' + widget.product.price[0].toString(),
+                          style: TextStyle(
+                              fontSize: 30.0,
+                              fontFamily: 'Inter',
+                              color: CustomColors().black,
+                              fontWeight: FontWeight.bold)),
+                    ],
+                  ),
+                )
+              : Container(
+                  height: 56 * widget.product.price.length.toDouble(),
+                  color: Colors.white,
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: widget.product.price.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Container(
+                            height: 40,
+                            color: Colors.white,
+                            width: 50,
+                            child: Center(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                      'Qty ' +
+                                          widget.product.rangeFrom[index]
+                                              .toString() +
+                                          ' To ' +
+                                          widget.product.rangeTo[index]
+                                              .toString(),
+                                      style: TextStyle(
+                                          fontSize: 18.0,
+                                          fontFamily: 'Inter',
+                                          color: CustomColors().grey,
+                                          fontWeight: FontWeight.w700)),
+                                  Text(
+                                      ' ETB ' +
+                                          widget.product.price[index]
+                                              .toString(),
+                                      style: TextStyle(
+                                          fontSize: 30.0,
+                                          fontFamily: 'Inter',
+                                          color: CustomColors().black,
+                                          fontWeight: FontWeight.bold)),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
+                      }),
+                ),
+          SizedBox(
+            height: 60,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: widget.product.fixed == true
-                          ? Colors.purple.withOpacity(0.1)
-                          : Colors.blue.withOpacity(0.2),
-                      borderRadius: const BorderRadius.only(
-                        topRight: Radius.circular(40.0),
-                        bottomRight: Radius.circular(40.0),
-                        topLeft: Radius.circular(40.0),
-                        bottomLeft: Radius.circular(40.0),
+                  padding: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 0, 0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: widget.product.fixed == true
+                                ? Colors.purple.withOpacity(0.1)
+                                : Colors.blue.withOpacity(0.2),
+                            borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(40.0),
+                              bottomRight: Radius.circular(40.0),
+                              topLeft: Radius.circular(40.0),
+                              bottomLeft: Radius.circular(40.0),
+                            ),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 8.0, vertical: 2.5),
+                            child: Text(
+                                widget.product.fixed == true
+                                    ? 'Fixed Price'
+                                    : 'Range',
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    color: widget.product.fixed == true
+                                        ? Colors.purple.withOpacity(0.7)
+                                        : Colors.blue.withOpacity(0.9),
+                                    fontWeight: FontWeight.w400)),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: widget.product.inStock == true
+                              ? Colors.green.withOpacity(0.2)
+                              : Colors.red.withOpacity(0.2),
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(40.0),
+                            bottomRight: Radius.circular(40.0),
+                            topLeft: Radius.circular(40.0),
+                            bottomLeft: Radius.circular(40.0),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 2.5),
+                          child: Text(
+                              widget.product.inStock == true
+                                  ? 'In Stock'
+                                  : 'Out of Stock',
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: widget.product.inStock == true
+                                      ? Colors.green.withOpacity(0.7)
+                                      : Colors.red.withOpacity(0.9),
+                                  fontWeight: FontWeight.w400)),
+                        ),
                       ),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 2.5),
-                      child: Text(
-                          widget.product.fixed == true
-                              ? 'Fixed Price'
-                              : 'Range',
-                          style: TextStyle(
-                              fontSize: 20.0,
-                              color: widget.product.fixed == true
-                                  ? Colors.purple.withOpacity(0.7)
-                                  : Colors.blue.withOpacity(0.9),
-                              fontWeight: FontWeight.w400)),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.orange.withOpacity(0.2),
+                          borderRadius: const BorderRadius.only(
+                            topRight: Radius.circular(40.0),
+                            bottomRight: Radius.circular(40.0),
+                            topLeft: Radius.circular(40.0),
+                            bottomLeft: Radius.circular(40.0),
+                          ),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8.0, vertical: 2.5),
+                          child: Text(
+                              widget.product.quantity.toString() +
+                                  ' items left',
+                              style: TextStyle(
+                                  fontSize: 20.0,
+                                  color: Colors.orange.withOpacity(0.9),
+                                  fontWeight: FontWeight.w400)),
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Price',
-                        style: TextStyle(
-                            fontSize: 18.0,
-                            fontFamily: 'Inter',
-                            color: CustomColors().grey,
-                            fontWeight: FontWeight.w700)),
-                    Text('ETB ' + widget.product.price[0].toString(),
-                        style: TextStyle(
-                            fontSize: 30.0,
-                            fontFamily: 'Inter',
-                            color: CustomColors().black,
-                            fontWeight: FontWeight.bold)),
                   ],
-                )
+                ),
               ],
             ),
-          ),
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: widget.product.inStock == true
-                        ? Colors.green.withOpacity(0.2)
-                        : Colors.red.withOpacity(0.2),
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(40.0),
-                      bottomRight: Radius.circular(40.0),
-                      topLeft: Radius.circular(40.0),
-                      bottomLeft: Radius.circular(40.0),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 2.5),
-                    child: Text(
-                        widget.product.inStock == true
-                            ? 'In Stock'
-                            : 'Out of Stock',
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            color: widget.product.inStock == true
-                                ? Colors.green.withOpacity(0.7)
-                                : Colors.red.withOpacity(0.9),
-                            fontWeight: FontWeight.w400)),
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(8, 8, 0, 0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.orange.withOpacity(0.2),
-                    borderRadius: const BorderRadius.only(
-                      topRight: Radius.circular(40.0),
-                      bottomRight: Radius.circular(40.0),
-                      topLeft: Radius.circular(40.0),
-                      bottomLeft: Radius.circular(40.0),
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 2.5),
-                    child: Text(
-                        widget.product.quantity.toString() + ' items left',
-                        style: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.orange.withOpacity(0.9),
-                            fontWeight: FontWeight.w400)),
-                  ),
-                ),
-              ),
-            ],
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10.0, 15, 5, 5),
