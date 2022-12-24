@@ -22,6 +22,7 @@ import 'package:provider/provider.dart';
 import '../../components/textFormField.dart';
 import 'AddProductsWidgets/addProductDetailContainer.dart';
 import 'AddProductsWidgets/addVideoContainer.dart';
+import 'ProductDetail/EditProduct/EditProductDetailWidgets.dart/1,EditImageContainer.dart';
 
 class AddProduct extends StatefulWidget {
   const AddProduct({super.key});

@@ -7,6 +7,62 @@ class AddProductDatabase {
       FirebaseFirestore.instance.collection('Sellers');
   final CollectionReference product =
       FirebaseFirestore.instance.collection('Products');
+  List images = [];
+  Future addImage(
+    String image,
+    String docUid,
+  ) async {
+    product.doc(docUid).get().then((document) {
+      images = (document.data() as dynamic)['image'] ?? '';
+
+      images.add(image);
+      return product.doc(docUid).update({
+        'image': images,
+      });
+    });
+  }
+
+  Future deleteImage(
+    String docUid,
+    int index,
+  ) async {
+    product.doc(docUid).get().then((document) {
+      images = (document.data() as dynamic)['image'] ?? '';
+      images.remove(images[index]);
+      return product.doc(docUid).update({
+        'image': images,
+      });
+    });
+  }
+
+  Future uploadVideo(
+    String docUid,
+    String video,
+  ) async {
+    return product.doc(docUid).update({
+      'video': video,
+    });
+  }
+
+  Future editProduct(
+    String docUid,
+    String name,
+    String description,
+    List<double> price,
+    List<int> rangeTo,
+    List<int> rangeFrom,
+    int quantity,
+  ) async {
+    return product.doc(docUid).update({
+      'created': Timestamp.now(),
+      'name': name,
+      'description': description,
+      'price': price,
+      'rangeTo': rangeTo,
+      'rangeFrom': rangeFrom,
+      'quantity': quantity,
+    });
+  }
 
   Future addProduct(
     String name,

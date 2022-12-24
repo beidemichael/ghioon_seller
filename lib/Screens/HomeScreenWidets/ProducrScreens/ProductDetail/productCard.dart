@@ -2,8 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/ProductDetail/EditProduct/EditProduct.dart';
+import 'package:provider/provider.dart';
 // import 'package:ntp/ntp.dart';
 
+import '../../../../Models/models.dart';
+import '../../../../Providers/EditRangeProvider.dart';
 import '../../../../Shared/constants.dart';
 import '../../../../Shared/customColors.dart';
 
@@ -13,16 +17,21 @@ class ProductList extends StatelessWidget {
       required this.title,
       required this.stock,
       required this.image,
-      required this.edit})
+      required this.edit,
+      required this.item,
+      required this.index})
       : super(key: key);
 
   final String title;
   final String stock;
   final List image;
   final bool edit;
+  final int index;
+  final item;
 
   @override
   Widget build(BuildContext context) {
+    final appState = Provider.of<EditRangeData>(context);
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Container(
@@ -98,7 +107,18 @@ class ProductList extends StatelessWidget {
 
             trailing: edit
                 ? IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Provider.of<EditRangeData>(context, listen: false)
+                          .removeallcontrollers();
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EditProduct(
+                                  product: item,
+                                  index: index,
+                                )),
+                      );
+                    },
                     icon: const Icon(FontAwesomeIcons.penToSquare),
                     iconSize: 40,
                     color: CustomColors().blue,

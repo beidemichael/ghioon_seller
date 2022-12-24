@@ -108,6 +108,8 @@ class _AllProductState extends State<AllProduct> {
                       stock: products[index].quantity.toString(),
                       image: products[index].image,
                       edit: true,
+                      item: products[index],
+                      index: index,
                     ),
                   ),
                 );
