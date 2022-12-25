@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/allProducts.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/collections.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/collections.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/InventoryScan/InventoryScanner.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/allProducts.dart';
 import 'package:ghioon_seller/Screens/components/LongProductGrid.dart';
 import 'package:ghioon_seller/Screens/components/ShortProductGrid.dart';
 import 'package:provider/provider.dart';
 
 import '../../Shared/customColors.dart';
-import '../components/storeList.dart';
 
 class Products extends StatefulWidget {
   const Products({super.key});
@@ -80,6 +80,12 @@ class _ProductsState extends State<Products> {
                     GestureDetector(
                       onTap: () {
                         print("Inventory Scanner");
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  const BarcodeScannerDemo()), //AddProductProvider()),
+                        );
                       },
                       child: ShortProductGrid(
                         width: width,

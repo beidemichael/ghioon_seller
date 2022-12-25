@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProducrScreens/allProducts.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/models.dart';
@@ -8,6 +7,7 @@ import '../../Shared/customColors.dart';
 import '../components/BlueDashboardGrid copy.dart';
 import '../components/WhiteDashboardGrid.dart';
 import '../components/ShortProductGrid.dart';
+import 'ProductScreens/Product/allProducts.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({super.key});
@@ -20,7 +20,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-     final products = Provider.of<List<Product>>(context);
+    final products = Provider.of<List<Product>>(context);
     return Scaffold(
       // drawer: Drawer(),
       appBar: AppBar(
@@ -85,13 +85,13 @@ class _DashboardState extends State<Dashboard> {
               children: [
                 Expanded(
                   child: GestureDetector(
-                    onTap: (){
-                        Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              const AllProduct()), //AddProductProvider()),
-                    );
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const AllProduct()), //AddProductProvider()),
+                      );
                     },
                     child: BlueDashboardGrid(
                       width: width,
