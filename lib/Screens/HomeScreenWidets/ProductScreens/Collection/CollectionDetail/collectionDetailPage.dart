@@ -117,6 +117,8 @@ class _CollectionDetailState extends State<CollectionDetail> {
                               stock: collectionitems[index].quantity.toString(),
                               image: collectionitems[index].image,
                               edit: false,
+                              item: collectionitems[index],
+                              index: index,
                             ),
                           ),
                         );

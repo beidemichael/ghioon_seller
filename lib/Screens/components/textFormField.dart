@@ -175,6 +175,46 @@ Widget TextFormFieldProduct(
   );
 }
 
+Widget TextFormFieldProductInitialValue(
+    TextEditingController control, TextInputType keyboard) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 10.0),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextFormField(
+          // initialValue: init,
+          keyboardType: keyboard,
+          controller: control,
+          //initialValue: autoAddress,
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter some text';
+            }
+            return null;
+          },
+          decoration: InputDecoration(
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            contentPadding:
+                const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide:
+                  const BorderSide(color: Color.fromARGB(255, 214, 214, 214)),
+              gapPadding: 10,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+              borderSide: BorderSide(color: CustomColors().blue),
+              gapPadding: 10,
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
 //Text widget for Product description in add product
 Widget TextFormFieldProDescription(
     String hintText, TextEditingController control, String header) {

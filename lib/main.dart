@@ -12,6 +12,7 @@ import 'package:ghioon_seller/firebase_options.dart';
 import 'package:provider/provider.dart';
 
 import 'Models/models.dart';
+import 'Providers/EditRangeProvider.dart';
 import 'Providers/RangeProvider.dart';
 import 'Screens/wrapper.dart';
 import 'Service/Controller/Controller.dart';
@@ -29,6 +30,9 @@ void main() async {
         providers: [
           ChangeNotifierProvider(
             create: (context) => RangeData(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => EditRangeData(),
           ),
           ChangeNotifierProvider(
             create: (context) => MapProvider(),

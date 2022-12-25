@@ -9,6 +9,7 @@ import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ad
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
 import '../../../../Models/models.dart';
+import 'package:ghioon_seller/Models/models.dart';
 
 class AllProduct extends StatefulWidget {
   const AllProduct({super.key});
@@ -106,6 +107,8 @@ class _AllProductState extends State<AllProduct> {
                       stock: products[index].quantity.toString(),
                       image: products[index].image,
                       edit: true,
+                      item: products[index],
+                      index: index,
                     ),
                   ),
                 );

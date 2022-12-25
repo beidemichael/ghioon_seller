@@ -128,6 +128,9 @@ class _AddProToCollectionState extends State<AddProToCollection> {
                                 collection.filtered[index].quantity.toString(),
                             image: collection.filtered[index].image,
                             edit: false,
+                            item: collection,
+                            index: index,
+
                           ),
                         ),
                       );

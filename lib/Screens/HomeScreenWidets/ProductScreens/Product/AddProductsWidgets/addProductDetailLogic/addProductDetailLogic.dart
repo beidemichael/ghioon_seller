@@ -66,8 +66,8 @@ class AddProductDetailLogic {
         appState.rangeToList.clear();
         appState.rangeFromList.clear();
         appState.priceList.add(double.parse(appState.fixedPrice.text));
-        appState.rangeToList.add(int.parse('1'));
-        appState.rangeFromList.add(int.parse('1'));
+        appState.rangeToList.add(int.parse(appState.fixedPrice.text));
+        appState.rangeFromList.add(int.parse(appState.oldPrice.text));
 
         print("fixed product");
       } else {
