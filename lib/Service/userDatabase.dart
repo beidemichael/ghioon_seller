@@ -14,7 +14,7 @@ class UserDatabaseService {
         phoneNumber: (doc.data() as dynamic)['phoneNumber'] ?? '',
         userUid: (doc.data() as dynamic)['userUid'] ?? '',
         approved: (doc.data() as dynamic)['approved'] ?? '',
-        businessCategory: (doc.data() as dynamic)['businessCategory'] ?? '',
+        businessCategory: (doc.data() as dynamic)['businessType'] ?? '',
         businessName: (doc.data() as dynamic)['businessName'] ?? '',
         businessNo: (doc.data() as dynamic)['businessNo'] ?? '',
         address: (doc.data() as dynamic)['address'] ?? '',

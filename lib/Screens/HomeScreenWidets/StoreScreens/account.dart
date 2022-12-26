@@ -91,7 +91,7 @@ class _AccountState extends State<Account> {
                                   userInfo[0].businessName, //'Endale Abegazee',
                                   style: TextStyle(
                                       fontSize: 25.0,
-                                      color: CustomColors().lightBlue,
+                                      color: CustomColors().white,
                                       fontWeight: FontWeight.w500)),
                             ],
                           ),
@@ -131,6 +131,8 @@ class _AccountState extends State<Account> {
                       ),
                     ],
                   ),
+                  containerWidget(
+                      userInfo[0].businessCategory, 'Business Type'),
                   containerWidget(userInfo[0].email, 'Email'),
                   containerWidget(userInfo[0].phoneNumber, 'Phone'),
                   containerWidget(userInfo[0].businessNo, 'Business Number'),
