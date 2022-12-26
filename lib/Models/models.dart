@@ -18,6 +18,7 @@ class UserInformation {
   List collection_images;
   List collection_description;
   bool online;
+  String address;
 
   UserInformation({
     required this.GhioonId,
@@ -34,6 +35,7 @@ class UserInformation {
     required this.collection_images,
     required this.collection_description,
     required this.online,
+    required this.address,
   });
 }
 

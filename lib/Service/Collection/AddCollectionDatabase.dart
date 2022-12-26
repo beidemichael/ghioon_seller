@@ -34,4 +34,24 @@ class AddCollectionDatabase {
       }
     });
   }
+
+  Future editCollection(
+    var userUid,
+    String name,
+    String description,
+    List<double> price,
+    List<int> rangeTo,
+    List<int> rangeFrom,
+    int quantity,
+  ) async {
+    return sellersCollection.doc(userUid).update({
+      'created': Timestamp.now(),
+      'name': name,
+      'description': description,
+      'price': price,
+      'rangeTo': rangeTo,
+      'rangeFrom': rangeFrom,
+      'quantity': quantity,
+    });
+  }
 }

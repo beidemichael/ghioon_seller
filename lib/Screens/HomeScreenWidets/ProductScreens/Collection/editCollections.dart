@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/AddCollectionWidgets/addCollectionDetailContainer.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/AddCollectionWidgets/addImageContainer.dart';

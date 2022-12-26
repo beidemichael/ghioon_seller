@@ -25,6 +25,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
   String businessName = '';
   String email = '';
   String businessNo = '';
+  String address = '';
   int businessCategory = 10000;
   String businessType = '';
   bool categoryOpen = false;
@@ -68,6 +69,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                   TextField('Business Name', 'businessName', true),
                   TextField('License Number(optional)', 'businessNo', false),
                   TextField('Email(optional)', 'email', false),
+                  TextField('Address', 'address', true),
                   const SizedBox(
                     height: 20,
                   ),
@@ -247,6 +249,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                               businessNo,
                               businessType,
                               phoneNumber.toString(),
+                              address,
                               ghioonId,
                               collections,
                               collection_description,

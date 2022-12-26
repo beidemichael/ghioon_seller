@@ -12,6 +12,7 @@ class RegisterDatabaseService {
     String businessNo,
     String businessType,
     String phoneNumber,
+    String address,
     int ghioonId,
     List collections,
     List collection_description,
@@ -34,6 +35,7 @@ class RegisterDatabaseService {
               'businessType': businessType,
               'userUid': userUid,
               'phoneNumber': phoneNumber,
+              'address': address,
               'approved': false,
               'active': false,
               'online': true,
@@ -45,6 +47,23 @@ class RegisterDatabaseService {
             .then((value) => print("Rgistration Info Added"))
             .catchError((error) => print("Failed to Register: $error"));
       }
+    });
+  }
+
+  Future edituser(
+    String sellerName,
+    String businessName,
+    String email,
+    String businessNo,
+    String address,
+    var userUid,
+  ) async {
+    return sellersCollection.doc(userUid).update({
+      'sellerName': sellerName,
+      'businessName': businessName,
+      'email': email,
+      'businessNo': businessNo,
+      'address': address
     });
   }
 }

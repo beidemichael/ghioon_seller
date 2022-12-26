@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Providers/EditProfileProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/accountEdit.dart';
 import 'package:ghioon_seller/Shared/loading.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ class _AccountState extends State<Account> {
   @override
   Widget build(BuildContext context) {
     final userInfo = Provider.of<List<UserInformation>>(context);
+    final appState = Provider.of<EditProfileData>(context);
     return userInfo.isEmpty
         ? Loading()
         : Scaffold(
@@ -32,7 +34,10 @@ class _AccountState extends State<Account> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const AccountEdit()),
+                                  builder: (context) => AccountEdit(
+                                        appState: appState,
+                                        user: userInfo[0],
+                                      )),
                             );
                           },
                           child: Center(
@@ -128,7 +133,8 @@ class _AccountState extends State<Account> {
                   ),
                   containerWidget(userInfo[0].email, 'Email'),
                   containerWidget(userInfo[0].phoneNumber, 'Phone'),
-                  containerWidget('Jemo michael, AA', 'Address'),
+                  containerWidget(userInfo[0].businessNo, 'Business Number'),
+                  containerWidget(userInfo[0].address, 'Address'),
                 ],
               ),
             ),

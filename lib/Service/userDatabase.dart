@@ -17,6 +17,7 @@ class UserDatabaseService {
         businessCategory: (doc.data() as dynamic)['businessCategory'] ?? '',
         businessName: (doc.data() as dynamic)['businessName'] ?? '',
         businessNo: (doc.data() as dynamic)['businessNo'] ?? '',
+        address: (doc.data() as dynamic)['address'] ?? '',
         email: (doc.data() as dynamic)['email'] ?? '',
         documentId: doc.reference.id,
         online: (doc.data() as dynamic)['online'] ?? '',

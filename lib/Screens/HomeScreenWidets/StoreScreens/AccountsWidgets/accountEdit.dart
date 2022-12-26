@@ -1,38 +1,51 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Screens/components/textFormField.dart';
+import 'package:ghioon_seller/Service/registerDatabase.dart';
 
 import '../../../../Shared/customColors.dart';
+import 'package:provider/provider.dart';
+import '../../../../Models/models.dart';
 
 class AccountEdit extends StatefulWidget {
-  const AccountEdit({super.key});
+  var appState;
+  UserInformation user;
+  AccountEdit({super.key, required this.appState, required this.user});
 
   @override
   State<AccountEdit> createState() => _AccountEditState();
 }
 
 class _AccountEditState extends State<AccountEdit> {
-  final fullName = TextEditingController();
-  final gender = TextEditingController();
-
-  final dateOfBirth = TextEditingController();
-  final email = TextEditingController();
-  final phone = TextEditingController();
-  final address = TextEditingController();
+  bool loading = false;
 
   @override
   void dispose() {
     super.dispose();
-    fullName.dispose();
-    gender.dispose();
-    dateOfBirth.dispose();
-    email.dispose();
-    phone.dispose();
-    address.dispose();
+    // fullName.dispose();
+    // gender.dispose();
+    // dateOfBirth.dispose();
+    // email.dispose();
+    // businessNo.dispose();
+    // address.dispose();
+  }
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    widget.appState.fullName.text = widget.user.userName;
+    widget.appState.businessName.text = widget.user.businessName;
+    widget.appState.email.text = widget.user.email;
+    widget.appState.businessNo.text = widget.user.businessNo;
+    widget.appState.address.text = widget.user.address;
   }
 
   @override
   Widget build(BuildContext context) {
+    final userInfo = Provider.of<List<UserInformation>>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(280.0),
@@ -41,7 +54,23 @@ class _AccountEditState extends State<AccountEdit> {
             AppBar(
                 actions: [
                   GestureDetector(
-                    onTap: () {
+                    onTap: () async {
+                      setState(() {
+                        loading = true;
+                      });
+                      print("loading");
+                      await RegisterDatabaseService().edituser(
+                          widget.appState.fullName.text,
+                          widget.appState.businessName.text,
+                          widget.appState.email.text,
+                          widget.appState.businessNo.text,
+                          widget.appState.address.text,
+                          widget.user.userUid);
+
+                      setState(() {
+                        loading = false;
+                      });
+
                       Navigator.of(context).pop();
                     },
                     child: Center(
@@ -55,11 +84,16 @@ class _AccountEditState extends State<AccountEdit> {
                           borderRadius: BorderRadius.circular(30.0),
                         ),
                         child: Center(
-                          child: Icon(
-                            FontAwesomeIcons.save,
-                            size: 25.0,
-                            color: CustomColors().blue,
-                          ),
+                          child: loading
+                              ? SpinKitCircle(
+                                  size: 40,
+                                  color: CustomColors().blue,
+                                )
+                              : Icon(
+                                  FontAwesomeIcons.save,
+                                  size: 25.0,
+                                  color: CustomColors().blue,
+                                ),
                         ),
                       ),
                     ),
@@ -91,7 +125,7 @@ class _AccountEditState extends State<AccountEdit> {
                         const SizedBox(
                           height: 30,
                         ),
-                        Text('Endale Abegazee',
+                        Text(widget.appState.fullName.text,
                             style: TextStyle(
                                 fontSize: 25.0,
                                 color: CustomColors().lightBlue,
@@ -119,27 +153,19 @@ class _AccountEditState extends State<AccountEdit> {
           physics: const BouncingScrollPhysics(
               parent: AlwaysScrollableScrollPhysics()),
           children: [
+            TextFormFieldWithOutIcon('Store Name', widget.appState.businessName,
+                'Store Name', TextInputType.text),
+            TextFormFieldWithOutIcon('Full Name', widget.appState.fullName,
+                'Owner Name', TextInputType.text),
             TextFormFieldWithOutIcon(
-                'Full Name', fullName, 'Name', TextInputType.text),
-            Row(
-              children: [
-                Expanded(
-                    child: TextFormFieldWithOutIcon(
-                        'Male', gender, 'Gender', TextInputType.text)),
-                SizedBox(
-                  width: 15,
-                ),
-                Expanded(
-                    child: TextFormFieldWithOutIcon('Jan 1 2022', dateOfBirth,
-                        'Date of Birth', TextInputType.text)),
-              ],
-            ),
+                'email', widget.appState.email, 'Email', TextInputType.text),
             TextFormFieldWithOutIcon(
-                'Ghioon@gmail.com', email, 'Email', TextInputType.text),
-            TextFormFieldWithOutIcon(
-                '+251912345678', phone, 'Phone', TextInputType.number),
-            TextFormFieldWithOutIcon('Jemo Michael, AA, Ethiopia', address,
-                'Address', TextInputType.text),
+                '+Business Number',
+                widget.appState.businessNo,
+                'Business Number',
+                TextInputType.number),
+            TextFormFieldWithOutIcon('Jemo Michael, AA, Ethiopia',
+                widget.appState.address, 'Address', TextInputType.text),
           ],
         ),
       ),

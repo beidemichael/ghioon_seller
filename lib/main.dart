@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Providers/EditProfileProvider.dart';
 import 'package:ghioon_seller/Providers/MapProvider.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Providers/FeedbackProvider.dart';
@@ -35,6 +36,9 @@ void main() async {
             create: (context) => EditRangeData(),
           ),
           ChangeNotifierProvider(
+            create: (context) => EditProfileData(),
+          ),
+          ChangeNotifierProvider(
             create: (context) => MapProvider(),
           ),
           ChangeNotifierProvider(
@@ -65,11 +69,6 @@ void main() async {
             initialData: [],
             value: ControllerDatabaseService().controller,
           ),
-          // StreamProvider<List<CollectionItems>>.value(
-          //     initialData: [],
-          //     value: ReadCollectionItemsDatabaseService(
-          //             collection: appState.selectedCatagoryValue)
-          //         .readCollectionItems)
         ],
         child: const MyApp(),
       ),
