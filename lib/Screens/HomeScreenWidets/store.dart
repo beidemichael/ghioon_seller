@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/StoreProfile/store_profile.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/account.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/accountEdit.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/customers.dart';
@@ -125,6 +126,16 @@ class _StoreState extends State<Store> {
                     ),
                   ),
                 ),
+                GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const StoreProfile()),
+                      );
+                    },
+                    child: StoreList(
+                        FontAwesomeIcons.solidUser, 'My Account', width)),
                 GestureDetector(
                     onTap: () {
                       Navigator.push(

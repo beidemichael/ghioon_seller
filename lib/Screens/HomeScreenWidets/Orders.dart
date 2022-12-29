@@ -66,7 +66,7 @@ class _OrdersState extends State<Orders> {
               ],
             ),
             excludeHeaderSemantics: true,
-            backgroundColor: CustomColors().blue,
+            backgroundColor: CustomColors().black,
             elevation: 3,
             bottom: upperTab,
             iconTheme: const IconThemeData(color: Colors.white)),
