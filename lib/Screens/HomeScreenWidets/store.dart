@@ -80,7 +80,8 @@ class _StoreState extends State<Store> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => const Account()),
+                      MaterialPageRoute(
+                          builder: (context) => const StoreProfile()),
                     );
                   },
                   child: Padding(
@@ -131,7 +132,7 @@ class _StoreState extends State<Store> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const StoreProfile()),
+                            builder: (context) => const Account()),
                       );
                     },
                     child: StoreList(
