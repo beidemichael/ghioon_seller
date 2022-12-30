@@ -17,6 +17,8 @@ class RegisterDatabaseService {
     List collections,
     List collection_description,
     List collection_images,
+    int views,
+    double rating,
     var userUid,
   ) async {
     sellersCollection
@@ -39,6 +41,8 @@ class RegisterDatabaseService {
               'approved': false,
               'active': false,
               'online': true,
+              'views': views,
+              'rating': rating,
               'GhioonId': 'GS' + ghioonId.toString(),
               'collection_images': collection_images,
               'collection_description': collection_description,

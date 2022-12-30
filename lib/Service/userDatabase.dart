@@ -18,6 +18,8 @@ class UserDatabaseService {
         businessName: (doc.data() as dynamic)['businessName'] ?? '',
         businessNo: (doc.data() as dynamic)['businessNo'] ?? '',
         address: (doc.data() as dynamic)['address'] ?? '',
+        views: (doc.data() as dynamic)['views'] ?? '',
+        rating: (doc.data() as dynamic)['rating'] ?? '',
         email: (doc.data() as dynamic)['email'] ?? '',
         documentId: doc.reference.id,
         online: (doc.data() as dynamic)['online'] ?? '',
@@ -32,8 +34,7 @@ class UserDatabaseService {
   //orders lounges stream
   Stream<List<UserInformation>> get userInfo {
     print(userUid);
-    print(
-        "5555555555555555555555555555555555555555555555555555555555555555555555555555555555555");
+
     return sellersCollection
         .where('userUid', isEqualTo: userUid)
         .snapshots()

@@ -19,24 +19,27 @@ class UserInformation {
   List collection_description;
   bool online;
   String address;
+  int views;
+  double rating;
 
-  UserInformation({
-    required this.GhioonId,
-    required this.userName,
-    required this.phoneNumber,
-    required this.userUid,
-    required this.approved,
-    required this.documentId,
-    required this.businessNo,
-    required this.businessCategory,
-    required this.businessName,
-    required this.email,
-    required this.collections,
-    required this.collection_images,
-    required this.collection_description,
-    required this.online,
-    required this.address,
-  });
+  UserInformation(
+      {required this.GhioonId,
+      required this.userName,
+      required this.phoneNumber,
+      required this.userUid,
+      required this.approved,
+      required this.documentId,
+      required this.businessNo,
+      required this.businessCategory,
+      required this.businessName,
+      required this.email,
+      required this.collections,
+      required this.collection_images,
+      required this.collection_description,
+      required this.online,
+      required this.address,
+      required this.views,
+      required this.rating});
 }
 
 class Categories {

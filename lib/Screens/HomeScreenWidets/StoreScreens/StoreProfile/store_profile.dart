@@ -1,8 +1,15 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Providers/RangeProvider.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/CollectionDetail/collection_card.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/cOllectionaddPro.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ProductDetail/productDetail.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/StoreProfile/Store_profile_components/ProductForGrid.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/StoreProfile/Store_profile_components/collectionListGrid.dart';
 import 'package:ghioon_seller/Screens/components/emptyScreen.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
@@ -19,8 +26,10 @@ class _StoreProfileState extends State<StoreProfile> {
   @override
   Widget build(BuildContext context) {
     final userInfo = Provider.of<List<UserInformation>>(context);
+    final products = Provider.of<List<Product>>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
+    final appState = Provider.of<RangeData>(context);
     const upperTab =
         TabBar(indicatorColor: Colors.white, indicatorWeight: 3, tabs: <Tab>[
       Tab(
@@ -108,7 +117,8 @@ class _StoreProfileState extends State<StoreProfile> {
                                       width: 5,
                                     ),
                                     Text(
-                                      '25',
+                                      userInfo[0].views.toString(),
+                                      //'25',
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontFamily: 'Inter',
@@ -132,7 +142,7 @@ class _StoreProfileState extends State<StoreProfile> {
                                       width: 5,
                                     ),
                                     Text(
-                                      '4.5',
+                                      userInfo[0].rating.toString(), //'4.5',
                                       style: TextStyle(
                                           fontSize: 20,
                                           fontFamily: 'Inter',
@@ -192,64 +202,15 @@ class _StoreProfileState extends State<StoreProfile> {
         ),
         body: TabBarView(
           children: [
-            // EmptyScreen(context, 'Products.'),
-            // EmptyScreen(context, 'Collections')
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.count(
-                  physics: const BouncingScrollPhysics(
-                      parent: AlwaysScrollableScrollPhysics()),
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 4.0,
-                  mainAxisSpacing: 8.0,
-                  children: List.generate(choices.length, (index) {
-                    return Center(
-                      child: SelectCard(choice: choices[index]),
-                    );
-                  })),
-            )
+            products.length == 0
+                ? EmptyScreen(context, 'No Products.')
+                : ProductForGrid(products: products),
+            userInfo[0].collections == 0
+                ? EmptyScreen(context, 'No Collections')
+                : CollectionListGrid(userInfo: userInfo, appState: appState),
           ],
         ),
       ),
     );
-  }
-}
-
-//List of center grid
-class Choice {
-  const Choice({required this.title, required this.icon});
-  final String title;
-  final IconData icon;
-}
-
-const List<Choice> choices = const <Choice>[
-  const Choice(title: 'Home', icon: Icons.home),
-  const Choice(title: 'Contact', icon: Icons.contacts),
-  const Choice(title: 'Map', icon: Icons.map),
-  const Choice(title: 'Phone', icon: Icons.phone),
-  const Choice(title: 'Camera', icon: Icons.camera_alt),
-  const Choice(title: 'Setting', icon: Icons.settings),
-  const Choice(title: 'Album', icon: Icons.photo_album),
-  const Choice(title: 'WiFi', icon: Icons.wifi),
-];
-
-class SelectCard extends StatelessWidget {
-  const SelectCard({Key? key, required this.choice}) : super(key: key);
-  final Choice choice;
-
-  @override
-  Widget build(BuildContext context) {
-    // final TextStyle textStyle = Theme.of(context).textTheme.;
-    return Card(
-        color: Colors.orange,
-        child: Center(
-          child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Expanded(
-                    child: Icon(choice.icon, size: 50.0, color: Colors.red)),
-                Text(choice.title, style: TextStyle(fontSize: 15)),
-              ]),
-        ));
   }
 }

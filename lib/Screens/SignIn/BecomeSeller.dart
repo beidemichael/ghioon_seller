@@ -254,6 +254,8 @@ class _BecomeSellerState extends State<BecomeSeller> {
                               collections,
                               collection_description,
                               collection_images,
+                              0,
+                              5.0,
                               userUid,
                             );
                             LastIdService().updateLastID(ghioonId);
