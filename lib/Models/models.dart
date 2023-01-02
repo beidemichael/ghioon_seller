@@ -76,6 +76,7 @@ class Product {
   int quantity;
   String documentId;
   String video;
+  String barcode;
 
   Product({
     required this.productId,
@@ -94,6 +95,46 @@ class Product {
     required this.quantity,
     required this.documentId,
     required this.video,
+    required this.barcode,
+  });
+}
+class ProductBar {
+  String productId;
+  String name;
+  String description;
+  bool fixed;
+  List<dynamic> price;
+  List<dynamic> rangeFrom;
+  List<dynamic> rangeTo;
+  String Product_Type;
+  String Product_collection;
+  double rating;
+  String category;
+  List image;
+  bool inStock;
+  int quantity;
+  String documentId;
+  String video;
+  String barcode;
+
+  ProductBar({
+    required this.productId,
+    required this.name,
+    required this.description,
+    required this.fixed,
+    required this.price,
+    required this.rangeFrom,
+    required this.rangeTo,
+    required this.Product_Type,
+    required this.Product_collection,
+    required this.rating,
+    required this.category,
+    required this.image,
+    required this.inStock,
+    required this.quantity,
+    required this.documentId,
+    required this.video,
+    required this.barcode,
   });
 }
 

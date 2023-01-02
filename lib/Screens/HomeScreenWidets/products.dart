@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Providers/AppState.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/collections.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/InventoryScan/InventoryScanner.dart';
@@ -8,6 +10,8 @@ import 'package:ghioon_seller/Screens/components/LongProductGrid.dart';
 import 'package:ghioon_seller/Screens/components/ShortProductGrid.dart';
 import 'package:provider/provider.dart';
 
+import '../../Models/models.dart';
+import '../../Service/Product/readProduct.dart';
 import '../../Shared/customColors.dart';
 
 class Products extends StatefulWidget {
@@ -21,6 +25,7 @@ class _ProductsState extends State<Products> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final appState = Provider.of<AppState>(context);
     return Scaffold(
       // drawer: Drawer(),
       appBar: PreferredSize(
@@ -80,16 +85,28 @@ class _ProductsState extends State<Products> {
                     GestureDetector(
                       onTap: () {
                         print("Inventory Scanner");
+                        // appState.barCode = '3';
+                        // Provider.of<AppState>(context, listen: false).refresh();
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  const BarcodeScannerDemo()), //AddProductProvider()),
+                            builder: (context) =>
+                                StreamProvider<List<ProductBar>>.value(
+                              initialData: [],
+                              value: ReadProductDatabaseService(
+                                      userUid: FirebaseAuth
+                                          .instance.currentUser!.uid,
+                                      barcode: appState.barCode)
+                                  .readProductBarCode,
+                              child: const BarcodeScannerDemo(),
+                            ),
+                          ), //AddProductProvider()),
                         );
                       },
                       child: ShortProductGrid(
                         width: width,
-                        title: "Inventory \n Scanner",
+                        title: "Barcode \n Scanner",
                         icon: FontAwesomeIcons.barcode,
                       ),
                     )

@@ -50,7 +50,7 @@ class _StoreProfileState extends State<StoreProfile> {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        drawer: Drawer(),
+        // drawer: Drawer(),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(300.0),
           child: AppBar(

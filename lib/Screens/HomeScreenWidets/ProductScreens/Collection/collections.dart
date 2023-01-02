@@ -60,7 +60,7 @@ class _CollectionsState extends State<Collections> {
       ),
       body: Padding(
         padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 0),
-        child: userInfo == null
+        child: userInfo.isEmpty
             ? Center(
                 child: CircularProgressIndicator(
                   backgroundColor: CustomColors().blue,

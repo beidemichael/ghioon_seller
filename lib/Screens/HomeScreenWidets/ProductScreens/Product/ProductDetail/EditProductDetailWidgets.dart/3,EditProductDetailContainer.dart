@@ -2,13 +2,14 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ProductDetail/EditProductDetailWidgets.dart/4,editfixedInputField.dart';
-
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:provider/provider.dart';
-
+import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 import '../../../../../../Providers/EditRangeProvider.dart';
 import '../../../../../../Service/Product/AddProductDatabase.dart';
 import '../../../../../../Shared/customColors.dart';
@@ -27,6 +28,7 @@ class EditProductDetail extends StatefulWidget {
 
 class _EditProductDetailState extends State<EditProductDetail> {
   bool loading = false;
+  String _scanBarcode = '';
   @override
   void initState() {
     // TODO: implement initState
@@ -34,6 +36,29 @@ class _EditProductDetailState extends State<EditProductDetail> {
 
     widget.appState.productName.text = widget.product.name;
     widget.appState.description.text = widget.product.description;
+  }
+
+  Future<void> barcodeScan() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancel', true, ScanMode.QR);
+      print(barcodeScanRes);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+    if (!mounted) return;
+    setState(() {
+      _scanBarcode = barcodeScanRes;
+    });
+  }
+
+  bool isNumeric(String s) {
+    if (s == null) {
+      return false;
+    }
+    return double.tryParse(s) != null;
   }
 
   @override
@@ -60,7 +85,7 @@ class _EditProductDetailState extends State<EditProductDetail> {
               appState.productName, TextInputType.text),
           TextFormFieldProDescription(
               "Description", appState.description, "Description"),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           const Text(
@@ -76,6 +101,45 @@ class _EditProductDetailState extends State<EditProductDetail> {
                   appState: appState,
                 )
               : EditRangeInputField(product: widget.product),
+          const SizedBox(
+            height: 15,
+          ),
+          widget.product.barcode != ''
+              ? Column(
+                  children: [
+                    isNumeric(widget.product.barcode)
+                        ? Container(
+                            height: 100,
+                            child: SfBarcodeGenerator(
+                              value: widget.product.barcode,
+                            ),
+                          )
+                        : Container(
+                            height: 200,
+                            child: SfBarcodeGenerator(
+                              value: widget.product.barcode,
+                              symbology: QRCode(),
+                            ),
+                          ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      widget.product.barcode,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w300),
+                    )
+                  ],
+                )
+              : Container(),
+          const SizedBox(
+            height: 15,
+          ),
+          GestureDetector(
+              onTap: () {
+                barcodeScan();
+              },
+              child: BlueButton(text: 'Barcode/Qrcode')),
           const SizedBox(
             height: 15,
           ),
@@ -116,14 +180,14 @@ class _EditProductDetailState extends State<EditProductDetail> {
                   }
                 }
                 await AddProductDatabase().editProduct(
-                  widget.product.documentId,
-                  appState.productName.text,
-                  appState.description.text,
-                  appState.priceList,
-                  appState.rangeToList,
-                  appState.rangeFromList,
-                  int.parse(appState.inventory.text),
-                );
+                    widget.product.documentId,
+                    appState.productName.text,
+                    appState.description.text,
+                    appState.priceList,
+                    appState.rangeToList,
+                    appState.rangeFromList,
+                    int.parse(appState.inventory.text),
+                    _scanBarcode);
                 setState(() {
                   loading = false;
                 });

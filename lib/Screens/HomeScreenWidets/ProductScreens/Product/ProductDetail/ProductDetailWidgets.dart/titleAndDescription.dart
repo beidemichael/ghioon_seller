@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
 import '../../../../../../Models/models.dart';
 
@@ -12,6 +13,13 @@ class TitleAndDescription extends StatefulWidget {
 }
 
 class _TitleAndDescriptionState extends State<TitleAndDescription> {
+  bool isNumeric(String s) {
+    if (s == null) {
+      return false;
+    }
+    return double.tryParse(s) != null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -270,6 +278,37 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
                     color: Color.fromARGB(255, 109, 109, 109),
                     fontWeight: FontWeight.w400)),
           ),
+          const SizedBox(
+            height: 15,
+          ),
+          widget.product.barcode != ''
+              ? Column(
+                  children: [
+                    isNumeric(widget.product.barcode)
+                        ? Container(
+                            height: 100,
+                            child: SfBarcodeGenerator(
+                              value: widget.product.barcode,
+                            ),
+                          )
+                        : Container(
+                            height: 200,
+                            child: SfBarcodeGenerator(
+                              value: widget.product.barcode,
+                              symbology: QRCode(),
+                            ),
+                          ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Text(
+                      widget.product.barcode,
+                      style: const TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.w300),
+                    )
+                  ],
+                )
+              : Container(),
         ],
       ),
     );

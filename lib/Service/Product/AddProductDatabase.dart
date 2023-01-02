@@ -52,6 +52,7 @@ class AddProductDatabase {
     List<int> rangeTo,
     List<int> rangeFrom,
     int quantity,
+    String barcode,
   ) async {
     return product.doc(docUid).update({
       'created': Timestamp.now(),
@@ -61,6 +62,7 @@ class AddProductDatabase {
       'rangeTo': rangeTo,
       'rangeFrom': rangeFrom,
       'quantity': quantity,
+      'barcode':barcode
     });
   }
 

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Providers/AppState.dart';
 import 'package:ghioon_seller/Providers/EditProfileProvider.dart';
 import 'package:ghioon_seller/Providers/MapProvider.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
@@ -47,12 +48,16 @@ void main() async {
           ChangeNotifierProvider(
             create: (context) => FeedbackData(),
           ),
+          ChangeNotifierProvider(
+            create: (context) => AppState(),
+          ),
           StreamProvider<List<Product>>.value(
             initialData: [],
             value: ReadProductDatabaseService(
                     userUid: FirebaseAuth.instance.currentUser!.uid)
                 .readProduct,
           ),
+         
           StreamProvider<List<Collection>>.value(
             initialData: [],
             value: ReadCollectionDatabaseService(

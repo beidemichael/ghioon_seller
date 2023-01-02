@@ -2,9 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/CheckRegisteration.dart';
-
 import 'package:provider/provider.dart';
-
 import '../Service/userDatabase.dart';
 import 'SignIn/SignInPage.dart';
 
