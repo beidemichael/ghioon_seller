@@ -33,9 +33,11 @@ dependencies:
   cloud_firestore: ^4.1.0
   country_code_picker: null
   cupertino_icons: ^1.0.2
+  draw_graph: ^1.0.0
   firebase_auth: ^4.1.3
   firebase_core: ^2.3.0
   firebase_storage: null
+  fl_chart: ^0.55.2
   flutter:
     sdk: flutter
   flutter_launcher_icons: ^0.11.0
