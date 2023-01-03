@@ -17,7 +17,7 @@ import '../../../../../../Service/uploadPhoto.dart';
 import '../../../../../../Shared/customColors.dart';
 
 class EditVideoContainer extends StatefulWidget {
-  Product product;
+  var product;
   int index;
   EditVideoContainer({super.key, required this.product, required this.index});
 

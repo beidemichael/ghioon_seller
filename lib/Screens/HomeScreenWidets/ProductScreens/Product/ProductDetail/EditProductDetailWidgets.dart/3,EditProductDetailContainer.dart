@@ -18,7 +18,7 @@ import '../../../../../components/textFormField.dart';
 import '4,editrangeInputField.dart';
 
 class EditProductDetail extends StatefulWidget {
-  Product product;
+  var product;
   var appState;
   EditProductDetail({super.key, required this.product, required this.appState});
 

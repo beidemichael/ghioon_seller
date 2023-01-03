@@ -14,7 +14,7 @@ import 'EditProductDetailWidgets.dart/3,EditProductDetailContainer.dart';
 import 'EditProductDetailWidgets.dart/2,EditVideoContainer.dart';
 
 class EditProduct extends StatefulWidget {
-  Product product;
+  var product;
   int index;
   EditProduct({super.key, required this.product, required this.index});
 

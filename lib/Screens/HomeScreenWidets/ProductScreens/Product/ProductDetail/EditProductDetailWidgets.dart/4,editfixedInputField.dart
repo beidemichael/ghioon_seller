@@ -8,7 +8,7 @@ import '../../../../../../Shared/customColors.dart';
 import '5,editinventoryQty.dart';
 
 class EditFixedInputField extends StatefulWidget {
-  Product product;
+  var product;
   EditRangeData appState;
   EditFixedInputField(
       {super.key, required this.product, required this.appState});

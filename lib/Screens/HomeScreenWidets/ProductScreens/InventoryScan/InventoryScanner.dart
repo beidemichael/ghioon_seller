@@ -1,12 +1,15 @@
 import 'dart:async';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:ghioon_seller/Providers/AppState.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/InventoryScan/DialogScannedProductsList.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Models/models.dart';
+import '../../../../Service/Product/readProduct.dart';
 import '../../../components/BlueButton.dart';
 import '../Product/ProductDetail/productCard.dart';
 import '../Product/ProductDetail/productDetail.dart';
@@ -44,20 +47,61 @@ class _BarcodeScannerDemoState extends State<BarcodeScannerDemo> {
       appState.barCode = _scanBarcode;
       Provider.of<AppState>(context, listen: false).refresh();
     });
+
+    _scannedProductsDialog(context);
+  }
+
+  _scannedProductsDialog(BuildContext context) {
+    final appState = Provider.of<AppState>(context, listen: false);
+
+    ScannedProducts alert = ScannedProducts();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StreamProvider<List<ProductBar>>.value(
+          initialData: [],
+          value: ReadProductDatabaseService(
+                  userUid: FirebaseAuth.instance.currentUser!.uid,
+                  barcode: _scanBarcode)
+              .readProductBarCode,
+          child: alert,
+        );
+      },
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-    final products = Provider.of<List<ProductBar>>(context);
-    print(products.length);
+
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text('Barcode/Qrcode Scanner'),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.cyan,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(70.0),
+        child: AppBar(
+            centerTitle: true,
+            title: Row(
+              mainAxisSize: MainAxisSize.min,
+              // ignore: prefer_const_literals_to_create_immutables
+              children: [
+                const Text('Barcode/Qrcode Scanner',
+                    style: TextStyle(
+                        fontSize: 25.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700)),
+              ],
+            ),
+            // excludeHeaderSemantics: true,
+            backgroundColor: CustomColors().blue,
+            // automaticallyImplyLeading: false,
+            elevation: 0,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(
+                bottom: Radius.circular(30),
+              ),
+            ),
+            iconTheme: const IconThemeData(color: Colors.white)),
       ),
       body: Builder(
         builder: (BuildContext context) {
@@ -65,88 +109,24 @@ class _BarcodeScannerDemoState extends State<BarcodeScannerDemo> {
             alignment: Alignment.center,
             child: Stack(
               children: [
-                products.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/undraw_No_data_re_kwbl.png',
-                              height: MediaQuery.of(context).size.height * .3,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            const Text(
-                              "Please scan Barcode to search...",
-                              style:
-                                  TextStyle(fontSize: 18, color: Colors.grey),
-                            )
-                          ],
-                        ),
-                      )
-                    : Container(
-                        height: MediaQuery.of(context).size.height,
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const BouncingScrollPhysics(
-                              parent: AlwaysScrollableScrollPhysics()),
-                          itemCount: products.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ProductDetail(
-                                            product: Product(
-                                                productId:
-                                                    products[index].productId,
-                                                name: products[index].name,
-                                                description:
-                                                    products[index].description,
-                                                fixed: products[index].fixed,
-                                                price: products[index].price,
-                                                rangeFrom:
-                                                    products[index].rangeFrom,
-                                                rangeTo:
-                                                    products[index].rangeTo,
-                                                Product_Type: products[index]
-                                                    .Product_Type,
-                                                Product_collection:
-                                                    products[index]
-                                                        .Product_collection,
-                                                rating: products[index].rating,
-                                                category:
-                                                    products[index].category,
-                                                image: products[index].image,
-                                                inStock:
-                                                    products[index].inStock,
-                                                quantity:
-                                                    products[index].quantity,
-                                                documentId:
-                                                    products[index].documentId,
-                                                video: products[index].video,
-                                                barcode:
-                                                    products[index].barcode),
-                                          )),
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: ProductList(
-                                  title: products[index].name,
-                                  stock: products[index].quantity.toString(),
-                                  image: products[index].image,
-                                  edit: true,
-                                  item: products[index],
-                                  index: index,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        'assets/undraw_Landscape_photographer_156c.png',
+                        height: MediaQuery.of(context).size.height * .5,
                       ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      const Text(
+                        "Please scan Barcode/QRcode",
+                        style: TextStyle(fontSize: 18, color: Colors.grey),
+                      )
+                    ],
+                  ),
+                ),
                 Center(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
@@ -161,7 +141,7 @@ class _BarcodeScannerDemoState extends State<BarcodeScannerDemo> {
                               _scanBarcode = _scanBarcode;
                             });
                           },
-                          child: BlueButton(text: 'Search Item')),
+                          child: BlueButton(text: 'SCAN')),
                       const SizedBox(
                         height: 45,
                       ),

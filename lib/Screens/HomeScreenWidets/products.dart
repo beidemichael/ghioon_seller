@@ -85,23 +85,14 @@ class _ProductsState extends State<Products> {
                     GestureDetector(
                       onTap: () {
                         print("Inventory Scanner");
-                        // appState.barCode = '3';
-                        // Provider.of<AppState>(context, listen: false).refresh();
+                        appState.barCode = '3';
+                        Provider.of<AppState>(context, listen: false).refresh();
 
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) =>
-                                StreamProvider<List<ProductBar>>.value(
-                              initialData: [],
-                              value: ReadProductDatabaseService(
-                                      userUid: FirebaseAuth
-                                          .instance.currentUser!.uid,
-                                      barcode: appState.barCode)
-                                  .readProductBarCode,
-                              child: const BarcodeScannerDemo(),
-                            ),
-                          ), //AddProductProvider()),
+                              builder: (context) =>
+                                  const BarcodeScannerDemo()), //AddProductProvider()),
                         );
                       },
                       child: ShortProductGrid(
