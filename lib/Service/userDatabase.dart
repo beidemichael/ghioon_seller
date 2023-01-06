@@ -27,6 +27,7 @@ class UserDatabaseService {
         collection_description:
             (doc.data() as dynamic)['collection_description'] ?? '',
         collection_images: (doc.data() as dynamic)['collection_images'] ?? '',
+        image: (doc.data() as dynamic)['image'] ?? '',
       );
     }).toList();
   }
