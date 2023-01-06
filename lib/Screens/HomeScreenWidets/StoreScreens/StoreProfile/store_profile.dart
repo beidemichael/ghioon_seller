@@ -15,6 +15,8 @@ import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../Shared/loading.dart';
+
 class StoreProfile extends StatefulWidget {
   const StoreProfile({super.key});
 
@@ -49,7 +51,9 @@ class _StoreProfileState extends State<StoreProfile> {
     ]);
     return DefaultTabController(
       length: 2,
-      child: Scaffold(
+      child:
+      userInfo.isEmpty?Loading():
+       Scaffold(
         // drawer: Drawer(),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(300.0),

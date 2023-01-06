@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/Marketing/MarketingUploadScreen.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 import '../../../Shared/customColors.dart';
 
-class Marketing extends StatelessWidget {
+class Marketing extends StatefulWidget {
   const Marketing({super.key});
+
+  @override
+  State<Marketing> createState() => _MarketingState();
+}
+
+class _MarketingState extends State<Marketing> {
+  bool promotionType = true;
+  changePromotionType() {
+    setState(() {
+      promotionType = !promotionType;
+      // if (index == 0) {
+      //   promotionType = true;
+      // } else {
+      //   promotionType = false;
+      // }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +56,7 @@ class Marketing extends StatelessWidget {
       body: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 20.0,left: 20.0,top: 80),
+            padding: const EdgeInsets.only(right: 20.0, left: 20.0, top: 80),
             child: ListView(
               shrinkWrap: true,
               physics: const BouncingScrollPhysics(
@@ -60,19 +78,20 @@ class Marketing extends StatelessWidget {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        container(
+                        Switch(
                             (MediaQuery.of(context).size.width - 50) * .5,
                             MediaQuery.of(context).size.width * .5,
-                            'CUSTOMERS',
-                            '25% SCREEN REALSTATE'),
+                            promotionType ? 'IMAGE' : 'VIDEO',
+                            'PROMOTION TYPE:'),
                         const SizedBox(
                           height: 10,
                         ),
                         container(
                             (MediaQuery.of(context).size.width - 50) * .5,
                             MediaQuery.of(context).size.width * .5,
-                            'CUSTOMERS',
-                            '25% SCREEN REALSTATE'),
+                            'PROMOTION',
+                            '25% SCREEN REALESTATE',
+                            25),
                       ],
                     ),
                     const SizedBox(
@@ -81,8 +100,9 @@ class Marketing extends StatelessWidget {
                     container(
                         (MediaQuery.of(context).size.width - 50) * .5,
                         MediaQuery.of(context).size.width + 10,
-                        'CUSTOMERS',
-                        '100% SCREEN REALSTATE'),
+                        'PROMOTION',
+                        '100% SCREEN REALESTATE',
+                        100),
                   ],
                 ),
                 const SizedBox(
@@ -91,8 +111,9 @@ class Marketing extends StatelessWidget {
                 container(
                     MediaQuery.of(context).size.width,
                     MediaQuery.of(context).size.width * .5,
-                    'CUSTOMERS',
-                    '50% SCREEN REALSTATE'),
+                    'PROMOTION',
+                    '50% SCREEN REALESTATE',
+                    50),
                 Container(
                   height: 50,
                 ),
@@ -152,13 +173,71 @@ class Marketing extends StatelessWidget {
     );
   }
 
-  Widget container(double width, double height, String title, String subTitle) {
+  Widget container(double width, double height, String title, String subTitle,
+      int screenRealestate) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => MarketingUploadScreen(
+                  imagType: promotionType, screenRealestate: screenRealestate)),
+        );
+      },
+      child: Container(
+        height: height,
+        width: width,
+        decoration: BoxDecoration(
+          // border: Border.all(width: 1, color: CustomColors().blue),
+          color: CustomColors().superLightBlue,
+          borderRadius: BorderRadius.circular(15.0),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.lightBlue.withOpacity(0.5),
+              spreadRadius: 0.05,
+              blurRadius: 3,
+              offset: const Offset(0, 4), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            // const SizedBox(
+            //   height: 15,
+            // ),
+
+            Text(subTitle,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 14,
+                    color: CustomColors().blue,
+                    fontWeight: FontWeight.w300)),
+            Text(title,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontFamily: 'Poppins',
+                    fontSize: 25,
+                    color: CustomColors().blue,
+                    fontWeight: FontWeight.w700)),
+            const SizedBox(
+              height: 5,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget Switch(double width, double height, String title, String subTitle) {
     return Container(
       height: height,
       width: width,
       decoration: BoxDecoration(
         // border: Border.all(width: 1, color: CustomColors().blue),
-        color: CustomColors().superLightBlue,
+        color: CustomColors().white,
         borderRadius: BorderRadius.circular(15.0),
         boxShadow: [
           BoxShadow(
@@ -169,30 +248,115 @@ class Marketing extends StatelessWidget {
           ),
         ],
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Stack(
         children: [
-          // const SizedBox(
-          //   height: 15,
-          // ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // const SizedBox(
+                //   height: 15,
+                // ),
 
-          Text(subTitle,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 14,
-                  color: CustomColors().blue,
-                  fontWeight: FontWeight.w300)),
-          Text(title,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontFamily: 'Poppins',
-                  fontSize: 25,
-                  color: CustomColors().blue,
-                  fontWeight: FontWeight.w700)),
-          const SizedBox(
-            height: 5,
+                Text(subTitle,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 14,
+                        color: CustomColors().grey,
+                        fontWeight: FontWeight.w300)),
+                AnimatedContainer(
+                  // height: 90,
+                  // width: 75,
+                  duration: const Duration(milliseconds: 700),
+                  curve: Curves.bounceInOut,
+                  decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(15),
+                        bottomLeft: Radius.circular(15)),
+                  ),
+                  child: Text(promotionType ? 'IMAGE' : 'VIDEO',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 25,
+                          color: CustomColors().grey,
+                          fontWeight: FontWeight.w700)),
+                ),
+
+                const SizedBox(
+                  height: 5,
+                ),
+              ],
+            ),
+          ),
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 35,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          promotionType = true;
+                        });
+                      },
+                      child: AnimatedContainer(
+                        height: 90,
+                        width: 75,
+                        duration: const Duration(milliseconds: 700),
+                        curve: Curves.bounceInOut,
+                        decoration: BoxDecoration(
+                          color: promotionType
+                              ? CustomColors().blue
+                              : Colors.grey.shade200,
+                          borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(15),
+                              bottomLeft: Radius.circular(15)),
+                        ),
+                        child: const Icon(
+                          FontAwesomeIcons.image,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          promotionType = false;
+                        });
+                      },
+                      child: AnimatedContainer(
+                        height: 90,
+                        width: 75,
+                        duration: const Duration(milliseconds: 700),
+                        curve: Curves.bounceInOut,
+                        decoration: BoxDecoration(
+                          color: !promotionType
+                              ? CustomColors().blue
+                              : Colors.grey.shade200,
+                          borderRadius: const BorderRadius.only(
+                              topRight: Radius.circular(15),
+                              bottomRight: Radius.circular(15)),
+                        ),
+                        child: const Icon(
+                          FontAwesomeIcons.video,
+                          color: Colors.white,
+                          size: 40,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ],
       ),
