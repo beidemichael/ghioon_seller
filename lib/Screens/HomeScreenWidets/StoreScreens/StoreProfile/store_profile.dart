@@ -190,39 +190,9 @@ class _StoreProfileState extends State<StoreProfile> {
                 ],
               ),
               actions: [
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => AccountEdit(
-                    //             appState: appState,
-                    //             user: userInfo[0],
-                    //           )),
-                    // );
-                  },
-                  child: Center(
-                    child: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        // border: Border.all(
-                        //     width: 1, color: Color.fromARGB(255, 255, 255, 255)),
-                        color: CustomColors().white,
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          FontAwesomeIcons.penToSquare,
-                          size: 25.0,
-                          color: CustomColors().blue,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+               
                 const SizedBox(
-                  width: 20,
+                  width: 50,
                 )
               ],
               excludeHeaderSemantics: true,

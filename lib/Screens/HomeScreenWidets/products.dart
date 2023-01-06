@@ -38,7 +38,7 @@ class _ProductsState extends State<Products> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Text('Collections',
+                const Text('Products',
                     style: TextStyle(
                         fontSize: 30.0,
                         color: Colors.white,
