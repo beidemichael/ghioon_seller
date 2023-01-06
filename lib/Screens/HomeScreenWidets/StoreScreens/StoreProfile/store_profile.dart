@@ -70,18 +70,45 @@ class _StoreProfileState extends State<StoreProfile> {
                         children: [
                           Column(
                             children: [
-                              Container(
+                              ClipRRect(
+                                borderRadius:
+                                    BorderRadius.circular(100.0), //or 15.0
+                                child: Container(
                                   height: 150,
                                   width: 150,
                                   decoration: BoxDecoration(
                                     color: CustomColors().darkBlue,
-                                    borderRadius: BorderRadius.circular(100),
+                                    borderRadius: BorderRadius.circular(100.0),
                                   ),
-                                  child: const Icon(
-                                    FontAwesomeIcons.userLarge,
-                                    size: 80.0,
-                                    color: Colors.white,
-                                  )),
+                                  child: userInfo[0].image != ''
+                                      ? CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: userInfo[0].image,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Center(
+                                            child: Container(
+                                              height: 20,
+                                              width: 20,
+                                              child: CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                              Color>(
+                                                          Colors.grey[300]!),
+                                                  value: downloadProgress
+                                                      .progress),
+                                            ),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
+                                        )
+                                      : Icon(
+                                          FontAwesomeIcons.userLarge,
+                                          size: 80.0,
+                                          color: Colors.white,
+                                        ),
+                                ),
+                              ),
                               const SizedBox(
                                 height: 20,
                               ),

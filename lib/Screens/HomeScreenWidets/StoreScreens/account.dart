@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Providers/EditProfileProvider.dart';
@@ -31,6 +32,7 @@ class _AccountState extends State<Account> {
                       actions: [
                         GestureDetector(
                           onTap: () {
+                            appState.image = '';
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -72,18 +74,45 @@ class _AccountState extends State<Account> {
                         children: [
                           Column(
                             children: [
-                              Container(
+                              ClipRRect(
+                                borderRadius:
+                                    BorderRadius.circular(100.0), //or 15.0
+                                child: Container(
                                   height: 150,
                                   width: 150,
                                   decoration: BoxDecoration(
                                     color: CustomColors().darkBlue,
                                     borderRadius: BorderRadius.circular(100),
                                   ),
-                                  child: const Icon(
-                                    FontAwesomeIcons.userLarge,
-                                    size: 80.0,
-                                    color: Colors.white,
-                                  )),
+                                  child: appState.uploadedImage != ''
+                                      ? CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: appState.uploadedImage,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Center(
+                                            child: Container(
+                                              height: 20,
+                                              width: 20,
+                                              child: CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                              Color>(
+                                                          Colors.grey[300]!),
+                                                  value: downloadProgress
+                                                      .progress),
+                                            ),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
+                                        )
+                                      : Icon(
+                                          FontAwesomeIcons.userLarge,
+                                          size: 80.0,
+                                          color: Colors.white,
+                                        ),
+                                ),
+                              ),
                               const SizedBox(
                                 height: 30,
                               ),

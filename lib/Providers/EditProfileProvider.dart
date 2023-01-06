@@ -18,6 +18,10 @@ class EditProfileData with ChangeNotifier {
   bool productDescriptionFilled = true;
   bool fixedFilled = true;
 
+  String image = '';
+
+  String uploadedImage = '';
+
   switchproductDescriptionFilled(bool productDescriptionFilledInput) {
     productDescriptionFilled = productDescriptionFilledInput;
     notifyListeners();

@@ -21,6 +21,7 @@ class UserInformation {
   String address;
   int views;
   double rating;
+  String image;
 
   UserInformation(
       {required this.GhioonId,
@@ -39,7 +40,8 @@ class UserInformation {
       required this.online,
       required this.address,
       required this.views,
-      required this.rating});
+      required this.rating,
+      required this.image});
 }
 
 class Categories {
@@ -98,6 +100,7 @@ class Product {
     required this.barcode,
   });
 }
+
 class ProductBar {
   String productId;
   String name;

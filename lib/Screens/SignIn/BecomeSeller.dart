@@ -243,21 +243,21 @@ class _BecomeSellerState extends State<BecomeSeller> {
                             final phoneNumber = user!.phoneNumber;
                             final userUid = user.uid;
                             RegisterDatabaseService().registerInformation(
-                              sellerName,
-                              businessName,
-                              email,
-                              businessNo,
-                              businessType,
-                              phoneNumber.toString(),
-                              address,
-                              ghioonId,
-                              collections,
-                              collection_description,
-                              collection_images,
-                              0,
-                              5.0,
-                              userUid,
-                            );
+                                sellerName,
+                                businessName,
+                                email,
+                                businessNo,
+                                businessType,
+                                phoneNumber.toString(),
+                                address,
+                                ghioonId,
+                                collections,
+                                collection_description,
+                                collection_images,
+                                0,
+                                5.0,
+                                userUid,
+                                '');
                             LastIdService().updateLastID(ghioonId);
                           }
                         }

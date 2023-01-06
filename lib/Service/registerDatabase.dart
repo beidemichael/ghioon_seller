@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ghioon_seller/Service/uploadPhoto.dart';
 
 class RegisterDatabaseService {
   var userUid;
@@ -20,6 +23,7 @@ class RegisterDatabaseService {
     int views,
     double rating,
     var userUid,
+    String image,
   ) async {
     sellersCollection
         .where('userUid', isEqualTo: userUid)
@@ -47,6 +51,7 @@ class RegisterDatabaseService {
               'collection_images': collection_images,
               'collection_description': collection_description,
               'collections': collections,
+              'image': image
             })
             .then((value) => print("Rgistration Info Added"))
             .catchError((error) => print("Failed to Register: $error"));
@@ -54,20 +59,60 @@ class RegisterDatabaseService {
     });
   }
 
-  Future edituser(
+  // Future edituser(
+  //   String sellerName,
+  //   String businessName,
+  //   String email,
+  //   String businessNo,
+  //   String address,
+  //   var userUid,
+  //   String image,
+  // ) async {
+  //   return sellersCollection.doc(userUid).update({
+  //     'sellerName': sellerName,
+  //     'businessName': businessName,
+  //     'email': email,
+  //     'businessNo': businessNo,
+  //     'address': address,
+  //     'image': image
+  //   });
+  // }
+
+  uploadToDatabase(
     String sellerName,
     String businessName,
     String email,
     String businessNo,
     String address,
     var userUid,
+    String image,
   ) async {
     return sellersCollection.doc(userUid).update({
       'sellerName': sellerName,
       'businessName': businessName,
       'email': email,
       'businessNo': businessNo,
-      'address': address
+      'address': address,
+      'image': image
     });
+  }
+
+  editUserProfile(
+    String sellerName,
+    String businessName,
+    String email,
+    String businessNo,
+    String address,
+    var userUid,
+    String image,
+  ) async {
+    var uploadedPhoto =
+        await uploadImage(File(image), userUid.toString(), 'Profile');
+
+    //}
+
+    uploadToDatabase(sellerName, businessName, email, businessNo, address,
+        userUid, uploadedPhoto);
+    print('done');
   }
 }

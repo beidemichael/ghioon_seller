@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/profileImage.dart';
 import 'package:ghioon_seller/Screens/components/textFormField.dart';
 import 'package:ghioon_seller/Service/registerDatabase.dart';
 
@@ -41,6 +42,8 @@ class _AccountEditState extends State<AccountEdit> {
     widget.appState.email.text = widget.user.email;
     widget.appState.businessNo.text = widget.user.businessNo;
     widget.appState.address.text = widget.user.address;
+    widget.appState.uploadedImage = widget.user.image;
+    print(widget.appState.uploadedImage);
   }
 
   @override
@@ -59,13 +62,14 @@ class _AccountEditState extends State<AccountEdit> {
                         loading = true;
                       });
                       print("loading");
-                      await RegisterDatabaseService().edituser(
+                      await RegisterDatabaseService().editUserProfile(
                           widget.appState.fullName.text,
                           widget.appState.businessName.text,
                           widget.appState.email.text,
                           widget.appState.businessNo.text,
                           widget.appState.address.text,
-                          widget.user.userUid);
+                          widget.user.userUid,
+                          widget.appState.image);
 
                       setState(() {
                         loading = false;
@@ -110,18 +114,10 @@ class _AccountEditState extends State<AccountEdit> {
                   children: [
                     Column(
                       children: [
-                        Container(
-                            height: 150,
-                            width: 150,
-                            decoration: BoxDecoration(
-                              color: CustomColors().darkBlue,
-                              borderRadius: BorderRadius.circular(100),
-                            ),
-                            child: const Icon(
-                              FontAwesomeIcons.userLarge,
-                              size: 80.0,
-                              color: Colors.white,
-                            )),
+                        AddProfileImage(
+                          appState: widget.appState,
+                          user: widget.user,
+                        ),
                         const SizedBox(
                           height: 30,
                         ),
