@@ -74,46 +74,43 @@ class _AccountState extends State<Account> {
                         children: [
                           Column(
                             children: [
-                              Container(
-                                child: ClipRRect(
-                                  borderRadius:
-                                      BorderRadius.circular(100.0), //or 15.0
-                                  child: Container(
-                                    height: 150,
-                                    width: 150,
-                                    decoration: BoxDecoration(
-                                      color: CustomColors().darkBlue,
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                    child: appState.uploadedImage != ''
-                                        ? CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl: appState.uploadedImage,
-                                            progressIndicatorBuilder: (context,
-                                                    url, downloadProgress) =>
-                                                Center(
-                                              child: Container(
-                                                height: 20,
-                                                width: 20,
-                                                child: CircularProgressIndicator(
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation<
-                                                                Color>(
-                                                            Colors.grey[300]!),
-                                                    value: downloadProgress
-                                                        .progress),
-                                              ),
-                                            ),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                    Icon(Icons.error),
-                                          )
-                                        : Icon(
-                                            FontAwesomeIcons.userLarge,
-                                            size: 80.0,
-                                            color: Colors.white,
-                                          ),
+                              ClipRRect(
+                                borderRadius:
+                                    BorderRadius.circular(100.0), //or 15.0
+                                child: Container(
+                                  height: 150,
+                                  width: 150,
+                                  decoration: BoxDecoration(
+                                    color: CustomColors().darkBlue,
+                                    borderRadius: BorderRadius.circular(100),
                                   ),
+                                  child: appState.uploadedImage != ''
+                                      ? CachedNetworkImage(
+                                          fit: BoxFit.cover,
+                                          imageUrl: appState.uploadedImage,
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              Center(
+                                            child: Container(
+                                              height: 20,
+                                              width: 20,
+                                              child: CircularProgressIndicator(
+                                                  valueColor:
+                                                      AlwaysStoppedAnimation<
+                                                              Color>(
+                                                          Colors.grey[300]!),
+                                                  value: downloadProgress
+                                                      .progress),
+                                            ),
+                                          ),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
+                                        )
+                                      : Icon(
+                                          FontAwesomeIcons.userLarge,
+                                          size: 80.0,
+                                          color: Colors.white,
+                                        ),
                                 ),
                               ),
                               const SizedBox(
