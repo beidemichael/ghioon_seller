@@ -70,6 +70,7 @@ class _StoreProfileState extends State<StoreProfile> {
                         children: [
                           Column(
                             children: [
+                              
                               ClipRRect(
                                 borderRadius:
                                     BorderRadius.circular(100.0), //or 15.0
@@ -80,10 +81,10 @@ class _StoreProfileState extends State<StoreProfile> {
                                     color: CustomColors().darkBlue,
                                     borderRadius: BorderRadius.circular(100.0),
                                   ),
-                                  child: userInfo[0].image != ''
+                                  child: userInfo[0].profileImages.isNotEmpty
                                       ? CachedNetworkImage(
                                           fit: BoxFit.cover,
-                                          imageUrl: userInfo[0].image,
+                                          imageUrl: userInfo[0].profileImages[0],
                                           progressIndicatorBuilder: (context,
                                                   url, downloadProgress) =>
                                               Center(

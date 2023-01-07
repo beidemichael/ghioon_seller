@@ -87,8 +87,8 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
       appState.videoLessThanSix = false;
     }
 
-    if (_controller.value.duration.inSeconds > 5 &&
-        _controller.value.size.height != _controller.value.size.width) {
+    if (_controller.value.duration.inSeconds <6 &&
+        _controller.value.size.height == _controller.value.size.width) {
       var uploadedVideo = await uploadVideo(
           _video, FirebaseAuth.instance.currentUser!.uid, 'Products');
       final videoString = uploadedVideo.toString();
