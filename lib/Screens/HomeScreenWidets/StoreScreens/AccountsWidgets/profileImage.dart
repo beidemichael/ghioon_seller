@@ -1,23 +1,26 @@
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Providers/EditProfileProvider.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/Edit/ProfileImageAndVideo.dart';
 import 'package:ghioon_seller/Screens/components/alert.dart';
+import 'package:ghioon_seller/Shared/loading.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../Providers/RangeProvider.dart';
 import '../../../../../Models/addProductmodels.dart';
 import '../../../../../Shared/customColors.dart';
+import '../../../../Service/userDatabase.dart';
 
 class AddProfileImage extends StatefulWidget {
   var appState;
-  UserInformation user;
-  AddProfileImage({super.key, required this.appState, required this.user});
+  AddProfileImage({super.key, required this.appState});
 
   @override
   State<AddProfileImage> createState() => _AddProfileImageState();
@@ -25,8 +28,26 @@ class AddProfileImage extends StatefulWidget {
 
 class _AddProfileImageState extends State<AddProfileImage> {
   final ImagePicker _picker = ImagePicker();
+  _ProfileImageAndProfileDialog(BuildContext context) {
+    ProfileImageAndVideoBlurryDialog alert = ProfileImageAndVideoBlurryDialog();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StreamProvider<List<UserInformation>>.value(
+          initialData: [],
+          value: UserDatabaseService(
+                  userUid: FirebaseAuth.instance.currentUser?.uid)
+              .userInfo,
+          child: alert,
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userInfo = Provider.of<List<UserInformation>>(context);
     Future pickImage(ImageSource source) async {
       final image = await _picker.pickImage(
         source: source,
@@ -107,66 +128,77 @@ class _AddProfileImageState extends State<AddProfileImage> {
                                 ),
                     ),
                   ),
-                  Positioned(
-                      bottom: -10,
-                      right: -10,
-                      child: GestureDetector(
-                        onTap: () {
-                          print('Change image');
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Text(
-                                    'Choose option',
-                                    style: TextStyle(
-                                        color: CustomColors().blue,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  content: SingleChildScrollView(
-                                    child: ListBody(
-                                      children: [
-                                        alertLists(
-                                            icon: Icons.camera,
-                                            title: 'Camera',
-                                            onTap: () {
-                                              Navigator.pop(context);
-                                              pickImage(ImageSource.camera);
-                                            }),
-                                        alertLists(
-                                            icon: Icons.photo_library,
-                                            title: 'Gallary',
-                                            onTap: () {
-                                              Navigator.pop(context);
-                                              pickImage(ImageSource.gallery);
-                                            }),
-                                        alertLists(
-                                            icon: Icons.delete,
-                                            title: 'Remove',
-                                            onTap: () {
-                                              Navigator.pop(context);
-                                              removeImage();
-                                            })
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              });
-                        },
-                        child: Container(
-                          width: 50,
-                          height: 50,
-                          decoration: BoxDecoration(
-                            color: CustomColors().white,
-                            borderRadius: BorderRadius.circular(100),
-                          ),
-                          child: Icon(
-                            FontAwesomeIcons.camera,
-                            size: 20.0,
-                            color: CustomColors().blue,
-                          ),
-                        ),
-                      ))
+                  userInfo.isEmpty
+                      ? Loading()
+                      : Positioned(
+                          bottom: -10,
+                          right: -10,
+                          child: GestureDetector(
+                            onTap: () {
+                              print('Change image');
+                              _ProfileImageAndProfileDialog(
+                                context,
+                              );
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //       builder: (context) =>
+                              //           ProfileImageAndVideoBlurryDialog()),
+                              // );
+                              // showDialog(
+                              //     context: context,
+                              //     builder: (BuildContext context) {
+                              //       return AlertDialog(
+                              //         title: Text(
+                              //           'Choose option',
+                              //           style: TextStyle(
+                              //               color: CustomColors().blue,
+                              //               fontWeight: FontWeight.bold),
+                              //         ),
+                              //         content: SingleChildScrollView(
+                              //           child: ListBody(
+                              //             children: [
+                              //               alertLists(
+                              //                   icon: Icons.camera,
+                              //                   title: 'Camera',
+                              //                   onTap: () {
+                              //                     Navigator.pop(context);
+                              //                     pickImage(ImageSource.camera);
+                              //                   }),
+                              //               alertLists(
+                              //                   icon: Icons.photo_library,
+                              //                   title: 'Gallary',
+                              //                   onTap: () {
+                              //                     Navigator.pop(context);
+                              //                     pickImage(ImageSource.gallery);
+                              //                   }),
+                              //               alertLists(
+                              //                   icon: Icons.delete,
+                              //                   title: 'Remove',
+                              //                   onTap: () {
+                              //                     Navigator.pop(context);
+                              //                     removeImage();
+                              //                   })
+                              //             ],
+                              //           ),
+                              //         ),
+                              //       );
+                              //     });
+                            },
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: CustomColors().white,
+                                borderRadius: BorderRadius.circular(100),
+                              ),
+                              child: Icon(
+                                FontAwesomeIcons.camera,
+                                size: 20.0,
+                                color: CustomColors().blue,
+                              ),
+                            ),
+                          ))
                 ],
               )),
         ),

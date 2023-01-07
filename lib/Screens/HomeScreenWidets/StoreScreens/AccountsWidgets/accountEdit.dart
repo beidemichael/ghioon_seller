@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/profileImage.dart';
 import 'package:ghioon_seller/Screens/components/textFormField.dart';
 import 'package:ghioon_seller/Service/registerDatabase.dart';
+import 'package:ghioon_seller/Shared/loading.dart';
 
 import '../../../../Shared/customColors.dart';
 import 'package:provider/provider.dart';
@@ -114,10 +115,10 @@ class _AccountEditState extends State<AccountEdit> {
                   children: [
                     Column(
                       children: [
-                        AddProfileImage(
-                          appState: widget.appState,
-                          user: widget.user,
-                        ),
+                      AddProfileImage(
+                                appState: widget.appState,
+                               
+                              ),
                         const SizedBox(
                           height: 30,
                         ),

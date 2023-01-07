@@ -34,6 +34,8 @@ class RegisterDatabaseService {
             .doc(userUid)
             .set({
               'created': Timestamp.now(),
+              'profileImages':[],
+              'profileVideo':'',
               'sellerName': sellerName,
               'businessName': businessName,
               'email': email,

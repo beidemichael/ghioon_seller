@@ -22,6 +22,8 @@ class UserInformation {
   int views;
   double rating;
   String image;
+  List profileImages;
+  String profileVideo;
 
   UserInformation(
       {required this.GhioonId,
@@ -41,7 +43,10 @@ class UserInformation {
       required this.address,
       required this.views,
       required this.rating,
-      required this.image});
+      required this.image,
+      required this.profileImages,
+      required this.profileVideo,
+      });
 }
 
 class Categories {

@@ -58,11 +58,13 @@ class _OrdersState extends State<Orders> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Text('Orders',
-                    style: TextStyle(
-                        fontSize: 30.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600)),
+                const Text(
+                  'Orders',
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
+                ),
               ],
             ),
             excludeHeaderSemantics: true,
@@ -70,16 +72,13 @@ class _OrdersState extends State<Orders> {
             elevation: 3,
             bottom: upperTab,
             iconTheme: const IconThemeData(color: Colors.white)),
-        body: ClipRRect(
-          borderRadius: BorderRadius.circular(20.0),
-          child: TabBarView(
-            children: [
-              EmptyScreen(context, 'No orders yet.'),
-              EmptyScreen(context, 'No pending orders yet.'),
-              EmptyScreen(context, 'No cancelled orders yet.'),
-              EmptyScreen(context, 'No completed orders yet.'),
-            ],
-          ),
+        body: TabBarView(
+          children: [
+            EmptyScreen(context, 'No orders yet.'),
+            EmptyScreen(context, 'No pending orders yet.'),
+            EmptyScreen(context, 'No cancelled orders yet.'),
+            EmptyScreen(context, 'No completed orders yet.'),
+          ],
         ),
       ),
     );
