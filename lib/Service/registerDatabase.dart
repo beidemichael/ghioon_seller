@@ -34,8 +34,8 @@ class RegisterDatabaseService {
             .doc(userUid)
             .set({
               'created': Timestamp.now(),
-              'profileImages':[],
-              'profileVideo':'',
+              'profileImages': [],
+              'profileVideo': '',
               'sellerName': sellerName,
               'businessName': businessName,
               'email': email,
@@ -79,6 +79,13 @@ class RegisterDatabaseService {
   //     'image': image
   //   });
   // }
+  updateNotification(
+    bool notification,
+  ) async {
+    return sellersCollection.doc(userUid).update({
+      'notification': notification,
+    });
+  }
 
   uploadToDatabase(
     String sellerName,

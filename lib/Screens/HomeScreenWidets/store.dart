@@ -8,6 +8,7 @@ import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidg
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/customers.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/marketing.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/setting.dart';
+import 'package:ghioon_seller/Screens/components/SnackBar.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/models.dart';
@@ -139,21 +140,23 @@ class _StoreState extends State<Store> {
                         FontAwesomeIcons.solidUser, 'My Account', width)),
                 GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Customers()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const Customers()),
+                      // );
+                      snackBar(context, 'No Customers yet.', CustomColors().blue, CustomColors().white);
                     },
                     child: StoreList(
                         FontAwesomeIcons.solidUser, 'Customers', width)),
                 GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const Analytics()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //       builder: (context) => const Analytics()),
+                      // );
+                      snackBar(context, 'No Analytics yet.', CustomColors().blue, CustomColors().white);
                     },
                     child: StoreList(
                         FontAwesomeIcons.chartPie, 'Analytics', width)),

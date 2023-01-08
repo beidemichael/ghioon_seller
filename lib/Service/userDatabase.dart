@@ -30,6 +30,7 @@ class UserDatabaseService {
         image: (doc.data() as dynamic)['image'] ?? '',
         profileImages: (doc.data() as dynamic)['profileImages'] ?? [],
         profileVideo: (doc.data() as dynamic)['profileVideo'] ?? '',
+        notification: (doc.data() as dynamic)['notification'] ?? false,
       );
     }).toList();
   }
