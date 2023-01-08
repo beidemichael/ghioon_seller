@@ -7,14 +7,14 @@ class Point {
 }
 
 List<Point> get storeview {
-  final data = <double>[2, 4, 6, 11, 3, 60, 4];
+  final data = <double>[0, 0, 0, 0, 0, 0, 0];
   return data
       .mapIndexed(((index, element) => Point(x: index.toDouble(), y: element)))
       .toList();
 }
 
 List<Point> get orders {
-  final data = <double>[20, 15, 32, 45, 28, 25];
+  final data = <double>[0, 0, 0, 0, 0, 0];
   return data
       .mapIndexed(((index, element) => Point(x: index.toDouble(), y: element)))
       .toList();
