@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../Models/models.dart';
 import '../../../../Shared/customColors.dart';
-import 'indicator.dart';
 
 class PieChartChart extends StatefulWidget {
   const PieChartChart({super.key});
@@ -132,39 +131,41 @@ class PieChart2State extends State {
                   ),
                   Center(
                     child: Container(
-                        height: 60,
-                        width: MediaQuery.of(context).size.width,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            physics: const BouncingScrollPhysics(
-                                parent: AlwaysScrollableScrollPhysics()),
-                            itemCount: userInfo[0].collections.length,
-                            itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: color[index],
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(userInfo[0].collections[index],
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          color: CustomColors().blue,
-                                          fontWeight: FontWeight.w700)),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                ],
-                              );
-                            })),
+                      height: 60,
+                      width: MediaQuery.of(context).size.width,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        physics: const BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        itemCount: userInfo[0].collections.length,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            children: [
+                              Container(
+                                width: 20,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: color[index],
+                                ),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(userInfo[0].collections[index],
+                                  style: TextStyle(
+                                      fontSize: 20.0,
+                                      color: CustomColors().blue,
+                                      fontWeight: FontWeight.w700)),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     width: 28,
@@ -173,67 +174,5 @@ class PieChart2State extends State {
               ),
             ),
           );
-  }
-
-  List<PieChartSectionData> showingSections() {
-    return List.generate(4, (i) {
-      final isTouched = i == touchedIndex;
-      final fontSize = isTouched ? 25.0 : 16.0;
-      final radius = isTouched
-          ? MediaQuery.of(context).size.width * 0.3
-          : MediaQuery.of(context).size.width * 0.25;
-      switch (i) {
-        case 0:
-          return PieChartSectionData(
-            color: const Color(0xff0293ee),
-            value: 40,
-            title: '40%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xffffffff),
-            ),
-          );
-        case 1:
-          return PieChartSectionData(
-            color: const Color(0xfff8b250),
-            value: 30,
-            title: '30%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xffffffff),
-            ),
-          );
-        case 2:
-          return PieChartSectionData(
-            color: const Color(0xff845bef),
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xffffffff),
-            ),
-          );
-        case 3:
-          return PieChartSectionData(
-            color: const Color(0xff13d38e),
-            value: 15,
-            title: '15%',
-            radius: radius,
-            titleStyle: TextStyle(
-              fontSize: fontSize,
-              fontWeight: FontWeight.bold,
-              color: const Color(0xffffffff),
-            ),
-          );
-        default:
-          throw Error();
-      }
-    });
   }
 }

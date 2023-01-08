@@ -91,8 +91,8 @@ class _StoreSettingState extends State<StoreSetting> {
                       FontAwesomeIcons.solidUser, 'Notification', width)),
             ],
           ),
-          StoreList(FontAwesomeIcons.solidBell, 'Privacy and Setting', width),
-          StoreList(FontAwesomeIcons.lock, 'Securiy and Terms', width),
+          StoreList(FontAwesomeIcons.solidBell, 'Privacy and Security', width),
+          StoreList(FontAwesomeIcons.lock, 'Terms and Conditions', width),
           GestureDetector(
               onTap: () {
                 Navigator.push(

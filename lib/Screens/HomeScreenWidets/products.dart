@@ -192,16 +192,11 @@ class _ProductsState extends State<Products> {
                     ),
                   ),
                 ),
-                // Expanded(
-                //   child: ListView(
-                //       physics: const BouncingScrollPhysics(
-                //           parent: AlwaysScrollableScrollPhysics()),
-                //       children: []),
-                // ),
+               
                 const SizedBox(
                   height: 20,
                 ),
-                SizedBox(width: 400, height: 400, child: const PieChartChart())
+                const SizedBox(width: 400, height: 400, child: PieChartChart())
               ],
             ),
           ),
