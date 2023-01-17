@@ -51,197 +51,206 @@ class _StoreProfileState extends State<StoreProfile> {
     ]);
     return DefaultTabController(
       length: 2,
-      child:
-      userInfo.isEmpty?Loading():
-       Scaffold(
-        // drawer: Drawer(),
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(300.0),
-          child: AppBar(
-              centerTitle: true,
-              toolbarHeight: 250,
-              title: Column(
-                children: [
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        // ignore: prefer_const_literals_to_create_immutables
-                        children: [
-                          Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(100.0), //or 15.0
-                                child: Container(
-                                  height: 150,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    color: CustomColors().darkBlue,
-                                    borderRadius: BorderRadius.circular(100.0),
-                                  ),
-                                  child: userInfo[0].image != ''
-                                      ? CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: userInfo[0].image,
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              Center(
-                                            child: Container(
-                                              height: 20,
-                                              width: 20,
-                                              child: CircularProgressIndicator(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                              Color>(
-                                                          Colors.grey[300]!),
-                                                  value: downloadProgress
-                                                      .progress),
-                                            ),
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              Icon(Icons.error),
-                                        )
-                                      : Icon(
-                                          FontAwesomeIcons.userLarge,
-                                          size: 80.0,
-                                          color: Colors.white,
+      child: userInfo.isEmpty
+          ? Loading()
+          : Scaffold(
+              // drawer: Drawer(),
+              appBar: PreferredSize(
+                preferredSize: const Size.fromHeight(300.0),
+                child: AppBar(
+                    centerTitle: true,
+                    toolbarHeight: 250,
+                    title: Column(
+                      children: [
+                        Column(
+                          children: [
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              // ignore: prefer_const_literals_to_create_immutables
+                              children: [
+                                Column(
+                                  children: [
+                                    ClipRRect(
+                                      borderRadius: BorderRadius.circular(
+                                          100.0), //or 15.0
+                                      child: Container(
+                                        height: 150,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                          color: CustomColors().darkBlue,
+                                          borderRadius:
+                                              BorderRadius.circular(100.0),
                                         ),
+                                        child: userInfo[0].image != ''
+                                            ? CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: userInfo[0].image,
+                                                progressIndicatorBuilder:
+                                                    (context, url,
+                                                            downloadProgress) =>
+                                                        Center(
+                                                  child: Container(
+                                                    height: 20,
+                                                    width: 20,
+                                                    child: CircularProgressIndicator(
+                                                        valueColor:
+                                                            AlwaysStoppedAnimation<
+                                                                    Color>(
+                                                                Colors.grey[
+                                                                    300]!),
+                                                        value: downloadProgress
+                                                            .progress),
+                                                  ),
+                                                ),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(Icons.error),
+                                              )
+                                            : Icon(
+                                                FontAwesomeIcons.userLarge,
+                                                size: 80.0,
+                                                color: Colors.white,
+                                              ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Text(userInfo[0].businessName,
+                                        style: TextStyle(
+                                            fontSize: 25.0,
+                                            color: CustomColors().white,
+                                            fontWeight: FontWeight.w500)),
+                                  ],
                                 ),
+                              ],
+                            ),
+                            Divider(
+                              height: 10,
+                              thickness: 1,
+                              color: CustomColors().white,
+                            ),
+                            Container(
+                              height: 50,
+                              width: ScreenSize().ScreenWidth(context),
+                              color: CustomColors().blue,
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Expanded(
+                                      child: Container(
+                                          child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Icon(
+                                            Icons.visibility,
+                                            size: 30,
+                                            color: Colors.white,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            userInfo[0].views.toString(),
+                                            //'25',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontFamily: 'Inter',
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      )),
+                                    ),
+                                    Expanded(
+                                      child: Container(
+                                          child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.end,
+                                        children: [
+                                          Icon(
+                                            Icons.star,
+                                            color: Colors.white,
+                                            size: 30,
+                                          ),
+                                          SizedBox(
+                                            width: 5,
+                                          ),
+                                          Text(
+                                            userInfo[0]
+                                                .rating
+                                                .toString(), //'4.5',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontFamily: 'Inter',
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
+                                          )
+                                        ],
+                                      )),
+                                    )
+                                  ]),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    actions: [
+                      GestureDetector(
+                        onTap: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => AccountEdit(
+                          //             appState: appState,
+                          //             user: userInfo[0],
+                          //           )),
+                          // );
+                        },
+                        child: Center(
+                          child: Container(
+                            height: 60,
+                            width: 60,
+                            decoration: BoxDecoration(
+                              // border: Border.all(
+                              //     width: 1, color: Color.fromARGB(255, 255, 255, 255)),
+                              color: CustomColors().white,
+                              borderRadius: BorderRadius.circular(30.0),
+                            ),
+                            child: Center(
+                              child: Icon(
+                                FontAwesomeIcons.penToSquare,
+                                size: 25.0,
+                                color: CustomColors().blue,
                               ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Text(
-                                  userInfo[0].businessName, //'Endale Abegazee',
-                                  style: TextStyle(
-                                      fontSize: 25.0,
-                                      color: CustomColors().white,
-                                      fontWeight: FontWeight.w500)),
-                            ],
+                            ),
                           ),
-                        ],
-                      ),
-                      Divider(
-                        height: 10,
-                        thickness: 1,
-                        color: CustomColors().white,
-                      ),
-                      Container(
-                        height: 50,
-                        width: ScreenSize().ScreenWidth(context),
-                        color: CustomColors().blue,
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                child: Container(
-                                    child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Icon(
-                                      Icons.visibility,
-                                      size: 30,
-                                      color: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      userInfo[0].views.toString(),
-                                      //'25',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontFamily: 'Inter',
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    )
-                                  ],
-                                )),
-                              ),
-                              Expanded(
-                                child: Container(
-                                    child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: [
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.white,
-                                      size: 30,
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      userInfo[0].rating.toString(), //'4.5',
-                                      style: TextStyle(
-                                          fontSize: 20,
-                                          fontFamily: 'Inter',
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white),
-                                    )
-                                  ],
-                                )),
-                              )
-                            ]),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              actions: [
-                GestureDetector(
-                  onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => AccountEdit(
-                    //             appState: appState,
-                    //             user: userInfo[0],
-                    //           )),
-                    // );
-                  },
-                  child: Center(
-                    child: Container(
-                      height: 60,
-                      width: 60,
-                      decoration: BoxDecoration(
-                        // border: Border.all(
-                        //     width: 1, color: Color.fromARGB(255, 255, 255, 255)),
-                        color: CustomColors().white,
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          FontAwesomeIcons.penToSquare,
-                          size: 25.0,
-                          color: CustomColors().blue,
                         ),
                       ),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 20,
-                )
-              ],
-              excludeHeaderSemantics: true,
-              backgroundColor: CustomColors().blue,
-              elevation: 3,
-              bottom: upperTab,
-              iconTheme: const IconThemeData(color: Colors.white)),
-        ),
-        body: TabBarView(
-          children: [
-            products.length == 0
-                ? EmptyScreen(context, 'No Products.')
-                : ProductForGrid(products: products),
-            userInfo[0].collections == 0
-                ? EmptyScreen(context, 'No Collections')
-                : CollectionListGrid(userInfo: userInfo, appState: appState),
-          ],
-        ),
-      ),
+                      const SizedBox(
+                        width: 20,
+                      )
+                    ],
+                    excludeHeaderSemantics: true,
+                    backgroundColor: CustomColors().blue,
+                    elevation: 3,
+                    bottom: upperTab,
+                    iconTheme: const IconThemeData(color: Colors.white)),
+              ),
+              body: TabBarView(
+                children: [
+                  products.length == 0
+                      ? EmptyScreen(context, 'No Products.')
+                      : ProductForGrid(products: products),
+                  userInfo[0].collections == 0
+                      ? EmptyScreen(context, 'No Collections')
+                      : CollectionListGrid(
+                          userInfo: userInfo, appState: appState),
+                ],
+              ),
+            ),
     );
   }
 }
