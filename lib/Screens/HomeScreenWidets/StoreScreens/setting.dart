@@ -1,9 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/Feedback.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/loading.dart';
+import 'package:provider/provider.dart';
 
 import '../../../Service/auth.dart';
+import '../../../Service/registerDatabase.dart';
 import '../../components/storeList.dart';
 import 'package:ghioon_seller/Service//auth.dart';
 
@@ -15,9 +21,12 @@ class StoreSetting extends StatefulWidget {
 }
 
 class _StoreSettingState extends State<StoreSetting> {
+  bool show = false;
+
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    final userInfo = Provider.of<List<UserInformation>>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
@@ -53,12 +62,37 @@ class _StoreSettingState extends State<StoreSetting> {
           const SizedBox(
             height: 30,
           ),
-          StoreList(FontAwesomeIcons.solidUser, 'Notification', width),
-          StoreList(FontAwesomeIcons.solidBell, 'Privacy and Setting', width),
-          StoreList(FontAwesomeIcons.lock, 'Securiy and Setting', width),
-          StoreList(FontAwesomeIcons.shield, 'Terms and Conditions', width),
-          StoreList(
-              FontAwesomeIcons.solidCircleQuestion, 'Help and Support', width),
+          Stack(
+            children: [
+              Column(
+                children: [
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Center(
+                      child: userInfo.isEmpty
+                          ? SpinKitCircle(
+                              color: CustomColors().blue,
+                              size: 50.0,
+                            )
+                          : Switch(userInfo[0])),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                ],
+              ),
+              GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      show = !show;
+                    });
+                  },
+                  child: StoreList(
+                      FontAwesomeIcons.solidUser, 'Notification', width)),
+            ],
+          ),
+          StoreList(FontAwesomeIcons.solidBell, 'Privacy and Security', width),
+          StoreList(FontAwesomeIcons.lock, 'Terms and Conditions', width),
           GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -68,7 +102,120 @@ class _StoreSettingState extends State<StoreSetting> {
               },
               child: StoreList(FontAwesomeIcons.solidFile, 'Feedback', width)),
           StoreList(FontAwesomeIcons.arrowsSpin, 'Upgrade', width),
-          StoreList(FontAwesomeIcons.rightFromBracket, 'Logout', width),
+          GestureDetector(
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context).pop();
+              },
+              child: StoreList(
+                  FontAwesomeIcons.rightFromBracket, 'Logout', width)),
+        ],
+      ),
+    );
+  }
+
+  changeBool(bool notification,userUid) async {
+    await RegisterDatabaseService(userUid: userUid).updateNotification(notification);
+  }
+
+  Widget Switch(UserInformation userInfo) {
+    return AnimatedContainer(
+      height: show ? 140 : 62,
+      width: 200,
+      duration: const Duration(milliseconds: 700),
+      curve: Curves.bounceInOut,
+      decoration: BoxDecoration(
+        color: CustomColors().white,
+        borderRadius: BorderRadius.circular(15.0),
+        boxShadow: [
+          show
+              ? BoxShadow(
+                  color: Colors.lightBlue.withOpacity(0.5),
+                  spreadRadius: 0.05,
+                  blurRadius: 3,
+                  offset: const Offset(0, 4), // changes position of shadow
+                )
+              : BoxShadow(
+                  color: Colors.lightBlue.withOpacity(0.0),
+                  spreadRadius: 0.05,
+                  blurRadius: 3,
+                  offset: const Offset(0, 4), // changes position of shadow
+                ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    changeBool(true,userInfo.documentId);
+                  });
+                },
+                child: AnimatedContainer(
+                  height: 50,
+                  width: 75,
+                  duration: const Duration(milliseconds: 700),
+                  curve: Curves.ease,
+                  decoration: BoxDecoration(
+                    color: userInfo.notification
+                        ? CustomColors().blue
+                        : Colors.grey.shade200,
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      bottomLeft: Radius.circular(15),
+                    ),
+                  ),
+                  child: const Center(
+                    child: Text('ON',
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 20.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    changeBool(false,userInfo.documentId);
+                  });
+                },
+                child: AnimatedContainer(
+                  height: 50,
+                  width: 75,
+                  duration: const Duration(milliseconds: 700),
+                  curve: Curves.ease,
+                  decoration: BoxDecoration(
+                    color: !userInfo.notification
+                        ? CustomColors().blue
+                        : Colors.grey.shade200,
+                    borderRadius: const BorderRadius.only(
+                        topRight: Radius.circular(15),
+                        bottomRight: Radius.circular(15)),
+                  ),
+                  child: const Center(
+                    child: Text('OFF',
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 20.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600)),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          AnimatedContainer(
+            height: show ? 15 : 0,
+            width: 5,
+            duration: const Duration(seconds: 1),
+            curve: Curves.bounceInOut,
+          ),
         ],
       ),
     );

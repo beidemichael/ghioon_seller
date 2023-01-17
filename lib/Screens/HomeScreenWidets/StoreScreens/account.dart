@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import '../../../Models/models.dart';
 import '../../../Shared/customColors.dart';
+import 'AccountsWidgets/ViewImageAndVideo.dart';
 
 class Account extends StatefulWidget {
   const Account({super.key});
@@ -24,150 +25,94 @@ class _AccountState extends State<Account> {
     return userInfo.isEmpty
         ? Loading()
         : Scaffold(
-            appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(280.0),
-              child: Column(
-                children: [
-                  AppBar(
-                      actions: [
-                        GestureDetector(
-                          onTap: () {
-                            appState.image = '';
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => AccountEdit(
-                                        appState: appState,
-                                        user: userInfo[0],
-                                      )),
-                            );
-                          },
-                          child: Center(
-                            child: Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                // border: Border.all(
-                                //     width: 1, color: Color.fromARGB(255, 255, 255, 255)),
-                                color: CustomColors().white,
-                                borderRadius: BorderRadius.circular(30.0),
-                              ),
-                              child: Center(
-                                child: Icon(
-                                  FontAwesomeIcons.penToSquare,
-                                  size: 25.0,
-                                  color: CustomColors().blue,
-                                ),
-                              ),
-                            ),
+            appBar: AppBar(
+                actions: [
+                  GestureDetector(
+                    onTap: () {
+                      appState.image = '';
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => AccountEdit(
+                                  appState: appState,
+                                  user: userInfo[0],
+                                )),
+                      );
+                    },
+                    child: Center(
+                      child: Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          // border: Border.all(
+                          //     width: 1, color: Color.fromARGB(255, 255, 255, 255)),
+                          color: CustomColors().white,
+                          borderRadius: BorderRadius.circular(30.0),
+                        ),
+                        child: Center(
+                          child: Icon(
+                            FontAwesomeIcons.penToSquare,
+                            size: 25.0,
+                            color: CustomColors().blue,
                           ),
                         ),
-                        const SizedBox(
-                          width: 20,
-                        )
-                      ],
-                      toolbarHeight: 250,
-                      centerTitle: true,
-                      title: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        // ignore: prefer_const_literals_to_create_immutables
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  )
+                ],
+                toolbarHeight: 100,
+                centerTitle: true,
+                title: Text(userInfo[0].businessName, //'Endale Abegazee',
+                    style: TextStyle(
+                        fontSize: 25.0,
+                        color: CustomColors().white,
+                        fontWeight: FontWeight.w500)),
+                // excludeHeaderSemantics: true,
+                backgroundColor: CustomColors().blue,
+                // automaticallyImplyLeading: false,
+                elevation: 5,
+                iconTheme: IconThemeData(color: CustomColors().white)),
+            body: ListView(
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              children: [
+                ViewImageAndVideo(
+                  user: userInfo[0],
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                  child: Column(
+                    children: [
+                      containerWidget(userInfo[0].businessName, 'Store Name'),
+                      containerWidget(userInfo[0].userName, 'Owner Name'),
+                      Row(
                         children: [
-                          Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(100.0), //or 15.0
-                                child: Container(
-                                  height: 150,
-                                  width: 150,
-                                  decoration: BoxDecoration(
-                                    color: CustomColors().darkBlue,
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  child: appState.uploadedImage != ''
-                                      ? CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: appState.uploadedImage,
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              Center(
-                                            child: Container(
-                                              height: 20,
-                                              width: 20,
-                                              child: CircularProgressIndicator(
-                                                  valueColor:
-                                                      AlwaysStoppedAnimation<
-                                                              Color>(
-                                                          Colors.grey[300]!),
-                                                  value: downloadProgress
-                                                      .progress),
-                                            ),
-                                          ),
-                                          errorWidget: (context, url, error) =>
-                                              Icon(Icons.error),
-                                        )
-                                      : Icon(
-                                          FontAwesomeIcons.userLarge,
-                                          size: 80.0,
-                                          color: Colors.white,
-                                        ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 30,
-                              ),
-                              Text(
-                                  userInfo[0].businessName, //'Endale Abegazee',
-                                  style: TextStyle(
-                                      fontSize: 25.0,
-                                      color: CustomColors().white,
-                                      fontWeight: FontWeight.w500)),
-                            ],
+                          Expanded(
+                            child: containerWidget('Male', 'Gender'),
+                          ),
+                          const SizedBox(
+                            width: 15,
+                          ),
+                          Expanded(
+                            child:
+                                containerWidget('Jan 1 2022', 'Date of birth'),
                           ),
                         ],
                       ),
-                      // excludeHeaderSemantics: true,
-                      backgroundColor: CustomColors().blue,
-                      // automaticallyImplyLeading: false,
-                      elevation: 5,
-                      shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.vertical(
-                          bottom: Radius.circular(30),
-                        ),
-                      ),
-                      iconTheme: IconThemeData(color: CustomColors().white)),
-                ],
-              ),
-            ),
-            body: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: ListView(
-                physics: const BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                children: [
-                  containerWidget(userInfo[0].businessName, 'Store Name'),
-                  containerWidget(userInfo[0].userName, 'Owner Name'),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: containerWidget('Male', 'Gender'),
-                      ),
-                      const SizedBox(
-                        width: 15,
-                      ),
-                      Expanded(
-                        child: containerWidget('Jan 1 2022', 'Date of birth'),
-                      ),
+                      containerWidget(
+                          userInfo[0].businessCategory, 'Business Type'),
+                      containerWidget(userInfo[0].email, 'Email'),
+                      containerWidget(userInfo[0].phoneNumber, 'Phone'),
+                      containerWidget(
+                          userInfo[0].businessNo, 'Business Number'),
+                      containerWidget(userInfo[0].address, 'Address'),
                     ],
                   ),
-                  containerWidget(
-                      userInfo[0].businessCategory, 'Business Type'),
-                  containerWidget(userInfo[0].email, 'Email'),
-                  containerWidget(userInfo[0].phoneNumber, 'Phone'),
-                  containerWidget(userInfo[0].businessNo, 'Business Number'),
-                  containerWidget(userInfo[0].address, 'Address'),
-                ],
-              ),
+                ),
+              ],
             ),
           );
   }

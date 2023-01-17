@@ -9,6 +9,9 @@ import 'package:image_picker/image_picker.dart';
 final List<Range> initialData = [];
 
 class RangeData with ChangeNotifier {
+  List<ImageList> profileImages = [];
+  var profileVideo;
+
   var video;
   String videoString = '';
   bool isLoading = false;

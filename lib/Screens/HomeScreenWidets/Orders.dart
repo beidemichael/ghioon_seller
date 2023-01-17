@@ -58,11 +58,13 @@ class _OrdersState extends State<Orders> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                // const Text('Orders',
-                //     style: TextStyle(
-                //         fontSize: 21.0,
-                //         color: Colors.white,
-                //         fontWeight: FontWeight.w600)),
+                const Text(
+                  'Orders',
+                  style: TextStyle(
+                      fontSize: 30.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600),
+                ),
               ],
             ),
             excludeHeaderSemantics: true,

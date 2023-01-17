@@ -4,42 +4,40 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addProductDetailLogic/addProductDetailLogic.dart';
-import 'package:ghioon_seller/Service/Product/AddProductDatabase.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../../../../Models/models.dart';
-import '../../../../../../Providers/EditRangeProvider.dart';
-import '../../../../../../Providers/RangeProvider.dart';
-import '../../../../../../Service/uploadPhoto.dart';
-import '../../../../../../Shared/customColors.dart';
+import '../../../../../Models/models.dart';
+import '../../../../../Providers/RangeProvider.dart';
+import '../../../../../Models/addProductmodels.dart';
+import '../../../../../Service/Profile/ProfileDatabase.dart';
+import '../../../../../Service/uploadPhoto.dart';
+import '../../../../../Shared/customColors.dart';
+import '../../../../components/alert.dart';
 
-class EditVideoContainer extends StatefulWidget {
-  var product;
-  int index;
-  EditVideoContainer({super.key, required this.product, required this.index});
-
+class AddProfileVideoContainer extends StatefulWidget {
+  UserInformation user;
+  AddProfileVideoContainer({required this.user});
   @override
-  State<EditVideoContainer> createState() => _EditVideoContainerState();
+  State<AddProfileVideoContainer> createState() =>
+      _AddProfileVideoContainerState();
 }
 
-class _EditVideoContainerState extends State<EditVideoContainer> {
+class _AddProfileVideoContainerState extends State<AddProfileVideoContainer> {
   final ImagePicker _picker = ImagePicker();
   File? _video;
   late VideoPlayerController _controller;
   late Future<void> _initializeVideoPlayerFuture;
   bool videoSquare = true;
   bool videoLessThanSix = true;
-
   @override
   void initState() {
     super.initState();
 
-    _controller = VideoPlayerController.network(widget.product.video == ''
+    _controller = VideoPlayerController.network(widget.user.profileVideo == ''
         ? 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4'
-        : widget.product.video)
+        : widget.user.profileVideo)
       ..initialize().then((_) {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {
@@ -78,21 +76,31 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
   }
 
   checkParameter() async {
-    final appState = Provider.of<EditRangeData>(context, listen: false);
-    appState.videoSubmited = true;
     if (_controller.value.size.height != _controller.value.size.width) {
-      appState.videoSquare = false;
+      setState(() {
+        videoSquare = false;
+      });
+    } else {
+      setState(() {
+        videoSquare = true;
+      });
     }
     if (_controller.value.duration.inSeconds > 5) {
-      appState.videoLessThanSix = false;
+      setState(() {
+        videoLessThanSix = false;
+      });
+    } else {
+      setState(() {
+        videoLessThanSix = true;
+      });
     }
 
-    if (_controller.value.duration.inSeconds <6 &&
+    if (_controller.value.duration.inSeconds < 6 &&
         _controller.value.size.height == _controller.value.size.width) {
       var uploadedVideo = await uploadVideo(
-          _video, FirebaseAuth.instance.currentUser!.uid, 'Products');
+          _video, FirebaseAuth.instance.currentUser!.uid, 'ProfileVideo');
       final videoString = uploadedVideo.toString();
-      AddProductDatabase().uploadVideo(widget.product.documentId, videoString);
+      ProfileDatabase().uploadVideo(widget.user.documentId, videoString);
     }
   }
 
@@ -100,15 +108,15 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    final appState = Provider.of<EditRangeData>(context);
-    final products = Provider.of<List<Product>>(context);
+    // final appState = Provider.of<EditRangeData>(context);
+    // final products = Provider.of<List<Product>>(context);
     // var _images = context.watch<EditRangeData>().Images;
 
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          products[widget.index].video != ''
+          widget.user.profileVideo != ''
               ? _controller.value.isInitialized
                   ? GestureDetector(
                       onTap: () {
@@ -119,10 +127,6 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
                           }
                         }
                         pickVideo();
-                        Future.delayed(const Duration(milliseconds: 500), () {
-                          AddProductDetailLogic().checkVideo(
-                              context, videoSquare, videoLessThanSix);
-                        });
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -148,7 +152,7 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
                                 color: CustomColors().blue),
                           ),
                           Visibility(
-                            visible: !appState.videoSquare,
+                            visible: !videoSquare,
                             child: const Text(
                               "Please submit a square video",
                               textAlign: TextAlign.center,
@@ -159,7 +163,7 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
                             ),
                           ),
                           Visibility(
-                            visible: !appState.videoLessThanSix,
+                            visible: !videoLessThanSix,
                             child: const Text(
                               "Please submit a video less than 6 seconds",
                               textAlign: TextAlign.center,
@@ -189,10 +193,7 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
               : GestureDetector(
                   onTap: () {
                     pickVideo();
-                    Future.delayed(const Duration(milliseconds: 500), () {
-                      AddProductDetailLogic()
-                          .checkVideo(context, videoSquare, videoLessThanSix);
-                    });
+                    Future.delayed(const Duration(milliseconds: 500), () {});
                   },
                   child: Container(
                     height: width * .5,
@@ -212,52 +213,5 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
         ],
       ),
     );
-
-    // return Scaffold(
-    //   appBar: AppBar(
-    //     title: const Text('Butterfly Video'),
-    //   ),
-    //   // Use a FutureBuilder to display a loading spinner while waiting for the
-    //   // VideoPlayerController to finish initializing.
-    //   body: FutureBuilder(
-    //     future: _initializeVideoPlayerFuture,
-    //     builder: (context, snapshot) {
-    //       if (snapshot.connectionState == ConnectionState.done) {
-    //         // If the VideoPlayerController has finished initialization, use
-    //         // the data it provides to limit the aspect ratio of the video.
-    //         return AspectRatio(
-    //           aspectRatio: _controller.value.aspectRatio,
-    //           // Use the VideoPlayer widget to display the video.
-    //           child: VideoPlayer(_controller),
-    //         );
-    //       } else {
-    //         // If the VideoPlayerController is still initializing, show a
-    //         // loading spinner.
-    //         return const Center(
-    //           child: CircularProgressIndicator(),
-    //         );
-    //       }
-    //     },
-    //   ),
-    //   floatingActionButton: FloatingActionButton(
-    //     onPressed: () {
-    //       // Wrap the play or pause in a call to `setState`. This ensures the
-    //       // correct icon is shown.
-    //       setState(() {
-    //         // If the video is playing, pause it.
-    //         if (_controller.value.isPlaying) {
-    //           _controller.pause();
-    //         } else {
-    //           // If the video is paused, play it.
-    //           _controller.play();
-    //         }
-    //       });
-    //     },
-    //     // Display the correct icon depending on the state of the player.
-    //     child: Icon(
-    //       _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-    //     ),
-    //   ),
-    // );
   }
 }

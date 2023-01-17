@@ -10,6 +10,7 @@ import 'package:draw_graph/draw_graph.dart';
 import '../../Models/models.dart';
 import '../../Shared/customColors.dart';
 import '../components/BlueDashboardGrid copy.dart';
+import '../components/SnackBar.dart';
 import '../components/WhiteDashboardGrid.dart';
 import '../components/ShortProductGrid.dart';
 import 'ProductScreens/Product/allProducts.dart';
@@ -113,22 +114,34 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Expanded(
-                      child: WhiteDashboardGrid(
-                        width: width,
-                        title: "0",
-                        subTitle: 'Sales',
-                        icon: FontAwesomeIcons.chartLine,
+                      child: GestureDetector(
+                        onTap: () {
+                          snackBar(context, 'No Sales yet.',
+                              CustomColors().blue, CustomColors().white);
+                        },
+                        child: WhiteDashboardGrid(
+                          width: width,
+                          title: "0",
+                          subTitle: 'Sales',
+                          icon: FontAwesomeIcons.chartLine,
+                        ),
                       ),
                     ),
                     const SizedBox(
                       width: 10,
                     ),
                     Expanded(
-                      child: BlueDashboardGrid(
-                        width: width,
-                        title: "0",
-                        subTitle: 'Revenue',
-                        icon: FontAwesomeIcons.coins,
+                      child: GestureDetector(
+                        onTap: () {
+                          snackBar(context, 'No Revenue yet.',
+                              CustomColors().blue, CustomColors().white);
+                        },
+                        child: BlueDashboardGrid(
+                          width: width,
+                          title: "0",
+                          subTitle: 'Revenue',
+                          icon: FontAwesomeIcons.coins,
+                        ),
                       ),
                     ),
                   ],
@@ -161,11 +174,17 @@ class _DashboardState extends State<Dashboard> {
                       width: 10,
                     ),
                     Expanded(
-                      child: WhiteDashboardGrid(
-                        width: width,
-                        title: "0",
-                        subTitle: 'Customers',
-                        icon: FontAwesomeIcons.peopleGroup,
+                      child: GestureDetector(
+                        onTap: () {
+                          snackBar(context, 'No Customers yet.',
+                              CustomColors().blue, CustomColors().white);
+                        },
+                        child: WhiteDashboardGrid(
+                          width: width,
+                          title: "0",
+                          subTitle: 'Customers',
+                          icon: FontAwesomeIcons.peopleGroup,
+                        ),
                       ),
                     ),
                   ],

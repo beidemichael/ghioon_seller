@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/profileImage.dart';
 import 'package:ghioon_seller/Screens/components/textFormField.dart';
 import 'package:ghioon_seller/Service/registerDatabase.dart';
+import 'package:ghioon_seller/Shared/loading.dart';
 
 import '../../../../Shared/customColors.dart';
 import 'package:provider/provider.dart';
@@ -50,120 +51,102 @@ class _AccountEditState extends State<AccountEdit> {
   Widget build(BuildContext context) {
     final userInfo = Provider.of<List<UserInformation>>(context);
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(280.0),
-        child: Column(
-          children: [
-            AppBar(
-                actions: [
-                  GestureDetector(
-                    onTap: () async {
-                      setState(() {
-                        loading = true;
-                      });
-                      print("loading");
-                      await RegisterDatabaseService().editUserProfile(
-                          widget.appState.fullName.text,
-                          widget.appState.businessName.text,
-                          widget.appState.email.text,
-                          widget.appState.businessNo.text,
-                          widget.appState.address.text,
-                          widget.user.userUid,
-                          widget.appState.image);
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+          actions: [
+            GestureDetector(
+              onTap: () async {
+                setState(() {
+                  loading = true;
+                });
+                print("loading");
+                await RegisterDatabaseService().editUserProfile(
+                    widget.appState.fullName.text,
+                    widget.appState.businessName.text,
+                    widget.appState.email.text,
+                    widget.appState.businessNo.text,
+                    widget.appState.address.text,
+                    widget.user.userUid,
+                    widget.appState.image);
 
-                      setState(() {
-                        loading = false;
-                      });
+                setState(() {
+                  loading = false;
+                });
 
-                      Navigator.of(context).pop();
-                    },
-                    child: Center(
-                      child: Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          // border: Border.all(
-                          //     width: 1, color: Color.fromARGB(255, 255, 255, 255)),
-                          color: CustomColors().white,
-                          borderRadius: BorderRadius.circular(30.0),
-                        ),
-                        child: Center(
-                          child: loading
-                              ? SpinKitCircle(
-                                  size: 40,
-                                  color: CustomColors().blue,
-                                )
-                              : Icon(
-                                  FontAwesomeIcons.save,
-                                  size: 25.0,
-                                  color: CustomColors().blue,
-                                ),
-                        ),
-                      ),
-                    ),
+                Navigator.of(context).pop();
+              },
+              child: Center(
+                child: Container(
+                  height: 60,
+                  width: 60,
+                  decoration: BoxDecoration(
+                    // border: Border.all(
+                    //     width: 1, color: Color.fromARGB(255, 255, 255, 255)),
+                    color: CustomColors().white,
+                    borderRadius: BorderRadius.circular(30.0),
                   ),
-                  const SizedBox(
-                    width: 20,
-                  )
-                ],
-                toolbarHeight: 250,
-                centerTitle: true,
-                title: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  // ignore: prefer_const_literals_to_create_immutables
-                  children: [
-                    Column(
-                      children: [
-                        AddProfileImage(
-                          appState: widget.appState,
-                          user: widget.user,
-                        ),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                        Text(widget.appState.fullName.text,
-                            style: TextStyle(
-                                fontSize: 25.0,
-                                color: CustomColors().lightBlue,
-                                fontWeight: FontWeight.w500)),
-                      ],
-                    ),
-                  ],
-                ),
-                // excludeHeaderSemantics: true,
-                backgroundColor: CustomColors().blue,
-                // automaticallyImplyLeading: false,
-                elevation: 5,
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.vertical(
-                    bottom: Radius.circular(30),
+                  child: Center(
+                    child: loading
+                        ? SpinKitCircle(
+                            size: 40,
+                            color: CustomColors().blue,
+                          )
+                        : Icon(
+                            FontAwesomeIcons.save,
+                            size: 25.0,
+                            color: CustomColors().blue,
+                          ),
                   ),
                 ),
-                iconTheme: IconThemeData(color: CustomColors().white)),
+              ),
+            ),
+            const SizedBox(
+              width: 20,
+            )
           ],
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: ListView(
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
-          children: [
-            TextFormFieldWithOutIcon('Store Name', widget.appState.businessName,
-                'Store Name', TextInputType.text),
-            TextFormFieldWithOutIcon('Full Name', widget.appState.fullName,
-                'Owner Name', TextInputType.text),
-            TextFormFieldWithOutIcon(
-                'email', widget.appState.email, 'Email', TextInputType.text),
-            TextFormFieldWithOutIcon(
-                '+Business Number',
-                widget.appState.businessNo,
-                'Business Number',
-                TextInputType.number),
-            TextFormFieldWithOutIcon('Jemo Michael, AA, Ethiopia',
-                widget.appState.address, 'Address', TextInputType.text),
-          ],
-        ),
+          toolbarHeight: 100,
+          centerTitle: true,
+          title: Text(widget.appState.businessName.text,
+              style: TextStyle(
+                  fontSize: 25.0,
+                  color: CustomColors().white,
+                  fontWeight: FontWeight.w500)),
+          // excludeHeaderSemantics: true,
+          backgroundColor: CustomColors().blue,
+          // automaticallyImplyLeading: false,
+          elevation: 5,
+          iconTheme: IconThemeData(color: CustomColors().white)),
+      body: ListView(
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
+        children: [
+          AddProfileImage(
+            appState: widget.appState,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: [
+                TextFormFieldWithOutIcon(
+                    'Store Name',
+                    widget.appState.businessName,
+                    'Store Name',
+                    TextInputType.text),
+                TextFormFieldWithOutIcon('Full Name', widget.appState.fullName,
+                    'Owner Name', TextInputType.text),
+                TextFormFieldWithOutIcon('email', widget.appState.email,
+                    'Email', TextInputType.text),
+                TextFormFieldWithOutIcon(
+                    '+Business Number',
+                    widget.appState.businessNo,
+                    'Business Number',
+                    TextInputType.number),
+                TextFormFieldWithOutIcon('Jemo Michael, AA, Ethiopia',
+                    widget.appState.address, 'Address', TextInputType.text),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

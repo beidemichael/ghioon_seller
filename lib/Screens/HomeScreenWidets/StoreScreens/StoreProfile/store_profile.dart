@@ -81,10 +81,13 @@ class _StoreProfileState extends State<StoreProfile> {
                                           borderRadius:
                                               BorderRadius.circular(100.0),
                                         ),
-                                        child: userInfo[0].image != ''
+                                        child: userInfo[0]
+                                                .profileImages
+                                                .isNotEmpty
                                             ? CachedNetworkImage(
                                                 fit: BoxFit.cover,
-                                                imageUrl: userInfo[0].image,
+                                                imageUrl: userInfo[0]
+                                                    .profileImages[0],
                                                 progressIndicatorBuilder:
                                                     (context, url,
                                                             downloadProgress) =>
@@ -113,10 +116,12 @@ class _StoreProfileState extends State<StoreProfile> {
                                               ),
                                       ),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 20,
                                     ),
-                                    Text(userInfo[0].businessName,
+                                    Text(
+                                        userInfo[0]
+                                            .businessName, //'Endale Abegazee',
                                         style: TextStyle(
                                             fontSize: 25.0,
                                             color: CustomColors().white,
@@ -198,39 +203,8 @@ class _StoreProfileState extends State<StoreProfile> {
                       ],
                     ),
                     actions: [
-                      GestureDetector(
-                        onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //       builder: (context) => AccountEdit(
-                          //             appState: appState,
-                          //             user: userInfo[0],
-                          //           )),
-                          // );
-                        },
-                        child: Center(
-                          child: Container(
-                            height: 60,
-                            width: 60,
-                            decoration: BoxDecoration(
-                              // border: Border.all(
-                              //     width: 1, color: Color.fromARGB(255, 255, 255, 255)),
-                              color: CustomColors().white,
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
-                            child: Center(
-                              child: Icon(
-                                FontAwesomeIcons.penToSquare,
-                                size: 25.0,
-                                color: CustomColors().blue,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
                       const SizedBox(
-                        width: 20,
+                        width: 50,
                       )
                     ],
                     excludeHeaderSemantics: true,
