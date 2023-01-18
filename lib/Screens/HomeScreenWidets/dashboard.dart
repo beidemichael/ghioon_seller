@@ -24,33 +24,6 @@ class Dashboard extends StatefulWidget {
 }
 
 class _DashboardState extends State<Dashboard> {
-  final List<Feature> features = [
-    Feature(
-      title: "Drink Water",
-      color: Colors.blue,
-      data: [0.2, 0.8, 0.4, 0.7, 0.6],
-    ),
-    Feature(
-      title: "Exercise",
-      color: Colors.pink,
-      data: [1, 0.8, 0.6, 0.7, 0.3],
-    ),
-    Feature(
-      title: "Study",
-      color: Colors.cyan,
-      data: [0.5, 0.4, 0.85, 0.4, 0.7],
-    ),
-    Feature(
-      title: "Water Plants",
-      color: Colors.green,
-      data: [0.6, 0.2, 0, 0.1, 1],
-    ),
-    Feature(
-      title: "Grocery Shopping",
-      color: Colors.amber,
-      data: [0.25, 1, 0.3, 0.8, 0.6],
-    ),
-  ];
   List<Color>? gradientColors = [
     Color(0xff23b6e6),
     Color(0xff02d39a),

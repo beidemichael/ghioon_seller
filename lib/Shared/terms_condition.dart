@@ -1,12 +1,11 @@
 class TermsData {
   String title1 = "Privacy Policy";
   String p1 =
-      '''This privacy notice for GHIOON E-COMMERCE share company describes how and why we might collect, store, use, and/or share (process) your 
-  information when you use our services (Services), such as when you:
+      '''This privacy notice for GHIOON E-COMMERCE share company describes how and why we might collect, store, use, and/or share (process) your information when you use our services (Services), such as when you:
 Download and use our mobile application (GHIOON), or any other application of ours that links to this privacy notice
 Engage with us in other related ways, including any sales, marketing, or events
 Questions or concerns? Reading this privacy notice will help you understand your privacy rights and choices. If you do not agree with our policies and
-practices, please do not use our Services. If you still have any questions or concerns, please contact us at _0113699626/0940679413''';
+practices, please do not use our Services. If you still have any questions or concerns, please contact us at 0113699626/0940679413''';
 
   String title2 = "SUMMARY OF KEY POINTS";
   String p2 = '''This summary provides key points from our privacy notice.
@@ -29,25 +28,26 @@ personal information. Click here to learn more.  ''';
   String p3 =
       ''' Want to learn more about what Ghioon e-commerce share company does with any information we collect?\n
 1. WHAT INFORMATION DO WE COLLECT?
+
 Personal information you disclose to us\n
 In Short: We collect personal information that you provide to us.\n
 We collect personal information that you voluntarily provide to us when you register on the Services, express an interest in obtaining information about
 us or our products and Services, when you participate in activities on the Services, or otherwise when you contact us.
 Personal Information Provided by You. The personal information that we collect depends on the context of your interactions with us and the Services,
 the choices you make, and the products and features you use. The personal information we collect may include the following:\n
-names\n
-phone numbers\n
-email addresses\n
-usernames\n
-contact preferences\n
-passwords\n
+names
+phone numbers
+email addresses
+usernames
+contact preferences
+passwords
+
 Social Media Login Data. We may provide you with the option to register with us using your existing social media account details, like your Facebook,
 Twitter, or other social media account. If you choose to register in this way, we will collect the information described in the section called "HOW DO WE
 HANDLE YOUR SOCIAL LOGINS?" below.''';
-}
 
-String p4 =
-    '''Application Data. If you use our application(s), we also may collect the following information if you choose to provide us with access or permission:
+  String p4 =
+      '''Application Data. If you use our application(s), we also may collect the following information if you choose to provide us with access or permission:
 Push Notifications. We may request to send you push notifications regarding your account or certain features of the application(s). If you wish to opt out from receiving these types of communications, you may turn them off in your device's settings.
 This information is primarily needed to maintain the security and operation of our application(s), for troubleshooting, and for our internal analytics and
 reporting purposes.\n
@@ -89,7 +89,7 @@ privacy settings.
 
  ''';
 
-String p5 = ''' 2. HOW DO WE PROCESS YOUR INFORMATION?\n
+  String p5 = ''' 2. HOW DO WE PROCESS YOUR INFORMATION?\n
 In Short: We process your information to provide, improve, and administer our Services, communicate with you, for security and fraud prevention, and to
 comply with law. We may also process your information for other purposes with your consent.\n
 We process your personal information for a variety of reasons, depending on how you interact with our Services, including:\n
@@ -124,7 +124,7 @@ marketing and promotional campaigns that are most relevant to you.\n
 To comply with our legal obligations. We may process your information to comply with our legal obligations, respond to legal requests, and exercise,
 establish, or defend our legal rights. ''';
 
-String p6 = ''' 
+  String p6 = ''' 
 3. WHEN AND WITH WHOM DO WE SHARE YOUR PERSONAL INFORMATION?\n
 In Short: We may share information in specific situations described in this section and/or with the following categories of third parties.\
 Vendors, Consultants, and Other Third-Party Service Providers. We may share your data with third-party vendors, service providers, contractors, or
@@ -169,15 +169,12 @@ to an external website belonging to other persons and will leave our application
 wall provider in order to prevent fraud and properly credit your account with the relevant reward.
 ''';
 
-String p7 = ''' 
+  String p7 = ''' 
 4. WHAT IS OUR STANCE ON THIRD-PARTY WEBSITES?\n
 In Short: We are not responsible for the safety of any information that you share with third parties that we may link to or who advertise on our Services,
 but are not affiliated with, our Services.\n
-The Services, including our offer wall, may link to third-party websites, online services, or mobile applications and/or contain advertisements from third
-parties that are not affiliated with us and which may link to other websites, services, or applications. Accordingly, we do not make any guarantee
-regarding any such third parties, and we will not be liable for any loss or damage caused by the use of such third-party websites, services, or
-applications. The inclusion of a link towards a third-party website, service, or application does not imply an endorsement by us. We cannot guarantee
-the safety and privacy of data you provide to any third parties. Any data collected by third parties is not covered by this privacy notice. We are not
+The Services, including our offer wall, may link to third-party websites, online services, or mobile applications and/or contain advertisements from third parties that are not affiliated with us and which may link to other websites, services, or applications. Accordingly, we do not make any guarantee
+regarding any such third parties, and we will not be liable for any loss or damage caused by the use of such third-party websites, services, or applications. The inclusion of a link towards a third-party website, service, or application does not imply an endorsement by us. We cannot guarantee the safety and privacy of data you provide to any third parties. Any data collected by third parties is not covered by this privacy notice. We are not
 responsible for the content or privacy and security practices and policies of any third parties, including other websites, services, or applications that may
 be linked to or from the Services. You should review the policies of such third parties and contact them directly to respond to your questions.\n
 5. DO WE USE COOKIES AND OTHER TRACKING TECHNOLOGIES?\n
@@ -197,7 +194,7 @@ you can set your privacy preferences on their sites and apps.\n
 
 ''';
 
-String p8 = ''' 
+  String p8 = ''' 
 7. HOW LONG DO WE KEEP YOUR INFORMATION?\n
 In Short: We keep your information for as long as necessary to fulfill the purposes outlined in this privacy notice unless otherwise required by law.\n
 We will only keep your personal information for as long as it is necessary for the purposes set out in this privacy notice, unless a longer retention period
@@ -248,3 +245,10 @@ Ethiopian\n
 Based on the applicable laws of your country, you may have the right to request access to the personal information we collect from you, change that
 information, or delete it. To request to review, update, or delete your personal information\n
 ''';
+}
+
+class AboutUsText {
+  String p1 = '''
+Ghioon technology application software allows customers to rowse and purchase items from an online store. Our company primarily focus on buying and selling of goods and services by transmitting of data over an electronic network.
+''';
+}

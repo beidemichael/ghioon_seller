@@ -4,6 +4,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/Feedback.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/aboutUs.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/privacy_terms.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:ghioon_seller/Shared/loading.dart';
 import 'package:provider/provider.dart';
@@ -91,8 +93,15 @@ class _StoreSettingState extends State<StoreSetting> {
                       FontAwesomeIcons.solidUser, 'Notification', width)),
             ],
           ),
-          StoreList(FontAwesomeIcons.solidBell, 'Privacy and Security', width),
-          StoreList(FontAwesomeIcons.lock, 'Terms and Conditions', width),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const Terms()),
+                );
+              },
+              child: StoreList(
+                  FontAwesomeIcons.lock, 'Terms and Conditions', width)),
           GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -101,7 +110,19 @@ class _StoreSettingState extends State<StoreSetting> {
                 );
               },
               child: StoreList(FontAwesomeIcons.solidFile, 'Feedback', width)),
-          StoreList(FontAwesomeIcons.arrowsSpin, 'Upgrade', width),
+          GestureDetector(
+              onTap: () {
+                // link to playstore
+              },
+              child: StoreList(FontAwesomeIcons.arrowsSpin, 'Upgrade', width)),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AboutUs()),
+                );
+              },
+              child: StoreList(FontAwesomeIcons.info, 'About Us', width)),
           GestureDetector(
               onTap: () async {
                 await FirebaseAuth.instance.signOut();
@@ -114,8 +135,9 @@ class _StoreSettingState extends State<StoreSetting> {
     );
   }
 
-  changeBool(bool notification,userUid) async {
-    await RegisterDatabaseService(userUid: userUid).updateNotification(notification);
+  changeBool(bool notification, userUid) async {
+    await RegisterDatabaseService(userUid: userUid)
+        .updateNotification(notification);
   }
 
   Widget Switch(UserInformation userInfo) {
@@ -152,7 +174,7 @@ class _StoreSettingState extends State<StoreSetting> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    changeBool(true,userInfo.documentId);
+                    changeBool(true, userInfo.documentId);
                   });
                 },
                 child: AnimatedContainer(
@@ -182,7 +204,7 @@ class _StoreSettingState extends State<StoreSetting> {
               GestureDetector(
                 onTap: () {
                   setState(() {
-                    changeBool(false,userInfo.documentId);
+                    changeBool(false, userInfo.documentId);
                   });
                 },
                 child: AnimatedContainer(
