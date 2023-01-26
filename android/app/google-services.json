@@ -39,10 +39,10 @@
               "client_type": 3
             },
             {
-              "client_id": "69046775842-en2cp6j7au9jdodrpvsj92gc2qhfcggq.apps.googleusercontent.com",
+              "client_id": "69046775842-7uletmtqgqg9vc7st4nna12p22p9flvj.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.ghioonRegistration"
+                "bundle_id": "com.example.ghioonSeller"
               }
             }
           ]
@@ -51,9 +51,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:69046775842:android:8f2151eef02c1ec67c9a7b",
+        "mobilesdk_app_id": "1:69046775842:android:559f849a2859a5377c9a7b",
         "android_client_info": {
-          "package_name": "com.example.ghioon_seller"
+          "package_name": "com.ghioon.ghioon_seller"
         }
       },
       "oauth_client": [
@@ -75,10 +75,10 @@
               "client_type": 3
             },
             {
-              "client_id": "69046775842-en2cp6j7au9jdodrpvsj92gc2qhfcggq.apps.googleusercontent.com",
+              "client_id": "69046775842-7uletmtqgqg9vc7st4nna12p22p9flvj.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.ghioonRegistration"
+                "bundle_id": "com.example.ghioonSeller"
               }
             }
           ]

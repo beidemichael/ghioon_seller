@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.ghioon_seller">
+    package="com.ghioon.ghioon_seller">
    <application
         android:label="Ghioon Seller"
         android:name="${applicationName}"
