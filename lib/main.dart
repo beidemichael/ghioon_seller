@@ -54,13 +54,13 @@ void main() async {
           StreamProvider<List<Product>>.value(
             initialData: [],
             value: ReadProductDatabaseService(
-                    userUid: FirebaseAuth.instance.currentUser!.uid)
+                    userUid: FirebaseAuth.instance.currentUser?.uid)
                 .readProduct,
           ),
           StreamProvider<List<Collection>>.value(
             initialData: [],
             value: ReadCollectionDatabaseService(
-                    userUid: FirebaseAuth.instance.currentUser!.uid)
+                    userUid: FirebaseAuth.instance.currentUser?.uid)
                 .readCollection,
           ),
           StreamProvider<List<UserInformation>>.value(
