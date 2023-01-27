@@ -57,7 +57,6 @@ void main() async {
                     userUid: FirebaseAuth.instance.currentUser!.uid)
                 .readProduct,
           ),
-         
           StreamProvider<List<Collection>>.value(
             initialData: [],
             value: ReadCollectionDatabaseService(
