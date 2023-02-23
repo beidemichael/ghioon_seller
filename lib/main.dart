@@ -51,45 +51,28 @@ void main() async {
           ChangeNotifierProvider(
             create: (context) => AppState(),
           ),
-          FirebaseAuth.instance.currentUser == null
-              ? StreamProvider<List<Product>>.value(
-                  initialData: [],
-                  value: ReadProductDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser?.uid)
-                      .readProduct,
-                )
-              : StreamProvider<List<Product>>.value(
-                  initialData: [],
-                  value: ReadProductDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser!.uid)
-                      .readProduct,
-                ),
-          FirebaseAuth.instance.currentUser == null
-              ? StreamProvider<List<Collection>>.value(
-                  initialData: [],
-                  value: ReadCollectionDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser?.uid)
-                      .readCollection,
-                )
-              : StreamProvider<List<Collection>>.value(
-                  initialData: [],
-                  value: ReadCollectionDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser!.uid)
-                      .readCollection,
-                ),
-          FirebaseAuth.instance.currentUser == null
-              ? StreamProvider<List<UserInformation>>.value(
-                  initialData: [],
-                  value: UserDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser?.uid)
-                      .userInfo,
-                )
-              : StreamProvider<List<UserInformation>>.value(
-                  initialData: [],
-                  value: UserDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser!.uid)
-                      .userInfo,
-                ),
+          StreamProvider<List<Product>>(
+            create: (_) {
+              final userUid = FirebaseAuth.instance.currentUser?.uid;
+              return ReadProductDatabaseService(userUid: userUid).readProduct;
+            },
+            initialData: [],
+          ),
+          StreamProvider<List<Collection>>(
+            create: (_) {
+              final userUid = FirebaseAuth.instance.currentUser?.uid;
+              return ReadCollectionDatabaseService(userUid: userUid)
+                  .readCollection;
+            },
+            initialData: [],
+          ),
+          StreamProvider<List<UserInformation>>(
+            create: (_) {
+              final userUid = FirebaseAuth.instance.currentUser?.uid;
+              return UserDatabaseService(userUid: userUid).userInfo;
+            },
+            initialData: [],
+          ),
           StreamProvider<List<Controller>>.value(
             initialData: [],
             value: ControllerDatabaseService().controller,
