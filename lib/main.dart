@@ -78,12 +78,10 @@ void main() async {
           //   value: ControllerDatabaseService().controller,
           // ),
           StreamProvider<List<Controller>>(
-            initialData: [],
-            create:(_){
-return ControllerDatabaseService().controller;
-            }
-            
-          ),
+              initialData: [],
+              create: (_) {
+                return ControllerDatabaseService().controller;
+              }),
         ],
         child: const MyApp(),
       ),
