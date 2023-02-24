@@ -73,9 +73,16 @@ void main() async {
             },
             initialData: [],
           ),
-          StreamProvider<List<Controller>>.value(
+          // StreamProvider<List<Controller>>.value(
+          //   initialData: [],
+          //   value: ControllerDatabaseService().controller,
+          // ),
+          StreamProvider<List<Controller>>(
             initialData: [],
-            value: ControllerDatabaseService().controller,
+            create:(_){
+return ControllerDatabaseService().controller;
+            }
+            
           ),
         ],
         child: const MyApp(),
