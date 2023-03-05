@@ -174,7 +174,6 @@ class _DashboardState extends State<Dashboard> {
                 SizedBox(
                     height: 700,
                     child: BarChartSample3(views: userInfo[0].viewsTime)),
-               
                 SizedBox(
                   height: 20,
                 ),

@@ -55,7 +55,7 @@ void main() async {
               ? StreamProvider<List<Product>>.value(
                   initialData: [],
                   value: ReadProductDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser?.uid??'')
+                          userUid: FirebaseAuth.instance.currentUser?.uid ?? '')
                       .readProduct,
                 )
               : StreamProvider<List<Product>>.value(
@@ -68,7 +68,7 @@ void main() async {
               ? StreamProvider<List<Collection>>.value(
                   initialData: [],
                   value: ReadCollectionDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser?.uid??'')
+                          userUid: FirebaseAuth.instance.currentUser?.uid ?? '')
                       .readCollection,
                 )
               : StreamProvider<List<Collection>>.value(
@@ -81,7 +81,7 @@ void main() async {
               ? StreamProvider<List<UserInformation>>.value(
                   initialData: [],
                   value: UserDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser?.uid??'')
+                          userUid: FirebaseAuth.instance.currentUser?.uid ?? '')
                       .userInfo,
                 )
               : StreamProvider<List<UserInformation>>.value(
@@ -90,10 +90,16 @@ void main() async {
                           userUid: FirebaseAuth.instance.currentUser!.uid)
                       .userInfo,
                 ),
+
           StreamProvider<List<Controller>>.value(
             initialData: [],
             value: ControllerDatabaseService().controller,
           ),
+          // StreamProvider<List<Controller>>(
+          //     initialData: [],
+          //     create: (_) {
+          //       return ControllerDatabaseService().controller;
+          //     }),
         ],
         child: const MyApp(),
       ),
