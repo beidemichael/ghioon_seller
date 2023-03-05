@@ -86,8 +86,8 @@ class OptionalUpdate extends StatelessWidget {
                           flex: 2,
                           child: InkWell(
                             onTap: () {
-                              // LaunchReview.launch(
-                              //     androidAppId: "com.agelgil.agelgil_user_end");
+                              LaunchReview.launch(
+                                  androidAppId: "com.ghioon.ghioon_seller");
                             },
                             child: Container(
                               padding: EdgeInsets.only(top: 20.0, bottom: 20.0),

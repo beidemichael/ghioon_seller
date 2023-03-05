@@ -158,7 +158,7 @@ class _StoreProfileState extends State<StoreProfile> {
                                             width: 5,
                                           ),
                                           Text(
-                                            userInfo[0].views.toString(),
+                                            userInfo[0].viewsTime.length.toString(),
                                             //'25',
                                             style: TextStyle(
                                                 fontSize: 20,

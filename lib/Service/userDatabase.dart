@@ -18,7 +18,7 @@ class UserDatabaseService {
         businessName: (doc.data() as dynamic)['businessName'] ?? '',
         businessNo: (doc.data() as dynamic)['businessNo'] ?? '',
         address: (doc.data() as dynamic)['address'] ?? '',
-        views: (doc.data() as dynamic)['views'] ?? '',
+        viewsTime: (doc.data() as dynamic)['viewCountTime'] ?? [],
         rating: (doc.data() as dynamic)['rating'] ?? '',
         email: (doc.data() as dynamic)['email'] ?? '',
         documentId: doc.reference.id,

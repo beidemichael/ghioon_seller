@@ -19,11 +19,12 @@ class UserInformation {
   List collection_description;
   bool online;
   String address;
-  int views;
+  List viewsTime;
   double rating;
   String image;
   List profileImages;
   String profileVideo;
+
 bool notification;
   UserInformation(
       {required this.GhioonId,
@@ -41,7 +42,7 @@ bool notification;
       required this.collection_description,
       required this.online,
       required this.address,
-      required this.views,
+      required this.viewsTime,
       required this.rating,
       required this.image,
       required this.profileImages,

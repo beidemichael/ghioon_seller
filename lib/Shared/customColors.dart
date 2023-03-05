@@ -5,6 +5,7 @@ class CustomColors {
   Color lightBlue = Color.fromARGB(255, 173, 240, 255);
   Color superLightBlue = Color(0xffE3FBFF);
   Color darkBlue = Color.fromARGB(255, 90, 180, 201);
+  Color darkBlue2 = Color.fromARGB(255, 61, 142, 160);
   Color white = Color.fromARGB(255, 255, 255, 255);
   Color black = Color.fromARGB(255, 0, 0, 0);
   Color red = Color.fromARGB(255, 255, 0, 0);

@@ -22,6 +22,7 @@ class _AllProductState extends State<AllProduct> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<RangeData>(context);
+    
     final products = Provider.of<List<Product>>(context);
     return Scaffold(
         appBar: PreferredSize(
