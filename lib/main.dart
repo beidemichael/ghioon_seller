@@ -28,80 +28,87 @@ void main() async {
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(
-            create: (context) => RangeData(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => EditRangeData(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => EditProfileData(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => MapProvider(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => CollectionData(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => FeedbackData(),
-          ),
-          ChangeNotifierProvider(
-            create: (context) => AppState(),
-          ),
-          FirebaseAuth.instance.currentUser == null
-              ? StreamProvider<List<Product>>.value(
-                  initialData: [],
-                  value: ReadProductDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser?.uid ?? '')
-                      .readProduct,
+      home: StreamProvider<UserAuth?>.value(
+        value: AuthServices().user,
+        initialData: null,
+        child: Builder(builder: (context) {
+          final user = Provider.of<UserAuth?>(context);
+          return user == null
+              ? MultiProvider(
+                  providers: [
+                    ChangeNotifierProvider(
+                      create: (context) => RangeData(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => EditRangeData(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => EditProfileData(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => MapProvider(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => CollectionData(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => FeedbackData(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => AppState(),
+                    ),
+                    StreamProvider<List<Controller>>.value(
+                      initialData: [],
+                      value: ControllerDatabaseService().controller,
+                    ),
+                  ],
+                  child: const MyApp(),
                 )
-              : StreamProvider<List<Product>>.value(
-                  initialData: [],
-                  value: ReadProductDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser!.uid)
-                      .readProduct,
-                ),
-          FirebaseAuth.instance.currentUser == null
-              ? StreamProvider<List<Collection>>.value(
-                  initialData: [],
-                  value: ReadCollectionDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser?.uid ?? '')
-                      .readCollection,
-                )
-              : StreamProvider<List<Collection>>.value(
-                  initialData: [],
-                  value: ReadCollectionDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser!.uid)
-                      .readCollection,
-                ),
-          FirebaseAuth.instance.currentUser == null
-              ? StreamProvider<List<UserInformation>>.value(
-                  initialData: [],
-                  value: UserDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser?.uid ?? '')
-                      .userInfo,
-                )
-              : StreamProvider<List<UserInformation>>.value(
-                  initialData: [],
-                  value: UserDatabaseService(
-                          userUid: FirebaseAuth.instance.currentUser!.uid)
-                      .userInfo,
-                ),
-
-          StreamProvider<List<Controller>>.value(
-            initialData: [],
-            value: ControllerDatabaseService().controller,
-          ),
-          // StreamProvider<List<Controller>>(
-          //     initialData: [],
-          //     create: (_) {
-          //       return ControllerDatabaseService().controller;
-          //     }),
-        ],
-        child: const MyApp(),
+              : MultiProvider(
+                  providers: [
+                    ChangeNotifierProvider(
+                      create: (context) => RangeData(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => EditRangeData(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => EditProfileData(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => MapProvider(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => CollectionData(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => FeedbackData(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (context) => AppState(),
+                    ),
+                    StreamProvider<List<Product>>.value(
+                      initialData: [],
+                      value: ReadProductDatabaseService(userUid: user.uid)
+                          .readProduct,
+                    ),
+                    StreamProvider<List<Collection>>.value(
+                      initialData: [],
+                      value: ReadCollectionDatabaseService(userUid: user.uid)
+                          .readCollection,
+                    ),
+                    StreamProvider<List<UserInformation>>.value(
+                      initialData: [],
+                      value: UserDatabaseService(userUid: user.uid).userInfo,
+                    ),
+                    StreamProvider<List<Controller>>.value(
+                      initialData: [],
+                      value: ControllerDatabaseService().controller,
+                    ),
+                  ],
+                  child: const MyApp(),
+                );
+        }),
       ),
     ),
   );
@@ -116,11 +123,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: StreamProvider<UserAuth?>.value(
-          value: AuthServices().user,
-          initialData: null,
-          child: const Wrapper(),
-        ),
+        body: const Wrapper(),
       ),
     );
   }
