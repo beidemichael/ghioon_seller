@@ -50,6 +50,7 @@ dependencies:
   google_maps_flutter: null
   image_picker: null
   launch_review: ^3.0.1
+  marquee_widget: ^1.2.0
   provider: ^6.0.4
   syncfusion_flutter_barcodes: ^20.4.41
   toggle_switch: ^2.0.1

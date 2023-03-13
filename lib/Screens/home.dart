@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   controller: _pageViewController,
                   children: const <Widget>[
                     Dashboard(),
-                    Orders(),
+                    OrdersScreen(),
                     Products(),
                     Store()
                   ],

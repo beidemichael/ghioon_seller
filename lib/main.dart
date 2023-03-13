@@ -18,6 +18,7 @@ import 'Providers/EditRangeProvider.dart';
 import 'Providers/RangeProvider.dart';
 import 'Screens/wrapper.dart';
 import 'Service/Controller/Controller.dart';
+import 'Service/Orders/OrdersDatabase.dart';
 import 'Service/auth.dart';
 
 void main() async {
@@ -35,7 +36,7 @@ void main() async {
           final user = Provider.of<UserAuth?>(context);
           return user == null
               ? MultiProvider(
-                  providers: [
+                   providers: [
                     ChangeNotifierProvider(
                       create: (context) => RangeData(),
                     ),
@@ -92,6 +93,7 @@ void main() async {
                       value: ReadProductDatabaseService(userUid: user.uid)
                           .readProduct,
                     ),
+                    
                     StreamProvider<List<Collection>>.value(
                       initialData: [],
                       value: ReadCollectionDatabaseService(userUid: user.uid)

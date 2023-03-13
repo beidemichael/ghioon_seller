@@ -2,19 +2,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Screens/components/emptyScreen.dart';
+import 'package:provider/provider.dart';
 
+import '../../Models/models.dart';
+import '../../Service/Orders/OrdersDatabase.dart';
 import '../../Shared/customColors.dart';
+import '../../Shared/loading.dart';
+import 'OrdersScreens/AllOrdersScreen.dart';
 
-class Orders extends StatefulWidget {
-  const Orders({super.key});
+class OrdersScreen extends StatefulWidget {
+  const OrdersScreen({super.key});
 
   @override
-  State<Orders> createState() => _OrdersState();
+  State<OrdersScreen> createState() => _OrdersScreenState();
 }
 
-class _OrdersState extends State<Orders> {
+class _OrdersScreenState extends State<OrdersScreen> {
   @override
   Widget build(BuildContext context) {
+    final userInfo = Provider.of<List<UserInformation>>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     const upperTab =
@@ -48,40 +54,47 @@ class _OrdersState extends State<Orders> {
                 fontWeight: FontWeight.w500)),
       ),
     ]);
-    return DefaultTabController(
-      length: 4,
-      child: Scaffold(
-        // drawer: Drawer(),
-        appBar: AppBar(
-            centerTitle: true,
-            title: Row(
-              mainAxisSize: MainAxisSize.min,
-              // ignore: prefer_const_literals_to_create_immutables
-              children: [
-                const Text(
-                  'Orders',
-                  style: TextStyle(
-                      fontSize: 30.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600),
-                ),
-              ],
+    return userInfo.isEmpty
+        ? Loading()
+        : DefaultTabController(
+            length: 4,
+            child: Scaffold(
+              // drawer: Drawer(),
+              appBar: AppBar(
+                  centerTitle: true,
+                  title: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    // ignore: prefer_const_literals_to_create_immutables
+                    children: [
+                      const Text(
+                        'Orders',
+                        style: TextStyle(
+                            fontSize: 30.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
+                  excludeHeaderSemantics: true,
+                  backgroundColor: CustomColors().blue,
+                  elevation: 3,
+                  bottom: upperTab,
+                  iconTheme: const IconThemeData(color: Colors.white)),
+              body: TabBarView(
+                children: [
+                  StreamProvider<List<Orders>>.value(
+                    initialData: [],
+                    value: OrdersDatabaseService(userUid: userInfo[0].userUid)
+                        .orders,
+                    child: AllOrdersScreen(),
+                  ),
+                  EmptyScreen(context, 'No pending orders yet.'),
+                  EmptyScreen(context, 'No cancelled orders yet.'),
+                  EmptyScreen(context, 'No completed orders yet.'),
+                ],
+              ),
             ),
-            excludeHeaderSemantics: true,
-            backgroundColor: CustomColors().blue,
-            elevation: 3,
-            bottom: upperTab,
-            iconTheme: const IconThemeData(color: Colors.white)),
-        body: TabBarView(
-          children: [
-            EmptyScreen(context, 'No orders yet.'),
-            EmptyScreen(context, 'No pending orders yet.'),
-            EmptyScreen(context, 'No cancelled orders yet.'),
-            EmptyScreen(context, 'No completed orders yet.'),
-          ],
-        ),
-      ),
-    );
+          );
   }
 }
 
