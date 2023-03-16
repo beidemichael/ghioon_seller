@@ -133,37 +133,40 @@ class PieChart2State extends State {
                     child: Container(
                       height: 60,
                       width: MediaQuery.of(context).size.width,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        scrollDirection: Axis.horizontal,
-                        physics: const BouncingScrollPhysics(
-                            parent: AlwaysScrollableScrollPhysics()),
-                        itemCount: userInfo[0].collections.length,
-                        itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              Container(
-                                width: 20,
-                                height: 20,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: color[index],
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          itemCount: userInfo[0].collections.length,
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                Container(
+                                  width: 20,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: color[index],
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(userInfo[0].collections[index],
-                                  style: TextStyle(
-                                      fontSize: 20.0,
-                                      color: CustomColors().blue,
-                                      fontWeight: FontWeight.w700)),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                            ],
-                          );
-                        },
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(userInfo[0].collections[index],
+                                    style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: CustomColors().blue,
+                                        fontWeight: FontWeight.w700)),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),

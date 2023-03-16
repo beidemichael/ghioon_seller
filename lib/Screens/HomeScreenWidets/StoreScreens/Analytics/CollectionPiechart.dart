@@ -101,7 +101,7 @@ class PieChart2State extends State {
                   Text('Collection Percentage',
                       style: TextStyle(
                           fontSize: 30,
-                          color: CustomColors().black,
+                          color: CustomColors().darkBlue2,
                           fontWeight: FontWeight.w600)),
                   const SizedBox(
                     height: 10,

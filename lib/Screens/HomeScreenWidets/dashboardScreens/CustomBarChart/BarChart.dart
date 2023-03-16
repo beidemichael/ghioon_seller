@@ -57,7 +57,7 @@ class BarChartSample3State extends State<BarChartSample3> {
                 child: Text('Store view',
                     style: TextStyle(
                         fontSize: 30,
-                        color: CustomColors().black,
+                        color: CustomColors().darkBlue2,
                         fontWeight: FontWeight.w600)),
               ),
             ),
