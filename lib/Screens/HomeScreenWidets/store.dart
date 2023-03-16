@@ -151,12 +151,11 @@ class _StoreState extends State<Store> {
                         FontAwesomeIcons.solidUser, 'Customers', width)),
                 GestureDetector(
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //       builder: (context) => const Analytics()),
-                      // );
-                      snackBar(context, 'No Analytics yet.', CustomColors().blue, CustomColors().white);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Analytics()),
+                      );
                     },
                     child: StoreList(
                         FontAwesomeIcons.chartPie, 'Analytics', width)),
