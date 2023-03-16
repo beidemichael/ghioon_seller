@@ -42,16 +42,41 @@ class OrdersDatabaseService {
         userPic: (doc.data() as dynamic)['userPic'] ?? '',
         userUid: (doc.data() as dynamic)['userUid'] ?? '',
         sellerId: (doc.data() as dynamic)['sellerId'] ?? '',
+        cancelled: (doc.data() as dynamic)['cancelled'] ?? false,
+        completed: (doc.data() as dynamic)['completed'] ?? false,
       );
     }).toList();
   }
 
   //orders lounges stream
   Stream<List<Orders>> get orders {
-    print(userUid);
-
     return ordersCollection
         .where('sellerId', arrayContains: userUid)
+        .snapshots()
+        .map(_userInfoListFromSnapshot);
+  }
+
+  Stream<List<Orders>> get pendingOrders {
+    return ordersCollection
+        .where('sellerId', arrayContains: userUid)
+        .where('completed', isEqualTo: false)
+        .where('cancelled', isEqualTo: false)
+        .snapshots()
+        .map(_userInfoListFromSnapshot);
+  }
+
+  Stream<List<Orders>> get completedOrders {
+    return ordersCollection
+        .where('sellerId', arrayContains: userUid)
+        .where('completed', isEqualTo: true)
+        .snapshots()
+        .map(_userInfoListFromSnapshot);
+  }
+
+  Stream<List<Orders>> get cancelledOrders {
+    return ordersCollection
+        .where('sellerId', arrayContains: userUid)
+        .where('cancelled', isEqualTo: true)
         .snapshots()
         .map(_userInfoListFromSnapshot);
   }

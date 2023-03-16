@@ -177,17 +177,6 @@ class _DashboardState extends State<Dashboard> {
                 SizedBox(
                   height: 20,
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    'Orders',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontFamily: 'Inter',
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                LineGraphWiget(points: orders)
               ],
             ),
           );

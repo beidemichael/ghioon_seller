@@ -88,9 +88,24 @@ class _OrdersScreenState extends State<OrdersScreen> {
                         .orders,
                     child: AllOrdersScreen(),
                   ),
-                  EmptyScreen(context, 'No pending orders yet.'),
-                  EmptyScreen(context, 'No cancelled orders yet.'),
-                  EmptyScreen(context, 'No completed orders yet.'),
+                  StreamProvider<List<Orders>>.value(
+                    initialData: [],
+                    value: OrdersDatabaseService(userUid: userInfo[0].userUid)
+                        .pendingOrders,
+                    child: AllOrdersScreen(),
+                  ),
+                  StreamProvider<List<Orders>>.value(
+                    initialData: [],
+                    value: OrdersDatabaseService(userUid: userInfo[0].userUid)
+                        .cancelledOrders,
+                    child: AllOrdersScreen(),
+                  ),
+                  StreamProvider<List<Orders>>.value(
+                    initialData: [],
+                    value: OrdersDatabaseService(userUid: userInfo[0].userUid)
+                        .completedOrders,
+                    child: AllOrdersScreen(),
+                  ),
                 ],
               ),
             ),

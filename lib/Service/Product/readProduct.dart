@@ -4,7 +4,7 @@ import 'package:ghioon_seller/Models/models.dart';
 class ReadProductDatabaseService {
   var userUid;
   var barcode;
-  ReadProductDatabaseService({this.userUid,this.barcode});
+  ReadProductDatabaseService({this.userUid, this.barcode});
   final CollectionReference productCollection =
       FirebaseFirestore.instance.collection('Products');
   List<Product> _productListFromSnapshot(QuerySnapshot snapshot) {
@@ -25,8 +25,9 @@ class ReadProductDatabaseService {
         image: (doc.data() as dynamic)['image'] ?? '',
         inStock: (doc.data() as dynamic)['isStock'] ?? '',
         quantity: (doc.data() as dynamic)['quantity'] ?? '',
-         barcode: (doc.data() as dynamic)['barcode'] ?? '',
+        barcode: (doc.data() as dynamic)['barcode'] ?? '',
         documentId: doc.reference.id,
+        
       );
     }).toList();
   }
@@ -38,7 +39,22 @@ class ReadProductDatabaseService {
         .snapshots()
         .map(_productListFromSnapshot);
   }
-   List<ProductBar> _productBarListFromSnapshot(QuerySnapshot snapshot) {
+   Stream<List<Product>> get cancelledProducts {
+    return productCollection
+        .where('userUid', isEqualTo: userUid)
+        .where('completed', isEqualTo: true)
+        .snapshots()
+        .map(_productListFromSnapshot);
+  }
+   Stream<List<Product>> get completedProducts {
+    return productCollection
+        .where('userUid', isEqualTo: userUid)
+        .where('completed', isEqualTo: true)
+        .snapshots()
+        .map(_productListFromSnapshot);
+  }
+
+  List<ProductBar> _productBarListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return ProductBar(
         productId: (doc.data() as dynamic)['productId'] ?? '',
@@ -56,11 +72,12 @@ class ReadProductDatabaseService {
         image: (doc.data() as dynamic)['image'] ?? '',
         inStock: (doc.data() as dynamic)['isStock'] ?? '',
         quantity: (doc.data() as dynamic)['quantity'] ?? '',
-         barcode: (doc.data() as dynamic)['barcode'] ?? '',
+        barcode: (doc.data() as dynamic)['barcode'] ?? '',
         documentId: doc.reference.id,
       );
     }).toList();
   }
+
   Stream<List<ProductBar>> get readProductBarCode {
     return productCollection
         .where('userUid', isEqualTo: userUid)

@@ -17,12 +17,29 @@ class OrdersDetail extends StatefulWidget {
 }
 
 class _OrdersDetailState extends State<OrdersDetail> {
+  double total = 0.0;
+  int orderdItems = 0;
+  calculator(Orders orders, UserInformation userInfo) {
+    total = 0.0;
+    orderdItems = 0;
+    for (int i = 0; i < orders.foodName.length; i++) {
+      if (widget.orders.sellerId[i] == userInfo.userUid) {
+        total = total + orders.foodPrice[i];
+        orderdItems++;
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final userInfo = Provider.of<List<UserInformation>>(context);
+    if (userInfo.isNotEmpty) {
+      calculator(widget.orders, userInfo[0]);
+    }
     return userInfo.isEmpty
         ? Loading()
         : Scaffold(
+            backgroundColor: CustomColors().superLightBlue,
             appBar: PreferredSize(
               preferredSize: const Size.fromHeight(70.0),
               child: AppBar(
@@ -61,7 +78,7 @@ class _OrdersDetailState extends State<OrdersDetail> {
                     width: MediaQuery.of(context).size.width,
                     height: 250,
                     decoration: BoxDecoration(
-                      color: CustomColors().superLightBlue,
+                      color: CustomColors().white,
                       boxShadow: [
                         BoxShadow(
                           color: CustomColors().blue,
@@ -85,7 +102,7 @@ class _OrdersDetailState extends State<OrdersDetail> {
                                 style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 25,
-                                    color: CustomColors().darkBlue,
+                                    color: CustomColors().black,
                                     fontWeight: FontWeight.w600)),
                           ),
                           Marquee(
@@ -96,8 +113,92 @@ class _OrdersDetailState extends State<OrdersDetail> {
                                 style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 25,
-                                    color: CustomColors().darkBlue,
+                                    color: CustomColors().grey,
                                     fontWeight: FontWeight.w400)),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 160,
+                    decoration: BoxDecoration(
+                      color: CustomColors().white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: CustomColors().blue,
+                          spreadRadius: 0.5,
+                          blurRadius: 3,
+                          offset: Offset(0, 2), // changes position of shadow
+                        ),
+                      ],
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Text('Invoice Breakup',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  fontFamily: 'Poppins',
+                                  fontSize: 25,
+                                  color: CustomColors().black,
+                                  fontWeight: FontWeight.w300)),
+                          Divider(),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Total',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 21,
+                                        color: CustomColors().black,
+                                        fontWeight: FontWeight.w300)),
+                                Text(total.toStringAsFixed(0) + ' Birr',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 21,
+                                        color: CustomColors().blue,
+                                        fontWeight: FontWeight.w500)),
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 20.0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text('Orderd Items',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 21,
+                                        color: CustomColors().black,
+                                        fontWeight: FontWeight.w300)),
+                                Text(orderdItems.toString(),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontFamily: 'Poppins',
+                                        fontSize: 21,
+                                        color: CustomColors().blue,
+                                        fontWeight: FontWeight.w500)),
+                              ],
+                            ),
                           ),
                         ],
                       ),
@@ -111,7 +212,7 @@ class _OrdersDetailState extends State<OrdersDetail> {
                     width: MediaQuery.of(context).size.width,
                     height: 400,
                     decoration: BoxDecoration(
-                      color: CustomColors().superLightBlue,
+                      color: CustomColors().white,
                       boxShadow: [
                         BoxShadow(
                           color: CustomColors().blue,
@@ -171,7 +272,7 @@ class _OrdersDetailState extends State<OrdersDetail> {
         // border: Border.all(width: 1, color: Colors.black),
         boxShadow: [
           BoxShadow(
-            color:CustomColors().lightBlue,
+            color: CustomColors().lightBlue,
             spreadRadius: 2,
             blurRadius: 4,
             offset: Offset(0, 4), // changes position of shadow
@@ -191,31 +292,56 @@ class _OrdersDetailState extends State<OrdersDetail> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Marquee(
-                  backDuration: Duration(milliseconds: 500),
-                  directionMarguee: DirectionMarguee.oneDirection,
-                  child: Text(widget.orders.foodName[index],
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 25,
-                          color: CustomColors().darkBlue,
-                          fontWeight: FontWeight.w600)),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width - 194,
+                  child: Marquee(
+                    backDuration: Duration(milliseconds: 500),
+                    directionMarguee: DirectionMarguee.oneDirection,
+                    child: Text(widget.orders.foodName[index],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 25,
+                            color: CustomColors().darkBlue,
+                            fontWeight: FontWeight.w600)),
+                  ),
                 ),
-                Text(widget.orders.foodPrice[index].toString(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 20,
-                        color: CustomColors().blue,
-                        fontWeight: FontWeight.w400)),
-                Text(widget.orders.foodQuantity[index].toString(),
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 20,
-                        color: CustomColors().blue,
-                        fontWeight: FontWeight.w400)),
+                Row(
+                  children: [
+                    Text('Price: ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 20,
+                            color: CustomColors().grey,
+                            fontWeight: FontWeight.w400)),
+                    Text(widget.orders.foodPrice[index].toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 20,
+                            color: CustomColors().blue,
+                            fontWeight: FontWeight.w400)),
+                  ],
+                ),
+                Row(
+                  children: [
+                    Text('Qty: ',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 20,
+                            color: CustomColors().grey,
+                            fontWeight: FontWeight.w400)),
+                    Text(widget.orders.foodQuantity[index].toString(),
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 20,
+                            color: CustomColors().blue,
+                            fontWeight: FontWeight.w400)),
+                  ],
+                ),
               ],
             ),
           ],

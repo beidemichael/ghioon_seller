@@ -9,11 +9,13 @@ import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:ghioon_seller/Shared/loading.dart';
 import 'package:provider/provider.dart';
-
+import 'package:launch_review/launch_review.dart';
 import '../../../Service/auth.dart';
 import '../../../Service/registerDatabase.dart';
 import '../../components/storeList.dart';
 import 'package:ghioon_seller/Service//auth.dart';
+
+import 'SettingPages/LogOut.dart';
 
 class StoreSetting extends StatefulWidget {
   const StoreSetting({super.key});
@@ -24,6 +26,19 @@ class StoreSetting extends StatefulWidget {
 
 class _StoreSettingState extends State<StoreSetting> {
   bool show = false;
+  _showLogoutDialog(BuildContext context) {
+    VoidCallback okCallBack = () => {
+          // Navigator.of(context).pop(),
+        };
+    LogOutMessage alert = LogOutMessage();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +127,7 @@ class _StoreSettingState extends State<StoreSetting> {
               child: StoreList(FontAwesomeIcons.solidFile, 'Feedback', width)),
           GestureDetector(
               onTap: () {
-                // link to playstore
+                LaunchReview.launch(androidAppId: "com.ghioon.ghioon_seller");
               },
               child: StoreList(FontAwesomeIcons.arrowsSpin, 'Upgrade', width)),
           GestureDetector(
@@ -125,8 +140,7 @@ class _StoreSettingState extends State<StoreSetting> {
               child: StoreList(FontAwesomeIcons.info, 'About Us', width)),
           GestureDetector(
               onTap: () async {
-                await FirebaseAuth.instance.signOut();
-                Navigator.of(context).pop();
+                _showLogoutDialog(context);
               },
               child: StoreList(
                   FontAwesomeIcons.rightFromBracket, 'Logout', width)),

@@ -31,9 +31,9 @@ class _BecomeSellerState extends State<BecomeSeller> {
   bool categoryOpen = false;
   bool businessTypeValid = true;
 
-  List collections = [];
-  List collection_description = [];
-  List collection_images = [];
+  List collections = ['Others'];
+  List collection_description = [''];
+  List collection_images = [''];
 
   @override
   Widget build(BuildContext context) {

@@ -25,30 +25,30 @@ class UserInformation {
   List profileImages;
   String profileVideo;
 
-bool notification;
-  UserInformation(
-      {required this.GhioonId,
-      required this.userName,
-      required this.phoneNumber,
-      required this.userUid,
-      required this.approved,
-      required this.documentId,
-      required this.businessNo,
-      required this.businessCategory,
-      required this.businessName,
-      required this.email,
-      required this.collections,
-      required this.collection_images,
-      required this.collection_description,
-      required this.online,
-      required this.address,
-      required this.viewsTime,
-      required this.rating,
-      required this.image,
-      required this.profileImages,
-      required this.profileVideo,
-      required this.notification,
-      });
+  bool notification;
+  UserInformation({
+    required this.GhioonId,
+    required this.userName,
+    required this.phoneNumber,
+    required this.userUid,
+    required this.approved,
+    required this.documentId,
+    required this.businessNo,
+    required this.businessCategory,
+    required this.businessName,
+    required this.email,
+    required this.collections,
+    required this.collection_images,
+    required this.collection_description,
+    required this.online,
+    required this.address,
+    required this.viewsTime,
+    required this.rating,
+    required this.image,
+    required this.profileImages,
+    required this.profileVideo,
+    required this.notification,
+  });
 }
 
 class Categories {
@@ -86,26 +86,26 @@ class Product {
   String documentId;
   String video;
   String barcode;
+ 
 
-  Product({
-    required this.productId,
-    required this.name,
-    required this.description,
-    required this.fixed,
-    required this.price,
-    required this.rangeFrom,
-    required this.rangeTo,
-    required this.Product_Type,
-    required this.Product_collection,
-    required this.rating,
-    required this.category,
-    required this.image,
-    required this.inStock,
-    required this.quantity,
-    required this.documentId,
-    required this.video,
-    required this.barcode,
-  });
+  Product(
+      {required this.productId,
+      required this.name,
+      required this.description,
+      required this.fixed,
+      required this.price,
+      required this.rangeFrom,
+      required this.rangeTo,
+      required this.Product_Type,
+      required this.Product_collection,
+      required this.rating,
+      required this.category,
+      required this.image,
+      required this.inStock,
+      required this.quantity,
+      required this.documentId,
+      required this.video,
+      required this.barcode,});
 }
 
 class ProductBar {
@@ -219,7 +219,6 @@ class Controller {
   });
 }
 
-
 class Orders {
   List foodName;
   List foodPrice;
@@ -253,6 +252,8 @@ class Orders {
   String carrierPhone;
   bool isBeingPrepared;
   List sellerId;
+   bool cancelled;
+  bool completed;
 
   Orders({
     required this.created,
@@ -284,6 +285,8 @@ class Orders {
     required this.isBeingPrepared,
     required this.carrierImage,
     required this.carrierName,
-     required this.sellerId,
+    required this.sellerId,
+    required this.cancelled,
+    required this.completed,
   });
 }
