@@ -30,7 +30,7 @@ class AddCollectionLogic {
 
     await AddCollectionDatabase().addCollection(
       appState.collectionName.text,
-      appState.collectionDescription.text,
+      appState.collectionDescription.text??'',
       appState.imageList,
       userUid,
     );

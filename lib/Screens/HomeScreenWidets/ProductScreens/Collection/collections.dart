@@ -79,7 +79,7 @@ class _CollectionsState extends State<Collections> {
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
-                      itemCount: userInfo[0].collections.length,
+                      itemCount: userInfo[0].collection_description.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
