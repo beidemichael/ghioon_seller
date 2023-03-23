@@ -86,48 +86,51 @@ class _DashboardState extends State<Dashboard> {
                   parent: AlwaysScrollableScrollPhysics()),
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(25.0),
+                  padding: const EdgeInsets.symmetric(vertical: 25.0),
                   child: Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                snackBar(context, 'No Sales yet.',
-                                    CustomColors().blue, CustomColors().white);
-                              },
-                              child: WhiteDashboardGrid(
-                                width: width,
-                                title: "0",
-                                subTitle: 'Sales',
-                                icon: FontAwesomeIcons.chartLine,
-                              ),
-                            ),
-                          ),
+                          // Expanded(
+                          //   child: GestureDetector(
+                          //     onTap: () {
+                          //       snackBar(context, 'No Sales yet.',
+                          //           CustomColors().blue, CustomColors().white);
+                          //     },
+                          //     child: WhiteDashboardGrid(
+                          //       width: width,
+                          //       title: "0",
+                          //       subTitle: 'Sales',
+                          //       icon: FontAwesomeIcons.chartLine,
+                          //     ),
+                          //   ),
+                          // ),
                           const SizedBox(
                             width: 10,
                           ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                snackBar(context, 'No Revenue yet.',
-                                    CustomColors().blue, CustomColors().white);
-                              },
-                              child: BlueDashboardGrid(
-                                width: width,
-                                title: "0",
-                                subTitle: 'Revenue',
-                                icon: FontAwesomeIcons.coins,
-                              ),
-                            ),
-                          ),
+                          // Expanded(
+                          //   child: GestureDetector(
+                          //     onTap: () {
+                          //       snackBar(context, 'No Revenue yet.',
+                          //           CustomColors().blue, CustomColors().white);
+                          //     },
+                          //     child: BlueDashboardGrid(
+                          //       width: width,
+                          //       title: "0",
+                          //       subTitle: 'Revenue',
+                          //       icon: FontAwesomeIcons.coins,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                       const SizedBox(
                         height: 15,
                       ),
+                      const SizedBox(
+                            width: 10,
+                          ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -152,20 +155,20 @@ class _DashboardState extends State<Dashboard> {
                           const SizedBox(
                             width: 10,
                           ),
-                          Expanded(
-                            child: GestureDetector(
-                              onTap: () {
-                                snackBar(context, 'No Customers yet.',
-                                    CustomColors().blue, CustomColors().white);
-                              },
-                              child: WhiteDashboardGrid(
-                                width: width,
-                                title: "0",
-                                subTitle: 'Customers',
-                                icon: FontAwesomeIcons.peopleGroup,
-                              ),
-                            ),
-                          ),
+                          // Expanded(
+                          //   child: GestureDetector(
+                          //     onTap: () {
+                          //       snackBar(context, 'No Customers yet.',
+                          //           CustomColors().blue, CustomColors().white);
+                          //     },
+                          //     child: WhiteDashboardGrid(
+                          //       width: width,
+                          //       title: "0",
+                          //       subTitle: 'Customers',
+                          //       icon: FontAwesomeIcons.peopleGroup,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ],

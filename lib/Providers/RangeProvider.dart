@@ -22,9 +22,9 @@ class RangeData with ChangeNotifier {
 
   final productName = TextEditingController();
   final description = TextEditingController();
-  final fixedPrice = TextEditingController();
-  final oldPrice = TextEditingController();
-  final cost = TextEditingController();
+  final fixedPrice = TextEditingController(text: "1");
+  final oldPrice = TextEditingController(text: "0");
+  final cost = TextEditingController(text: "0");
   final inventory = TextEditingController(text: "1");
   bool fixed = true;
 
@@ -39,8 +39,8 @@ class RangeData with ChangeNotifier {
   final ImagePicker _picker = ImagePicker();
 
   //variables for dropdown
-  String? selectedValue = null;
-  String? selectedCatagoryValue = null;
+  String selectedValue = 'New';
+  String selectedCatagoryValue = 'Others';
 
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
@@ -57,6 +57,9 @@ class RangeData with ChangeNotifier {
   addInventory() {
     //Qty = Qty + 1;
     inventory.text = (int.parse(inventory.text) + 1).toString();
+    notifyListeners();
+  }
+   RefreshState() {
     notifyListeners();
   }
 
@@ -99,7 +102,7 @@ class RangeData with ChangeNotifier {
   }
 
   removeSelectedValue() {
-    selectedValue = null;
+    selectedValue = '';
   }
 
   removeSelectedCatagoryValue() {

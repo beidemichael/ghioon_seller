@@ -86,26 +86,28 @@ class Product {
   String documentId;
   String video;
   String barcode;
- 
+  List viewsTime;
 
-  Product(
-      {required this.productId,
-      required this.name,
-      required this.description,
-      required this.fixed,
-      required this.price,
-      required this.rangeFrom,
-      required this.rangeTo,
-      required this.Product_Type,
-      required this.Product_collection,
-      required this.rating,
-      required this.category,
-      required this.image,
-      required this.inStock,
-      required this.quantity,
-      required this.documentId,
-      required this.video,
-      required this.barcode,});
+  Product({
+    required this.productId,
+    required this.name,
+    required this.description,
+    required this.fixed,
+    required this.price,
+    required this.rangeFrom,
+    required this.rangeTo,
+    required this.Product_Type,
+    required this.Product_collection,
+    required this.rating,
+    required this.category,
+    required this.image,
+    required this.inStock,
+    required this.quantity,
+    required this.documentId,
+    required this.video,
+    required this.barcode,
+    required this.viewsTime,
+  });
 }
 
 class ProductBar {
@@ -126,6 +128,7 @@ class ProductBar {
   String documentId;
   String video;
   String barcode;
+    List viewsTime;
 
   ProductBar({
     required this.productId,
@@ -145,6 +148,7 @@ class ProductBar {
     required this.documentId,
     required this.video,
     required this.barcode,
+    required this.viewsTime
   });
 }
 
@@ -252,7 +256,7 @@ class Orders {
   String carrierPhone;
   bool isBeingPrepared;
   List sellerId;
-   bool cancelled;
+  bool cancelled;
   bool completed;
 
   Orders({

@@ -91,10 +91,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   icon: Icon(FontAwesomeIcons.grip),
                   label: 'Dashboard',
                 ),
-                const BottomNavigationBarItem(
-                  icon: Icon(FontAwesomeIcons.cartShopping),
-                  label: 'Orders',
-                ),
+                // const BottomNavigationBarItem(
+                //   icon: Icon(FontAwesomeIcons.cartShopping),
+                //   label: 'Orders',
+                // ),
                 const BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.tag),
                   label: 'Products',
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   controller: _pageViewController,
                   children: const <Widget>[
                     Dashboard(),
-                    OrdersScreen(),
+                    // OrdersScreen(),
                     Products(),
                     Store()
                   ],

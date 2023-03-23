@@ -30,6 +30,26 @@ class addProductDetail extends StatefulWidget {
 }
 
 class _addProductDetailState extends State<addProductDetail> {
+  dialog() {
+    final appState = Provider.of<RangeData>(context,listen: false);
+    PopupDialog alert =
+        PopupDialog("Are You Sure you want to add the product?", () {
+      print(appState.isLoading);
+      AddProductDetailLogic()
+          .addProduct(context)
+          .then((value) => appState.isLoading = false);
+    }, () {
+      Navigator.pop(context);
+    });
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<RangeData>(context);
@@ -45,199 +65,172 @@ class _addProductDetailState extends State<addProductDetail> {
     }
 
     return Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: ListView(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            children: [
-              TextFormFieldProduct(
-                  "Enter Product Name", appState.productName, "Product Name"),
-              TextFormFieldProDescription(
-                  "Description", appState.description, "Description"),
-              DropdownButtonFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Select Product Type',
-                    enabledBorder: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: CustomColors().lightgrey, width: 2),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    border: OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: CustomColors().white, width: 2),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    // filled: false,
-                    // fillColor: Colors.blueAccent,
-                  ),
-                  validator: (value) =>
-                      value == null ? "Select a country" : null,
-                  dropdownColor: Colors.white,
-                  value: appState.selectedValue,
-                  onChanged: (String? newValue) {
-                    setState(() {
-                      appState.selectedValue = newValue!;
-                    });
-                  },
-                  items: appState.dropdownItems),
-              SizedBox(
-                height: 10,
-              ),
-              DropdownButtonFormField(
-                decoration: InputDecoration(
-                  hintText: 'Select Product Catagory',
-                  enabledBorder: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: CustomColors().lightgrey, width: 2),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide:
-                        BorderSide(color: CustomColors().grey, width: 2),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  // filled: false,
-                  // fillColor: Colors.blueAccent,
-                ),
-                validator: (value) => value == null ? "Select a country" : null,
-                dropdownColor: Colors.white,
-                value: appState.selectedCatagoryValue,
-                onChanged: (String? newValue) {
-                  setState(() {
-                    appState.selectedCatagoryValue = newValue!;
-                  });
-                },
-                items: catagories.toList().map((String items) {
-                  print(items);
-                  print("33333333333333333333333333333333333333333");
+      padding: const EdgeInsets.all(15.0),
+      child: ListView(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        children: [
+          TextFormFieldProduct(
+              "Enter Product Name", appState.productName, "Product Name"),
+          TextFormFieldProDescription(
+              "Description", appState.description, "Description"),
+          // DropdownButtonFormField(
+          //     decoration: InputDecoration(
+          //       hintText: 'Select Product Type',
+          //       enabledBorder: OutlineInputBorder(
+          //         borderSide:
+          //             BorderSide(color: CustomColors().lightgrey, width: 2),
+          //         borderRadius: BorderRadius.circular(20),
+          //       ),
+          //       border: OutlineInputBorder(
+          //         borderSide:
+          //             BorderSide(color: CustomColors().white, width: 2),
+          //         borderRadius: BorderRadius.circular(20),
+          //       ),
+          //       // filled: false,
+          //       // fillColor: Colors.blueAccent,
+          //     ),
+          //     validator: (value) =>
+          //         value == null ? "Select a country" : null,
+          //     dropdownColor: Colors.white,
+          //     value: appState.selectedValue,
+          //     onChanged: (String? newValue) {
+          //       setState(() {
+          //         appState.selectedValue = newValue!;
+          //       });
+          //     },
+          //     items: appState.dropdownItems),
+          // SizedBox(
+          //   height: 10,
+          // ),
+          // DropdownButtonFormField(
+          //   decoration: InputDecoration(
+          //     hintText: 'Select Product Catagory',
+          //     enabledBorder: OutlineInputBorder(
+          //       borderSide:
+          //           BorderSide(color: CustomColors().lightgrey, width: 2),
+          //       borderRadius: BorderRadius.circular(20),
+          //     ),
+          //     border: OutlineInputBorder(
+          //       borderSide:
+          //           BorderSide(color: CustomColors().grey, width: 2),
+          //       borderRadius: BorderRadius.circular(20),
+          //     ),
+          //     // filled: false,
+          //     // fillColor: Colors.blueAccent,
+          //   ),
+          //   validator: (value) => value == null ? "Select a country" : null,
+          //   dropdownColor: Colors.white,
+          //   value: appState.selectedCatagoryValue,
+          //   onChanged: (String? newValue) {
+          //     setState(() {
+          //       appState.selectedCatagoryValue = newValue!;
+          //     });
+          //   },
+          //   items: catagories.toList().map((String items) {
+          //     print(items);
+          //     print("33333333333333333333333333333333333333333");
 
-                  return DropdownMenuItem(
-                    value: items,
-                    child: Text(items),
-                  );
-                }).toList(),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Visibility(
-                visible: !appState.productDescriptionFilled,
-                child: const Center(
-                  child: Text(
-                    "Please fill all inputs",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.red),
-                  ),
-                ),
-              ),
-              const Text(
-                "Price",
-                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-              ),
-              Row(
-                children: [
-                  Flexible(
-                      child: GestureDetector(
-                          onTap: () {
-                            !appState.fixed
-                                ? Provider.of<RangeData>(context, listen: false)
-                                    .switchFixed(appState.fixed)
-                                : null;
-                          },
-                          child: FixedButton(fixed: appState.fixed))),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Flexible(
-                      child: GestureDetector(
-                          onTap: () {
-                            appState.fixed
-                                ? Provider.of<RangeData>(context, listen: false)
-                                    .switchFixed(appState.fixed)
-                                : null;
-                          },
-                          child: RangeButton(fixed: appState.fixed))),
-                ],
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              appState.fixed
-                  ? const FixedInputField()
-                  : const RangeInputField(),
-              const SizedBox(
-                height: 15,
-              ),
-              GestureDetector(
-                  onTap: () async {
-                    print("loading");
+          //     return DropdownMenuItem(
+          //       value: items,
+          //       child: Text(items),
+          //     );
+          //   }).toList(),
+          // ),
 
-                    //Check if image is filled
-                    AddProductDetailLogic().checkImage(context);
-                    //Check if Product Name and Description is filled
-                    AddProductDetailLogic()
-                        .checkProductNameandDescription(context);
-                    //Check if Range and Fixed fields are filled
-                    AddProductDetailLogic().checkFixedAndRange(context);
-                    //If All fields are filled==>
-                    if (appState.fixed) {
-                      if (appState.productDescriptionFilled &&
-                          appState.fixedFilled &&
-                          appState.videoLessThanSix &&
-                          appState.videoSquare) {
-                        appState.isLoading = true;
-                        // AddProductDetailLogic().showDialog(context);
+          SizedBox(
+            height: 10,
+          ),
+          Visibility(
+            visible: !appState.productDescriptionFilled,
+            child: const Center(
+              child: Text(
+                "Please fill all inputs",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w300,
+                    color: Colors.red),
+              ),
+            ),
+          ),
+          // const Text(
+          //   "Price",
+          //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          // ),
+          // Row(
+          //   children: [
+          //     Flexible(
+          //         child: GestureDetector(
+          //             onTap: () {
+          //               !appState.fixed
+          //                   ? Provider.of<RangeData>(context, listen: false)
+          //                       .switchFixed(appState.fixed)
+          //                   : null;
+          //             },
+          //             child: FixedButton(fixed: appState.fixed))),
+          //     const SizedBox(
+          //       width: 15,
+          //     ),
+          //     Flexible(
+          //         child: GestureDetector(
+          //             onTap: () {
+          //               appState.fixed
+          //                   ? Provider.of<RangeData>(context, listen: false)
+          //                       .switchFixed(appState.fixed)
+          //                   : null;
+          //             },
+          //             child: RangeButton(fixed: appState.fixed))),
+          //   ],
+          // ),
+          const SizedBox(
+            height: 10,
+          ),
+          // appState.fixed
+          //     ? const FixedInputField()
+          //     : const RangeInputField(),
+          const SizedBox(
+            height: 15,
+          ),
+          GestureDetector(
+              onTap: () async {
+                print("loading");
 
-                        PopupDialog alert = PopupDialog(
-                            "Are You Sure you want to add the product?", () {
-                          print(appState.isLoading);
-                          AddProductDetailLogic()
-                              .addProduct(context)
-                              .then((value) => appState.isLoading = false);
-                        }, () {
-                          Navigator.pop(context);
-                        });
+                //Check if image is filled
+                AddProductDetailLogic().checkImage(context);
+                //Check if Product Name and Description is filled
+                AddProductDetailLogic().checkProductNameandDescription(context);
+                //Check if Range and Fixed fields are filled
+                AddProductDetailLogic().checkFixedAndRange(context);
+                //If All fields are filled==>
+                if (appState.fixed) {
+                  if (appState.imageFilled &&
+                      appState.productDescriptionFilled &&
+                      appState.fixedFilled &&
+                      appState.videoLessThanSix &&
+                      appState.videoSquare) {
+                    appState.isLoading = true;
+                    // AddProductDetailLogic().showDialog(context);
+                    dialog();
+                  }
+                } else {
+                  if (appState.imageFilled &&
+                      appState.productDescriptionFilled &&
+                      appState.rangefilled &&
+                      appState.videoLessThanSix &&
+                      appState.videoSquare) {
+                    appState.isLoading = true;
+                    // AddProductDetailLogic().showDialog(context);
 
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return alert;
-                          },
-                        );
-                      }
-                    } else {
-                      if (appState.productDescriptionFilled &&
-                          appState.rangefilled &&
-                          appState.videoLessThanSix &&
-                          appState.videoSquare) {
-                        appState.isLoading = true;
-                        // AddProductDetailLogic().showDialog(context);
+                    dialog();
+                  }
+                }
 
-                        PopupDialog alert = PopupDialog(
-                            "Are You Sure you want to add the product?", () {
-                          print(appState.isLoading);
-                          AddProductDetailLogic()
-                              .addProduct(context)
-                              .then((value) => appState.isLoading = false);
-                        }, () {
-                          Navigator.pop(context);
-                        });
-
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return alert;
-                          },
-                        );
-                      }
-                    }
-
-                    print("not loading");
-                  },
-                  child: BlueButton(text: 'Continue'))
-            ]));
+                print("not loading");
+              },
+              child: BlueButton(text: 'Continue'))
+        ],
+      ),
+    );
   }
 }

@@ -19,16 +19,20 @@ class AddProductDetailLogic {
         emptyImage++;
         if (appState.Images.length != 1) {
           appState.Images.removeAt(i);
+          appState.RefreshState();
         }
       }
     }
     if (emptyImage == appState.Images.length) {
       appState.imageFilled = false;
+      appState.RefreshState();
     } else {
       appState.imageFilled = true;
+      appState.RefreshState();
     }
     print('emptyImage: ' + emptyImage.toString());
     print('appStateImage: ' + appState.Images.length.toString());
+    appState.RefreshState();
   }
 
   checkVideo(BuildContext context, bool videoSquare, bool videoLessThanSix) {
@@ -37,19 +41,23 @@ class AddProductDetailLogic {
     appState.videoLessThanSix = videoLessThanSix;
 
     appState.videoSquare = videoSquare;
+    appState.RefreshState();
   }
 
   checkProductNameandDescription(BuildContext context) {
     final appState = Provider.of<RangeData>(context, listen: false);
 
     if (appState.productName.value.text.isNotEmpty &&
-        appState.description.value.text.isNotEmpty &&
-        appState.selectedValue != null &&
-        appState.selectedCatagoryValue != null) {
+        appState.description.value.text.isNotEmpty 
+        // &&
+        // appState.selectedValue != null &&
+        // appState.selectedCatagoryValue != null
+        ) {
       appState.productDescriptionFilled = true;
     } else {
       appState.productDescriptionFilled = false;
     }
+    appState.RefreshState();
   }
 
   checkFixedAndRange(BuildContext context) {
@@ -58,21 +66,23 @@ class AddProductDetailLogic {
     if (appState.fixed) {
       //Fixed Product
       //Check if Fixed input fields are filled
-      if (appState.fixedPrice.value.text.isNotEmpty &&
-          appState.oldPrice.value.text.isNotEmpty &&
-          appState.cost.value.text.isNotEmpty) {
+
+      // if (appState.fixedPrice.value.text.isNotEmpty &&
+      //     appState.oldPrice.value.text.isNotEmpty &&
+      //     appState.cost.value.text.isNotEmpty) {
         Provider.of<RangeData>(context, listen: false).switchfixedFilled(true);
         appState.priceList.clear();
         appState.rangeToList.clear();
         appState.rangeFromList.clear();
-        appState.priceList.add(double.parse(appState.fixedPrice.text));
-        appState.rangeToList.add(int.parse(appState.fixedPrice.text));
-        appState.rangeFromList.add(int.parse(appState.oldPrice.text));
+        appState.priceList.add(0.0);
+        appState.rangeToList.add(0);
+        appState.rangeFromList.add(0);
 
         print("fixed product");
-      } else {
-        Provider.of<RangeData>(context, listen: false).switchfixedFilled(false);
-      }
+      // } else {
+      //   Provider.of<RangeData>(context, listen: false).switchfixedFilled(false);
+      // }
+
     } else {
       //Range Product
 
@@ -101,6 +111,7 @@ class AddProductDetailLogic {
         }
       }
     }
+    appState.RefreshState();
   }
 
   uploadToDatabase(BuildContext context) async {
@@ -115,8 +126,8 @@ class AddProductDetailLogic {
         appState.priceList,
         appState.rangeToList,
         appState.rangeFromList,
-        appState.selectedValue!,
-        appState.selectedCatagoryValue!,
+        appState.selectedValue,
+        appState.selectedCatagoryValue,
         5,
         'food',
         appState.imageList,
@@ -124,9 +135,11 @@ class AddProductDetailLogic {
         true,
         int.parse(appState.inventory.text),
         userUid);
+        appState.RefreshState();
   }
 
   addProduct(BuildContext context) async {
+    print('started uplading');
     final appState = Provider.of<RangeData>(context, listen: false);
     //appState.isLoading = true;
     final user = FirebaseAuth.instance.currentUser;

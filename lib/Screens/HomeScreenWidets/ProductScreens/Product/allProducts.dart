@@ -110,6 +110,7 @@ class _AllProductState extends State<AllProduct> {
                       edit: true,
                       item: products[index],
                       index: index,
+                      // view:products[index].viewsTime,
                     ),
                   ),
                 );

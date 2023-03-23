@@ -126,7 +126,9 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                                     video:
                                                         products[index].video,
                                                     barcode: products[index]
-                                                        .barcode),
+                                                        .barcode,
+                                                        viewsTime: products[index].viewsTime
+                                                        ),
                                               )),
                                     );
                                   },
@@ -140,6 +142,8 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                       edit: true,
                                       item: products[index],
                                       index: index,
+                                      // view: products[index].viewsTime,
+                                     
                                     ),
                                   ),
                                 );
