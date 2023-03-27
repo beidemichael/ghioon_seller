@@ -2,6 +2,9 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 
 import '../../../Shared/customColors.dart';
 
@@ -13,6 +16,7 @@ class TooManyTrialsBlurryDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
       child: AlertDialog(
@@ -55,7 +59,7 @@ class TooManyTrialsBlurryDialog extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 25.0, vertical: 25.0),
                     child: Text(
-                      "You've requested verification code too many times, please try again after 24 hours.",
+                      Language().too_many_attempt[languageprov.LanguageIndex],
                       style: TextStyle(
                           color: Colors.grey[900], fontWeight: FontWeight.w300),
                     )),
@@ -73,8 +77,8 @@ class TooManyTrialsBlurryDialog extends StatelessWidget {
                         bottomLeft: Radius.circular(30.0),
                         bottomRight: Radius.circular(30.0)),
                   ),
-                  child: const Center(
-                    child: Text('OK',
+                  child: Center(
+                    child: Text(Language().ok[languageprov.LanguageIndex],
                         style: TextStyle(
                             fontSize: 20.0,
                             color: Colors.black,

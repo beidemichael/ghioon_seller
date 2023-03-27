@@ -6,6 +6,7 @@ import 'package:ghioon_seller/Providers/EditProfileProvider.dart';
 import 'package:ghioon_seller/Providers/MapProvider.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Providers/FeedbackProvider.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Service/Collection/readCollection.dart';
 import 'package:ghioon_seller/Service/Collection/readCollectionItems.dart';
 import 'package:ghioon_seller/Service/Product/readProduct.dart';
@@ -36,7 +37,7 @@ void main() async {
           final user = Provider.of<UserAuth?>(context);
           return user == null
               ? MultiProvider(
-                   providers: [
+                  providers: [
                     ChangeNotifierProvider(
                       create: (context) => RangeData(),
                     ),
@@ -93,7 +94,6 @@ void main() async {
                       value: ReadProductDatabaseService(userUid: user.uid)
                           .readProduct,
                     ),
-                    
                     StreamProvider<List<Collection>>.value(
                       initialData: [],
                       value: ReadCollectionDatabaseService(userUid: user.uid)
@@ -106,6 +106,12 @@ void main() async {
                     StreamProvider<List<Controller>>.value(
                       initialData: [],
                       value: ControllerDatabaseService().controller,
+                    ),
+                    ChangeNotifierProvider(
+                      create: (_) {
+                        LanguageProvider().loadSelectedLanguageIndex;
+                      },
+                      //create: (context) => LanguageProvider().loadSelectedLanguageIndex,
                     ),
                   ],
                   child: const MyApp(),

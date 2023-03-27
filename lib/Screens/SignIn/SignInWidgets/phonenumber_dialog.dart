@@ -2,6 +2,9 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 
 import '../../../Shared/customColors.dart';
 
@@ -14,6 +17,7 @@ class PhoneBlurryDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: AlertDialog(
@@ -81,7 +85,8 @@ class PhoneBlurryDialog extends StatelessWidget {
                             ),
                           ),
                           child: Center(
-                            child: Text('NO',
+                            child: Text(
+                                Language().no[languageprov.LanguageIndex],
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.grey[500],
@@ -106,8 +111,9 @@ class PhoneBlurryDialog extends StatelessWidget {
                                 topLeft: Radius.circular(30.0),
                                 bottomRight: Radius.circular(30.0)),
                           ),
-                          child: const Center(
-                            child: Text('YES',
+                          child: Center(
+                            child: Text(
+                                Language().yes[languageprov.LanguageIndex],
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.black,

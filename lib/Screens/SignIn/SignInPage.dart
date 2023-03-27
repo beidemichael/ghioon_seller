@@ -5,15 +5,20 @@ import 'dart:async';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/Select_language.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
-
+import 'package:ghioon_seller/Screens/components/storeList.dart';
+import 'package:ghioon_seller/Shared/constants.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 
 import '../../Service/auth.dart';
-
+import 'package:provider/provider.dart';
 import 'SignInWidgets/error_signingin.dart';
 import 'SignInWidgets/expired_code_blury_dialog.dart';
 import 'SignInWidgets/phonenumber_dialog.dart';
 import 'SignInWidgets/too_many_times.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SignInPage extends StatefulWidget {
   SignInPage({super.key});
@@ -149,12 +154,31 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
         child: ListView(
           shrinkWrap: true,
           children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const LanguageSelectionPage()),
+                      );
+                    },
+                    child: StoreList(
+                        FontAwesomeIcons.lock,
+                        languageprov.languagesList[languageprov.LanguageIndex],
+                        ScreenSize().ScreenWidth(context))),
+              ],
+            ),
             Form(
               key: _formKey,
               child: Column(
@@ -164,7 +188,7 @@ class _SignInPageState extends State<SignInPage> {
                     'assets/undraw_web_shopping_re_owap.png',
                     height: MediaQuery.of(context).size.height * .3,
                   ),
-                  const Text('Enter Your Phone',
+                  Text(Language().enter_phone[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 40.0,
                           color: Colors.black,
@@ -175,10 +199,10 @@ class _SignInPageState extends State<SignInPage> {
                   // ignore: prefer_const_constructors
                   Visibility(
                     visible: !otpVisible,
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 40.0),
                       child: Text(
-                          'You’ll receive 6 digit code for phone number verification',
+                          Language().receive6digit[languageprov.LanguageIndex],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 20.0,
@@ -192,7 +216,7 @@ class _SignInPageState extends State<SignInPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 40.0),
                       child: Text(
                           // ignore: prefer_interpolation_to_compose_strings
-                          'Please enter the activation code we have sent via SMS to:  ' +
+                          Language().enterOtp[languageprov.LanguageIndex] +
                               wholePhoneNumber,
                           style: const TextStyle(
                               fontSize: 20.0,
@@ -275,7 +299,8 @@ class _SignInPageState extends State<SignInPage> {
                                     fontWeight: FontWeight.w500),
                                 decoration: InputDecoration(
                                   border: InputBorder.none,
-                                  labelText: 'Phonenumber',
+                                  labelText: Language()
+                                      .phonenumber[languageprov.LanguageIndex],
                                   focusColor: Colors.orange[900],
                                   labelStyle: TextStyle(
                                       color: Colors.grey[500],
@@ -295,7 +320,7 @@ class _SignInPageState extends State<SignInPage> {
                       padding: const EdgeInsets.symmetric(horizontal: 50),
                       child: TextFormField(
                         validator: (val) => val!.length != 6
-                            ? 'Code should be 6 digits long'
+                            ? Language().mustbe6[languageprov.LanguageIndex]
                             : null,
                         textAlign: TextAlign.center,
                         onChanged: (val) {
@@ -396,7 +421,11 @@ class _SignInPageState extends State<SignInPage> {
                               size: 50.0,
                             ))
                           : BlueButton(
-                              text: !otpVisible ? 'Submit' : 'Login')),
+                              text: !otpVisible
+                                  ? Language()
+                                      .submit[languageprov.LanguageIndex]
+                                  : Language()
+                                      .login[languageprov.LanguageIndex])),
                   const SizedBox(
                     height: 20,
                   ),

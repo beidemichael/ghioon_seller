@@ -1,7 +1,9 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 import '../home.dart';
 
 class PendingScreen extends StatelessWidget {
@@ -9,6 +11,7 @@ class PendingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -21,7 +24,7 @@ class PendingScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
             ),
           ),
-          const Text('Thank you for submitting',
+          Text(Language().Thank_you[languageprov.LanguageIndex],
               style: TextStyle(
                   fontSize: 20.0,
                   color: Color.fromARGB(255, 156, 156, 156),
@@ -33,7 +36,7 @@ class PendingScreen extends StatelessWidget {
               //   MaterialPageRoute(builder: (context) => const HomeScreen()),
               // );
             },
-            child: const Text('Pending for Approval...',
+            child: Text(Language().pending[languageprov.LanguageIndex],
                 style: TextStyle(
                     fontSize: 30.0,
                     color: Color.fromARGB(255, 133, 133, 133),

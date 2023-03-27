@@ -2,6 +2,9 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 
 import '../../../Shared/customColors.dart';
 
@@ -13,6 +16,7 @@ class BlurryDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: Stack(
@@ -37,7 +41,7 @@ class BlurryDialog extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          "Expired",
+                          Language().expired[languageprov.LanguageIndex],
                           style: TextStyle(
                               fontSize: 24.0,
                               color: Colors.grey[900],
@@ -57,7 +61,7 @@ class BlurryDialog extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 25.0, vertical: 25.0),
                           child: Text(
-                            "The Verification code we have sent has now Expired, please re-submit your phone number to recieve another Verifiacation code.",
+                            Language().otp_expired[languageprov.LanguageIndex],
                             style: TextStyle(
                                 color: Colors.grey[900],
                                 fontWeight: FontWeight.w300),
@@ -70,14 +74,14 @@ class BlurryDialog extends StatelessWidget {
                       },
                       child: Container(
                         padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-                        decoration:  BoxDecoration(
+                        decoration: BoxDecoration(
                           color: CustomColors().blue,
                           borderRadius: const BorderRadius.only(
                               bottomLeft: Radius.circular(30.0),
                               bottomRight: Radius.circular(30.0)),
                         ),
-                        child: const Center(
-                          child: Text('OK',
+                        child: Center(
+                          child: Text(Language().ok[languageprov.LanguageIndex],
                               style: TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,
@@ -88,24 +92,6 @@ class BlurryDialog extends StatelessWidget {
                   ],
                 ),
               ),
-              // content: new Text(
-              //   content,
-              //   style: textStyle,
-              // ),
-              // actions: <Widget>[
-              //   new FlatButton(
-              //     child: new Text("Continue"),
-              //     onPressed: () {
-              //       continueCallBack();
-              //     },
-              //   ),
-              //   new FlatButton(
-              //     child: Text("Cancel"),
-              //     onPressed: () {
-              //       Navigator.of(context).pop();
-              //     },
-              //   ),
-              // ],
             ),
           ],
         ));

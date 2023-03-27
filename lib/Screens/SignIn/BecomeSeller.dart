@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
 import 'package:ghioon_seller/Service/lastId.dart';
 import 'package:ghioon_seller/Service/registerDatabase.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 class BecomeSeller extends StatefulWidget {
@@ -39,6 +41,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
   Widget build(BuildContext context) {
     final categories = Provider.of<List<Categories>>(context);
     final lastid = Provider.of<List<LastId>>(context);
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -57,7 +60,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text('Become a Seller',
+                  Text(Language().become_seller[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 38.0,
                           color: Colors.black,
@@ -65,11 +68,20 @@ class _BecomeSellerState extends State<BecomeSeller> {
                   const SizedBox(
                     height: 20,
                   ),
-                  TextField('Full Name', 'sellerName', true),
-                  TextField('Business Name', 'businessName', true),
-                  TextField('License Number(optional)', 'businessNo', false),
-                  TextField('Email(optional)', 'email', false),
-                  TextField('Address', 'address', true),
+                  TextField(Language().full_name[languageprov.LanguageIndex],
+                      'sellerName', true),
+                  TextField(
+                      Language().business_name[languageprov.LanguageIndex],
+                      'businessName',
+                      true),
+                  TextField(Language().license_num[languageprov.LanguageIndex],
+                      'businessNo', false),
+                  TextField(
+                      Language().email_optional[languageprov.LanguageIndex],
+                      'email',
+                      false),
+                  TextField(Language().address[languageprov.LanguageIndex],
+                      'address', true),
                   const SizedBox(
                     height: 20,
                   ),

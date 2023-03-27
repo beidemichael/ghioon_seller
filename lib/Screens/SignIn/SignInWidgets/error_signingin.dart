@@ -2,17 +2,20 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 
 class ErrorSigningInBlurryDialog extends StatelessWidget {
- 
   VoidCallback okCallBack;
 
-  ErrorSigningInBlurryDialog( this.okCallBack);
+  ErrorSigningInBlurryDialog(this.okCallBack);
   TextStyle textStyle = const TextStyle(color: Colors.black);
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: AlertDialog(
@@ -35,10 +38,12 @@ class ErrorSigningInBlurryDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Error",
-                      style: TextStyle(fontSize: 24.0,color: Colors.grey[900],fontWeight: FontWeight.w600),
+                      Language().error[languageprov.LanguageIndex],
+                      style: TextStyle(
+                          fontSize: 24.0,
+                          color: Colors.grey[900],
+                          fontWeight: FontWeight.w600),
                     ),
-                   
                   ],
                 ),
                 const SizedBox(
@@ -50,12 +55,14 @@ class ErrorSigningInBlurryDialog extends StatelessWidget {
                 ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 25.0),
-                    child: 
-                    Text("Invalid code"
-                    ,style: TextStyle(color: Colors.grey[900],fontWeight: FontWeight.w300),
-                    )
-                  ),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 25.0, vertical: 25.0),
+                      child: Text(
+                        Language().invalid_code[languageprov.LanguageIndex],
+                        style: TextStyle(
+                            color: Colors.grey[900],
+                            fontWeight: FontWeight.w300),
+                      )),
                 ),
                 InkWell(
                   onTap: () {
@@ -63,25 +70,24 @@ class ErrorSigningInBlurryDialog extends StatelessWidget {
                   },
                   child: Container(
                     padding: const EdgeInsets.only(top: 20.0, bottom: 20.0),
-                    decoration:  BoxDecoration(
+                    decoration: BoxDecoration(
                       color: CustomColors().blue,
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(30.0),
                           bottomRight: Radius.circular(30.0)),
                     ),
-                    child: const Center(
-                      child: Text('OK',
-                              style: TextStyle(
-                                  fontSize: 20.0,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w300)),
+                    child: Center(
+                      child: Text(Language().ok[languageprov.LanguageIndex],
+                          style: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.black,
+                              fontWeight: FontWeight.w300)),
                     ),
                   ),
                 ),
               ],
             ),
           ),
-      
         ));
   }
 }

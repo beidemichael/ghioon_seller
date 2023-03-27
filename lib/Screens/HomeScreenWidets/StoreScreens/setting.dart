@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/Feedback.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/Select_language.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/aboutUs.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/privacy_terms.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:ghioon_seller/Shared/loading.dart';
 import 'package:provider/provider.dart';
 import 'package:launch_review/launch_review.dart';
@@ -44,6 +47,7 @@ class _StoreSettingState extends State<StoreSetting> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     final userInfo = Provider.of<List<UserInformation>>(context);
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
@@ -55,7 +59,7 @@ class _StoreSettingState extends State<StoreSetting> {
                 mainAxisSize: MainAxisSize.min,
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  Text('Setting',
+                  Text(Language().setting[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 30.0,
                           color: CustomColors().white,
@@ -105,7 +109,9 @@ class _StoreSettingState extends State<StoreSetting> {
                     });
                   },
                   child: StoreList(
-                      FontAwesomeIcons.solidUser, 'Notification', width)),
+                      FontAwesomeIcons.solidUser,
+                      Language().notification[languageprov.LanguageIndex],
+                      width)),
             ],
           ),
           GestureDetector(
@@ -116,7 +122,19 @@ class _StoreSettingState extends State<StoreSetting> {
                 );
               },
               child: StoreList(
-                  FontAwesomeIcons.lock, 'Terms and Conditions', width)),
+                  FontAwesomeIcons.lock,
+                  Language().Term_condition[languageprov.LanguageIndex],
+                  width)),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const LanguageSelectionPage()),
+                );
+              },
+              child: StoreList(FontAwesomeIcons.lock,
+                  Language().language[languageprov.LanguageIndex], width)),
           GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -124,12 +142,14 @@ class _StoreSettingState extends State<StoreSetting> {
                   MaterialPageRoute(builder: (context) => const FeedbackPage()),
                 );
               },
-              child: StoreList(FontAwesomeIcons.solidFile, 'Feedback', width)),
+              child: StoreList(FontAwesomeIcons.solidFile,
+                  Language().feedback[languageprov.LanguageIndex], width)),
           GestureDetector(
               onTap: () {
                 LaunchReview.launch(androidAppId: "com.ghioon.ghioon_seller");
               },
-              child: StoreList(FontAwesomeIcons.arrowsSpin, 'Upgrade', width)),
+              child: StoreList(FontAwesomeIcons.arrowsSpin,
+                  Language().upgrade[languageprov.LanguageIndex], width)),
           GestureDetector(
               onTap: () {
                 Navigator.push(
@@ -137,13 +157,14 @@ class _StoreSettingState extends State<StoreSetting> {
                   MaterialPageRoute(builder: (context) => const AboutUs()),
                 );
               },
-              child: StoreList(FontAwesomeIcons.info, 'About Us', width)),
+              child: StoreList(FontAwesomeIcons.info,
+                  Language().about[languageprov.LanguageIndex], width)),
           GestureDetector(
               onTap: () async {
                 _showLogoutDialog(context);
               },
-              child: StoreList(
-                  FontAwesomeIcons.rightFromBracket, 'Logout', width)),
+              child: StoreList(FontAwesomeIcons.rightFromBracket,
+                  Language().logout[languageprov.LanguageIndex], width)),
         ],
       ),
     );
@@ -155,6 +176,7 @@ class _StoreSettingState extends State<StoreSetting> {
   }
 
   Widget Switch(UserInformation userInfo) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return AnimatedContainer(
       height: show ? 140 : 62,
       width: 200,
@@ -205,8 +227,8 @@ class _StoreSettingState extends State<StoreSetting> {
                       bottomLeft: Radius.circular(15),
                     ),
                   ),
-                  child: const Center(
-                    child: Text('ON',
+                  child: Center(
+                    child: Text(Language().on[languageprov.LanguageIndex],
                         style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 20.0,
@@ -234,8 +256,8 @@ class _StoreSettingState extends State<StoreSetting> {
                         topRight: Radius.circular(15),
                         bottomRight: Radius.circular(15)),
                   ),
-                  child: const Center(
-                    child: Text('OFF',
+                  child: Center(
+                    child: Text(Language().off[languageprov.LanguageIndex],
                         style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 20.0,
