@@ -4,10 +4,6 @@ import 'package:flutter/material.dart';
 
 import '../home.dart';
 
-
-
-
-
 class PendingScreen extends StatelessWidget {
   const PendingScreen({super.key});
 
@@ -25,7 +21,7 @@ class PendingScreen extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
             ),
           ),
-          const Text('Thankyou for submitting',
+          const Text('Thank you for submitting',
               style: TextStyle(
                   fontSize: 20.0,
                   color: Color.fromARGB(255, 156, 156, 156),
