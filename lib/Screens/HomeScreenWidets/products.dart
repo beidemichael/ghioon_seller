@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Providers/AppState.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/collections.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/InventoryScan/InventoryScanner.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/allProducts.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/graph/piechart.dart';
 import 'package:ghioon_seller/Screens/components/LongProductGrid.dart';
 import 'package:ghioon_seller/Screens/components/ShortProductGrid.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/models.dart';
@@ -28,6 +30,7 @@ class _ProductsState extends State<Products> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     final appState = Provider.of<AppState>(context);
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       // drawer: Drawer(),
       appBar: PreferredSize(
@@ -38,7 +41,7 @@ class _ProductsState extends State<Products> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Text('Products',
+                Text(Language().products[languageprov.LanguageIndex],
                     style: TextStyle(
                         fontSize: 30.0,
                         color: Colors.white,
@@ -57,7 +60,8 @@ class _ProductsState extends State<Products> {
             iconTheme: const IconThemeData(color: Colors.white)),
       ),
       body: ListView(
-        physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
         children: [
           Padding(
             padding: const EdgeInsets.all(25.0),
@@ -80,7 +84,8 @@ class _ProductsState extends State<Products> {
                               create: (context) => RangeData(),
                               child: LongProductGrid(
                                 width: width,
-                                title: "All \n Products",
+                                title: Language()
+                                    .all_products[languageprov.LanguageIndex],
                                 icon: FontAwesomeIcons.tags,
                               ),
                             ),
@@ -100,7 +105,8 @@ class _ProductsState extends State<Products> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              print("Collection");
+                              print(Language()
+                                  .collections[languageprov.LanguageIndex]);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -141,7 +147,9 @@ class _ProductsState extends State<Products> {
                                       const SizedBox(
                                         height: 15,
                                       ),
-                                      Text("Collections",
+                                      Text(
+                                          Language().collections[
+                                              languageprov.LanguageIndex],
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                               fontFamily: 'Poppins',
@@ -172,7 +180,8 @@ class _ProductsState extends State<Products> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print("Inventory Scanner");
+                    print(Language()
+                        .inventory_scanner[languageprov.LanguageIndex]);
                     appState.barCode = '3';
                     Provider.of<AppState>(context, listen: false).refresh();
 
@@ -187,12 +196,12 @@ class _ProductsState extends State<Products> {
                     width: width,
                     child: ShortProductGrid(
                       width: width,
-                      title: "Barcode \n Scanner",
+                      title: Language()
+                          .barcode_scanner[languageprov.LanguageIndex],
                       icon: FontAwesomeIcons.barcode,
                     ),
                   ),
                 ),
-               
                 const SizedBox(
                   height: 20,
                 ),

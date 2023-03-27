@@ -106,4 +106,9 @@ class Language {
   List<String> no_customers = ["No Customers yet", "እስካሁን ምንም ደንበኛ የለም"];
   List<String> no_revenue = ["No Revenue yet", "እስካሁን ምንም ገቢ የለም"];
   List<String> no_sales = ["No Sales yet", "እስካሁን ምንም ሽያጭ የለም"];
+
+//products
+  List<String> all_products = ["All \n Products", "ሁሉም \n ምርቶች"];
+  List<String> collections = ["Collections", "ስብስቦች"];
+  List<String> customers = ["Customers", "ደንበኞች"];
 }
