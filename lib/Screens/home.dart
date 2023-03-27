@@ -3,11 +3,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/Orders.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/dashboard.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/products.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/store.dart';
 import 'package:ghioon_seller/Screens/update/optional_update.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:ghioon_seller/Shared/loading.dart';
 import 'package:provider/provider.dart';
 
@@ -61,6 +63,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final controller = Provider.of<List<Controller>>(context);
     if (controller.isNotEmpty) {
       netVersion = controller[0].sellerVersion - appVersion;
@@ -87,21 +90,21 @@ class _HomeScreenState extends State<HomeScreen> {
               },
               // ignore: prefer_const_literals_to_create_immutables
               items: [
-                const BottomNavigationBarItem(
+                BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.grip),
-                  label: 'Dashboard',
+                  label: Language().dashboard[languageprov.LanguageIndex],
                 ),
                 // const BottomNavigationBarItem(
                 //   icon: Icon(FontAwesomeIcons.cartShopping),
                 //   label: 'Orders',
                 // ),
-                const BottomNavigationBarItem(
+                BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.tag),
-                  label: 'Products',
+                  label: Language().products[languageprov.LanguageIndex],
                 ),
-                const BottomNavigationBarItem(
+                BottomNavigationBarItem(
                   icon: Icon(FontAwesomeIcons.store),
-                  label: 'Store',
+                  label: Language().store[languageprov.LanguageIndex],
                 ),
               ],
             ),

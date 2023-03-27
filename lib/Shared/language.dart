@@ -94,4 +94,16 @@ class Language {
     "You've requested verification code too many times, please try again after 24 hours",
     "የማረጋገጫ ኮድ ብዙ ጊዜ ጠይቀሃል፣ እባክህ ከ24 ሰዓታት በኋላ እንደገና ሞክር"
   ];
+
+  //home
+  List<String> dashboard = ["Dashboard", "ዳሽቦርድ"];
+  List<String> products = ["Products", "ምርቶች"];
+  List<String> store = ["Store", "ሱቅ"];
+  //Dashboard
+  List<String> sales = ["Sales", "ሽያጭ"];
+  List<String> revenue = ["Revenue", "ገቢ"];
+  List<String> customers = ["Customers", "ደንበኞች"];
+  List<String> no_customers = ["No Customers yet", "እስካሁን ምንም ደንበኛ የለም"];
+  List<String> no_revenue = ["No Revenue yet", "እስካሁን ምንም ገቢ የለም"];
+  List<String> no_sales = ["No Sales yet", "እስካሁን ምንም ሽያጭ የለም"];
 }

@@ -2,9 +2,11 @@ import 'package:draw_graph/models/feature.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/dashboardScreens/linechart.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/dashboardScreens/graphPoints.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 import 'package:draw_graph/draw_graph.dart';
 import '../../Models/models.dart';
@@ -49,6 +51,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
+    var languageprov = Provider.of<LanguageProvider>(context);
     final products = Provider.of<List<Product>>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
     return userInfo.isEmpty
@@ -61,7 +64,7 @@ class _DashboardState extends State<Dashboard> {
                   mainAxisSize: MainAxisSize.min,
                   // ignore: prefer_const_literals_to_create_immutables
                   children: [
-                    Text('Dashboard',
+                    Text(Language().dashboard[languageprov.LanguageIndex],
                         style: TextStyle(
                             fontSize: 30.0,
                             // ignore: prefer_const_literals_to_create_immutables
@@ -95,13 +98,13 @@ class _DashboardState extends State<Dashboard> {
                           // Expanded(
                           //   child: GestureDetector(
                           //     onTap: () {
-                          //       snackBar(context, 'No Sales yet.',
+                          //       snackBar(context, Language().no_sales[languageprov.LanguageIndex],
                           //           CustomColors().blue, CustomColors().white);
                           //     },
                           //     child: WhiteDashboardGrid(
                           //       width: width,
                           //       title: "0",
-                          //       subTitle: 'Sales',
+                          //       subTitle: Language().sales[languageprov.LanguageIndex],
                           //       icon: FontAwesomeIcons.chartLine,
                           //     ),
                           //   ),
@@ -112,13 +115,13 @@ class _DashboardState extends State<Dashboard> {
                           // Expanded(
                           //   child: GestureDetector(
                           //     onTap: () {
-                          //       snackBar(context, 'No Revenue yet.',
+                          //       snackBar(context, Language().no_revenue[languageprov.LanguageIndex],
                           //           CustomColors().blue, CustomColors().white);
                           //     },
                           //     child: BlueDashboardGrid(
                           //       width: width,
                           //       title: "0",
-                          //       subTitle: 'Revenue',
+                          //       subTitle: Language().revenue[languageprov.LanguageIndex],
                           //       icon: FontAwesomeIcons.coins,
                           //     ),
                           //   ),
@@ -129,8 +132,8 @@ class _DashboardState extends State<Dashboard> {
                         height: 15,
                       ),
                       const SizedBox(
-                            width: 10,
-                          ),
+                        width: 10,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
@@ -147,7 +150,8 @@ class _DashboardState extends State<Dashboard> {
                               child: BlueDashboardGrid(
                                 width: width,
                                 title: products.length.toString(),
-                                subTitle: 'Products',
+                                subTitle: Language()
+                                    .products[languageprov.LanguageIndex],
                                 icon: FontAwesomeIcons.tag,
                               ),
                             ),
@@ -158,13 +162,13 @@ class _DashboardState extends State<Dashboard> {
                           // Expanded(
                           //   child: GestureDetector(
                           //     onTap: () {
-                          //       snackBar(context, 'No Customers yet.',
+                          //       snackBar(context, Language().no_customers[languageprov.LanguageIndex],
                           //           CustomColors().blue, CustomColors().white);
                           //     },
                           //     child: WhiteDashboardGrid(
                           //       width: width,
                           //       title: "0",
-                          //       subTitle: 'Customers',
+                          //       subTitle: Language().customers[languageprov.LanguageIndex],
                           //       icon: FontAwesomeIcons.peopleGroup,
                           //     ),
                           //   ),

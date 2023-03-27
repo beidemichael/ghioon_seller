@@ -39,7 +39,7 @@ class TooManyTrialsBlurryDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    "Error",
+                    Language().error[languageprov.LanguageIndex],
                     style: TextStyle(
                         fontSize: 24.0,
                         color: Colors.grey[900],
