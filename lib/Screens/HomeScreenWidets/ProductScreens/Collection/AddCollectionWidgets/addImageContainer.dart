@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +25,7 @@ class _AddCollectionImageContainerState
   final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final appState = Provider.of<CollectionData>(context);
     var _images = context.watch<CollectionData>().collectionImage;
     Future pickImage(ImageSource source) async {
@@ -63,7 +66,8 @@ class _AddCollectionImageContainerState
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: Text(
-                            'Choose option',
+                            Language()
+                                .choose_option[languageprov.LanguageIndex],
                             style: TextStyle(
                                 color: CustomColors().blue,
                                 fontWeight: FontWeight.bold),
@@ -73,21 +77,24 @@ class _AddCollectionImageContainerState
                               children: [
                                 alertLists(
                                     icon: Icons.camera,
-                                    title: 'Camera',
+                                    title: Language()
+                                        .camera[languageprov.LanguageIndex],
                                     onTap: () {
                                       Navigator.pop(context);
                                       pickImage(ImageSource.camera);
                                     }),
                                 alertLists(
                                     icon: Icons.photo_library,
-                                    title: 'Gallary',
+                                    title: Language()
+                                        .gallary[languageprov.LanguageIndex],
                                     onTap: () {
                                       Navigator.pop(context);
                                       pickImage(ImageSource.gallery);
                                     }),
                                 alertLists(
                                     icon: Icons.delete,
-                                    title: 'Remove',
+                                    title: Language()
+                                        .remove[languageprov.LanguageIndex],
                                     onTap: () {
                                       Navigator.pop(context);
                                       removeImage();

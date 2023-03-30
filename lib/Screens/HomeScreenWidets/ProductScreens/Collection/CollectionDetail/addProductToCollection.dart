@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../Models/models.dart';
@@ -18,6 +20,7 @@ class _AddProToCollectionState extends State<AddProToCollection> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final products = Provider.of<List<Product>>(context);
     final collection = Provider.of<CollectionData>(context);
     collection.filtered = products;
@@ -56,7 +59,7 @@ class _AddProToCollectionState extends State<AddProToCollection> {
                 mainAxisSize: MainAxisSize.min,
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  Text('Add Products',
+                  Text(Language().add_product[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 30.0,
                           color: Colors.white,
@@ -89,7 +92,8 @@ class _AddProToCollectionState extends State<AddProToCollection> {
                       keyboardType: TextInputType.text,
                       controller: search,
                       decoration: InputDecoration(
-                        hintText: 'Search Products here',
+                        hintText: Language()
+                            .search_product_here[languageprov.LanguageIndex],
                         floatingLabelBehavior: FloatingLabelBehavior.always,
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20, vertical: 20),
@@ -130,7 +134,6 @@ class _AddProToCollectionState extends State<AddProToCollection> {
                             edit: false,
                             item: collection,
                             index: index,
-
                           ),
                         ),
                       );

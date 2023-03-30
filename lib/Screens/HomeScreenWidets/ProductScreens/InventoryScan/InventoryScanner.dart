@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:ghioon_seller/Providers/AppState.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/InventoryScan/DialogScannedProductsList.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Models/models.dart';
@@ -74,7 +76,7 @@ class _BarcodeScannerDemoState extends State<BarcodeScannerDemo> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<AppState>(context);
-
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: PreferredSize(
@@ -85,7 +87,7 @@ class _BarcodeScannerDemoState extends State<BarcodeScannerDemo> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Text('Barcode/Qrcode Scanner',
+                Text(Language().barcode_Scanner_l[languageprov.LanguageIndex],
                     style: TextStyle(
                         fontSize: 25.0,
                         color: Colors.white,
@@ -120,8 +122,8 @@ class _BarcodeScannerDemoState extends State<BarcodeScannerDemo> {
                       const SizedBox(
                         height: 15,
                       ),
-                      const Text(
-                        "Please scan Barcode/QRcode",
+                      Text(
+                        Language().please_scan[languageprov.LanguageIndex],
                         style: TextStyle(fontSize: 18, color: Colors.grey),
                       )
                     ],
@@ -141,7 +143,9 @@ class _BarcodeScannerDemoState extends State<BarcodeScannerDemo> {
                               _scanBarcode = _scanBarcode;
                             });
                           },
-                          child: BlueButton(text: 'SCAN')),
+                          child: BlueButton(
+                              text:
+                                  Language().scan[languageprov.LanguageIndex])),
                       const SizedBox(
                         height: 45,
                       ),

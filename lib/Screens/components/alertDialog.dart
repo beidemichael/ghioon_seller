@@ -3,6 +3,9 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 
 import '../../../Shared/customColors.dart';
 
@@ -15,6 +18,7 @@ class PopupDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: AlertDialog(
@@ -37,7 +41,7 @@ class PopupDialog extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Ghioon",
+                      Language().ghioon[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 24.0,
                           color: Colors.grey[900],
@@ -82,7 +86,8 @@ class PopupDialog extends StatelessWidget {
                             ),
                           ),
                           child: Center(
-                            child: Text('NO',
+                            child: Text(
+                                Language().no[languageprov.LanguageIndex],
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.grey[500],
@@ -107,8 +112,9 @@ class PopupDialog extends StatelessWidget {
                                 topLeft: Radius.circular(30.0),
                                 bottomRight: Radius.circular(30.0)),
                           ),
-                          child: const Center(
-                            child: Text('YES',
+                          child: Center(
+                            child: Text(
+                                Language().yes[languageprov.LanguageIndex],
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.black,
@@ -128,6 +134,7 @@ class PopupDialog extends StatelessWidget {
 
 Future buildShowDialog(BuildContext context, String title, String text,
     VoidCallback yesCallBack, VoidCallback noCallBack) {
+  var languageprov = Provider.of<LanguageProvider>(context);
   return showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -223,7 +230,8 @@ Future buildShowDialog(BuildContext context, String title, String text,
                                 bottomRight: Radius.circular(20.0)),
                           ),
                           child: Center(
-                            child: Text('YES',
+                            child: Text(
+                                Language().yes[languageprov.LanguageIndex],
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.white,
@@ -243,6 +251,7 @@ Future buildShowDialog(BuildContext context, String title, String text,
 
 Future buildShowDoneDialog(
     BuildContext context, String title, String text, VoidCallback yesCallBack) {
+  var languageprov = Provider.of<LanguageProvider>(context);
   return showDialog(
       //useRootNavigator: false,
       context: context,
@@ -314,7 +323,8 @@ Future buildShowDoneDialog(
                                 bottomRight: Radius.circular(20.0)),
                           ),
                           child: Center(
-                            child: Text('Ok',
+                            child: Text(
+                                Language().ok[languageprov.LanguageIndex],
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: CustomColors().white,

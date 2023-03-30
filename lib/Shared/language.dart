@@ -231,4 +231,42 @@ class Language {
   List<String> from = ["From", "ከ"];
   List<String> to = ["From", "እስከ"];
   List<String> continuee = ["Continue", "ቀጥል"];
+
+//barcode
+  List<String> barcode_Scanner_l = [
+    "Barcode/Qrcode Scanner",
+    "ባርኮድ/Qrcode ስካነር"
+  ];
+  List<String> please_scan = [
+    "Please scan Barcode/QRcode",
+    "እባክዎን ባርኮድ/QRcode ይቃኙ"
+  ];
+  List<String> scan = ["Scan", "ቅኝት"];
+  List<String> result = ["Result", "ውጤት"];
+  List<String> no_product_with_barcode = [
+    "No product is registered under the given Barcode/QRcode.",
+    "በተሰጠው ባርኮድ/QRcode ስር ምንም ምርት አልተመዘገበም"
+  ];
+  //clollections
+  List<String> close = ["Close", "ዝጋ"];
+  List<String> search_product_here = ["Search Products here", "ምርቶችን እዚህ ይፈልጉ"];
+  List<String> Are_you_sure_collection = [
+    "Are You Sure you want to add the collection?",
+    "እርግጠኛ ነዎት ስብስቡን ማከል ይፈልጋሉ?"
+  ];
+  List<String> add_collection = ["Add Collection", "ስብስብ ያክሉ"];
+
+  //orders
+  List<String> no_order = ["No orders yet", "እስካሁን ምንም ትዕዛዞች የሉም"];
+  List<String> you_dont_have_order = [
+    "You don\'t have any orders yet.",
+    "እስካሁን ምንም ትዕዛዞች የሎትም"
+  ];
+  List<String> order_detail = ["Orders Detail", "የትዕዛዝ ዝርዝሮች"];
+  List<String> invoice_detail = ["Invoice Breakup", "የክፍያ መጠየቂያ"];
+  List<String> order_items = ["Orderd Items", "የታዘዙ ዕቃዎች"];
+  List<String> qty = ["Qty", "ብዛት"];
+
+  List<String> store_view = ["Store view", "የመደብር እይታ"];
+  List<String> ghioon = ["Ghioon", "ግዮን"];
 }

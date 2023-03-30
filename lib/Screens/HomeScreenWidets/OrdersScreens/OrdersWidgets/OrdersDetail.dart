@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:marquee_widget/marquee_widget.dart';
 import 'package:provider/provider.dart';
 import '../../../../Models/models.dart';
@@ -32,6 +34,7 @@ class _OrdersDetailState extends State<OrdersDetail> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
     if (userInfo.isNotEmpty) {
       calculator(widget.orders, userInfo[0]);
@@ -48,7 +51,7 @@ class _OrdersDetailState extends State<OrdersDetail> {
                     mainAxisSize: MainAxisSize.min,
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      const Text('Orders Detail',
+                      Text(Language().order_detail[languageprov.LanguageIndex],
                           style: TextStyle(
                               fontSize: 30.0,
                               color: Colors.white,
@@ -146,7 +149,9 @@ class _OrdersDetailState extends State<OrdersDetail> {
                           SizedBox(
                             height: 20,
                           ),
-                          Text('Invoice Breakup',
+                          Text(
+                              Language()
+                                  .invoice_detail[languageprov.LanguageIndex],
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontFamily: 'Poppins',
@@ -160,7 +165,9 @@ class _OrdersDetailState extends State<OrdersDetail> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Total',
+                                Text(
+                                    Language()
+                                        .total[languageprov.LanguageIndex],
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
@@ -183,7 +190,9 @@ class _OrdersDetailState extends State<OrdersDetail> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text('Orderd Items',
+                                Text(
+                                    Language().order_items[
+                                        languageprov.LanguageIndex],
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         fontFamily: 'Poppins',
@@ -249,7 +258,9 @@ class _OrdersDetailState extends State<OrdersDetail> {
                             // color: Colors.red,
                             height: ScreenSize().ScreenHeight(context),
                             child: Center(
-                              child: Text('No Products',
+                              child: Text(
+                                  Language()
+                                      .No_products[languageprov.LanguageIndex],
                                   style: TextStyle(
                                       fontSize: 30.0,
                                       color: CustomColors().blue,
@@ -264,6 +275,7 @@ class _OrdersDetailState extends State<OrdersDetail> {
   }
 
   Widget Card(index) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Container(
       width: MediaQuery.of(context).size.width,
       height: 110,
@@ -308,7 +320,7 @@ class _OrdersDetailState extends State<OrdersDetail> {
                 ),
                 Row(
                   children: [
-                    Text('Price: ',
+                    Text(Language().price[languageprov.LanguageIndex] + ": ",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: 'Poppins',
@@ -326,7 +338,7 @@ class _OrdersDetailState extends State<OrdersDetail> {
                 ),
                 Row(
                   children: [
-                    Text('Qty: ',
+                    Text(Language().qty[languageprov.LanguageIndex] + ": ",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontFamily: 'Poppins',

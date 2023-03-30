@@ -2,7 +2,9 @@
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:ghioon_seller/Shared/loading.dart';
 import 'package:provider/provider.dart';
 
@@ -20,6 +22,7 @@ class _ScannedProductsState extends State<ScannedProducts> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final products = Provider.of<List<ProductBar>>(context);
     print('Product list dialog: ' + products.length.toString());
     return BackdropFilter(
@@ -44,7 +47,7 @@ class _ScannedProductsState extends State<ScannedProducts> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     Text(
-                      "Result",
+                      Language().result[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 24.0,
                           color: Colors.grey[900],
@@ -68,7 +71,8 @@ class _ScannedProductsState extends State<ScannedProducts> {
                               padding: const EdgeInsets.all(20.0),
                               child: Center(
                                 child: Text(
-                                  "No product is registered under the given Barcode/QRcode.",
+                                  Language().no_product_with_barcode[
+                                      languageprov.LanguageIndex],
                                   style: TextStyle(
                                       fontSize: 20.0,
                                       color: Colors.grey[500],
@@ -125,10 +129,10 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                                         .documentId,
                                                     video:
                                                         products[index].video,
-                                                    barcode: products[index]
-                                                        .barcode,
-                                                        viewsTime: products[index].viewsTime
-                                                        ),
+                                                    barcode:
+                                                        products[index].barcode,
+                                                    viewsTime: products[index]
+                                                        .viewsTime),
                                               )),
                                     );
                                   },
@@ -143,7 +147,6 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                       item: products[index],
                                       index: index,
                                       // view: products[index].viewsTime,
-                                     
                                     ),
                                   ),
                                 );
@@ -162,8 +165,8 @@ class _ScannedProductsState extends State<ScannedProducts> {
                           bottomLeft: Radius.circular(30.0),
                           bottomRight: Radius.circular(30.0)),
                     ),
-                    child: const Center(
-                      child: Text('Close',
+                    child: Center(
+                      child: Text(Language().close[languageprov.LanguageIndex],
                           style: TextStyle(
                               fontSize: 20.0,
                               color: Colors.black,

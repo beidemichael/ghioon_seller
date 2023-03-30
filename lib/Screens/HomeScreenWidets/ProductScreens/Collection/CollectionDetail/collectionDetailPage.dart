@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/components/emptyScreen.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../Product/ProductDetail/productCard.dart';
@@ -24,6 +26,7 @@ class CollectionDetail extends StatefulWidget {
 class _CollectionDetailState extends State<CollectionDetail> {
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final collectionitems = Provider.of<List<CollectionItems>>(context);
     return Scaffold(
       appBar: PreferredSize(
@@ -87,7 +90,8 @@ class _CollectionDetailState extends State<CollectionDetail> {
             child: Container(
               // height: MediaQuery.of(context).size.height,
               child: collectionitems.length == 0
-                  ? EmptyScreen(context, 'No Products Found.')
+                  ? EmptyScreen(context,
+                      Language().No_products[languageprov.LanguageIndex])
                   : ListView.builder(
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),

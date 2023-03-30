@@ -3,10 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/AddCollectionWidgets/addCollectionDetailsLogic/addCollectionDetailsLogic.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
 import 'package:ghioon_seller/Screens/components/alertDialog.dart';
 import 'package:ghioon_seller/Screens/components/textFormField.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 class addCollectionDetail extends StatefulWidget {
@@ -20,7 +22,7 @@ class _addCollectionDetailState extends State<addCollectionDetail> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<CollectionData>(context);
-
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(15.0),
       child: ListView(
@@ -28,14 +30,18 @@ class _addCollectionDetailState extends State<addCollectionDetail> {
           physics: const NeverScrollableScrollPhysics(),
           children: [
             TextFormFieldProduct(
-                "Enter Product Name", appState.collectionName, "Product Name"),
+                Language().Enter_product_name[languageprov.LanguageIndex],
+                appState.collectionName,
+                "Product Name"),
             TextFormFieldProDescription(
-                "Description", appState.collectionDescription, "Description"),
+                Language().description[languageprov.LanguageIndex],
+                appState.collectionDescription,
+                "Description"),
             Visibility(
               visible: !appState.productDescriptionFilled,
-              child: const Center(
+              child: Center(
                 child: Text(
-                  "Please fill all inputs",
+                  Language().please_fill_all_field[languageprov.LanguageIndex],
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontSize: 18,
@@ -59,7 +65,8 @@ class _addCollectionDetailState extends State<addCollectionDetail> {
                     // AddProductDetailLogic().showDialog(context);
 
                     PopupDialog alert = PopupDialog(
-                        "Are You Sure you want to add the product?", () {
+                        Language().Are_you_sure_collection[
+                            languageprov.LanguageIndex], () {
                       print(appState.isLoading);
                       AddCollectionLogic()
                           .addCollection(context)
@@ -76,7 +83,9 @@ class _addCollectionDetailState extends State<addCollectionDetail> {
                     );
                   }
                 },
-                child: BlueButton(text: 'Add Collection'))
+                child: BlueButton(
+                    text:
+                        Language().add_collection[languageprov.LanguageIndex]))
           ]),
     );
   }

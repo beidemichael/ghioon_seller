@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
-
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 
 import '../CustomBarCharLogic/ArrageByDateLogic.dart';
 
@@ -16,19 +17,19 @@ class BottomText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Container(
       height: 40,
       width: 60,
       child: Center(
-        child: item == 'Day'
+        child: item == Language().day[languageprov.LanguageIndex]
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  TextWidget(item == 'Day'
+                  TextWidget(item == Language().day[languageprov.LanguageIndex]
                       ? ArrageByDateLogic()
-                          .monTuesWedConversion(
-                              listOfDateLists[index].first)
+                          .monTuesWedConversion(listOfDateLists[index].first)
                           .toString()
                       : ''),
                   TextWidget(ArrageByDateLogic()
@@ -36,11 +37,11 @@ class BottomText extends StatelessWidget {
                       .toString()),
                 ],
               )
-            : TextWidget(item == 'Week'
+            : TextWidget(item == Language().week[languageprov.LanguageIndex]
                 ? ArrageByDateLogic()
                     .dateConversion(listOfDateLists[index].first)
                     .toString()
-                : item == 'Month'
+                : item == Language().month[languageprov.LanguageIndex]
                     ? ArrageByDateLogic()
                         .monthConversion(listOfDateLists[index].first)
                         .toString()

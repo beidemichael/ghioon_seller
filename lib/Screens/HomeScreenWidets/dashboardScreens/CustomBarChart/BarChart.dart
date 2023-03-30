@@ -3,7 +3,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 
 import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
@@ -21,20 +23,29 @@ class BarChartSample3 extends StatefulWidget {
 }
 
 class BarChartSample3State extends State<BarChartSample3> {
-  int max = 0;
-  String item = 'Day';
-  var items = [
-    'Day',
-    'Week',
-    'Month',
-    'Year',
-  ];
-  List listOfDateLists = [];
-
+  // int max = 0;
+  // String item = 'Day';
+  // var items = [
+  //   Language().day[languageprov.LanguageIndex],
+  //                   Language().week[languageprov.LanguageIndex],
+  //                   Language().month[languageprov.LanguageIndex],
+  //                   Language().year[languageprov.LanguageIndex],
+  // ];
+  // List listOfDateLists = [];
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
+    int max = 0;
+    String item = Language().day[languageprov.LanguageIndex];
+    var items = [
+      Language().day[languageprov.LanguageIndex],
+      Language().week[languageprov.LanguageIndex],
+      Language().month[languageprov.LanguageIndex],
+      Language().year[languageprov.LanguageIndex],
+    ];
+
     List<List> listOfDateLists =
-        ArrageByDateLogic().calculation(widget.views, item);
+        ArrageByDateLogic().calculation(widget.views, item, context);
     max = ArrageByDateLogic().maxNumber();
     print(FirebaseAuth.instance.currentUser?.uid ?? '');
     return Padding(
@@ -54,7 +65,7 @@ class BarChartSample3State extends State<BarChartSample3> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 17.0, vertical: 20),
               child: Center(
-                child: Text('Store view',
+                child: Text(Language().store_view[languageprov.LanguageIndex],
                     style: TextStyle(
                         fontSize: 30,
                         color: CustomColors().darkBlue2,
@@ -85,11 +96,11 @@ class BarChartSample3State extends State<BarChartSample3> {
                   inactiveBgColor: CustomColors().blue,
                   inactiveFgColor: CustomColors().darkBlue2,
                   totalSwitches: 4,
-                  labels: const [
-                    'Day',
-                    'Week',
-                    'Month',
-                    'Year',
+                  labels: [
+                    Language().day[languageprov.LanguageIndex],
+                    Language().week[languageprov.LanguageIndex],
+                    Language().month[languageprov.LanguageIndex],
+                    Language().year[languageprov.LanguageIndex],
                   ],
                   onToggle: (index) {
                     setState(() {
@@ -117,7 +128,8 @@ class BarChartSample3State extends State<BarChartSample3> {
                                 height: MediaQuery.of(context).size.width,
                                 child: Center(
                                   child: Text(
-                                      'You don\'t have any orders yet.',
+                                      Language().you_dont_have_order[
+                                          languageprov.LanguageIndex],
                                       style: TextStyle(
                                           fontSize: 18,
                                           color: Colors.grey[400],
