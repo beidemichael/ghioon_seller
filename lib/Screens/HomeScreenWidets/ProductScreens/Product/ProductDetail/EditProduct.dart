@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +28,7 @@ class _EditProductState extends State<EditProduct> {
   File? image;
 
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final appState = Provider.of<EditRangeData>(context);
@@ -47,7 +50,7 @@ class _EditProductState extends State<EditProduct> {
             mainAxisSize: MainAxisSize.min,
             // ignore: prefer_const_literals_to_create_immutables
             children: [
-              const Text('Edit Products',
+              Text(Language().edit_products[languageprov.LanguageIndex],
                   style: TextStyle(
                       fontSize: 30.0,
                       color: Colors.white,
@@ -128,7 +131,9 @@ class _EditProductState extends State<EditProduct> {
               child: Visibility(
                 visible: appState.isLoading,
                 child: LoadingWidget(
-                    height: height, message: "Adding Product . . ."),
+                    height: height,
+                    message:
+                        Language().adding_product[languageprov.LanguageIndex]),
               ))
         ],
       ),

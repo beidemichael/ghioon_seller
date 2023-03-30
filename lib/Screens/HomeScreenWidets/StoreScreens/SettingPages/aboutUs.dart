@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:ghioon_seller/Shared/terms_condition.dart';
+import 'package:provider/provider.dart';
 
 class AboutUs extends StatelessWidget {
   const AboutUs({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
@@ -18,7 +22,7 @@ class AboutUs extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                Text('About US',
+                Text(Language().about[languageprov.LanguageIndex],
                     style: TextStyle(
                         fontSize: 30.0,
                         color: CustomColors().white,

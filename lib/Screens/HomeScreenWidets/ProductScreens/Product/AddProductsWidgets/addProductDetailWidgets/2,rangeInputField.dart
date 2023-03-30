@@ -4,7 +4,9 @@ import 'package:provider/provider.dart';
 
 import '../../../../../../Providers/RangeProvider.dart';
 import '../../../../../../Models/addProductmodels.dart';
+import '../../../../../../Providers/language_provider.dart';
 import '../../../../../../Shared/customColors.dart';
+import '../../../../../../Shared/language.dart';
 import '../../../../../components/textFormField.dart';
 import '3,inventoryQty.dart';
 
@@ -18,6 +20,7 @@ class RangeInputField extends StatefulWidget {
 class _RangeInputFieldState extends State<RangeInputField> {
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final appState = Provider.of<RangeData>(context);
     return Container(
       child: Column(
@@ -27,7 +30,7 @@ class _RangeInputFieldState extends State<RangeInputField> {
             padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
             child: Row(children: [
               Text(
-                "Range Price",
+                Language().range_price[languageprov.LanguageIndex],
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
@@ -90,7 +93,7 @@ class _RangeInputFieldState extends State<RangeInputField> {
                   children: [
                     Expanded(
                         child: TextFormFieldWithOutLabel(
-                            'From',
+                            Language().from[languageprov.LanguageIndex],
                             appState.Ranges[index].fromcontroller!,
                             TextInputType.number)),
                     const Padding(
@@ -102,7 +105,7 @@ class _RangeInputFieldState extends State<RangeInputField> {
                     ),
                     Expanded(
                         child: TextFormFieldWithOutLabel(
-                            'To',
+                            Language().to[languageprov.LanguageIndex],
                             appState.Ranges[index].tocontroller!,
                             TextInputType.number)),
                     const Padding(
@@ -114,7 +117,7 @@ class _RangeInputFieldState extends State<RangeInputField> {
                     ),
                     Expanded(
                         child: TextFormFieldWithOutLabel(
-                            'Price',
+                            Language().price[languageprov.LanguageIndex],
                             appState.Ranges[index].pricecontroller!,
                             TextInputType.number))
                   ],
@@ -122,9 +125,9 @@ class _RangeInputFieldState extends State<RangeInputField> {
               }),
           Visibility(
             visible: !appState.rangefilled,
-            child: const Center(
+            child: Center(
               child: Text(
-                "Please fill all inputs",
+                Language().please_fill_all_field[languageprov.LanguageIndex],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 18,

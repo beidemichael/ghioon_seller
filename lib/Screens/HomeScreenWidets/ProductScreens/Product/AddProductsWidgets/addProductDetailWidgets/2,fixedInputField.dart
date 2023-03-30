@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../Providers/RangeProvider.dart';
+import '../../../../../../Providers/language_provider.dart';
 import '../../../../../../Shared/customColors.dart';
 import '../../../../../components/textFormField.dart';
 import '3,inventoryQty.dart';
@@ -17,12 +19,13 @@ class _FixedInputFieldState extends State<FixedInputField> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<RangeData>(context);
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Fixed Price",
+            Language().fixed_price[languageprov.LanguageIndex],
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
@@ -51,7 +54,7 @@ class _FixedInputFieldState extends State<FixedInputField> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Profit",
+                        Language().profit[languageprov.LanguageIndex],
                         style: TextStyle(
                             fontSize: 22.0,
                             color: CustomColors().blue,
@@ -71,7 +74,7 @@ class _FixedInputFieldState extends State<FixedInputField> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Profit",
+                      Language().profit[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 22.0,
                           color: CustomColors().blue,
@@ -102,9 +105,9 @@ class _FixedInputFieldState extends State<FixedInputField> {
           ),
           Visibility(
             visible: !appState.fixedFilled,
-            child: const Center(
+            child: Center(
               child: Text(
-                "Please fill all inputs",
+                Language().please_fill_all_field[languageprov.LanguageIndex],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 18,

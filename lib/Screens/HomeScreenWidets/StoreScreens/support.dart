@@ -62,10 +62,11 @@ class Support extends StatelessWidget {
                     children: [
                       GestureDetector(
                         onTap: () async {
-                         try {
+                          try {
                             print("Launch URL: whatsapp://send?phone=");
                             if (!await launchUrl(
-                                Uri.parse("whatsapp://send?phone=+251940679413"),
+                                Uri.parse(
+                                    "whatsapp://send?phone=+251940679413"),
                                 mode: LaunchMode.externalApplication)) {
                               snackBar(context, 'Something went wrong',
                                   CustomColors().blue, Colors.white);

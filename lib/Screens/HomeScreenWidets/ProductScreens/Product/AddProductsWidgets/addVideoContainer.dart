@@ -8,7 +8,9 @@ import 'package:video_player/video_player.dart';
 
 import '../../../../../Providers/RangeProvider.dart';
 import '../../../../../Models/addProductmodels.dart';
+import '../../../../../Providers/language_provider.dart';
 import '../../../../../Shared/customColors.dart';
+import '../../../../../Shared/language.dart';
 import '../../../../components/alert.dart';
 import 'addProductDetailLogic/addProductDetailLogic.dart';
 
@@ -89,6 +91,7 @@ class _AddVideoContainerState extends State<AddVideoContainer> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     final appState = Provider.of<RangeData>(context);
@@ -127,7 +130,8 @@ class _AddVideoContainerState extends State<AddVideoContainer> {
                             ),
                           ),
                           Text(
-                            'Video duration: ' +
+                            Language()
+                                    .vide_duration[languageprov.LanguageIndex] +
                                 _controller.value.duration.inSeconds
                                     .toString() +
                                 ' Secs',
@@ -139,8 +143,9 @@ class _AddVideoContainerState extends State<AddVideoContainer> {
                           ),
                           Visibility(
                             visible: !appState.videoSquare,
-                            child: const Text(
-                              "Please submit a square video",
+                            child: Text(
+                              Language()
+                                  .square_video[languageprov.LanguageIndex],
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 17,
@@ -150,8 +155,9 @@ class _AddVideoContainerState extends State<AddVideoContainer> {
                           ),
                           Visibility(
                             visible: !appState.videoLessThanSix,
-                            child: const Text(
-                              "Please submit a video less than 6 seconds",
+                            child: Text(
+                              Language()
+                                  .sixsec_video[languageprov.LanguageIndex],
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 17,

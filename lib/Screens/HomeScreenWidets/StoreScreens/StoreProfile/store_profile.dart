@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/CollectionDetail/collection_card.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/cOllectionaddPro.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ProductDetail/productDetail.dart';
@@ -13,6 +14,7 @@ import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/StoreProfile
 import 'package:ghioon_seller/Screens/components/emptyScreen.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Shared/loading.dart';
@@ -29,20 +31,21 @@ class _StoreProfileState extends State<StoreProfile> {
   Widget build(BuildContext context) {
     final userInfo = Provider.of<List<UserInformation>>(context);
     final products = Provider.of<List<Product>>(context);
+    var languageprov = Provider.of<LanguageProvider>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final appState = Provider.of<RangeData>(context);
-    const upperTab =
+    final upperTab =
         TabBar(indicatorColor: Colors.white, indicatorWeight: 3, tabs: <Tab>[
       Tab(
-        child: Text('Product',
+        child: Text(Language().products[languageprov.LanguageIndex],
             style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.white,
                 fontWeight: FontWeight.w500)),
       ),
       Tab(
-        child: Text('Collection',
+        child: Text(Language().collections[languageprov.LanguageIndex],
             style: TextStyle(
                 fontSize: 20.0,
                 color: Colors.white,
@@ -158,7 +161,10 @@ class _StoreProfileState extends State<StoreProfile> {
                                             width: 5,
                                           ),
                                           Text(
-                                            userInfo[0].viewsTime.length.toString(),
+                                            userInfo[0]
+                                                .viewsTime
+                                                .length
+                                                .toString(),
                                             //'25',
                                             style: TextStyle(
                                                 fontSize: 20,
@@ -216,10 +222,12 @@ class _StoreProfileState extends State<StoreProfile> {
               body: TabBarView(
                 children: [
                   products.length == 0
-                      ? EmptyScreen(context, 'No Products.')
+                      ? EmptyScreen(context,
+                          Language().No_products[languageprov.LanguageIndex])
                       : ProductForGrid(products: products),
                   userInfo[0].collections == 0
-                      ? EmptyScreen(context, 'No Collections')
+                      ? EmptyScreen(context,
+                          Language().No_collections[languageprov.LanguageIndex])
                       : CollectionListGrid(
                           userInfo: userInfo, appState: appState),
                 ],

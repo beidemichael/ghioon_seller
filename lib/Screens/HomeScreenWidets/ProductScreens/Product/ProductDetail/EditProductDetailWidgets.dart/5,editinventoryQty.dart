@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../Providers/EditRangeProvider.dart';
+import '../../../../../../Providers/language_provider.dart';
 import '../../../../../../Shared/customColors.dart';
 
 class EditInventoryQty extends StatefulWidget {
   var inventory;
-   EditRangeData appState;
- 
-  EditInventoryQty({super.key, required this.inventory,required this.appState});
+  EditRangeData appState;
+
+  EditInventoryQty(
+      {super.key, required this.inventory, required this.appState});
 
   @override
   State<EditInventoryQty> createState() => _EditInventoryQtyState();
@@ -22,15 +25,16 @@ class _EditInventoryQtyState extends State<EditInventoryQty> {
   void initState() {
     // TODO: implement initState
     super.initState();
-     widget.appState.inventory.text = widget.inventory.toString();
-    
+    widget.appState.inventory.text = widget.inventory.toString();
   }
+
   @override
   Widget build(BuildContext context) {
-      final appState = Provider.of<EditRangeData>(context);
+    var languageprov = Provider.of<LanguageProvider>(context);
+    final appState = Provider.of<EditRangeData>(context);
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      const Text(
-        "Inventory (Qty)",
+      Text(
+        Language().inventory[languageprov.LanguageIndex],
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
       ),
       const SizedBox(
@@ -42,8 +46,9 @@ class _EditInventoryQtyState extends State<EditInventoryQty> {
               onTap: () {
                 // Provider.of<RangeData>(context, listen: false).minusInventory();
                 int.parse(appState.inventory.text) > 1
-        ? appState.inventory.text = (int.parse(appState.inventory.text) - 1).toString()
-        : appState.inventory.text = '1';
+                    ? appState.inventory.text =
+                        (int.parse(appState.inventory.text) - 1).toString()
+                    : appState.inventory.text = '1';
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -85,14 +90,17 @@ class _EditInventoryQtyState extends State<EditInventoryQty> {
                       textAlign: TextAlign.center,
                       keyboardType: TextInputType.number,
                       controller: appState.inventory,
-                      style:  TextStyle(
-                          fontSize: 25, fontWeight: FontWeight.bold,color: CustomColors().blue))),
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: CustomColors().blue))),
             ),
           ),
           GestureDetector(
               onTap: () {
                 // Provider.of<RangeData>(context, listen: false).addInventory();
-                 appState.inventory.text = (int.parse(appState.inventory.text) + 1).toString();
+                appState.inventory.text =
+                    (int.parse(appState.inventory.text) + 1).toString();
               },
               child: Container(
                 decoration: BoxDecoration(

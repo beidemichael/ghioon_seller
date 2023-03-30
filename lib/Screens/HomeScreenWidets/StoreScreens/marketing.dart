@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/Marketing/MarketingUploadScreen.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 import '../../../Shared/customColors.dart';
 
@@ -26,6 +29,7 @@ class _MarketingState extends State<Marketing> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(69.0),
@@ -35,7 +39,7 @@ class _MarketingState extends State<Marketing> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                Text('Marketing',
+                Text(Language().marketing[languageprov.LanguageIndex],
                     style: TextStyle(
                         fontSize: 30.0,
                         color: CustomColors().white,
@@ -64,7 +68,7 @@ class _MarketingState extends State<Marketing> {
               children: [
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 20.0),
-                  child: Text('CHOOSE YOUR TYPE BELOW',
+                  child: Text(Language().choose[languageprov.LanguageIndex],
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontFamily: 'IBMPlexSans',
@@ -81,15 +85,18 @@ class _MarketingState extends State<Marketing> {
                         Switch(
                             (MediaQuery.of(context).size.width - 50) * .5,
                             MediaQuery.of(context).size.width * .5,
-                            promotionType ? 'IMAGE' : 'VIDEO',
-                            'PROMOTION TYPE:'),
+                            promotionType
+                                ? Language().image[languageprov.LanguageIndex]
+                                : Language().video[languageprov.LanguageIndex],
+                            Language().promotype[languageprov.LanguageIndex] +
+                                ':'),
                         const SizedBox(
                           height: 10,
                         ),
                         container(
                             (MediaQuery.of(context).size.width - 50) * .5,
                             MediaQuery.of(context).size.width * .5,
-                            'PROMOTION',
+                            Language().promotion[languageprov.LanguageIndex],
                             '25% SCREEN REALESTATE',
                             25),
                       ],
@@ -100,7 +107,7 @@ class _MarketingState extends State<Marketing> {
                     container(
                         (MediaQuery.of(context).size.width - 50) * .5,
                         MediaQuery.of(context).size.width + 10,
-                        'PROMOTION',
+                        Language().promotion[languageprov.LanguageIndex],
                         '100% SCREEN REALESTATE',
                         100),
                   ],
@@ -111,7 +118,7 @@ class _MarketingState extends State<Marketing> {
                 container(
                     MediaQuery.of(context).size.width,
                     MediaQuery.of(context).size.width * .5,
-                    'PROMOTION',
+                    Language().promotion[languageprov.LanguageIndex],
                     '50% SCREEN REALESTATE',
                     50),
                 Container(
@@ -152,7 +159,8 @@ class _MarketingState extends State<Marketing> {
 
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 50.0),
-                      child: Text('Promote your product and services here',
+                      child: Text(
+                          Language().promotproduct[languageprov.LanguageIndex],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontFamily: 'Poppins',
@@ -232,6 +240,7 @@ class _MarketingState extends State<Marketing> {
   }
 
   Widget Switch(double width, double height, String title, String subTitle) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Container(
       height: height,
       width: width,
@@ -276,7 +285,10 @@ class _MarketingState extends State<Marketing> {
                         topLeft: Radius.circular(15),
                         bottomLeft: Radius.circular(15)),
                   ),
-                  child: Text(promotionType ? 'IMAGE' : 'VIDEO',
+                  child: Text(
+                      promotionType
+                          ? Language().image[languageprov.LanguageIndex]
+                          : Language().video[languageprov.LanguageIndex],
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontFamily: 'Poppins',

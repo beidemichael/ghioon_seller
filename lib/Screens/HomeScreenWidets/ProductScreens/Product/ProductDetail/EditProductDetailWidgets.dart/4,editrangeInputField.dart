@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/components/textFormField.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../Models/addProductmodels.dart';
 import '../../../../../../Providers/EditRangeProvider.dart';
 import '../../../../../../Shared/customColors.dart';
+import '../../../../../../Shared/language.dart';
 import '5,editinventoryQty.dart';
 
 class EditRangeInputField extends StatefulWidget {
@@ -20,6 +22,7 @@ class EditRangeInputField extends StatefulWidget {
 class _EditRangeInputFieldState extends State<EditRangeInputField> {
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final appState = Provider.of<EditRangeData>(context);
     return Container(
       child: Column(
@@ -29,7 +32,7 @@ class _EditRangeInputFieldState extends State<EditRangeInputField> {
             padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
             child: Row(children: [
               Text(
-                "Range Price",
+                Language().range_price[languageprov.LanguageIndex],
                 style: TextStyle(
                     fontSize: 25,
                     fontWeight: FontWeight.w500,
@@ -67,7 +70,10 @@ class _EditRangeInputFieldState extends State<EditRangeInputField> {
           //     ),
           //   ),
           // ),
-          EditInventoryQty(inventory: widget.product.quantity,appState: appState,),
+          EditInventoryQty(
+            inventory: widget.product.quantity,
+            appState: appState,
+          ),
         ],
       ),
     );

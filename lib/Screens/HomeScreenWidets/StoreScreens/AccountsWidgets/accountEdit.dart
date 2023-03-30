@@ -2,9 +2,11 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/profileImage.dart';
 import 'package:ghioon_seller/Screens/components/textFormField.dart';
 import 'package:ghioon_seller/Service/registerDatabase.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:ghioon_seller/Shared/loading.dart';
 
 import '../../../../Shared/customColors.dart';
@@ -49,6 +51,7 @@ class _AccountEditState extends State<AccountEdit> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
     return Scaffold(
       backgroundColor: Colors.white,
@@ -128,21 +131,30 @@ class _AccountEditState extends State<AccountEdit> {
             child: Column(
               children: [
                 TextFormFieldWithOutIcon(
-                    'Store Name',
+                    Language().business_name[languageprov.LanguageIndex],
                     widget.appState.businessName,
-                    'Store Name',
+                    Language().business_name[languageprov.LanguageIndex],
                     TextInputType.text),
-                TextFormFieldWithOutIcon('Full Name', widget.appState.fullName,
-                    'Owner Name', TextInputType.text),
-                TextFormFieldWithOutIcon('email', widget.appState.email,
-                    'Email', TextInputType.text),
                 TextFormFieldWithOutIcon(
-                    '+Business Number',
+                    Language().full_name[languageprov.LanguageIndex],
+                    widget.appState.fullName,
+                    Language().sellername[languageprov.LanguageIndex],
+                    TextInputType.text),
+                TextFormFieldWithOutIcon(
+                    Language().email[languageprov.LanguageIndex],
+                    widget.appState.email,
+                    Language().email[languageprov.LanguageIndex],
+                    TextInputType.text),
+                TextFormFieldWithOutIcon(
+                    Language().businessnum[languageprov.LanguageIndex],
                     widget.appState.businessNo,
-                    'Business Number',
+                    Language().businessnum[languageprov.LanguageIndex],
                     TextInputType.number),
-                TextFormFieldWithOutIcon('Jemo Michael, AA, Ethiopia',
-                    widget.appState.address, 'Address', TextInputType.text),
+                TextFormFieldWithOutIcon(
+                    'Jemo Michael, AA, Ethiopia',
+                    widget.appState.address,
+                    Language().address[languageprov.LanguageIndex],
+                    TextInputType.text),
               ],
             ),
           ),

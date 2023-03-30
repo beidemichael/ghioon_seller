@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../Providers/EditRangeProvider.dart';
+import '../../../../../../Providers/language_provider.dart';
 import '../../../../../../Service/Product/AddProductDatabase.dart';
 import '../../../../../../Service/uploadPhoto.dart';
 import '../../../../../../Shared/customColors.dart';
@@ -28,6 +30,7 @@ class _EditImageContainerState extends State<EditImageContainer> {
   bool loading = false;
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     final appState = Provider.of<EditRangeData>(context);
@@ -189,7 +192,8 @@ class _EditImageContainerState extends State<EditImageContainer> {
                                     builder: (BuildContext context) {
                                       return AlertDialog(
                                         title: Text(
-                                          'Choose option',
+                                          Language().choose_option[
+                                              languageprov.LanguageIndex],
                                           style: TextStyle(
                                               color: CustomColors().blue,
                                               fontWeight: FontWeight.bold),
@@ -199,7 +203,9 @@ class _EditImageContainerState extends State<EditImageContainer> {
                                             children: [
                                               alertLists(
                                                   icon: Icons.camera,
-                                                  title: 'Camera',
+                                                  title: Language().camera[
+                                                      languageprov
+                                                          .LanguageIndex],
                                                   onTap: () {
                                                     Navigator.pop(context);
                                                     pickImage(
@@ -208,7 +214,9 @@ class _EditImageContainerState extends State<EditImageContainer> {
                                                   }),
                                               alertLists(
                                                   icon: Icons.photo_library,
-                                                  title: 'Gallary',
+                                                  title: Language().gallary[
+                                                      languageprov
+                                                          .LanguageIndex],
                                                   onTap: () {
                                                     Navigator.pop(context);
                                                     pickImage(
@@ -217,7 +225,9 @@ class _EditImageContainerState extends State<EditImageContainer> {
                                                   }),
                                               alertLists(
                                                   icon: Icons.delete,
-                                                  title: 'Remove',
+                                                  title: Language().remove[
+                                                      languageprov
+                                                          .LanguageIndex],
                                                   onTap: () {
                                                     Navigator.pop(context);
                                                     removeImage(index);

@@ -49,6 +49,8 @@ class Language {
   //words in search
   List<String> No_products = ["No products found", "ምንም ምርቶች አልተገኙም"];
 
+  List<String> No_collections = ["No Collection found", "ስብስቦች የሉም"];
+
   //words in sign in page
   List<String> enter_phone = ["Enter Your Phone", "ስልክህን አስገባ"];
   List<String> receive6digit = [
@@ -110,5 +112,123 @@ class Language {
 //products
   List<String> all_products = ["All \n Products", "ሁሉም \n ምርቶች"];
   List<String> collections = ["Collections", "ስብስቦች"];
-  List<String> customers = ["Customers", "ደንበኞች"];
+  List<String> inventory_scanner = ["Inventory Scanner", "የእቃ ዝርዝር ቃኚ"];
+  List<String> barcode_scanner = ["Barcode \n Scanner", "ባርኮድ \n ስካነር"];
+//Store
+  List<String> mystore = ["My Store", "የእኔ ሱቅ"];
+  List<String> analytics = ["Analytics", "ትንታኔ"];
+  List<String> myaccount = ["My Account", "አካውንቴ"];
+  List<String> marketing = ["Maketing", "ማስታወቂያ"];
+  List<String> support = ["Support", "ድጋፍ"];
+//store screens
+  List<String> helpandsupport = ["Help and Support", "እርዳታ እና ድጋፍ"];
+  List<String> choose = ["CHOOSE YOUR TYPE BELOW", "የእርስዎን አይነት ከዚህ በታች ይምረጡ"];
+  List<String> promotype = ["PROMOTION TYPE", "የማስታወቂያ ዓይነት"];
+  List<String> promotproduct = [
+    "Promote your product and services here",
+    "ምርትዎን እና አገልግሎቶችዎን እዚህ ያስተዋውቁ"
+  ];
+  List<String> image = ["IMAGE", "ምስል"];
+  List<String> video = ["VIDEO", "ቪዲዮ"];
+  List<String> viewonmap = ["View on Map", "በካርታው ላይ ይመልከቱ"];
+  List<String> allcustomers = ["All Customers", "ሁሉም ደንበኞች"];
+//accounts
+  List<String> businesstype = ["Business Type", "የንግድ ዓይነት"];
+  List<String> businessnum = ["Business Number", "የንግድ ቁጥር"];
+  List<String> sellername = ["Seller name", "የሻጭ ስም"];
+  List<String> gender = ["Gender", "ጾታ"];
+  List<String> etb = ["ETB", "ብር"];
+  List<String> please_fill_all_field = [
+    "Please fill all fields",
+    "እባክዎ ሁሉንም ይሙሉ"
+  ];
+  List<String> are_yousure_logout = [
+    "Are you sure you want to logout?",
+    "እርግጠኛ ነህ መውጣት ትፈልጋለህ?"
+  ];
+
+  //feedback
+  List<String> are_yousure_feedback = [
+    "Are You Sure you want to send this feedback? (your user id will be sent for feedback reply)",
+    "እርግጠኛ ነዎት ይህን ግብረመልስ መላክ ይፈልጋሉ? (የእርስዎ የተጠቃሚ መታወቂያ ለአስተያየት ምላሽ ይላካል)"
+  ];
+  List<String> send_feedback = ["Send Feedback", "አስተያየት ላክ"];
+  List<String> sending_feedback = ["Sending Feedback...", "አስተያየት በመላክ ላይ ..."];
+
+//Marketing Screen
+
+  List<String> upload = ["Upload", "ይለጥፉ"];
+  List<String> video_duration = ["Video duration:", "የቪዲዮ ቆይታ፡"];
+  List<String> no_image = ["No Image is Submitted", "ምንም ምስል አልቀረበም"];
+  List<String> no_video = ["No Video is Submitted", "ምንም ምስል አልቀረበም"];
+  List<String> imagenot169 = [
+    "Image not 16:9 Aspect ratio",
+    "ምስል 16፡9 ምጥጥነ ገጽታ አይደለም"
+  ];
+  List<String> videonot169 = [
+    "Vidio not 16:9 Aspect ratio",
+    "ቪዲዮ 16፡9 ምጥጥነ ገጽታ አይደለም"
+  ];
+  List<String> imagenot11 = [
+    "Image not 1:1 Aspect ratio",
+    "ምስል 16፡9 ምጥጥነ ገጽታ አይደለም"
+  ];
+  List<String> videonot11 = [
+    "Vidio not 1:1 Aspect ratio",
+    "ቪዲዮ 16፡9 ምጥጥነ ገጽታ አይደለም"
+  ];
+
+  List<String> collection_per = ["Collection Percentage", "የስብስብ መቶኛ"];
+
+//products
+
+  List<String> add_product = ["Add Product", "አዲስ ምርት"];
+  List<String> please_add_image = ["Please add an image", "እባክህ ምስል ጨምር"];
+  List<String> adding_product = ["Adding Product...", "ምርት መጨመር ላይ ..."];
+  List<String> edit_products = ["Edit Products", "ምርቶችን መለወጥ"];
+  //Bar chart
+
+  List<String> day = ["Day", "ቀን"];
+  List<String> week = ["Week", "ሳምንት"];
+  List<String> month = ["Month", "ወር"];
+  List<String> year = ["Year", "አመት"];
+  List<String> productView = ["Product View", "የምርት እይታ"];
+  List<String> no_view = [
+    "You don't have any views yet.",
+    "እስካሁን ምንም እይታ የሎትም"
+  ];
+
+  //Product Detail
+
+  List<String> fixed_price = ["Fixed Price", "ቋሚ ዋጋ"];
+  List<String> range_price = ["Range Price", "ክልል ዋጋ"];
+  List<String> choose_option = ["Choose option", "አማራጭ ይምረጡ"];
+  List<String> camera = ["Camera", "ካሜራ"];
+  List<String> gallary = ["Gallary", "ጋላሪ"];
+  List<String> remove = ["Remove", "አስወግድ"];
+
+  // video upload
+  List<String> vide_duration = ["Video duration: ", "የቪዲዮ ቆይታ: "];
+  List<String> square_video = [
+    "Please submit a square video",
+    "እባክዎ ካሬ ቪዲዮ ያስገቡ"
+  ];
+  List<String> sixsec_video = [
+    "Please submit a video less than 6 seconds",
+    "እባክዎ ከ6 ሰከንድ ያነሰ ቪዲዮ ያስገቡ"
+  ];
+  List<String> barcode = ["Barcode/Qrcode", "ባርኮድ"];
+  List<String> save = ["Save", "አስቀምጥ"];
+  List<String> saving = ["Saving...", "በማስቀመጥ ላይ..."];
+  List<String> profit = ["Profit", "ትርፍ"];
+
+  List<String> inventory = ["Inventory (Qty)", "የምርት ክምችት"];
+
+  //add product
+  List<String> Enter_product_name = ["Enter Product Name", "የምርት ስም ያስገቡ"];
+  List<String> product_name = ["Product Name", "የምርት ስም"];
+  List<String> description = ["Description", "መግለጫ"];
+  List<String> from = ["From", "ከ"];
+  List<String> to = ["From", "እስከ"];
+  List<String> continuee = ["Continue", "ቀጥል"];
 }

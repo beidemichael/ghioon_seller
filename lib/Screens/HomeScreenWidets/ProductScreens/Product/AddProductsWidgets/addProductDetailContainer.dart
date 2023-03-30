@@ -7,10 +7,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addProductDetailWidgets/1,fixedButton.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addProductDetailWidgets/1,rangeButton.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../Providers/RangeProvider.dart';
 import '../../../../../Models/addProductmodels.dart';
+import '../../../../../Providers/language_provider.dart';
 import '../../../../../Service/Product/AddProductDatabase.dart';
 import '../../../../../Service/uploadPhoto.dart';
 import '../../../../../Shared/customColors.dart';
@@ -31,7 +33,7 @@ class addProductDetail extends StatefulWidget {
 
 class _addProductDetailState extends State<addProductDetail> {
   dialog() {
-    final appState = Provider.of<RangeData>(context,listen: false);
+    final appState = Provider.of<RangeData>(context, listen: false);
     PopupDialog alert =
         PopupDialog("Are You Sure you want to add the product?", () {
       print(appState.isLoading);
@@ -52,6 +54,7 @@ class _addProductDetailState extends State<addProductDetail> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final appState = Provider.of<RangeData>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
     List<String> catagories = [];
@@ -71,9 +74,13 @@ class _addProductDetailState extends State<addProductDetail> {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           TextFormFieldProduct(
-              "Enter Product Name", appState.productName, "Product Name"),
+              Language().Enter_product_name[languageprov.LanguageIndex],
+              appState.productName,
+              Language().product_name[languageprov.LanguageIndex]),
           TextFormFieldProDescription(
-              "Description", appState.description, "Description"),
+              Language().description[languageprov.LanguageIndex],
+              appState.description,
+              Language().description[languageprov.LanguageIndex]),
           // DropdownButtonFormField(
           //     decoration: InputDecoration(
           //       hintText: 'Select Product Type',
@@ -143,9 +150,9 @@ class _addProductDetailState extends State<addProductDetail> {
           ),
           Visibility(
             visible: !appState.productDescriptionFilled,
-            child: const Center(
+            child: Center(
               child: Text(
-                "Please fill all inputs",
+                Language().please_fill_all_field[languageprov.LanguageIndex],
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     fontSize: 18,
@@ -228,7 +235,8 @@ class _addProductDetailState extends State<addProductDetail> {
 
                 print("not loading");
               },
-              child: BlueButton(text: 'Continue'))
+              child: BlueButton(
+                  text: Language().continuee[languageprov.LanguageIndex]))
         ],
       ),
     );

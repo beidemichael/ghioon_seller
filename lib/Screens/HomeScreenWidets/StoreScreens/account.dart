@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Providers/EditProfileProvider.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/accountEdit.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:ghioon_seller/Shared/loading.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +24,7 @@ class _AccountState extends State<Account> {
   Widget build(BuildContext context) {
     final userInfo = Provider.of<List<UserInformation>>(context);
     final appState = Provider.of<EditProfileData>(context);
+    var languageprov = Provider.of<LanguageProvider>(context);
     return userInfo.isEmpty
         ? Loading()
         : Scaffold(
@@ -86,29 +89,37 @@ class _AccountState extends State<Account> {
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
                     children: [
-                      containerWidget(userInfo[0].businessName, 'Store Name'),
-                      containerWidget(userInfo[0].userName, 'Owner Name'),
+                      containerWidget(userInfo[0].businessName,
+                          Language().business_name[languageprov.LanguageIndex]),
+                      containerWidget(userInfo[0].userName,
+                          Language().sellername[languageprov.LanguageIndex]),
                       Row(
                         children: [
                           Expanded(
-                            child: containerWidget('Male', 'Gender'),
+                            child: containerWidget('',
+                                Language().gender[languageprov.LanguageIndex]),
                           ),
                           const SizedBox(
                             width: 15,
                           ),
                           Expanded(
-                            child:
-                                containerWidget('Jan 1 2022', 'Date of birth'),
+                            child: containerWidget(
+                                'Jan 1 2022',
+                                Language()
+                                    .birthdate[languageprov.LanguageIndex]),
                           ),
                         ],
                       ),
-                      containerWidget(
-                          userInfo[0].businessCategory, 'Business Type'),
-                      containerWidget(userInfo[0].email, 'Email'),
-                      containerWidget(userInfo[0].phoneNumber, 'Phone'),
-                      containerWidget(
-                          userInfo[0].businessNo, 'Business Number'),
-                      containerWidget(userInfo[0].address, 'Address'),
+                      containerWidget(userInfo[0].businessCategory,
+                          Language().businesstype[languageprov.LanguageIndex]),
+                      containerWidget(userInfo[0].email,
+                          Language().email[languageprov.LanguageIndex]),
+                      containerWidget(userInfo[0].phoneNumber,
+                          Language().phonenumber[languageprov.LanguageIndex]),
+                      containerWidget(userInfo[0].businessNo,
+                          Language().businessnum[languageprov.LanguageIndex]),
+                      containerWidget(userInfo[0].address,
+                          Language().address[languageprov.LanguageIndex]),
                     ],
                   ),
                 ),

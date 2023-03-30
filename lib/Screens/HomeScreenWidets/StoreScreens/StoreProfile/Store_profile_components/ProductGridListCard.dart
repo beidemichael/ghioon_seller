@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 
 class ProductListCard extends StatelessWidget {
   const ProductListCard({Key? key, required this.product}) : super(key: key);
@@ -11,6 +14,7 @@ class ProductListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final TextStyle textStyle = Theme.of(context).textTheme.;
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Container(
@@ -87,7 +91,8 @@ class ProductListCard extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          'ETB ' + product.price[0].toString(),
+                          Language().etb[languageprov.LanguageIndex] +
+                              product.price[0].toString(),
                           style: TextStyle(
                               fontFamily: 'Inter',
                               color: CustomColors().black,

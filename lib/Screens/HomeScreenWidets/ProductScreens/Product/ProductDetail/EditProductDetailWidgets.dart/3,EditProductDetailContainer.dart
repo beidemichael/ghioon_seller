@@ -8,9 +8,11 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ProductDetail/EditProductDetailWidgets.dart/4,editfixedInputField.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 import '../../../../../../Providers/EditRangeProvider.dart';
+import '../../../../../../Providers/language_provider.dart';
 import '../../../../../../Service/Product/AddProductDatabase.dart';
 import '../../../../../../Shared/customColors.dart';
 import '../../../../../components/BlueButton.dart';
@@ -63,6 +65,7 @@ class _EditProductDetailState extends State<EditProductDetail> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final appState = Provider.of<EditRangeData>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
     List<String> catagories = [];
@@ -139,7 +142,8 @@ class _EditProductDetailState extends State<EditProductDetail> {
               onTap: () {
                 barcodeScan();
               },
-              child: BlueButton(text: 'Barcode/Qrcode')),
+              child: BlueButton(
+                  text: Language().barcode[languageprov.LanguageIndex])),
           const SizedBox(
             height: 15,
           ),
@@ -194,8 +198,10 @@ class _EditProductDetailState extends State<EditProductDetail> {
                 Navigator.of(context).pop();
               },
               child: loading
-                  ? BlueButton(text: 'Saving...')
-                  : BlueButton(text: 'Save'))
+                  ? BlueButton(
+                      text: Language().saving[languageprov.LanguageIndex])
+                  : BlueButton(
+                      text: Language().save[languageprov.LanguageIndex]))
         ],
       ),
     );

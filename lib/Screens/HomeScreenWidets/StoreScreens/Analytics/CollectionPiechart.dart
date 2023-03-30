@@ -1,8 +1,10 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Models/models.dart';
+import '../../../../Providers/language_provider.dart';
 import '../../../../Shared/customColors.dart';
 
 class CollectionPieChartChart extends StatefulWidget {
@@ -77,6 +79,7 @@ class PieChart2State extends State {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
     final products = Provider.of<List<Product>>(context);
     if (userInfo.isNotEmpty && products.isNotEmpty) {
@@ -98,7 +101,7 @@ class PieChart2State extends State {
                   const SizedBox(
                     height: 50,
                   ),
-                  Text('Collection Percentage',
+                  Text(Language().collection_per[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 30,
                           color: CustomColors().darkBlue2,
@@ -169,8 +172,10 @@ class PieChart2State extends State {
                                     width: 20,
                                     height: 20,
                                     decoration: BoxDecoration(
-                                      border:
-                              Border.all(width: 1, color: Color.fromARGB(255, 255, 255, 255)),
+                                      border: Border.all(
+                                          width: 1,
+                                          color: Color.fromARGB(
+                                              255, 255, 255, 255)),
                                       shape: BoxShape.circle,
                                       color: color[index],
                                     ),

@@ -2,11 +2,13 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addImageContainer.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addProductDetailContainer.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addVideoContainer.dart';
 import 'package:ghioon_seller/Screens/components/loadingWidget.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -21,6 +23,7 @@ class _AddProductState extends State<AddProduct> {
   File? image;
 
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final appState = Provider.of<RangeData>(context);
@@ -42,7 +45,7 @@ class _AddProductState extends State<AddProduct> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Text('Add Products',
+                Text(Language().add_product[languageprov.LanguageIndex],
                     style: TextStyle(
                         fontSize: 30.0,
                         color: Colors.white,
@@ -81,9 +84,10 @@ class _AddProductState extends State<AddProduct> {
                     const SizedBox(height: 15),
                     Visibility(
                       visible: !appState.imageFilled,
-                      child: const Center(
+                      child: Center(
                         child: Text(
-                          "Please add an image",
+                          Language()
+                              .please_add_image[languageprov.LanguageIndex],
                           textAlign: TextAlign.center,
                           style: TextStyle(
                               fontSize: 18,
@@ -126,7 +130,9 @@ class _AddProductState extends State<AddProduct> {
               child: Visibility(
                 visible: appState.isLoading,
                 child: LoadingWidget(
-                    height: height, message: "Adding Product . . ."),
+                    height: height,
+                    message:
+                        Language().adding_product[languageprov.LanguageIndex]),
               ))
         ],
       ),

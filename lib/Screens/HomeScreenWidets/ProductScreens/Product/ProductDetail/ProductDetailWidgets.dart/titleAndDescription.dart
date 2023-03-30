@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
 import '../../../../../../Models/models.dart';
@@ -22,6 +25,7 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -43,13 +47,15 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Price',
+                      Text(Language().price[languageprov.LanguageIndex],
                           style: TextStyle(
                               fontSize: 18.0,
                               fontFamily: 'Inter',
                               color: CustomColors().grey,
                               fontWeight: FontWeight.w700)),
-                      Text('ETB ' + widget.product.price[0].toString(),
+                      Text(
+                          Language().etb[languageprov.LanguageIndex] +
+                              widget.product.price[0].toString(),
                           style: TextStyle(
                               fontSize: 30.0,
                               fontFamily: 'Inter',
@@ -74,7 +80,7 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                  'ETB ' +
+                                  Language().etb[languageprov.LanguageIndex] +
                                       widget.product.price[index].toString(),
                                   style: TextStyle(
                                       fontSize: 22.0,
@@ -128,8 +134,10 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
                                 horizontal: 8.0, vertical: 2.5),
                             child: Text(
                                 widget.product.fixed == true
-                                    ? 'Fixed Price'
-                                    : 'Range Price',
+                                    ? Language()
+                                        .fixed_price[languageprov.LanguageIndex]
+                                    : Language().range_price[
+                                        languageprov.LanguageIndex],
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: widget.product.fixed == true
@@ -163,8 +171,10 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
                               horizontal: 8.0, vertical: 2.5),
                           child: Text(
                               widget.product.inStock == true
-                                  ? 'In Stock'
-                                  : 'Out of Stock',
+                                  ? Language()
+                                      .inStock[languageprov.LanguageIndex]
+                                  : Language()
+                                      .outStock[languageprov.LanguageIndex],
                               style: TextStyle(
                                   fontSize: 20.0,
                                   color: widget.product.inStock == true
@@ -191,7 +201,9 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
                               horizontal: 8.0, vertical: 2.5),
                           child: Text(
                               widget.product.quantity.toString() +
-                                  ' items left',
+                                  ' ' +
+                                  Language()
+                                      .item_left[languageprov.LanguageIndex],
                               style: TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.orange.withOpacity(0.9),
@@ -262,7 +274,7 @@ class _TitleAndDescriptionState extends State<TitleAndDescription> {
           //       ),
           Padding(
             padding: const EdgeInsets.fromLTRB(10.0, 0, 5, 5),
-            child: Text('Product Description',
+            child: Text(Language().product_desc[languageprov.LanguageIndex],
                 style: TextStyle(
                     fontSize: 22.0,
                     fontFamily: 'Inter',

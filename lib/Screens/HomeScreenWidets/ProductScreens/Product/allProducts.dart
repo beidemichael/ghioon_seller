@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/addProductmodels.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ProductDetail/productCard.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ProductDetail/productDetail.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/addProduct.dart';
@@ -10,6 +11,8 @@ import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
 import '../../../../Models/models.dart';
 import 'package:ghioon_seller/Models/models.dart';
+
+import '../../../../Shared/language.dart';
 
 class AllProduct extends StatefulWidget {
   const AllProduct({super.key});
@@ -22,7 +25,7 @@ class _AllProductState extends State<AllProduct> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<RangeData>(context);
-    
+    var languageprov = Provider.of<LanguageProvider>(context);
     final products = Provider.of<List<Product>>(context);
     return Scaffold(
         appBar: PreferredSize(
@@ -63,7 +66,7 @@ class _AllProductState extends State<AllProduct> {
                 mainAxisSize: MainAxisSize.min,
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  const Text('All Products',
+                  Text(Language().all_products[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 30.0,
                           color: Colors.white,

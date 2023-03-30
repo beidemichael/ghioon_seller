@@ -3,7 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../Providers/RangeProvider.dart';
+import '../../../../../../Providers/language_provider.dart';
 import '../../../../../../Shared/customColors.dart';
+import '../../../../../../Shared/language.dart';
 
 class InventoryQty extends StatefulWidget {
   var inventory;
@@ -16,9 +18,10 @@ class InventoryQty extends StatefulWidget {
 class _InventoryQtyState extends State<InventoryQty> {
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-      const Text(
-        "Inventory (Qty)",
+      Text(
+        Language().inventory[languageprov.LanguageIndex],
         style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
       ),
       const SizedBox(

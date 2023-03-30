@@ -4,8 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addProductDetailLogic/addProductDetailLogic.dart';
 import 'package:ghioon_seller/Service/Product/AddProductDatabase.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
@@ -87,7 +89,7 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
       appState.videoLessThanSix = false;
     }
 
-    if (_controller.value.duration.inSeconds <6 &&
+    if (_controller.value.duration.inSeconds < 6 &&
         _controller.value.size.height == _controller.value.size.width) {
       var uploadedVideo = await uploadVideo(
           _video, FirebaseAuth.instance.currentUser!.uid, 'Products');
@@ -98,6 +100,7 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     final appState = Provider.of<EditRangeData>(context);
@@ -137,7 +140,8 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
                             ),
                           ),
                           Text(
-                            'Video duration: ' +
+                            Language()
+                                    .vide_duration[languageprov.LanguageIndex] +
                                 _controller.value.duration.inSeconds
                                     .toString() +
                                 ' Secs',
@@ -149,8 +153,9 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
                           ),
                           Visibility(
                             visible: !appState.videoSquare,
-                            child: const Text(
-                              "Please submit a square video",
+                            child: Text(
+                              Language()
+                                  .square_video[languageprov.LanguageIndex],
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 17,
@@ -160,8 +165,9 @@ class _EditVideoContainerState extends State<EditVideoContainer> {
                           ),
                           Visibility(
                             visible: !appState.videoLessThanSix,
-                            child: const Text(
-                              "Please submit a video less than 6 seconds",
+                            child: Text(
+                              Language()
+                                  .sixsec_video[languageprov.LanguageIndex],
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                   fontSize: 17,

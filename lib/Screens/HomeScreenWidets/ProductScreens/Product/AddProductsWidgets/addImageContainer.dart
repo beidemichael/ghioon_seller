@@ -2,11 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../Providers/RangeProvider.dart';
 import '../../../../../Models/addProductmodels.dart';
+import '../../../../../Providers/language_provider.dart';
 import '../../../../../Shared/customColors.dart';
 import '../../../../components/alert.dart';
 
@@ -21,6 +23,7 @@ class _AddImageContainerState extends State<AddImageContainer> {
   final ImagePicker _picker = ImagePicker();
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     final appState = Provider.of<RangeData>(context);
@@ -82,7 +85,8 @@ class _AddImageContainerState extends State<AddImageContainer> {
                                         children: [
                                           alertLists(
                                               icon: Icons.camera,
-                                              title: 'Camera',
+                                              title: Language().camera[
+                                                  languageprov.LanguageIndex],
                                               onTap: () {
                                                 Navigator.pop(context);
                                                 pickImage(
@@ -90,7 +94,8 @@ class _AddImageContainerState extends State<AddImageContainer> {
                                               }),
                                           alertLists(
                                               icon: Icons.photo_library,
-                                              title: 'Gallary',
+                                              title: Language().gallary[
+                                                  languageprov.LanguageIndex],
                                               onTap: () {
                                                 Navigator.pop(context);
                                                 pickImage(
@@ -98,7 +103,8 @@ class _AddImageContainerState extends State<AddImageContainer> {
                                               }),
                                           alertLists(
                                               icon: Icons.delete,
-                                              title: 'Remove',
+                                              title: Language().remove[
+                                                  languageprov.LanguageIndex],
                                               onTap: () {
                                                 Navigator.pop(context);
                                                 removeImage(index);

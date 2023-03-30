@@ -4,12 +4,17 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../Providers/language_provider.dart';
 
 class LogOutMessage extends StatelessWidget {
   TextStyle textStyle = const TextStyle(color: Colors.black);
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: BackdropFilter(
@@ -34,7 +39,7 @@ class LogOutMessage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        "Logout",
+                        Language().logout[languageprov.LanguageIndex],
                         style: TextStyle(
                             fontSize: 24.0,
                             color: Colors.grey[900],
@@ -54,7 +59,8 @@ class LogOutMessage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 25.0, vertical: 25.0),
                         child: Text(
-                          "Are you sure you want to logout?",
+                          Language()
+                              .are_yousure_logout[languageprov.LanguageIndex],
                           style: TextStyle(
                               color: Colors.grey[900],
                               fontWeight: FontWeight.w300),
@@ -79,7 +85,8 @@ class LogOutMessage extends StatelessWidget {
                               ),
                             ),
                             child: Center(
-                              child: Text('NO',
+                              child: Text(
+                                  Language().no[languageprov.LanguageIndex],
                                   style: TextStyle(
                                       fontSize: 20.0,
                                       color: Colors.grey[500],
@@ -105,8 +112,9 @@ class LogOutMessage extends StatelessWidget {
                                   topLeft: Radius.circular(30.0),
                                   bottomRight: Radius.circular(30.0)),
                             ),
-                            child: const Center(
-                              child: Text('YES',
+                            child: Center(
+                              child: Text(
+                                  Language().yes[languageprov.LanguageIndex],
                                   style: TextStyle(
                                       fontSize: 20.0,
                                       color: Colors.white,

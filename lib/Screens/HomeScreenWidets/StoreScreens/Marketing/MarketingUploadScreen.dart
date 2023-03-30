@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/Marketing/MarketingLogic.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:ghioon_seller/Shared/loading.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
+import '../../../../Providers/language_provider.dart';
 import '../../../../Service/uploadPhoto.dart';
 import '../../../../Shared/customColors.dart';
 
@@ -115,6 +118,7 @@ class _MarketingUploadScreenState extends State<MarketingUploadScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(69.0),
@@ -126,12 +130,15 @@ class _MarketingUploadScreenState extends State<MarketingUploadScreen> {
               children: [
                 Row(
                   children: [
-                    Text('Upload ',
+                    Text(Language().upload[languageprov.LanguageIndex],
                         style: TextStyle(
                             fontSize: 30.0,
                             color: CustomColors().white,
                             fontWeight: FontWeight.w700)),
-                    Text(widget.imagType ? 'Image' : 'Video',
+                    Text(
+                        widget.imagType
+                            ? Language().image[languageprov.LanguageIndex]
+                            : Language().video[languageprov.LanguageIndex],
                         style: TextStyle(
                             fontSize: 30.0,
                             color: CustomColors().white,
@@ -450,8 +457,8 @@ class _MarketingUploadScreenState extends State<MarketingUploadScreen> {
                                       } else {
                                         //Image not 16:9
                                         setState(() {
-                                          message =
-                                              'Image not 16:9 Aspect ratio.';
+                                          message = Language().imagenot169[
+                                              languageprov.LanguageIndex];
                                         });
                                       }
                                     } else {
@@ -471,15 +478,16 @@ class _MarketingUploadScreenState extends State<MarketingUploadScreen> {
                                       } else {
                                         //Image not 1:1
                                         setState(() {
-                                          message =
-                                              'Image not 1:1 Aspect ratio.';
+                                          message = Language().imagenot11[
+                                              languageprov.LanguageIndex];
                                         });
                                       }
                                     }
                                   } else {
                                     //Image is not submitted
                                     setState(() {
-                                      message = 'No Image is Submitted';
+                                      message = Language()
+                                          .no_image[languageprov.LanguageIndex];
                                     });
                                   }
                                 } else {
@@ -506,8 +514,8 @@ class _MarketingUploadScreenState extends State<MarketingUploadScreen> {
                                       } else {
                                         //video not 16:9
                                         setState(() {
-                                          message =
-                                              'Video not 16:9 Aspect ratio.';
+                                          message = Language().videonot169[
+                                              languageprov.LanguageIndex];
                                         });
                                       }
                                     } else {
@@ -528,15 +536,16 @@ class _MarketingUploadScreenState extends State<MarketingUploadScreen> {
                                       } else {
                                         //Image not 1:1
                                         setState(() {
-                                          message =
-                                              'Video not 1:1 Aspect ratio.';
+                                          message = Language().videonot11[
+                                              languageprov.LanguageIndex];
                                         });
                                       }
                                     }
                                   } else {
                                     //Image is not submitted
                                     setState(() {
-                                      message = 'No Vido is Submitted';
+                                      message = Language()
+                                          .no_video[languageprov.LanguageIndex];
                                     });
                                   }
                                 }
@@ -545,7 +554,9 @@ class _MarketingUploadScreenState extends State<MarketingUploadScreen> {
                                   loading = false;
                                 });
                               },
-                              child: BlueButton(text: 'Submit')),
+                              child: BlueButton(
+                                  text: Language()
+                                      .submit[languageprov.LanguageIndex])),
                         ),
                         const SizedBox(
                           height: 50,

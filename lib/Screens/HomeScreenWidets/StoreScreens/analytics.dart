@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Models/models.dart';
@@ -15,6 +17,7 @@ class Analytics extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userInfo = Provider.of<List<UserInformation>>(context);
+    var languageprov = Provider.of<LanguageProvider>(context);
     return userInfo.isEmpty
         ? Loading()
         : Scaffold(
@@ -26,7 +29,7 @@ class Analytics extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Text('Analytics',
+                      Text(Language().analytics[languageprov.LanguageIndex],
                           style: TextStyle(
                               fontSize: 30.0,
                               color: CustomColors().white,

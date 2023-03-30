@@ -9,6 +9,9 @@ import 'package:ghioon_seller/Screens/components/textFormField.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../Providers/language_provider.dart';
+import '../../../../Shared/language.dart';
+
 class FeedbackPage extends StatefulWidget {
   const FeedbackPage({super.key});
 
@@ -20,6 +23,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
   @override
   Widget build(BuildContext context) {
     final appState = Provider.of<FeedbackData>(context);
+    var languageprov = Provider.of<LanguageProvider>(context);
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: PreferredSize(
@@ -30,7 +34,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                Text('Feedback',
+                Text(Language().feedback[languageprov.LanguageIndex],
                     style: TextStyle(
                         fontSize: 30.0,
                         color: CustomColors().white,
@@ -86,12 +90,15 @@ class _FeedbackPageState extends State<FeedbackPage> {
                         height: 20,
                       ),
                       TextFormFieldFeeDescription(
-                          "Feedback", appState.feedbackDescription, "Feedback"),
+                          Language().feedback[languageprov.LanguageIndex],
+                          appState.feedbackDescription,
+                          "Feedback"),
                       Visibility(
                         visible: !appState.feedbackDescriptionFilled,
-                        child: const Center(
+                        child: Center(
                           child: Text(
-                            "Please fill all inputs",
+                            Language().please_fill_all_field[
+                                languageprov.LanguageIndex],
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 18,
@@ -115,8 +122,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                               // AddProductDetailLogic().showDialog(context);
 
                               PopupDialog alert = PopupDialog(
-                                  "Are You Sure you want to send this feedback? (your user id will be sent for feedback reply)",
-                                  () {
+                                  Language().are_yousure_feedback[
+                                      languageprov.LanguageIndex], () {
                                 print(appState.isLoading);
                                 appState.sendFeedback(context).then(
                                     (value) => appState.isLoading = false);
@@ -130,7 +137,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
                               );
                             }
                           },
-                          child: BlueButtonWhite(text: 'Send Feedback'))
+                          child: BlueButtonWhite(
+                              text: Language()
+                                  .send_feedback[languageprov.LanguageIndex]))
                     ]),
                   ),
                 )),
@@ -145,7 +154,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
               child: Visibility(
                 visible: appState.isLoading,
                 child: LoadingWidget(
-                    height: height, message: "Sending feedback . . ."),
+                    height: height,
+                    message: Language()
+                        .sending_feedback[languageprov.LanguageIndex]),
               ))
         ],
       ),

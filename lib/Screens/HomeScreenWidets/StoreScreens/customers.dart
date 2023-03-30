@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/CustomerPages/ViewOnMap.dart';
+import 'package:ghioon_seller/Shared/language.dart';
+import 'package:provider/provider.dart';
 
 import '../../../Shared/customColors.dart';
 
@@ -9,6 +12,7 @@ class Customers extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70.0),
@@ -18,7 +22,7 @@ class Customers extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                Text('Customers',
+                Text(Language().customers[languageprov.LanguageIndex],
                     style: TextStyle(
                         fontSize: 30.0,
                         color: CustomColors().white,
@@ -42,7 +46,7 @@ class Customers extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             container(MediaQuery.of(context).size.width, FontAwesomeIcons.users,
-                'All Customers'),
+                Language().allcustomers[languageprov.LanguageIndex]),
             const SizedBox(
               height: 30,
             ),
@@ -53,8 +57,10 @@ class Customers extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => const ViewOnMap()),
                 );
               },
-              child: container(MediaQuery.of(context).size.width,
-                  FontAwesomeIcons.mapLocationDot, 'View on Map'),
+              child: container(
+                  MediaQuery.of(context).size.width,
+                  FontAwesomeIcons.mapLocationDot,
+                  Language().viewonmap[languageprov.LanguageIndex]),
             ),
           ],
         ),

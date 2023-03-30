@@ -4,7 +4,9 @@ import 'package:ghioon_seller/Screens/components/textFormField.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../Providers/EditRangeProvider.dart';
+import '../../../../../../Providers/language_provider.dart';
 import '../../../../../../Shared/customColors.dart';
+import '../../../../../../Shared/language.dart';
 import '5,editinventoryQty.dart';
 
 class EditFixedInputField extends StatefulWidget {
@@ -25,18 +27,18 @@ class _EditFixedInputFieldState extends State<EditFixedInputField> {
     widget.appState.fixedPrice.text = widget.product.rangeTo[0].toString();
     widget.appState.oldPrice.text = widget.product.rangeFrom[0].toString();
     widget.appState.cost.text = widget.product.price[0].toString();
-   
   }
 
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     final appState = Provider.of<EditRangeData>(context);
     return Container(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Fixed Price",
+            Language().fixed_price[languageprov.LanguageIndex],
             style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
@@ -65,7 +67,7 @@ class _EditFixedInputFieldState extends State<EditFixedInputField> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Profit",
+                        Language().profit[languageprov.LanguageIndex],
                         style: TextStyle(
                             fontSize: 22.0,
                             color: CustomColors().blue,
@@ -85,7 +87,7 @@ class _EditFixedInputFieldState extends State<EditFixedInputField> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Profit",
+                      Language().profit[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 22.0,
                           color: CustomColors().blue,
@@ -127,7 +129,8 @@ class _EditFixedInputFieldState extends State<EditFixedInputField> {
           //     ),
           //   ),
           // ),
-          EditInventoryQty(inventory: widget.product.quantity,appState: appState),
+          EditInventoryQty(
+              inventory: widget.product.quantity, appState: appState),
         ],
       ),
     );

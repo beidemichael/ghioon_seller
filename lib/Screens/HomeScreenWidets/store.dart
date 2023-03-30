@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/StoreProfile/store_profile.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/account.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/accountEdit.dart';
@@ -9,6 +10,7 @@ import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/customers.da
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/marketing.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/setting.dart';
 import 'package:ghioon_seller/Screens/components/SnackBar.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import '../../Models/models.dart';
@@ -40,6 +42,7 @@ class _StoreState extends State<Store> {
   @override
   Widget build(BuildContext context) {
     final userInfo = Provider.of<List<UserInformation>>(context);
+    var languageprov = Provider.of<LanguageProvider>(context);
     double width = MediaQuery.of(context).size.width;
     return userInfo.isEmpty
         ? Loading()
@@ -53,7 +56,7 @@ class _StoreState extends State<Store> {
                     mainAxisSize: MainAxisSize.min,
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
-                      Text('Store',
+                      Text(Language().store[languageprov.LanguageIndex],
                           style: TextStyle(
                               fontFamily: 'Inter',
                               fontSize: 30.0,
@@ -105,7 +108,7 @@ class _StoreState extends State<Store> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           // ignore: prefer_const_literals_to_create_immutables
                           children: [
-                            Text('My Store',
+                            Text(Language().mystore[languageprov.LanguageIndex],
                                 style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontSize: 30.0,
@@ -137,7 +140,9 @@ class _StoreState extends State<Store> {
                       );
                     },
                     child: StoreList(
-                        FontAwesomeIcons.solidUser, 'My Account', width)),
+                        FontAwesomeIcons.solidUser,
+                        Language().my_account[languageprov.LanguageIndex],
+                        width)),
                 GestureDetector(
                     onTap: () {
                       // Navigator.push(
@@ -145,10 +150,16 @@ class _StoreState extends State<Store> {
                       //   MaterialPageRoute(
                       //       builder: (context) => const Customers()),
                       // );
-                      snackBar(context, 'No Customers yet.', CustomColors().blue, CustomColors().white);
+                      snackBar(
+                          context,
+                          Language().no_customers[languageprov.LanguageIndex],
+                          CustomColors().blue,
+                          CustomColors().white);
                     },
                     child: StoreList(
-                        FontAwesomeIcons.solidUser, 'Customers', width)),
+                        FontAwesomeIcons.solidUser,
+                        Language().customers[languageprov.LanguageIndex],
+                        width)),
                 GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -158,7 +169,9 @@ class _StoreState extends State<Store> {
                       );
                     },
                     child: StoreList(
-                        FontAwesomeIcons.chartPie, 'Analytics', width)),
+                        FontAwesomeIcons.chartPie,
+                        Language().analytics[languageprov.LanguageIndex],
+                        width)),
                 GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -168,7 +181,9 @@ class _StoreState extends State<Store> {
                       );
                     },
                     child: StoreList(
-                        FontAwesomeIcons.bullhorn, 'Maketing', width)),
+                        FontAwesomeIcons.bullhorn,
+                        Language().promotion[languageprov.LanguageIndex],
+                        width)),
                 GestureDetector(
                     onTap: () {
                       Navigator.push(
@@ -177,13 +192,14 @@ class _StoreState extends State<Store> {
                             builder: (context) => const StoreSetting()),
                       );
                     },
-                    child: StoreList(FontAwesomeIcons.gear, 'Setting', width)),
+                    child: StoreList(FontAwesomeIcons.gear,
+                        Language().setting[languageprov.LanguageIndex], width)),
                 GestureDetector(
                     onTap: () {
                       support(context);
                     },
                     child: StoreList(FontAwesomeIcons.solidCircleQuestion,
-                        'Support', width)),
+                        Language().support[languageprov.LanguageIndex], width)),
               ],
             ),
           );
