@@ -48,7 +48,7 @@ class LongProductGrid extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontFamily: 'Poppins',
-                      fontSize: width / 14,
+                      fontSize: width / 15,
                       color: CustomColors().blue,
                       fontWeight: FontWeight.w600))
             ]),

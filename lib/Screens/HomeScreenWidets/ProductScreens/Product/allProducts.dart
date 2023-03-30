@@ -66,7 +66,7 @@ class _AllProductState extends State<AllProduct> {
                 mainAxisSize: MainAxisSize.min,
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
-                  Text(Language().all_products[languageprov.LanguageIndex],
+                  Text(Language().all_products_one[languageprov.LanguageIndex],
                       style: TextStyle(
                           fontSize: 30.0,
                           color: Colors.white,

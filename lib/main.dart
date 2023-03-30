@@ -63,6 +63,15 @@ void main() async {
                       initialData: [],
                       value: ControllerDatabaseService().controller,
                     ),
+                    ChangeNotifierProvider(
+                      create: (context) => LanguageProvider(),
+                    ),
+                    ChangeNotifierProvider(
+                      create: (_) {
+                        LanguageProvider().loadSelectedLanguageIndex;
+                      },
+                      //create: (context) => LanguageProvider().loadSelectedLanguageIndex,
+                    ),
                   ],
                   child: const MyApp(),
                 )
@@ -89,23 +98,36 @@ void main() async {
                     ChangeNotifierProvider(
                       create: (context) => AppState(),
                     ),
-                    StreamProvider<List<Product>>.value(
-                      initialData: [],
-                      value: ReadProductDatabaseService(userUid: user.uid)
-                          .readProduct,
-                    ),
-                    StreamProvider<List<Collection>>.value(
-                      initialData: [],
-                      value: ReadCollectionDatabaseService(userUid: user.uid)
-                          .readCollection,
-                    ),
-                    StreamProvider<List<UserInformation>>.value(
-                      initialData: [],
-                      value: UserDatabaseService(userUid: user.uid).userInfo,
-                    ),
-                    StreamProvider<List<Controller>>.value(
-                      initialData: [],
-                      value: ControllerDatabaseService().controller,
+                    StreamProvider<List<Product>>(
+                        initialData: [],
+                        create: (_) {
+                          final userUid =
+                              FirebaseAuth.instance.currentUser?.uid;
+                          return ReadProductDatabaseService(userUid: userUid)
+                              .readProduct;
+                        }),
+                    StreamProvider<List<Collection>>(
+                        initialData: [],
+                        create: (_) {
+                          final userUid =
+                              FirebaseAuth.instance.currentUser?.uid;
+                          return ReadCollectionDatabaseService(userUid: userUid)
+                              .readCollection;
+                        }),
+                    StreamProvider<List<UserInformation>>(
+                        initialData: [],
+                        create: (_) {
+                          final userUid =
+                              FirebaseAuth.instance.currentUser?.uid;
+                          return UserDatabaseService(userUid: userUid).userInfo;
+                        }),
+                    StreamProvider<List<Controller>>(
+                        initialData: [],
+                        create: (_) {
+                          return ControllerDatabaseService().controller;
+                        }),
+                    ChangeNotifierProvider(
+                      create: (context) => LanguageProvider(),
                     ),
                     ChangeNotifierProvider(
                       create: (_) {

@@ -110,7 +110,8 @@ class Language {
   List<String> no_sales = ["No Sales yet", "እስካሁን ምንም ሽያጭ የለም"];
 
 //products
-  List<String> all_products = ["All \n Products", "ሁሉም \n ምርቶች"];
+  List<String> all_products = ["All  Products", "ሁሉም \n ምርቶች"];
+  List<String> all_products_one = ["All Products", "ሁሉም ምርቶች"];
   List<String> collections = ["Collections", "ስብስቦች"];
   List<String> inventory_scanner = ["Inventory Scanner", "የእቃ ዝርዝር ቃኚ"];
   List<String> barcode_scanner = ["Barcode \n Scanner", "ባርኮድ \n ስካነር"];

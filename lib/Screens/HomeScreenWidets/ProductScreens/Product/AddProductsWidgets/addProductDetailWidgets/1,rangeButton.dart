@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../../../../../Providers/language_provider.dart';
 import '../../../../../../Shared/customColors.dart';
 
 class RangeButton extends StatefulWidget {
@@ -13,6 +15,7 @@ class RangeButton extends StatefulWidget {
 class _RangeButtonState extends State<RangeButton> {
   @override
   Widget build(BuildContext context) {
+    var languageprov = Provider.of<LanguageProvider>(context);
     return Container(
       height: 50,
       decoration: BoxDecoration(

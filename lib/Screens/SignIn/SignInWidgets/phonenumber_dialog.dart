@@ -17,7 +17,6 @@ class PhoneBlurryDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var languageprov = Provider.of<LanguageProvider>(context);
     return BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: AlertDialog(
@@ -85,8 +84,7 @@ class PhoneBlurryDialog extends StatelessWidget {
                             ),
                           ),
                           child: Center(
-                            child: Text(
-                                Language().no[languageprov.LanguageIndex],
+                            child: Text('NO',
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.grey[500],
@@ -112,8 +110,7 @@ class PhoneBlurryDialog extends StatelessWidget {
                                 bottomRight: Radius.circular(30.0)),
                           ),
                           child: Center(
-                            child: Text(
-                                Language().yes[languageprov.LanguageIndex],
+                            child: Text('YES',
                                 style: TextStyle(
                                     fontSize: 20.0,
                                     color: Colors.black,

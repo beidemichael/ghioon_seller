@@ -312,6 +312,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                 if (value == 'businessName') businessName = val;
                 if (value == 'email') email = val;
                 if (value == 'businessNo') businessNo = val;
+                if (value == 'address') address = val;
               });
             },
             validator: (val) {
