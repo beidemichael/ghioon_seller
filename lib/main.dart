@@ -66,12 +66,7 @@ void main() async {
                     ChangeNotifierProvider(
                       create: (context) => LanguageProvider(),
                     ),
-                    ChangeNotifierProvider(
-                      create: (_) {
-                        LanguageProvider().loadSelectedLanguageIndex;
-                      },
-                      //create: (context) => LanguageProvider().loadSelectedLanguageIndex,
-                    ),
+                  
                   ],
                   child: const MyApp(),
                 )
