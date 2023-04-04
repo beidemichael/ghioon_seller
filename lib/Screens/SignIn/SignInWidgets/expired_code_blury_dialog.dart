@@ -16,7 +16,6 @@ class BlurryDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var languageprov = Provider.of<LanguageProvider>(context);
     return BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: Stack(
@@ -41,7 +40,7 @@ class BlurryDialog extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
                         Text(
-                          Language().expired[languageprov.LanguageIndex],
+                          "Expired",
                           style: TextStyle(
                               fontSize: 24.0,
                               color: Colors.grey[900],
@@ -61,7 +60,7 @@ class BlurryDialog extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 25.0, vertical: 25.0),
                           child: Text(
-                            Language().otp_expired[languageprov.LanguageIndex],
+                            "The Verification code we have sent has now Expired, please re-submit your phone number to recieve another Verifiacation code",
                             style: TextStyle(
                                 color: Colors.grey[900],
                                 fontWeight: FontWeight.w300),
@@ -81,7 +80,7 @@ class BlurryDialog extends StatelessWidget {
                               bottomRight: Radius.circular(30.0)),
                         ),
                         child: Center(
-                          child: Text(Language().ok[languageprov.LanguageIndex],
+                          child: Text("OK",
                               style: TextStyle(
                                   fontSize: 20.0,
                                   color: Colors.black,

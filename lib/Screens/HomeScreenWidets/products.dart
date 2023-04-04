@@ -116,6 +116,7 @@ class _ProductsState extends State<Products> {
                             },
                             child: Container(
                               height: (width / 2) + 45,
+                              width: width / 2,
                               decoration: BoxDecoration(
                                 border: Border.all(
                                     width: 1, color: CustomColors().white),

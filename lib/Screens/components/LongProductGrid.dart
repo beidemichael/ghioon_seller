@@ -17,6 +17,7 @@ class LongProductGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: width / 2 + width / 10,
+      width: width,
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: CustomColors().blue),
         color: CustomColors().white,

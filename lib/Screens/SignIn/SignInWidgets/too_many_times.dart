@@ -16,7 +16,6 @@ class TooManyTrialsBlurryDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var languageprov = Provider.of<LanguageProvider>(context);
     return BackdropFilter(
       filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
       child: AlertDialog(
@@ -39,7 +38,7 @@ class TooManyTrialsBlurryDialog extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Text(
-                    Language().error[languageprov.LanguageIndex],
+                    "Error",
                     style: TextStyle(
                         fontSize: 24.0,
                         color: Colors.grey[900],
@@ -59,7 +58,7 @@ class TooManyTrialsBlurryDialog extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 25.0, vertical: 25.0),
                     child: Text(
-                      Language().too_many_attempt[languageprov.LanguageIndex],
+                      "You've requested verification code too many times, please try again after 24 hours.",
                       style: TextStyle(
                           color: Colors.grey[900], fontWeight: FontWeight.w300),
                     )),
@@ -78,7 +77,7 @@ class TooManyTrialsBlurryDialog extends StatelessWidget {
                         bottomRight: Radius.circular(30.0)),
                   ),
                   child: Center(
-                    child: Text(Language().ok[languageprov.LanguageIndex],
+                    child: Text('OK',
                         style: TextStyle(
                             fontSize: 20.0,
                             color: Colors.black,
