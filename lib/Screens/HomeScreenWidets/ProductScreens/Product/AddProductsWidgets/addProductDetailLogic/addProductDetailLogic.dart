@@ -140,19 +140,36 @@ class AddProductDetailLogic {
     appState.RefreshState();
   }
 
+  Future<File> compressFile(File file) async {
+    final filePath = file.absolute.path;
+
+    // Create output file path
+    // eg:- "Volume/VM/abcd_out.jpeg"
+    final lastIndex = filePath.lastIndexOf(new RegExp(r'.jp'));
+    final splitted = filePath.substring(0, (lastIndex));
+    final outPath = "${splitted}_out${filePath.substring(lastIndex)}";
+    var result = await FlutterImageCompress.compressAndGetFile(
+      file.absolute.path,
+      outPath,
+      quality: 10,
+    );
+
+    print(file.lengthSync());
+    print(result!.lengthSync());
+
+    return result;
+  }
+
   addProduct(BuildContext context) async {
     print('started uplading');
     final appState = Provider.of<RangeData>(context, listen: false);
     //appState.isLoading = true;
     final user = FirebaseAuth.instance.currentUser;
     for (var i = 0; i < appState.Images.length; i++) {
-      var result = await FlutterImageCompress.compressWithFile(
-        appState.Images[i].photo!.path,
-        quality: 5,
-      );
-
       var uploadedPhoto = await uploadImage(
-          File.fromRawPath(result!), user!.uid.toString(), 'Products');
+          await compressFile(appState.Images[i].photo!),
+          user!.uid.toString(),
+          'Products');
 
       appState.imageList.add(uploadedPhoto.toString());
     }
