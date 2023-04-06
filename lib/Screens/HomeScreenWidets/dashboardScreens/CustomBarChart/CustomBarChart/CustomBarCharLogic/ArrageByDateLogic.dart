@@ -12,8 +12,8 @@ class ArrageByDateLogic {
     return max;
   }
 
-  calculation(completeOrders, item, context) {
-    var languageprov = Provider.of<LanguageProvider>(context);
+  calculation(completeOrders, item, context,langIndex) {
+    // var languageprov = Provider.of<LanguageProvider>(context);
     listOfDateLists = [];
     listForEachDate = [];
     //Make sure that there are documents within firebase
@@ -35,10 +35,10 @@ class ArrageByDateLogic {
         DateTime myDateTimei_1 = completeOrders[i - 1].toDate();
         var myDateTimeii = DateFormat.yMd().format(myDateTimei);
         var myDateTimeii_1 = DateFormat.yMd().format(myDateTimei_1);
-        if (item == Language().day[languageprov.LanguageIndex]) {
+        if (item == Language().day[langIndex]) {
           myDateTimeii = DateFormat.yMd().format(myDateTimei);
           myDateTimeii_1 = DateFormat.yMd().format(myDateTimei_1);
-        } else if (item == Language().week[languageprov.LanguageIndex]) {
+        } else if (item == Language().week[langIndex]) {
           myDateTimeii = DateFormat.d().format(myDateTimei);
           if (int.parse(myDateTimeii) >= 1 && int.parse(myDateTimeii) <= 7) {
             myDateTimeii = '1';
@@ -66,10 +66,10 @@ class ArrageByDateLogic {
               int.parse(myDateTimeii_1) <= 31) {
             myDateTimeii_1 = '4';
           }
-        } else if (item == Language().month[languageprov.LanguageIndex]) {
+        } else if (item == Language().month[langIndex]) {
           myDateTimeii = DateFormat.MMMM().format(myDateTimei);
           myDateTimeii_1 = DateFormat.MMMM().format(myDateTimei_1);
-        } else if (item == Language().year[languageprov.LanguageIndex]) {
+        } else if (item == Language().year[langIndex]) {
           myDateTimeii = DateFormat.y().format(myDateTimei);
           myDateTimeii_1 = DateFormat.y().format(myDateTimei_1);
         }

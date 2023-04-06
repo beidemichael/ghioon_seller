@@ -55,7 +55,10 @@ class Analytics extends StatelessWidget {
                 children: [
                   SizedBox(
                       height: 700,
-                      child: BarChartSample3(views: userInfo[0].viewsTime)),
+                      child: BarChartSample3(
+                        views: userInfo[0].viewsTime,
+                        langIndex: languageprov.LanguageIndex,
+                      )),
                   const SizedBox(
                       width: 400, height: 500, child: CollectionPieChartChart())
                 ],

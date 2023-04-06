@@ -51,9 +51,10 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    var languageprov = Provider.of<LanguageProvider>(context);
+  
     final products = Provider.of<List<Product>>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
+      var languageprov = Provider.of<LanguageProvider>(context);
     return userInfo.isEmpty
         ? Loading()
         : Scaffold(
@@ -178,9 +179,12 @@ class _DashboardState extends State<Dashboard> {
                     ],
                   ),
                 ),
-                SizedBox(
-                    height: 700,
-                    child: BarChartSample3(views: userInfo[0].viewsTime)),
+               SizedBox(
+                      height: 700,
+                      child: BarChartSample3(
+                        views: userInfo[0].viewsTime,
+                        langIndex: languageprov.LanguageIndex,
+                      )),
                 SizedBox(
                   height: 20,
                 ),

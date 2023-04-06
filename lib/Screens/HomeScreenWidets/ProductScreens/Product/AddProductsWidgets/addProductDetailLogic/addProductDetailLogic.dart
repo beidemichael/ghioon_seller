@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -8,6 +10,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../../../Providers/RangeProvider.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 import '../../../../../../Service/Product/AddProductDatabase.dart';
 
 class AddProductDetailLogic {
@@ -48,7 +51,7 @@ class AddProductDetailLogic {
     final appState = Provider.of<RangeData>(context, listen: false);
 
     if (appState.productName.value.text.isNotEmpty &&
-        appState.description.value.text.isNotEmpty 
+            appState.description.value.text.isNotEmpty
         // &&
         // appState.selectedValue != null &&
         // appState.selectedCatagoryValue != null
@@ -70,19 +73,18 @@ class AddProductDetailLogic {
       // if (appState.fixedPrice.value.text.isNotEmpty &&
       //     appState.oldPrice.value.text.isNotEmpty &&
       //     appState.cost.value.text.isNotEmpty) {
-        Provider.of<RangeData>(context, listen: false).switchfixedFilled(true);
-        appState.priceList.clear();
-        appState.rangeToList.clear();
-        appState.rangeFromList.clear();
-        appState.priceList.add(0.0);
-        appState.rangeToList.add(0);
-        appState.rangeFromList.add(0);
+      Provider.of<RangeData>(context, listen: false).switchfixedFilled(true);
+      appState.priceList.clear();
+      appState.rangeToList.clear();
+      appState.rangeFromList.clear();
+      appState.priceList.add(0.0);
+      appState.rangeToList.add(0);
+      appState.rangeFromList.add(0);
 
-        print("fixed product");
+      print("fixed product");
       // } else {
       //   Provider.of<RangeData>(context, listen: false).switchfixedFilled(false);
       // }
-
     } else {
       //Range Product
 
@@ -135,7 +137,7 @@ class AddProductDetailLogic {
         true,
         int.parse(appState.inventory.text),
         userUid);
-        appState.RefreshState();
+    appState.RefreshState();
   }
 
   addProduct(BuildContext context) async {
@@ -144,8 +146,13 @@ class AddProductDetailLogic {
     //appState.isLoading = true;
     final user = FirebaseAuth.instance.currentUser;
     for (var i = 0; i < appState.Images.length; i++) {
+      var result = await FlutterImageCompress.compressWithFile(
+        appState.Images[i].photo!.path,
+        quality: 5,
+      );
+
       var uploadedPhoto = await uploadImage(
-          appState.Images[i].photo, user!.uid.toString(), 'Products');
+          File.fromRawPath(result!), user!.uid.toString(), 'Products');
 
       appState.imageList.add(uploadedPhoto.toString());
     }
