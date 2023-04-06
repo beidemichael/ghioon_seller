@@ -80,6 +80,7 @@ class _LanguageSelectionPageState extends State<LanguageSelectionPage> {
                     languageprov.LanguageIndex = index;
                   });
                   await languageprov.saveSelectedLanguageIndex(index);
+                  Navigator.of(context).pop();
                 },
               ),
             ),

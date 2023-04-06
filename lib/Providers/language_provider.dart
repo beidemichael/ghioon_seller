@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageProvider extends ChangeNotifier {
   LanguageProvider() {
-    loadSelectedLanguageIndex();
+    loadSelectedLanguageIndexInitialLoad();
   }
 
   int LanguageIndex = 0;
@@ -11,7 +11,11 @@ class LanguageProvider extends ChangeNotifier {
     'English',
     'አማርኛ',
   ];
-
+ Future<void> loadSelectedLanguageIndexInitialLoad() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    LanguageIndex = prefs.getInt('language') ?? 0;
+    // notifyListeners();
+  }
   Future<void> loadSelectedLanguageIndex() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     LanguageIndex = prefs.getInt('language') ?? 0;
