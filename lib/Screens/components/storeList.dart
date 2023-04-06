@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/dimensions.dart';
 
 Widget StoreList(IconData icon, String name, double width) {
   return Padding(
@@ -34,9 +35,9 @@ Widget StoreList(IconData icon, String name, double width) {
                   width: 18,
                 ),
                 Text(name,
-                    style: const TextStyle(
+                    style: TextStyle(
                         fontFamily: 'Poppins',
-                        fontSize: 20.0,
+                        fontSize: Dimensions.font20, //20.0,
                         color: Colors.black,
                         fontWeight: FontWeight.w500)),
               ],

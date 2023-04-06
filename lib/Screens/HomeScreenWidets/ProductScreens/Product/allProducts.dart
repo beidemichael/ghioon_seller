@@ -7,6 +7,7 @@ import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ProductDetail/productCard.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ProductDetail/productDetail.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/addProduct.dart';
+import 'package:ghioon_seller/Screens/components/emptyScreen.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
 import '../../../../Models/models.dart';
@@ -88,37 +89,40 @@ class _AllProductState extends State<AllProduct> {
           padding: const EdgeInsets.fromLTRB(15.0, 15, 15, 0),
           child: Container(
             height: MediaQuery.of(context).size.height,
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ProductDetail(
-                                product: products[index],
-                              )),
-                    );
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ProductList(
-                      title: products[index].name,
-                      stock: products[index].quantity.toString(),
-                      image: products[index].image,
-                      edit: true,
-                      item: products[index],
-                      index: index,
-                      // view:products[index].viewsTime,
-                    ),
-                  ),
-                );
-              },
-            ),
+            child: products.length != 0
+                ? ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(
+                        parent: AlwaysScrollableScrollPhysics()),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductDetail(
+                                      product: products[index],
+                                    )),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ProductList(
+                            title: products[index].name,
+                            stock: products[index].quantity.toString(),
+                            image: products[index].image,
+                            edit: true,
+                            item: products[index],
+                            index: index,
+                            // view:products[index].viewsTime,
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                : EmptyScreen(context,
+                    (Language().No_products[languageprov.LanguageIndex])),
           ),
         ));
   }

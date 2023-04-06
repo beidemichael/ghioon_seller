@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:ghioon_seller/Providers/AppState.dart';
 import 'package:ghioon_seller/Providers/EditProfileProvider.dart';
 import 'package:ghioon_seller/Providers/MapProvider.dart';
@@ -28,7 +29,7 @@ void main() async {
   Firebase.apps;
 
   runApp(
-    MaterialApp(
+    GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: StreamProvider<UserAuth?>.value(
         value: AuthServices().user,
@@ -38,6 +39,9 @@ void main() async {
           return user == null
               ? MultiProvider(
                   providers: [
+                    ChangeNotifierProvider(
+                      create: (context) => LanguageProvider(),
+                    ),
                     ChangeNotifierProvider(
                       create: (context) => RangeData(),
                     ),
@@ -63,10 +67,6 @@ void main() async {
                       initialData: [],
                       value: ControllerDatabaseService().controller,
                     ),
-                    ChangeNotifierProvider(
-                      create: (context) => LanguageProvider(),
-                    ),
-                  
                   ],
                   child: const MyApp(),
                 )
@@ -124,7 +124,6 @@ void main() async {
                     ChangeNotifierProvider(
                       create: (context) => LanguageProvider(),
                     ),
-                   
                   ],
                   child: const MyApp(),
                 );
@@ -138,6 +137,7 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   // This widget is the root of your application.
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(

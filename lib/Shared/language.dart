@@ -26,7 +26,7 @@ class Language {
   ];
   List<String> pick = ["Pick Location", "ቦታ ይምረጡ"];
   // words in profile/setting
-  List<String> Term_condition = ["Terms and Conditions", "አተገባበሩና ​​መመሪያው"];
+  List<String> Term_condition = ["Terms & Conditions", "አተገባበሩና ​​መመሪያው"];
   List<String> feedback = ["Feedback", "አስተያየት"];
   List<String> notification = ["Notification", "ማሳወቂያ"];
   List<String> on = ["ON", "አብራ"];
