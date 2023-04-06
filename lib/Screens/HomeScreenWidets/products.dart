@@ -105,8 +105,8 @@ class _ProductsState extends State<Products> {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              print(Language()
-                                  .collections[languageprov.LanguageIndex]);
+                              // print(Language()
+                              //     .collections[languageprov.LanguageIndex]);
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -181,8 +181,8 @@ class _ProductsState extends State<Products> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    print(Language()
-                        .inventory_scanner[languageprov.LanguageIndex]);
+                    // print(Language()
+                    //     .inventory_scanner[languageprov.LanguageIndex]);
                     appState.barCode = '3';
                     Provider.of<AppState>(context, listen: false).refresh();
 

@@ -184,9 +184,9 @@ class _EditImageContainerState extends State<EditImageContainer> {
                             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                             child: GestureDetector(
                               onTap: () {
-                                print("add");
+                                //      print("add");
                                 // appState.addToImageList(ImageList());
-                                print('Change image');
+                                //    print('Change image');
                                 showDialog(
                                     context: context,
                                     builder: (BuildContext context) {

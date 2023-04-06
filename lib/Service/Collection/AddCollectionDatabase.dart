@@ -21,7 +21,7 @@ class AddCollectionDatabase {
       if (!docs.docs.isEmpty) {
         DocumentReference ref =
             sellersCollection.doc(userUid).collection('Collections').doc();
-        print("Trying 8888888888888888888888888888888888888");
+        //  print("Trying 8888888888888888888888888888888888888");
         return await sellersCollection
             .doc(userUid)
             .update({

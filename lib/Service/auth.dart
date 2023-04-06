@@ -78,7 +78,7 @@ class AuthServices {
           .then((authRes) {
         _firebaseUser = authRes.user;
 
-        print(_firebaseUser.toString());
+        //  print(_firebaseUser.toString());
       });
       final User user = FirebaseAuth.instance.currentUser!;
       final uid = user.uid;
@@ -107,17 +107,17 @@ class AuthServices {
   Future<void> submitPhoneNumber(Function toManyTimes) async {
     /// The below functions are the callbacks, separated so as to make code more redable
     void verificationCompleted(AuthCredential phoneAuthCredential) async {
-      print('verificationCompleted');
+      // print('verificationCompleted');
 
       _phoneAuthCredential = phoneAuthCredential;
-      print(phoneAuthCredential);
+      //   print(phoneAuthCredential);
       try {
         await FirebaseAuth.instance
             .signInWithCredential(_phoneAuthCredential!)
             .then((authRes) {
           _firebaseUser = authRes.user;
 
-          print(_firebaseUser.toString());
+          //      print(_firebaseUser.toString());
         });
         final User user = FirebaseAuth.instance.currentUser!;
         final uid = user.uid;
@@ -141,8 +141,8 @@ class AuthServices {
     void codeSent(String verificationId, [int? code]) {
       print('codeSent');
       _verificationId = verificationId;
-      print(verificationId);
-      print(code.toString());
+      //  print(verificationId);
+      //  print(code.toString());
     }
 
     void codeAutoRetrievalTimeout(String verificationId) {

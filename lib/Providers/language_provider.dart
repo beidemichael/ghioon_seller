@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageProvider extends ChangeNotifier {
-   LanguageProvider() {
+  LanguageProvider() {
     loadSelectedLanguageIndex();
   }
 
@@ -11,7 +11,6 @@ class LanguageProvider extends ChangeNotifier {
     'English',
     'አማርኛ',
   ];
-
 
   Future<void> loadSelectedLanguageIndex() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -24,6 +23,5 @@ class LanguageProvider extends ChangeNotifier {
     await prefs.setInt('language', index);
     LanguageIndex = index;
     notifyListeners();
-    print(index);
   }
 }

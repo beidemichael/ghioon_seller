@@ -69,7 +69,7 @@ class _AddImageContainerState extends State<AddImageContainer> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            print('Change image');
+                            //    print('Change image');
                             showDialog(
                                 context: context,
                                 builder: (BuildContext context) {
@@ -198,7 +198,7 @@ class _AddImageContainerState extends State<AddImageContainer> {
                             padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                             child: GestureDetector(
                               onTap: () {
-                                print("add");
+                                //     print("add");
                                 appState.addToImageList(ImageList());
                               },
                               child: Container(

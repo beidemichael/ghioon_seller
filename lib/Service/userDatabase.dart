@@ -37,7 +37,7 @@ class UserDatabaseService {
 
   //orders lounges stream
   Stream<List<UserInformation>> get userInfo {
-    print(userUid);
+    // print(userUid);
 
     return sellersCollection
         .where('userUid', isEqualTo: userUid)

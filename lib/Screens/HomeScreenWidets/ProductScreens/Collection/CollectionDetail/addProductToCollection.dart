@@ -28,7 +28,7 @@ class _AddProToCollectionState extends State<AddProToCollection> {
     final collectionLogic = Provider.of<CollectionData>(context);
 
     fillterSearch(String query) {
-      print(query);
+      //   print(query);
       setState(() {
         final searched = products.where((product) {
           final productName = product.name.toLowerCase();

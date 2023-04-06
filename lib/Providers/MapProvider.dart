@@ -42,7 +42,7 @@ class MapProvider with ChangeNotifier {
   }
 // ! TO GET THE USERS LOCATION
   void _getUserLocation() async {
-    print("GET POSITION");
+    //print("GET POSITION");
     bool serviceEnabled;
     LocationPermission permission;
 

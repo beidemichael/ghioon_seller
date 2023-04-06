@@ -67,7 +67,7 @@ class _addCollectionDetailState extends State<addCollectionDetail> {
                     PopupDialog alert = PopupDialog(
                         Language().Are_you_sure_collection[
                             languageprov.LanguageIndex], () {
-                      print(appState.isLoading);
+                      //  print(appState.isLoading);
                       AddCollectionLogic()
                           .addCollection(context)
                           .then((value) => appState.isLoading = false);

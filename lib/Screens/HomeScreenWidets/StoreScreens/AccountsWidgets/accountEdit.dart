@@ -46,7 +46,7 @@ class _AccountEditState extends State<AccountEdit> {
     widget.appState.businessNo.text = widget.user.businessNo;
     widget.appState.address.text = widget.user.address;
     widget.appState.uploadedImage = widget.user.image;
-    print(widget.appState.uploadedImage);
+    // print(widget.appState.uploadedImage);
   }
 
   @override

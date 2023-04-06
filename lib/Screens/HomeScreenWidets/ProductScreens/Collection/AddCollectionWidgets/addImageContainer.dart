@@ -60,7 +60,7 @@ class _AddCollectionImageContainerState
               width: 115,
               child: GestureDetector(
                 onTap: () {
-                  print('Change image');
+                  //   print('Change image');
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {

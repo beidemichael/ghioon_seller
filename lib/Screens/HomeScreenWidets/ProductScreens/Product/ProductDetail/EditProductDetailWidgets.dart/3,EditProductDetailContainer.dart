@@ -72,9 +72,9 @@ class _EditProductDetailState extends State<EditProductDetail> {
     if (userInfo.isNotEmpty) {
       for (int i = 0; i < userInfo[0].collections.length; i++) {
         catagories.add(userInfo[0].collections[i]);
-        print(userInfo[0].collections[i]);
-        print(catagories);
-        print("33333333333333333333333333333333333333333");
+        // print(userInfo[0].collections[i]);
+        // print(catagories);
+        // print("33333333333333333333333333333333333333333");
       }
     }
 

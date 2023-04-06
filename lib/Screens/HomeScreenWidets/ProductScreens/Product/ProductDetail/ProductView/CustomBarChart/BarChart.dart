@@ -49,7 +49,7 @@ class BarChartProductViewState extends State<BarChartProductView> {
     List<List> listOfDateLists =
         ArrageByDateLogic().calculation(widget.views, item);
     max = ArrageByDateLogic().maxNumber();
-    print(FirebaseAuth.instance.currentUser?.uid ?? '');
+    // print(FirebaseAuth.instance.currentUser?.uid ?? '');
     return Scaffold(
       body: SizedBox(
         height: MediaQuery.of(context).size.height,

@@ -47,7 +47,7 @@ class BarChartSample3State extends State<BarChartSample3> {
     List<List> listOfDateLists =
         ArrageByDateLogic().calculation(widget.views, item, context);
     max = ArrageByDateLogic().maxNumber();
-    print(FirebaseAuth.instance.currentUser?.uid ?? '');
+    // print(FirebaseAuth.instance.currentUser?.uid ?? '');
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
