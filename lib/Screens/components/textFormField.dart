@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:provider/provider.dart';
 
@@ -143,6 +144,20 @@ Widget TextFormFieldProduct(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         TextFormField(
+          maxLength: 20,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+
+          //buildCounter: (BuildContext context, { int? currentLength, int? maxLength, bool? isFocused }) => null,   // hide counter
+          buildCounter: (BuildContext context,
+              {int? currentLength, int? maxLength, bool? isFocused}) {
+            return Text(
+              '$currentLength / $maxLength',
+              style: TextStyle(
+                  color: currentLength == maxLength
+                      ? CustomColors().red
+                      : CustomColors().grey),
+            );
+          },
           keyboardType: TextInputType.text,
           controller: control,
           //initialValue: autoAddress,
@@ -226,6 +241,22 @@ Widget TextFormFieldProDescription(
         TextFormField(
           maxLines: 10, // <-- SEE HERE
           minLines: 5, // <-- SEE HERE
+          maxLength: 200,
+          maxLengthEnforcement: MaxLengthEnforcement.enforced,
+
+          // buildCounter: (BuildContext context,
+          //         {int? currentLength, int? maxLength, bool? isFocused}) =>
+          //     null, // hide counter
+          buildCounter: (BuildContext context,
+              {int? currentLength, int? maxLength, bool? isFocused}) {
+            return Text(
+              '$currentLength / $maxLength',
+              style: TextStyle(
+                  color: currentLength == maxLength
+                      ? CustomColors().red
+                      : CustomColors().grey),
+            );
+          },
           keyboardType: TextInputType.text,
           controller: control,
           //initialValue: autoAddress,
