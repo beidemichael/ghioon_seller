@@ -23,8 +23,6 @@ class BarChartSample3 extends StatefulWidget {
 }
 
 class BarChartSample3State extends State<BarChartSample3> {
-
-
   int langIndex = 0;
   int max = 0;
   String item = '';
@@ -35,24 +33,24 @@ class BarChartSample3State extends State<BarChartSample3> {
     super.initState();
     langIndex = widget.langIndex;
     item = Language().day[langIndex];
-    
-    
-    listOfDateLists = ArrageByDateLogic().calculation(widget.views, item,context,langIndex);
-  }
 
+    listOfDateLists =
+        ArrageByDateLogic().calculation(widget.views, item, context, langIndex);
+  }
 
   @override
   Widget build(BuildContext context) {
     max = ArrageByDateLogic().maxNumber();
-     langIndex = widget.langIndex;
-     items = [
+    langIndex = widget.langIndex;
+    items = [
       Language().day[langIndex],
       Language().week[langIndex],
       Language().month[langIndex],
       Language().year[langIndex],
     ];
-    // print(FirebaseAuth.instance.currentUser?.uid ?? '');
-     listOfDateLists = ArrageByDateLogic().calculation(widget.views, item,context,langIndex);
+
+    listOfDateLists =
+        ArrageByDateLogic().calculation(widget.views, item, context, langIndex);
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -132,8 +130,7 @@ class BarChartSample3State extends State<BarChartSample3> {
                               ? SizedBox(
                                   height: MediaQuery.of(context).size.width,
                                   child: Center(
-                                    child: Text(
-                                        Language().you_dont_have_order[langIndex],
+                                    child: Text(Language().no_view[langIndex],
                                         style: TextStyle(
                                             fontSize: 18,
                                             color: Colors.grey[400],

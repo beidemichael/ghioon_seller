@@ -8,11 +8,11 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
-import '../../../../Providers/RangeProvider.dart';
-import '../../../../Models/addProductmodels.dart';
-import '../../../../Shared/customColors.dart';
-import '../../../components/alert.dart';
-import '../../ProductScreens/Product/AddProductsWidgets/addProductDetailLogic/addProductDetailLogic.dart';
+import '../../../Providers/RangeProvider.dart';
+import '../../../Models/addProductmodels.dart';
+import '../../../Shared/customColors.dart';
+import '../../components/alert.dart';
+import 'Product/AddProductsWidgets/addProductDetailLogic/addProductDetailLogic.dart';
 
 class AddVideoContainer extends StatefulWidget {
   const AddVideoContainer({

@@ -9,6 +9,7 @@ import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
 import 'package:ghioon_seller/Service/lastId.dart';
 import 'package:ghioon_seller/Service/registerDatabase.dart';
+import 'package:ghioon_seller/Shared/dimensions.dart';
 import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
@@ -80,8 +81,40 @@ class _BecomeSellerState extends State<BecomeSeller> {
                       Language().email_optional[languageprov.LanguageIndex],
                       'email',
                       false),
+                  //=======================================
+                  Divider(
+                    thickness: 0.5,
+                    height: Dimensions.width20,
+                    indent: Dimensions.width30,
+                    endIndent: Dimensions.width30,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            Dimensions.width30, 5, Dimensions.width10, 5),
+                        child: Text(
+                          Language().address[languageprov.LanguageIndex],
+                          style: TextStyle(
+                              fontSize: Dimensions.font16,
+                              fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    thickness: 0.5,
+                    height: Dimensions.width20,
+                    indent: Dimensions.width30,
+                    endIndent: Dimensions.width30,
+                  ),
+//=======================================
+
                   TextField(Language().address[languageprov.LanguageIndex],
                       'address', true),
+
                   const SizedBox(
                     height: 20,
                   ),
