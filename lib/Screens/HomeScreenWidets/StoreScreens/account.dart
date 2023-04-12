@@ -93,23 +93,23 @@ class _AccountState extends State<Account> {
                           Language().business_name[languageprov.LanguageIndex]),
                       containerWidget(userInfo[0].userName,
                           Language().sellername[languageprov.LanguageIndex]),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: containerWidget('',
-                                Language().gender[languageprov.LanguageIndex]),
-                          ),
-                          const SizedBox(
-                            width: 15,
-                          ),
-                          Expanded(
-                            child: containerWidget(
-                                'Jan 1 2022',
-                                Language()
-                                    .birthdate[languageprov.LanguageIndex]),
-                          ),
-                        ],
-                      ),
+                      // Row(
+                      //   children: [
+                      //     Expanded(
+                      //       child: containerWidget('',
+                      //           Language().gender[languageprov.LanguageIndex]),
+                      //     ),
+                      //     const SizedBox(
+                      //       width: 15,
+                      //     ),
+                      //     Expanded(
+                      //       child: containerWidget(
+                      //           'Jan 1 2022',
+                      //           Language()
+                      //               .birthdate[languageprov.LanguageIndex]),
+                      //     ),
+                      //   ],
+                      // ),
                       containerWidget(userInfo[0].businessCategory,
                           Language().businesstype[languageprov.LanguageIndex]),
                       containerWidget(userInfo[0].email,
