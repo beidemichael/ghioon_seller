@@ -37,7 +37,7 @@ class EditRangeData with ChangeNotifier {
 
   //variables for dropdown
   String? selectedValue = null;
-  String? selectedCatagoryValue = null;
+   var selectedCatagoryValue = null;
 
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [

@@ -91,31 +91,35 @@ class _EditProductState extends State<EditProduct> {
                           index: widget.index,
                         ))),
                     const SizedBox(height: 15),
-                    const SizedBox(height: 15),
-                    GestureDetector(
-                      onTap: () {
-                        print(
-                            'VideoSquare: ' + appState.videoSquare.toString());
-                        print('VideoSix: ' +
-                            appState.videoLessThanSix.toString());
-                      },
-                      child: Container(
-                        height: (width * .5) + 80,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 1,
-                              color: const Color.fromARGB(255, 207, 207, 207)),
-                          color: CustomColors().white,
-                          borderRadius: BorderRadius.circular(20.0),
-                        ),
-                        child: Center(
-                          child: EditVideoContainer(
-                            product: widget.product,
-                            index: widget.index,
-                          ),
-                        ),
-                      ),
-                    ),
+
+                    // ======
+                    //Edit video
+                    //=======
+                    // const SizedBox(height: 15),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     print(
+                    //         'VideoSquare: ' + appState.videoSquare.toString());
+                    //     print('VideoSix: ' +
+                    //         appState.videoLessThanSix.toString());
+                    //   },
+                    //   child: Container(
+                    //     height: (width * .5) + 80,
+                    //     decoration: BoxDecoration(
+                    //       border: Border.all(
+                    //           width: 1,
+                    //           color: const Color.fromARGB(255, 207, 207, 207)),
+                    //       color: CustomColors().white,
+                    //       borderRadius: BorderRadius.circular(20.0),
+                    //     ),
+                    //     child: Center(
+                    //       child: EditVideoContainer(
+                    //         product: widget.product,
+                    //         index: widget.index,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     const SizedBox(height: 15),
                     EditProductDetail(
                       product: widget.product,

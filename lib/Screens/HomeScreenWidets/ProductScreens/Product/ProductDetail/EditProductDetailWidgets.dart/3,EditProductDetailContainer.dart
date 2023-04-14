@@ -8,6 +8,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ProductDetail/EditProductDetailWidgets.dart/4,editfixedInputField.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:ghioon_seller/Screens/components/alertDialog.dart';
 import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
@@ -38,6 +39,7 @@ class _EditProductDetailState extends State<EditProductDetail> {
 
     widget.appState.productName.text = widget.product.name;
     widget.appState.description.text = widget.product.description;
+    widget.appState.selectedCatagoryValue = widget.product.category;
   }
 
   Future<void> barcodeScan() async {
@@ -70,8 +72,8 @@ class _EditProductDetailState extends State<EditProductDetail> {
     final userInfo = Provider.of<List<UserInformation>>(context);
     List<String> catagories = [];
     if (userInfo.isNotEmpty) {
-      for (int i = 0; i < userInfo[0].collections.length; i++) {
-        catagories.add(userInfo[0].collections[i]);
+      for (int i = 0; i < userInfo[0].businessCategory.length; i++) {
+        catagories.add(userInfo[0].businessCategory[i]);
         // print(userInfo[0].collections[i]);
         // print(catagories);
         // print("33333333333333333333333333333333333333333");
@@ -91,22 +93,55 @@ class _EditProductDetailState extends State<EditProductDetail> {
           const SizedBox(
             height: 10,
           ),
-          const Text(
-            "Price",
-            style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          DropdownButtonFormField<String>(
+            decoration: InputDecoration(
+              hintText:  Language().Select_Product_Catagory[languageprov.LanguageIndex],
+              enabledBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: CustomColors().lightgrey, width: 2),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              border: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: CustomColors().grey, width: 2),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              // filled: false,
+              // fillColor: Colors.blueAccent,
+            ),
+            value: appState.selectedCatagoryValue,// =='' ?appState. selectedCatagoryValue : null,
+           // validator: (value) => value == null ? Language().Select_Product_Catagory[languageprov.LanguageIndex] : null,
+            items: catagories.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+              appState. selectedCatagoryValue = value!;
+              print(appState.selectedCatagoryValue);
+              });
+              // Do something with the selected value
+            },
+            
           ),
+          // const Text(
+          //   "Price",
+          //   style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+          // ),
           const SizedBox(
             height: 10,
           ),
-          widget.product.fixed
-              ? EditFixedInputField(
-                  product: widget.product,
-                  appState: appState,
-                )
-              : EditRangeInputField(product: widget.product),
-          const SizedBox(
-            height: 15,
-          ),
+          // widget.product.fixed
+          //     ? EditFixedInputField(
+          //         product: widget.product,
+          //         appState: appState,
+          //       )
+          //     : EditRangeInputField(product: widget.product),
+          // const SizedBox(
+          //   height: 15,
+          // ),
           widget.product.barcode != ''
               ? Column(
                   children: [
@@ -149,7 +184,14 @@ class _EditProductDetailState extends State<EditProductDetail> {
           ),
           GestureDetector(
               onTap: () async {
-                setState(() {
+               
+
+
+
+
+PopupDialog alert =
+        PopupDialog(Language().alert_edit_product[languageprov.LanguageIndex],()async {
+           setState(() {
                   loading = true;
                 });
                 print("loading");
@@ -158,35 +200,36 @@ class _EditProductDetailState extends State<EditProductDetail> {
                 if (widget.product.fixed) {
                   //Fixed Product
 
-                  appState.priceList.clear();
-                  appState.rangeToList.clear();
-                  appState.rangeFromList.clear();
-                  appState.priceList.add(double.parse(appState.cost.text));
-                  appState.rangeToList.add(int.parse(appState.fixedPrice.text));
-                  appState.rangeFromList.add(int.parse(appState.oldPrice.text));
+                  // appState.priceList.clear();
+                  // appState.rangeToList.clear();
+                  // appState.rangeFromList.clear();
+                  // appState.priceList.add(double.parse(appState.cost.text));
+                  // appState.rangeToList.add(int.parse(appState.fixedPrice.text));
+                  // appState.rangeFromList.add(int.parse(appState.oldPrice.text));
                   print("fixed product");
                 } else {
                   //Range Product
-                  for (var i = 0; i < appState.Ranges.length; i++) {
-                    appState.priceList.clear();
-                    appState.rangeToList.clear();
-                    appState.rangeFromList.clear();
-                    for (var i = 0; i < appState.Ranges.length; i++) {
-                      appState.priceList.add(double.parse(
-                          appState.Ranges[i].pricecontroller!.text));
-                      appState.rangeToList.add(
-                          int.parse(appState.Ranges[i].tocontroller!.text));
-                      appState.rangeFromList.add(
-                          int.parse(appState.Ranges[i].fromcontroller!.text));
-                    }
+                  // for (var i = 0; i < appState.Ranges.length; i++) {
+                  //   appState.priceList.clear();
+                  //   appState.rangeToList.clear();
+                  //   appState.rangeFromList.clear();
+                  //   for (var i = 0; i < appState.Ranges.length; i++) {
+                  //     appState.priceList.add(double.parse(
+                  //         appState.Ranges[i].pricecontroller!.text));
+                  //     appState.rangeToList.add(
+                  //         int.parse(appState.Ranges[i].tocontroller!.text));
+                  //     appState.rangeFromList.add(
+                  //         int.parse(appState.Ranges[i].fromcontroller!.text));
+                  //   }
 
-                    print('add Range product');
-                  }
+                  //   print('add Range product');
+                  // }
                 }
                 await AddProductDatabase().editProduct(
                     widget.product.documentId,
                     appState.productName.text,
                     appState.description.text,
+                    appState.selectedCatagoryValue!,
                     appState.priceList,
                     appState.rangeToList,
                     appState.rangeFromList,
@@ -196,6 +239,71 @@ class _EditProductDetailState extends State<EditProductDetail> {
                   loading = false;
                 });
                 Navigator.of(context).pop();
+     
+    }, () {
+      Navigator.pop(context);
+    });
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+
+
+
+
+
+
+                // setState(() {
+                //   loading = true;
+                // });
+                // print("loading");
+                // final appState =
+                //     Provider.of<EditRangeData>(context, listen: false);
+                // if (widget.product.fixed) {
+                //   //Fixed Product
+
+                //   // appState.priceList.clear();
+                //   // appState.rangeToList.clear();
+                //   // appState.rangeFromList.clear();
+                //   // appState.priceList.add(double.parse(appState.cost.text));
+                //   // appState.rangeToList.add(int.parse(appState.fixedPrice.text));
+                //   // appState.rangeFromList.add(int.parse(appState.oldPrice.text));
+                //   print("fixed product");
+                // } else {
+                //   //Range Product
+                //   // for (var i = 0; i < appState.Ranges.length; i++) {
+                //   //   appState.priceList.clear();
+                //   //   appState.rangeToList.clear();
+                //   //   appState.rangeFromList.clear();
+                //   //   for (var i = 0; i < appState.Ranges.length; i++) {
+                //   //     appState.priceList.add(double.parse(
+                //   //         appState.Ranges[i].pricecontroller!.text));
+                //   //     appState.rangeToList.add(
+                //   //         int.parse(appState.Ranges[i].tocontroller!.text));
+                //   //     appState.rangeFromList.add(
+                //   //         int.parse(appState.Ranges[i].fromcontroller!.text));
+                //   //   }
+
+                //   //   print('add Range product');
+                //   // }
+                // }
+                // await AddProductDatabase().editProduct(
+                //     widget.product.documentId,
+                //     appState.productName.text,
+                //     appState.description.text,
+                //     appState.selectedCatagoryValue!,
+                //     appState.priceList,
+                //     appState.rangeToList,
+                //     appState.rangeFromList,
+                //     int.parse(appState.inventory.text),
+                //     _scanBarcode);
+                // setState(() {
+                //   loading = false;
+                // });
+                // Navigator.of(context).pop();
               },
               child: loading
                   ? BlueButton(

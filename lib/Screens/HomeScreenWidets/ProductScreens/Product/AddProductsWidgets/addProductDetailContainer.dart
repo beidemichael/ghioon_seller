@@ -31,27 +31,28 @@ class addProductDetail extends StatefulWidget {
 }
 
 class _addProductDetailState extends State<addProductDetail> {
-  dialog() {
-    final appState = Provider.of<RangeData>(context, listen: false);
-    PopupDialog alert =
-        PopupDialog("Are You Sure you want to add the product?", () {
-      print(appState.isLoading);
-      appState.isLoading = true;
-      AddProductDetailLogic()
-          .addProduct(context)
-          .then((value) => appState.isLoading = false);
-    }, () {
-      Navigator.pop(context);
-      appState.isLoading = false;
-    });
+  // dialog() {
+  //   final appState = Provider.of<RangeData>(context, listen: false);
+    
+  //   PopupDialog alert =
+  //       PopupDialog("Are You Sure you want to add the product?", () {
+  //     print(appState.isLoading);
+  //     appState.isLoading = true;
+  //     AddProductDetailLogic()
+  //         .addProduct(context)
+  //         .then((value) => appState.isLoading = false);
+  //   }, () {
+  //     Navigator.pop(context);
+  //     appState.isLoading = false;
+  //   });
 
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       return alert;
+  //     },
+  //   );
+  // }
    String selectedCatagoryValue = '';
 
   @override
@@ -269,9 +270,35 @@ class _addProductDetailState extends State<addProductDetail> {
                       appState.fixedFilled &&
                       appState.videoLessThanSix &&
                       appState.videoSquare) {
-                    appState.isLoading = true;
-                    // AddProductDetailLogic().showDialog(context);
-                    dialog();
+                    // appState.isLoading = true;
+                    // dialog();
+
+                    //=== Dialog box
+                    final appState = Provider.of<RangeData>(context, listen: false);
+    
+                    PopupDialog alert =
+                        PopupDialog("Are You Sure you want to add the product?", () {
+                      print(appState.isLoading);
+                      appState.isLoading = true;
+                      AddProductDetailLogic()
+                          .addProduct(context)
+                          .then((value) => appState.isLoading = false);
+                    }, () {
+                      Navigator.pop(context);
+                      appState.isLoading = false;
+                    });
+                appState.isLoading = true;
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return alert;
+                      },
+                    );
+
+                    
+
+
+                    
                   }
                 } else {
                   if (appState.imageFilled &&
@@ -279,10 +306,30 @@ class _addProductDetailState extends State<addProductDetail> {
                       appState.rangefilled &&
                       appState.videoLessThanSix &&
                       appState.videoSquare) {
-                    appState.isLoading = true;
+                  //  appState.isLoading = true;
                     // AddProductDetailLogic().showDialog(context);
 
-                    dialog();
+                   // dialog();
+                      final appState = Provider.of<RangeData>(context, listen: false);
+    
+                    PopupDialog alert =
+                        PopupDialog(Language().alert_edit_product[languageprov.LanguageIndex], () {
+                      print(appState.isLoading);
+                      appState.isLoading = true;
+                      AddProductDetailLogic()
+                          .addProduct(context)
+                          .then((value) => appState.isLoading = false);
+                    }, () {
+                      Navigator.pop(context);
+                      appState.isLoading = false;
+                    });
+                appState.isLoading = true;
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return alert;
+                      },
+                    );
                   }
                 }
 

@@ -271,4 +271,13 @@ class Language {
   List<String> store_view = ["Store view", "የመደብር እይታ"];
   List<String> ghioon = ["Ghioon", "ግዮን"];
   List<String> Select_Product_Catagory = ["Select Product Catagory", "የምርት ምድብ ይምረጡ"];
+
+
+  //alerts
+
+
+  List<String> alert_edit_product = ["Are You Sure you want to Edit the product?", "እርግጠኛ ነዎት ምርቱን መለወጥ ይፈልጋሉ?"];
+  List<String> alert_add_product = ["Are You Sure you want to add the product?", "እርግጠኛ ነዎት ምርቱን ማከል ይፈልጋሉ?"];
+
+  
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: must_be_immutable, use_key_in_widget_constructors
+// ignore_for_file: must_be_immutable, use_key_in_widget_ructors
 
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -21,9 +21,9 @@ class PopupDialog extends StatelessWidget {
     return BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: AlertDialog(
-          shape: const RoundedRectangleBorder(
+          shape:  RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30.0))),
-          contentPadding: const EdgeInsets.all(0),
+          contentPadding:  EdgeInsets.all(0),
           content: SizedBox(
             width: 250.0,
             child: Column(
@@ -31,7 +31,7 @@ class PopupDialog extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                const SizedBox(
+                 SizedBox(
                   height: 15.0,
                 ),
                 Row(
@@ -48,16 +48,16 @@ class PopupDialog extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(
+                 SizedBox(
                   height: 15.0,
                 ),
-                const Divider(
+                 Divider(
                   color: Colors.grey,
                   height: 4.0,
                 ),
                 Center(
                   child: Padding(
-                      padding: const EdgeInsets.symmetric(
+                      padding:  EdgeInsets.symmetric(
                           horizontal: 25.0, vertical: 25.0),
                       child: Text(
                         message,
@@ -76,10 +76,10 @@ class PopupDialog extends StatelessWidget {
                         },
                         child: Container(
                           padding:
-                              const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                               EdgeInsets.only(top: 20.0, bottom: 20.0),
                           decoration: BoxDecoration(
                             color: Colors.grey[50],
-                            borderRadius: const BorderRadius.only(
+                            borderRadius:  BorderRadius.only(
                               bottomLeft: Radius.circular(30.0),
                               topRight: Radius.circular(30.0),
                             ),
@@ -103,10 +103,10 @@ class PopupDialog extends StatelessWidget {
                         },
                         child: Container(
                           padding:
-                              const EdgeInsets.only(top: 20.0, bottom: 20.0),
+                               EdgeInsets.only(top: 20.0, bottom: 20.0),
                           decoration: BoxDecoration(
                             color: CustomColors().blue,
-                            borderRadius: const BorderRadius.only(
+                            borderRadius:  BorderRadius.only(
                                 topLeft: Radius.circular(30.0),
                                 bottomRight: Radius.circular(30.0)),
                           ),
