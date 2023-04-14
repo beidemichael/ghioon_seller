@@ -9,7 +9,6 @@ import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/Ad
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addProductDetailWidgets/1,rangeButton.dart';
 import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
-
 import '../../../../../Providers/RangeProvider.dart';
 import '../../../../../Models/addProductmodels.dart';
 import '../../../../../Providers/language_provider.dart';
@@ -37,11 +36,13 @@ class _addProductDetailState extends State<addProductDetail> {
     PopupDialog alert =
         PopupDialog("Are You Sure you want to add the product?", () {
       print(appState.isLoading);
+      appState.isLoading = true;
       AddProductDetailLogic()
           .addProduct(context)
           .then((value) => appState.isLoading = false);
     }, () {
       Navigator.pop(context);
+      appState.isLoading = false;
     });
 
     showDialog(
@@ -51,21 +52,37 @@ class _addProductDetailState extends State<addProductDetail> {
       },
     );
   }
+   String selectedCatagoryValue = '';
 
   @override
   Widget build(BuildContext context) {
     var languageprov = Provider.of<LanguageProvider>(context);
     final appState = Provider.of<RangeData>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
+
+// collections
+    // List<String> catagories = [];
+    // if (userInfo.isNotEmpty) {
+    //   for (int i = 0; i < userInfo[0].collections.length; i++) {
+    //     catagories.add(userInfo[0].collections[i]);
+    //     // print(userInfo[0].collections[i]);
+    //     // print(catagories);
+    //     // print("33333333333333333333333333333333333333333");
+    //   }
+    // }
+
+//make bussiness catagory map to list
     List<String> catagories = [];
+    
     if (userInfo.isNotEmpty) {
-      for (int i = 0; i < userInfo[0].collections.length; i++) {
-        catagories.add(userInfo[0].collections[i]);
-        // print(userInfo[0].collections[i]);
-        // print(catagories);
-        // print("33333333333333333333333333333333333333333");
+      for (int i = 0; i < userInfo[0].businessCategory.length; i++) {
+        catagories.add(userInfo[0].businessCategory[i]);
+       
+       
+       
       }
     }
+    
 
     return Padding(
       padding: const EdgeInsets.all(15.0),
@@ -107,43 +124,79 @@ class _addProductDetailState extends State<addProductDetail> {
           //       });
           //     },
           //     items: appState.dropdownItems),
-          // SizedBox(
-          //   height: 10,
-          // ),
-          // DropdownButtonFormField(
-          //   decoration: InputDecoration(
-          //     hintText: 'Select Product Catagory',
-          //     enabledBorder: OutlineInputBorder(
-          //       borderSide:
-          //           BorderSide(color: CustomColors().lightgrey, width: 2),
-          //       borderRadius: BorderRadius.circular(20),
-          //     ),
-          //     border: OutlineInputBorder(
-          //       borderSide:
-          //           BorderSide(color: CustomColors().grey, width: 2),
-          //       borderRadius: BorderRadius.circular(20),
-          //     ),
-          //     // filled: false,
-          //     // fillColor: Colors.blueAccent,
-          //   ),
-          //   validator: (value) => value == null ? "Select a country" : null,
-          //   dropdownColor: Colors.white,
-          //   value: appState.selectedCatagoryValue,
-          //   onChanged: (String? newValue) {
-          //     setState(() {
-          //       appState.selectedCatagoryValue = newValue!;
-          //     });
-          //   },
-          //   items: catagories.toList().map((String items) {
-          //     print(items);
-          //     print("33333333333333333333333333333333333333333");
+          SizedBox(
+            height: 10,
+          ),
 
-          //     return DropdownMenuItem(
-          //       value: items,
-          //       child: Text(items),
-          //     );
-          //   }).toList(),
+          
+  //         DropdownButtonFormField(
+  //           decoration: InputDecoration(
+  //             hintText: 'Select Product Catagory',
+  //             enabledBorder: OutlineInputBorder(
+  //               borderSide:
+  //                   BorderSide(color: CustomColors().lightgrey, width: 2),
+  //               borderRadius: BorderRadius.circular(20),
+  //             ),
+  //             border: OutlineInputBorder(
+  //               borderSide:
+  //                   BorderSide(color: CustomColors().grey, width: 2),
+  //               borderRadius: BorderRadius.circular(20),
+  //             ),
+  //             // filled: false,
+  //             // fillColor: Colors.blueAccent,
+  //           ),
+  //           validator: (value) => value == null ? "Select Product Catagory" : null,
+  //           dropdownColor: Colors.white,
+  //           value: appState.selectedCatagoryValue,
+  //            onChanged: (value) {
+  //   setState(() {
+  //     selectedCatagoryValue = value!;
+  //   });
+  //   // Do something with the selected value
+  // },
+  //          items: catagories.map((String value) {
+  //   return DropdownMenuItem<String>(
+  //     value: value,
+  //     child: Text(value),
+  //   );
+  // }).toList(),
+
+            
           // ),
+
+          DropdownButtonFormField<String>(
+            decoration: InputDecoration(
+              hintText:  Language().Select_Product_Catagory[languageprov.LanguageIndex],
+              enabledBorder: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: CustomColors().lightgrey, width: 2),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              border: OutlineInputBorder(
+                borderSide:
+                    BorderSide(color: CustomColors().grey, width: 2),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              // filled: false,
+              // fillColor: Colors.blueAccent,
+            ),
+            value: appState.selectedCatagoryValue =='' ?appState. selectedCatagoryValue : null,
+            validator: (value) => value == null ? Language().Select_Product_Catagory[languageprov.LanguageIndex] : null,
+            items: catagories.map((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (value) {
+              setState(() {
+              appState. selectedCatagoryValue = value!;
+              print(appState.selectedCatagoryValue);
+              });
+              // Do something with the selected value
+            },
+            
+          ),
 
           SizedBox(
             height: 10,

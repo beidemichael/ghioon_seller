@@ -110,7 +110,7 @@ class _AccountState extends State<Account> {
                       //     ),
                       //   ],
                       // ),
-                      containerWidget(userInfo[0].businessCategory,
+                      containerWidget(userInfo[0].businessCategory.join(', '),
                           Language().businesstype[languageprov.LanguageIndex]),
                       containerWidget(userInfo[0].email,
                           Language().email[languageprov.LanguageIndex]),

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class AddProductDatabase {
   var userUid;
@@ -65,6 +66,43 @@ class AddProductDatabase {
       'barcode':barcode
     });
   }
+
+  Future deleteProduct(String docUid,String userId) async {
+
+    // Get the product document
+  DocumentSnapshot productDoc = await product.doc(docUid).get();
+  
+  // Get the image download URL from the product document
+  List  image =  productDoc.get('image');
+  //String imageUrl = productDoc.get('image');
+  
+  // Delete the product document
+  await product.doc(docUid).delete();
+  
+  // Delete the image from Cloud Storage
+  if (image.isNotEmpty) {
+    for(String imageUrl in image){
+      print(imageUrl);
+      // Extract the image file name from the URL
+   
+    //String imageName =imageUrl.split('/').last.split('?').first.split('%').last.split('%2F').last;
+    String imageName =imageUrl.split('/').last.split('%2F').last.split('?').first;
+    print(imageName);
+    
+    // Create a reference to the image file in Cloud Storage
+    print('Products/$userId/$imageName');
+    Reference imageRef = FirebaseStorage.instance.ref().child('Products/$userId/$imageName');
+
+    
+    // Delete the image file
+    await imageRef.delete();
+    print("deleted");
+
+    }
+    
+  }
+
+}
 
   Future addProduct(
     String name,

@@ -30,7 +30,8 @@ class _BecomeSellerState extends State<BecomeSeller> {
   String businessNo = '';
   String address = '';
   int businessCategory = 10000;
-  String businessType = '';
+  //String businessType = '';
+    List<String> businessType = [];
   bool categoryOpen = false;
   bool businessTypeValid = true;
 
@@ -205,14 +206,23 @@ class _BecomeSellerState extends State<BecomeSeller> {
                                           onTap: () {
                                             setState(() {
                                               businessCategory = index;
-                                              businessType =
-                                                  categories[index].type;
+                                             // businessType =categories[index].type;
+                                              if(businessType.contains(categories[index].type)){
+                                                businessType.remove(categories[index].type);
+                                              }
+                                              else{
+                                                businessType.add(categories[index].type);
+                                              }
+                                              print(businessType);
+                                              
                                             });
                                           },
                                           child: Container(
                                             height: 50,
                                             decoration: BoxDecoration(
-                                              color: businessCategory == index
+                                              color:
+                                              // businessCategory == index
+                                               businessType.contains(categories[index].type)
                                                   ? const Color.fromARGB(
                                                       255, 245, 255, 152)
                                                   : const Color.fromARGB(

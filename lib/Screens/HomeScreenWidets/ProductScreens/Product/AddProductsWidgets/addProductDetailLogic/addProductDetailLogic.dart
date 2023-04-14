@@ -52,9 +52,9 @@ class AddProductDetailLogic {
 
     if (appState.productName.value.text.isNotEmpty &&
             appState.description.value.text.isNotEmpty
-        // &&
+         &&
         // appState.selectedValue != null &&
-        // appState.selectedCatagoryValue != null
+        appState.selectedCatagoryValue != null
         ) {
       appState.productDescriptionFilled = true;
     } else {
@@ -129,9 +129,9 @@ class AddProductDetailLogic {
         appState.rangeToList,
         appState.rangeFromList,
         appState.selectedValue,
-        appState.selectedCatagoryValue,
+        appState.selectedCollectionValue,
         5,
-        'food',
+         appState.selectedCatagoryValue,
         appState.imageList,
         appState.videoString,
         true,

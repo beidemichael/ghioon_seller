@@ -4,9 +4,13 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Providers/EditRangeProvider.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addProductDetailLogic/addProductDetailLogic.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/ProductDetail/EditProduct.dart';
+import 'package:ghioon_seller/Screens/components/alertDialog.dart';
+import 'package:ghioon_seller/Service/Product/AddProductDatabase.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/dimensions.dart';
 import 'package:provider/provider.dart';
 
 import 'ProductView/CustomBarChart/BarChart.dart';
@@ -30,9 +34,29 @@ class ProductList extends StatelessWidget {
   final int index;
   final item;
   // final List view;
+ 
 
   @override
   Widget build(BuildContext context) {
+     Deletedialog(var docuid, var userId) {
+    
+    PopupDialog alert =
+        PopupDialog("Are You Sure you want to Delete the product?", () {
+     // print(appState.isLoading);
+      AddProductDatabase()
+          .deleteProduct(docuid, userId)
+          .then((value) => print("Deleted"));//appState.isLoading = false);
+    }, () {
+      Navigator.pop(context);
+    });
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
       child: Container(
@@ -140,6 +164,21 @@ class ProductList extends StatelessWidget {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                          IconButton(
+                          onPressed: () {
+                            Provider.of<EditRangeData>(context, listen: false)
+                                .removeallcontrollers();
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => BarChartProductView(
+                                      views: item.viewsTime)),
+                            );
+                          },
+                          icon: const Icon(Icons.remove_red_eye),
+                          iconSize: Dimensions.width30,
+                          color: CustomColors().grey,
+                        ),
                         IconButton(
                           onPressed: () {
                             Provider.of<EditRangeData>(context, listen: false)
@@ -153,24 +192,20 @@ class ProductList extends StatelessWidget {
                                       )),
                             );
                           },
-                          icon: const Icon(FontAwesomeIcons.penToSquare),
-                          iconSize: 40,
+                          icon: const Icon( Icons.edit),
+                          iconSize: Dimensions.width30,
                           color: CustomColors().blue,
                         ),
-                        IconButton(
+                      
+                         IconButton(
                           onPressed: () {
-                            Provider.of<EditRangeData>(context, listen: false)
-                                .removeallcontrollers();
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => BarChartProductView(
-                                      views: item.viewsTime)),
-                            );
+                          
+                                 //AddProductDatabase().deleteProduct(item.docUid);
+                            Deletedialog(item.productId, item.userUid);
                           },
-                          icon: const Icon(FontAwesomeIcons.eye),
-                          iconSize: 25,
-                          color: CustomColors().grey,
+                          icon: const Icon( Icons.delete),
+                          iconSize: Dimensions.width30,
+                          color: CustomColors().red,
                         ),
                       ],
                     )

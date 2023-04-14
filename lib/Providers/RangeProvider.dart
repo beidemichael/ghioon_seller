@@ -40,7 +40,9 @@ class RangeData with ChangeNotifier {
 
   //variables for dropdown
   String selectedValue = 'New';
-  String selectedCatagoryValue = 'Others';
+  var selectedCatagoryValue = null;
+  String selectedCollectionValue = 'others';
+  
 
   List<DropdownMenuItem<String>> get dropdownItems {
     List<DropdownMenuItem<String>> menuItems = [
@@ -106,7 +108,7 @@ class RangeData with ChangeNotifier {
   }
 
   removeSelectedCatagoryValue() {
-    selectedCatagoryValue = '';
+    selectedCatagoryValue = null;
   }
 
   addSelectedCatagoryValue(String value) {

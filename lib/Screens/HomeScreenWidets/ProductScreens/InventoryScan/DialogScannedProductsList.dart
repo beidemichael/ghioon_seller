@@ -132,7 +132,9 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                                     barcode:
                                                         products[index].barcode,
                                                     viewsTime: products[index]
-                                                        .viewsTime),
+                                                        .viewsTime,
+                                                    userUid: products[index].userUid,
+                                                        ),
                                               )),
                                     );
                                   },

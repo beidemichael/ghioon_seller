@@ -38,7 +38,7 @@ class _AllProductState extends State<AllProduct> {
                     appState.removeallcontrollers();
                     appState.removeallimages();
                     appState.removeSelectedValue();
-                    //appState.removeSelectedCatagoryValue();
+                    appState.removeSelectedCatagoryValue();
                     appState.addinit();
                     appState.addToImageList(ImageList(name: 'first'));
                     print("image added");

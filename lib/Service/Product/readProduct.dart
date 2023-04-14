@@ -27,7 +27,9 @@ class ReadProductDatabaseService {
         inStock: (doc.data() as dynamic)['isStock'] ?? '',
         quantity: (doc.data() as dynamic)['quantity'] ?? '',
         barcode: (doc.data() as dynamic)['barcode'] ?? '',
+         userUid: (doc.data() as dynamic)['userUid'] ?? '',
         documentId: doc.reference.id,
+
         
       );
     }).toList();
@@ -75,6 +77,7 @@ class ReadProductDatabaseService {
         inStock: (doc.data() as dynamic)['isStock'] ?? '',
         quantity: (doc.data() as dynamic)['quantity'] ?? '',
         barcode: (doc.data() as dynamic)['barcode'] ?? '',
+        userUid: (doc.data() as dynamic)['userUid'] ?? '',
         documentId: doc.reference.id,
       );
     }).toList();

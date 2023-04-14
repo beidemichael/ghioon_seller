@@ -270,4 +270,5 @@ class Language {
 
   List<String> store_view = ["Store view", "የመደብር እይታ"];
   List<String> ghioon = ["Ghioon", "ግዮን"];
+  List<String> Select_Product_Catagory = ["Select Product Catagory", "የምርት ምድብ ይምረጡ"];
 }

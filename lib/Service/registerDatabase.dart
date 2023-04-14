@@ -13,7 +13,7 @@ class RegisterDatabaseService {
     String businessName,
     String email,
     String businessNo,
-    String businessType,
+    List<String> businessType,
     String phoneNumber,
     String address,
     int ghioonId,

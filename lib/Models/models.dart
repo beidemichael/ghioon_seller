@@ -10,7 +10,7 @@ class UserInformation {
   String userUid;
   bool approved;
   String documentId;
-  String businessCategory;
+  List businessCategory;
   String businessName;
   String email;
   String businessNo;
@@ -87,6 +87,7 @@ class Product {
   String video;
   String barcode;
   List viewsTime;
+   String userUid;
 
   Product({
     required this.productId,
@@ -107,6 +108,7 @@ class Product {
     required this.video,
     required this.barcode,
     required this.viewsTime,
+    required this.userUid,
   });
 }
 
@@ -129,6 +131,7 @@ class ProductBar {
   String video;
   String barcode;
     List viewsTime;
+  String userUid;
 
   ProductBar({
     required this.productId,
@@ -148,7 +151,8 @@ class ProductBar {
     required this.documentId,
     required this.video,
     required this.barcode,
-    required this.viewsTime
+    required this.viewsTime,
+    required this.userUid,
   });
 }
 
