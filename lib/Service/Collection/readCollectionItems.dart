@@ -33,9 +33,11 @@ class ReadCollectionItemsDatabaseService {
   //orders lounges stream
   Stream<List<CollectionItems>> get readCollectionItems {
     return productCollection
-        .where('Product_collection', isEqualTo: collection)
+        .where('category', isEqualTo: collection)
         .where('userUid', isEqualTo: userUid)
         .snapshots()
         .map(_productListFromSnapshot);
   }
+
+  
 }

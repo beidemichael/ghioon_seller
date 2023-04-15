@@ -14,7 +14,7 @@ class LogOutMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var languageprov = Provider.of<LanguageProvider>(context);
+//var languageprov = Provider.of<LanguageProvider>(context);
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: BackdropFilter(
@@ -39,7 +39,7 @@ class LogOutMessage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        Language().logout[languageprov.LanguageIndex],
+                       "Logout",// Language().logout[languageprov.LanguageIndex],
                         style: TextStyle(
                             fontSize: 24.0,
                             color: Colors.grey[900],
@@ -59,8 +59,9 @@ class LogOutMessage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 25.0, vertical: 25.0),
                         child: Text(
-                          Language()
-                              .are_yousure_logout[languageprov.LanguageIndex],
+                          "Are you sure you want to logout?",
+                          // Language()
+                          //     .are_yousure_logout[languageprov.LanguageIndex],
                           style: TextStyle(
                               color: Colors.grey[900],
                               fontWeight: FontWeight.w300),
@@ -86,7 +87,7 @@ class LogOutMessage extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                  Language().no[languageprov.LanguageIndex],
+                                 "NO",// Language().no[languageprov.LanguageIndex],
                                   style: TextStyle(
                                       fontSize: 20.0,
                                       color: Colors.grey[500],
@@ -101,7 +102,7 @@ class LogOutMessage extends StatelessWidget {
                           onTap: () async {
                             await FirebaseAuth.instance.signOut();
                             Navigator.of(context).pop();
-                            Navigator.of(context).pop();
+                            //Navigator.of(context).pop();
                           },
                           child: Container(
                             padding:
@@ -114,7 +115,7 @@ class LogOutMessage extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                  Language().yes[languageprov.LanguageIndex],
+                                "Yes" ,// Language().yes[languageprov.LanguageIndex],
                                   style: TextStyle(
                                       fontSize: 20.0,
                                       color: Colors.white,

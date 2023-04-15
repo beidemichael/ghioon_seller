@@ -91,8 +91,9 @@ class ProductListCard extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          Language().etb[languageprov.LanguageIndex] +
-                              product.price[0].toString(),
+                            Language().negotiable[languageprov.LanguageIndex],
+                          // Language().etb[languageprov.LanguageIndex] +
+                          //     product.price[0].toString(),
                           style: TextStyle(
                               fontFamily: 'Inter',
                               color: CustomColors().black,

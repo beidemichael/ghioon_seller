@@ -17,6 +17,8 @@ class UserDatabaseService {
         businessCategory: (doc.data() as dynamic)['businessType'] ?? '',
         businessName: (doc.data() as dynamic)['businessName'] ?? '',
         businessNo: (doc.data() as dynamic)['businessNo'] ?? '',
+        region: (doc.data() as dynamic)['region'] ?? '',
+        zone: (doc.data() as dynamic)['zone'] ?? '',
         address: (doc.data() as dynamic)['address'] ?? '',
         viewsTime: (doc.data() as dynamic)['viewCountTime'] ?? [],
         rating: (doc.data() as dynamic)['rating'] ?? '',

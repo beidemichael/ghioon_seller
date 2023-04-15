@@ -134,6 +134,8 @@ class _ScannedProductsState extends State<ScannedProducts> {
                                                     viewsTime: products[index]
                                                         .viewsTime,
                                                     userUid: products[index].userUid,
+                                                     created: products[index].created,
+                                                     viewCountTime: products[index].viewCountTime
                                                         ),
                                               )),
                                     );

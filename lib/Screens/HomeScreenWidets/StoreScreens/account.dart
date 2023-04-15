@@ -33,6 +33,9 @@ class _AccountState extends State<Account> {
                   GestureDetector(
                     onTap: () {
                       appState.image = '';
+                      // appState.region = null;
+                      // appState.zone = null;
+                      appState.regionIndex =0;
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -118,7 +121,7 @@ class _AccountState extends State<Account> {
                           Language().phonenumber[languageprov.LanguageIndex]),
                       containerWidget(userInfo[0].businessNo,
                           Language().businessnum[languageprov.LanguageIndex]),
-                      containerWidget(userInfo[0].address,
+                      containerWidget(userInfo[0].region+ ', ' + userInfo[0].zone+ ', ' +userInfo[0].address,
                           Language().address[languageprov.LanguageIndex]),
                     ],
                   ),

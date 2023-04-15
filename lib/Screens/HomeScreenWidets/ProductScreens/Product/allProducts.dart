@@ -9,6 +9,7 @@ import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/Pr
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/addProduct.dart';
 import 'package:ghioon_seller/Screens/components/emptyScreen.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
+import 'package:ghioon_seller/Shared/dimensions.dart';
 import 'package:provider/provider.dart';
 import '../../../../Models/models.dart';
 import 'package:ghioon_seller/Models/models.dart';
@@ -69,7 +70,7 @@ class _AllProductState extends State<AllProduct> {
                 children: [
                   Text(Language().all_products_one[languageprov.LanguageIndex],
                       style: TextStyle(
-                          fontSize: 30.0,
+                          fontSize: Dimensions.font26,
                           color: Colors.white,
                           fontWeight: FontWeight.w700)),
                 ],
@@ -124,6 +125,34 @@ class _AllProductState extends State<AllProduct> {
                 : EmptyScreen(context,
                     (Language().No_products[languageprov.LanguageIndex])),
           ),
-        ));
+        ),
+        
+      //      floatingActionButton: FloatingActionButton(
+      //   backgroundColor: CustomColors().blue,
+      //   onPressed: () {
+      //      appState.removeallcontrollers();
+      //               appState.removeallimages();
+      //               appState.removeSelectedValue();
+      //               appState.removeSelectedCatagoryValue();
+      //               appState.addinit();
+      //               appState.addToImageList(ImageList(name: 'first'));
+      //               print("image added");
+
+      //               Navigator.push(
+      //                 context,
+      //                 MaterialPageRoute(
+      //                     builder: (context) =>
+      //                         const AddProduct()), //AddProductProvider()),
+      //               );
+      //   },
+      //   child: Center(
+      //     child: Icon(
+      //       FontAwesomeIcons.plus,
+      //       size: 25.0,
+      //       color: CustomColors().white,
+      //     ),
+      //   ),
+      // ),
+        );
   }
 }

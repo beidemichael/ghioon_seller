@@ -129,6 +129,125 @@ class PopupDialog extends StatelessWidget {
   }
 }
 
+class PopupDialogDone extends StatelessWidget {
+  String message;
+ 
+  VoidCallback noCallBack;
+
+  PopupDialogDone(this.message, this.noCallBack);
+
+  @override
+  Widget build(BuildContext context) {
+    return BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+        child: AlertDialog(
+          shape:  RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(30.0))),
+          contentPadding:  EdgeInsets.all(0),
+          content: SizedBox(
+            width: 250.0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisSize: MainAxisSize.min,
+              children: <Widget>[
+                 SizedBox(
+                  height: 15.0,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      "Ghioon",
+                      style: TextStyle(
+                          fontSize: 24.0,
+                          color: Colors.grey[900],
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ],
+                ),
+                 SizedBox(
+                  height: 15.0,
+                ),
+                 Divider(
+                  color: Colors.grey,
+                  height: 4.0,
+                ),
+                Center(
+                  child: Padding(
+                      padding:  EdgeInsets.symmetric(
+                          horizontal: 25.0, vertical: 25.0),
+                      child: Text(
+                        message,
+                        style: TextStyle(
+                            color: Colors.grey[900],
+                            fontWeight: FontWeight.w300),
+                      )),
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          padding:
+                               EdgeInsets.only(top: 20.0, bottom: 20.0),
+                           decoration: BoxDecoration(
+                            color: CustomColors().blue,
+                            borderRadius:  BorderRadius.only(
+                                topLeft: Radius.circular(30.0),
+                                bottomRight: Radius.circular(30.0)),
+                          ),
+                                child: Center(
+                            child: Text("OK",
+                                style: TextStyle(
+                                    fontSize: 20.0,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w400)),
+                          ),
+                        ),
+                      ),
+                    ),
+                    // Expanded(
+                    //   flex: 2,
+                    //   child: InkWell(
+                    //     onTap: () async {
+                    //       Navigator.of(context).pop();
+                    //       yesCallBack();
+                    //     },
+                    //     child: Container(
+                    //       padding:
+                    //            EdgeInsets.only(top: 20.0, bottom: 20.0),
+                    //       decoration: BoxDecoration(
+                    //         color: CustomColors().blue,
+                    //         borderRadius:  BorderRadius.only(
+                    //             topLeft: Radius.circular(30.0),
+                    //             bottomRight: Radius.circular(30.0)),
+                    //       ),
+                    //       child: Center(
+                    //         child: Text("Yes",
+                    //             style: TextStyle(
+                    //                 fontSize: 20.0,
+                    //                 color: Colors.black,
+                    //                 fontWeight: FontWeight.w400)),
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ));
+  }
+}
+
 Future buildShowDialog(BuildContext context, String title, String text,
     VoidCallback yesCallBack, VoidCallback noCallBack) {
   var languageprov = Provider.of<LanguageProvider>(context);

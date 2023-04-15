@@ -4,7 +4,8 @@ import 'package:ghioon_seller/Models/models.dart';
 class ReadProductDatabaseService {
   var userUid;
   var barcode;
-  ReadProductDatabaseService({this.userUid, this.barcode});
+  var category;
+  ReadProductDatabaseService({this.userUid, this.barcode, this.category});
   final CollectionReference productCollection =
       FirebaseFirestore.instance.collection('Products');
   List<Product> _productListFromSnapshot(QuerySnapshot snapshot) {
@@ -29,6 +30,8 @@ class ReadProductDatabaseService {
         barcode: (doc.data() as dynamic)['barcode'] ?? '',
          userUid: (doc.data() as dynamic)['userUid'] ?? '',
         documentId: doc.reference.id,
+        viewCountTime: (doc.data() as dynamic)['viewCountTime'] ?? [],
+        created:(doc.data() as dynamic)['created'] ?? Timestamp.now(),
 
         
       );
@@ -57,6 +60,13 @@ class ReadProductDatabaseService {
         .map(_productListFromSnapshot);
   }
 
+ Stream<List<Product>> get readProductsUnderCatagory {
+    return productCollection
+        .where('category', isEqualTo: category)
+        .where('userUid', isEqualTo: userUid)
+        .snapshots()
+        .map(_productListFromSnapshot);
+  }
   List<ProductBar> _productBarListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.docs.map((doc) {
       return ProductBar(
@@ -79,6 +89,8 @@ class ReadProductDatabaseService {
         barcode: (doc.data() as dynamic)['barcode'] ?? '',
         userUid: (doc.data() as dynamic)['userUid'] ?? '',
         documentId: doc.reference.id,
+        viewCountTime: (doc.data() as dynamic)['viewCountTime'] ?? [],
+        created:(doc.data() as dynamic)['created'] ?? Timestamp.now(),
       );
     }).toList();
   }

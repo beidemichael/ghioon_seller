@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
+import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/CollectionDetail/collection_card.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/addCollections.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Collection/add_category.dart';
 import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Shared/dimensions.dart';
+import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
 import 'cOllectionaddPro.dart';
@@ -23,8 +27,10 @@ class _CollectionsState extends State<Collections> {
   Widget build(BuildContext context) {
     final collectionState = Provider.of<CollectionData>(context);
     final collection = Provider.of<List<Collection>>(context);
+    final categories = Provider.of<List<Categories>>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
     final appState = Provider.of<RangeData>(context);
+     var languageprov = Provider.of<LanguageProvider>(context);
 
     return Scaffold(
       appBar: PreferredSize(
@@ -40,9 +46,9 @@ class _CollectionsState extends State<Collections> {
               mainAxisSize: MainAxisSize.min,
               // ignore: prefer_const_literals_to_create_immutables
               children: [
-                const Text('Collections',
+                 Text(Language().collections[languageprov.LanguageIndex],
                     style: TextStyle(
-                        fontSize: 30.0,
+                        fontSize: Dimensions.font26,
                         color: Colors.white,
                         fontWeight: FontWeight.w700)),
               ],
@@ -66,7 +72,7 @@ class _CollectionsState extends State<Collections> {
                   backgroundColor: CustomColors().blue,
                 ),
               )
-            : userInfo[0].collections.length == 0
+            : userInfo[0].businessCategory.length == 0
                 ? Center(
                     child: Text(
                     "No collections Found",
@@ -79,20 +85,21 @@ class _CollectionsState extends State<Collections> {
                     child: ListView.builder(
                       physics: const BouncingScrollPhysics(
                           parent: AlwaysScrollableScrollPhysics()),
-                      itemCount: userInfo[0].collection_description.length,
+                      itemCount: userInfo[0].businessCategory.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
                             appState.addSelectedCatagoryValue(
-                                userInfo[0].collections[index]);
+                                userInfo[0].businessCategory[index]);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => CollectionDetailProvider(
                                     collection_name:
-                                        userInfo[0].collections[index],
-                                    collection_description: userInfo[0]
-                                        .collection_description[index]),
+                                        userInfo[0].businessCategory[index],
+                                    // collection_description: userInfo[0]
+                                    //     .collection_description[index]
+                                        ),
                                 // CollectionDetail(
                                 //     collection_name:
                                 //         userInfo[0].collections[index],
@@ -104,16 +111,17 @@ class _CollectionsState extends State<Collections> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: CollectionList(
-                                title: userInfo[0].collections[index],
-                                desc: userInfo[0].collection_description[index],
-                                image: userInfo[0].collection_images[index]),
+                                title: userInfo[0].businessCategory[index],
+                                // desc: userInfo[0].collection_description[index],
+                                // image: userInfo[0].collection_images[index]
+                                ),
                           ),
                         );
                       },
                     ),
                   ),
       ),
-      floatingActionButton: FloatingActionButton(
+       floatingActionButton: FloatingActionButton(
         backgroundColor: CustomColors().blue,
         onPressed: () {
           collectionState.addinitCollectionImages();
@@ -121,7 +129,7 @@ class _CollectionsState extends State<Collections> {
           collectionState.cleanallcontrollers();
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AddCollections()),
+            MaterialPageRoute(builder: (context) => const AddCategory()),
           );
         },
         child: Center(
@@ -132,6 +140,25 @@ class _CollectionsState extends State<Collections> {
           ),
         ),
       ),
+      // floatingActionButton: FloatingActionButton(
+      //   backgroundColor: CustomColors().blue,
+      //   onPressed: () {
+      //     collectionState.addinitCollectionImages();
+      //     collectionState.removeallimages();
+      //     collectionState.cleanallcontrollers();
+      //     Navigator.push(
+      //       context,
+      //       MaterialPageRoute(builder: (context) => const AddCollections()),
+      //     );
+      //   },
+      //   child: Center(
+      //     child: Icon(
+      //       FontAwesomeIcons.plus,
+      //       size: 25.0,
+      //       color: CustomColors().white,
+      //     ),
+      //   ),
+      // ),
     );
   }
 }

@@ -11,6 +11,7 @@ import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/al
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/graph/piechart.dart';
 import 'package:ghioon_seller/Screens/components/LongProductGrid.dart';
 import 'package:ghioon_seller/Screens/components/ShortProductGrid.dart';
+import 'package:ghioon_seller/Shared/dimensions.dart';
 import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,8 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
+  @override
+  
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -43,7 +46,7 @@ class _ProductsState extends State<Products> {
               children: [
                 Text(Language().products[languageprov.LanguageIndex],
                     style: TextStyle(
-                        fontSize: 30.0,
+                        fontSize: Dimensions.font26,
                         color: Colors.white,
                         fontWeight: FontWeight.w700)),
               ],

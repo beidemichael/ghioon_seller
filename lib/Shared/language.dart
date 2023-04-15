@@ -37,6 +37,7 @@ class Language {
 
   // words in product detail
   List<String> price = ["Price", "ዋጋ"];
+   List<String> view = ["View", "እይታ"];
   List<String> negotiable = ["Negotiable", "በድርድር"];
   List<String> product_desc = ["Product Description", "የምርት ማብራሪያ"];
   List<String> call = ["Call Seller", "ይደውሉ"];
@@ -75,7 +76,12 @@ class Language {
   List<String> business_name = ["Business Name", "የንግድ ስም"];
   List<String> license_num = ["License Number(optional)", "የፍቃድ ቁጥር (አማራጭ)"];
   List<String> address = ["Address", "አድራሻ"];
+   List<String> additional_address = ["Additional Address", "ተጨማሪ አድራሻ"];
   List<String> email_optional = ["Email(optional)", "ኢሜል (አማራጭ)"];
+
+   List<String> select_region = ["Select Region", "ክልል ይምረጡ"];
+  List<String> select_zone = ["Select Zone", "ዞን ይምረጡ"];
+  
 
   //pending for approval
   List<String> pending = ["Pending for Approval...", "ለማጽደቅ በመጠባበቅ ላይ..."];
@@ -278,6 +284,8 @@ class Language {
 
   List<String> alert_edit_product = ["Are You Sure you want to Edit the product?", "እርግጠኛ ነዎት ምርቱን መለወጥ ይፈልጋሉ?"];
   List<String> alert_add_product = ["Are You Sure you want to add the product?", "እርግጠኛ ነዎት ምርቱን ማከል ይፈልጋሉ?"];
+
+
 
   
 }

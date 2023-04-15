@@ -6,6 +6,7 @@ import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/dashboardScreens/linechart.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/dashboardScreens/graphPoints.dart';
 import 'package:ghioon_seller/Shared/constants.dart';
+import 'package:ghioon_seller/Shared/dimensions.dart';
 import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 import 'package:draw_graph/draw_graph.dart';
@@ -67,7 +68,7 @@ class _DashboardState extends State<Dashboard> {
                   children: [
                     Text(Language().dashboard[languageprov.LanguageIndex],
                         style: TextStyle(
-                            fontSize: 30.0,
+                            fontSize:  Dimensions.font29,
                             // ignore: prefer_const_literals_to_create_immutables
                             shadows: <Shadow>[
                               const Shadow(

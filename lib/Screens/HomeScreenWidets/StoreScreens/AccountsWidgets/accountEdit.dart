@@ -4,8 +4,10 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/profileImage.dart';
+import 'package:ghioon_seller/Screens/SignIn/Address.dart';
 import 'package:ghioon_seller/Screens/components/textFormField.dart';
 import 'package:ghioon_seller/Service/registerDatabase.dart';
+import 'package:ghioon_seller/Shared/dimensions.dart';
 import 'package:ghioon_seller/Shared/language.dart';
 import 'package:ghioon_seller/Shared/loading.dart';
 
@@ -46,19 +48,30 @@ class _AccountEditState extends State<AccountEdit> {
     widget.appState.businessNo.text = widget.user.businessNo;
     widget.appState.address.text = widget.user.address;
     widget.appState.uploadedImage = widget.user.image;
+    widget.appState.region = widget.user.region;
+    widget.appState.zone = widget.user.zone;
     // print(widget.appState.uploadedImage);
   }
 
+ int regionIndex = 0;
   @override
   Widget build(BuildContext context) {
     var languageprov = Provider.of<LanguageProvider>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
+    print(widget.appState.region);
+    print("region ====================");
+     print(widget.appState.zone);
+    print("region ====================");
+    
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
           actions: [
             GestureDetector(
               onTap: () async {
+
+                 print(widget.appState.region);
+                 print( widget.appState.zone);
                 setState(() {
                   loading = true;
                 });
@@ -69,6 +82,8 @@ class _AccountEditState extends State<AccountEdit> {
                     widget.appState.email.text,
                     widget.appState.businessNo.text,
                     widget.appState.address.text,
+                    widget.appState.region,
+                    widget.appState.zone,
                     widget.user.userUid,
                     widget.appState.image);
 
@@ -127,7 +142,7 @@ class _AccountEditState extends State<AccountEdit> {
             appState: widget.appState,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            padding:  EdgeInsets.symmetric(horizontal: Dimensions.width10),
             child: Column(
               children: [
                 TextFormFieldWithOutIcon(
@@ -151,13 +166,97 @@ class _AccountEditState extends State<AccountEdit> {
                     Language().businessnum[languageprov.LanguageIndex],
                     TextInputType.number),
                 TextFormFieldWithOutIcon(
-                    'Jemo Michael, AA, Ethiopia',
+                    Language().additional_address[languageprov.LanguageIndex],
                     widget.appState.address,
                     Language().address[languageprov.LanguageIndex],
                     TextInputType.text),
+
+
+
+                    
+DropdownButtonFormField(
+   decoration: InputDecoration(
+     hintText:  Language().select_region[languageprov.LanguageIndex],
+     enabledBorder: OutlineInputBorder(
+       borderSide:
+           BorderSide(color: CustomColors().lightgrey, width: 2),
+       borderRadius: BorderRadius.circular(20),
+     ),
+     border: OutlineInputBorder(
+       borderSide:
+           BorderSide(color: CustomColors().grey, width: 2),
+       borderRadius: BorderRadius.circular(20),
+     ),
+     // filled: false,
+     // fillColor: Colors.blueAccent,
+   ),
+   validator: (value) => value == null ?  Language().select_region[languageprov.LanguageIndex] : null,
+   dropdownColor: Colors.white,
+   value: widget.appState.region,
+    onChanged: (value) {
+    setState(() {
+      widget.appState.region = value!;
+      print(widget.appState.region);
+
+widget.appState. zone = null;
+    widget.appState.region = value!;  
+         widget.appState.regionIndex = AddressDetail().regions.indexOf(widget.appState.region);
+        print( widget.appState.region);
+        print(regionIndex);
+    });
+    // Do something with the selected value
+  },
+  items: AddressDetail().regions.map((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value,
+      style: TextStyle(fontSize: Dimensions.font14),
+      overflow: TextOverflow.ellipsis,
+          maxLines: 1, ),
+    );
+  }).toList(),),
+SizedBox(height: Dimensions.height10,),
+          DropdownButtonFormField(
+             decoration: InputDecoration(
+               hintText:  Language().select_zone[languageprov.LanguageIndex],
+               enabledBorder: OutlineInputBorder(
+                 borderSide:
+                     BorderSide(color: CustomColors().lightgrey, width: 2),
+                 borderRadius: BorderRadius.circular(20),
+               ),
+               border: OutlineInputBorder(
+                 borderSide:
+                     BorderSide(color: CustomColors().grey, width: 2),
+                 borderRadius: BorderRadius.circular(20),
+               ),
+               // filled: false,
+               // fillColor: Colors.blueAccent,
+             ),
+             validator: (value) => value == null ?  Language().select_zone[languageprov.LanguageIndex] : null,
+             dropdownColor: Colors.white,
+             value: widget.appState.zone,
+              onChanged: (value) {
+    setState(() {
+      widget.appState.zone = value!;
+      print(widget.appState.zone);
+    });
+    // Do something with the selected value
+  },
+            items: AddressDetail().Zone[ AddressDetail().regions.indexOf(widget.appState.region)].map((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value,
+      style: TextStyle(fontSize: Dimensions.font14),
+      overflow: TextOverflow.ellipsis,
+          maxLines: 1, ),
+    );
+  }).toList(),),
+
+         
               ],
             ),
           ),
+
         ],
       ),
     );

@@ -18,6 +18,8 @@ class UserInformation {
   List collection_images;
   List collection_description;
   bool online;
+  String region;
+  String zone;
   String address;
   List viewsTime;
   double rating;
@@ -41,6 +43,8 @@ class UserInformation {
     required this.collection_images,
     required this.collection_description,
     required this.online,
+    required this.region,
+    required this.zone,
     required this.address,
     required this.viewsTime,
     required this.rating,
@@ -54,11 +58,16 @@ class UserInformation {
 class Categories {
   String type;
   String documentId;
+  String name;
+  String image;
   Categories({
     required this.type,
     required this.documentId,
+    required this.name,
+    required this.image
   });
 }
+
 
 class LastId {
   int lastId;
@@ -88,6 +97,8 @@ class Product {
   String barcode;
   List viewsTime;
    String userUid;
+   List viewCountTime;
+   var created;
 
   Product({
     required this.productId,
@@ -109,6 +120,8 @@ class Product {
     required this.barcode,
     required this.viewsTime,
     required this.userUid,
+    required this.viewCountTime,
+    required this.created
   });
 }
 
@@ -132,6 +145,8 @@ class ProductBar {
   String barcode;
     List viewsTime;
   String userUid;
+  List viewCountTime;
+   var created;
 
   ProductBar({
     required this.productId,
@@ -153,6 +168,8 @@ class ProductBar {
     required this.barcode,
     required this.viewsTime,
     required this.userUid,
+    required this.viewCountTime,
+    required this.created
   });
 }
 

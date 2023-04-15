@@ -30,6 +30,7 @@ class Dimensions {
   static double font20 = screenHeight / 42.2;
   static double font23 = screenHeight / 37.33;
   static double font26 = screenHeight / 32.46;
+  static double font29 = screenHeight / 27.59;
 
   //Dynamic radius
   static double radius30 = screenHeight / 28.13;

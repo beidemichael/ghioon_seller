@@ -159,12 +159,12 @@ class _StoreSettingState extends State<StoreSetting> {
               },
               child: StoreList(FontAwesomeIcons.info,
                   Language().about[languageprov.LanguageIndex], width)),
-          GestureDetector(
-              onTap: () async {
-                _showLogoutDialog(context);
-              },
-              child: StoreList(FontAwesomeIcons.rightFromBracket,
-                  Language().logout[languageprov.LanguageIndex], width)),
+          // GestureDetector(
+          //     onTap: () async {
+          //       _showLogoutDialog(context);
+          //     },
+          //     child: StoreList(FontAwesomeIcons.rightFromBracket,
+          //         Language().logout[languageprov.LanguageIndex], width)),
         ],
       ),
     );

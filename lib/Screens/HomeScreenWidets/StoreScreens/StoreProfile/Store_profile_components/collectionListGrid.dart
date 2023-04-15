@@ -21,27 +21,29 @@ class CollectionListGrid extends StatelessWidget {
       child: ListView.builder(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
-        itemCount: userInfo[0].collections.length,
+        itemCount: userInfo[0].businessCategory.length,
         itemBuilder: (context, index) {
           return GestureDetector(
             onTap: () {
-              appState.addSelectedCatagoryValue(userInfo[0].collections[index]);
+              appState.addSelectedCatagoryValue(userInfo[0].businessCategory[index]);
               Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) => CollectionDetailProvider(
-                      collection_name: userInfo[0].collections[index],
-                      collection_description:
-                          userInfo[0].collection_description[index]),
+                      collection_name: userInfo[0].businessCategory[index],
+                      // collection_description:
+                      //     userInfo[0].collection_description[index]
+                          ),
                 ),
               );
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: CollectionList(
-                  title: userInfo[0].collections[index],
-                  desc: userInfo[0].collection_description[index],
-                  image: userInfo[0].collection_images[index]),
+                  title: userInfo[0].businessCategory[index],
+                 // desc: userInfo[0].collection_description[index],
+                 // image: userInfo[0].collection_images[index]),
+              ),
             ),
           );
         },

@@ -13,7 +13,6 @@ class CollectionPieChartChart extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => PieChart2State();
 }
-
 class PieChart2State extends State {
   int touchedIndex = -1;
   List<PieChartSectionData> pieDataList = [];
@@ -43,16 +42,31 @@ class PieChart2State extends State {
   initializeCollection(collection, products) {
     percentCounter.clear();
     for (int i = 0; i < collection.length; i++) {
+      print(collection[i]);
+      print("Category **************");
       int counter = 0;
       for (int j = 0; j < products.length; j++) {
-        if (products[j].Product_collection == collection[i]) {
+        // if (products[j].Product_collection == collection[i]) {
+        //   counter++;
+        // }
+        print(products[j].category);
+        print("product category **************");
+        if (products[j].category == collection[i]) {
           counter++;
+          print("added");
+        }
+        else{
+          print("not added");
         }
       }
       percentCounter.add(counter);
+      print(counter);
+      print("=======================================");
     }
     for (int i = 0; i < percentCounter.length; i++) {
       total = total + percentCounter[i];
+      print("total+++++++++++++++++");
+      print(total);
     }
     for (int i = 0; i < percentCounter.length; i++) {
       percentCounterPercent.add(((percentCounter[i] / total) * 100).toInt());
@@ -79,122 +93,96 @@ class PieChart2State extends State {
 
   @override
   Widget build(BuildContext context) {
-    var languageprov = Provider.of<LanguageProvider>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
     final products = Provider.of<List<Product>>(context);
     if (userInfo.isNotEmpty && products.isNotEmpty) {
-      initializeCollection(userInfo[0].collections, products);
+     // initializeCollection(userInfo[0].collections, products);
+       initializeCollection(userInfo[0].businessCategory, products);
     }
     return percentCounterPercent.isEmpty
         ? Container()
-        : Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              decoration: BoxDecoration(
-                color: CustomColors().lightBlue,
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
+        : AspectRatio(
+            aspectRatio: 1.3,
+            child: Card(
+              color: Colors.white,
               child: Column(
                 children: <Widget>[
                   const SizedBox(
-                    height: 50,
-                  ),
-                  Text(Language().collection_per[languageprov.LanguageIndex],
-                      style: TextStyle(
-                          fontSize: 30,
-                          color: CustomColors().darkBlue2,
-                          fontWeight: FontWeight.w600)),
-                  const SizedBox(
-                    height: 10,
+                    height: 18,
                   ),
                   Expanded(
-                    child: PieChart(
-                      PieChartData(
-                        pieTouchData: PieTouchData(
-                          touchCallback:
-                              (FlTouchEvent event, pieTouchResponse) {
-                            setState(() {
-                              if (!event.isInterestedForInteractions ||
-                                  pieTouchResponse == null ||
-                                  pieTouchResponse.touchedSection == null) {
-                                // touchedIndex = -1;
-                                return;
-                              }
-                              if (touchedIndex ==
-                                  pieTouchResponse
-                                      .touchedSection!.touchedSectionIndex) {
-                                touchedIndex = -1;
-                              } else {
-                                touchedIndex = pieTouchResponse
-                                    .touchedSection!.touchedSectionIndex;
-                              }
-                            });
-                          },
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: PieChart(
+                        PieChartData(
+                          pieTouchData: PieTouchData(
+                            touchCallback:
+                                (FlTouchEvent event, pieTouchResponse) {
+                              setState(() {
+                                if (!event.isInterestedForInteractions ||
+                                    pieTouchResponse == null ||
+                                    pieTouchResponse.touchedSection == null) {
+                                  // touchedIndex = -1;
+                                  return;
+                                }
+                                if (touchedIndex ==
+                                    pieTouchResponse
+                                        .touchedSection!.touchedSectionIndex) {
+                                  touchedIndex = -1;
+                                } else {
+                                  touchedIndex = pieTouchResponse
+                                      .touchedSection!.touchedSectionIndex;
+                                }
+                              });
+                            },
+                          ),
+                          borderData: FlBorderData(
+                            show: false,
+                          ),
+                          sectionsSpace: 0,
+                          centerSpaceRadius: 40,
+                          sections: pieDataList,
                         ),
-                        borderData: FlBorderData(
-                          show: false,
-                        ),
-                        sectionsSpace: 0,
-                        centerSpaceRadius: 40,
-                        sections: pieDataList,
                       ),
                     ),
                   ),
                   Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 10),
-                      child: Container(
-                        height: 60,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(
-                            Radius.circular(10.0),
-                          ),
-                          border:
-                              Border.all(width: 1, color: Color(0xFFC5C5C5)),
-                          color: CustomColors().blue,
-                        ),
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            scrollDirection: Axis.horizontal,
-                            physics: const BouncingScrollPhysics(
-                                parent: AlwaysScrollableScrollPhysics()),
-                            itemCount: userInfo[0].collections.length,
-                            itemBuilder: (context, index) {
-                              return Row(
-                                children: [
-                                  Container(
-                                    width: 20,
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                          width: 1,
-                                          color: Color.fromARGB(
-                                              255, 255, 255, 255)),
-                                      shape: BoxShape.circle,
-                                      color: color[index],
-                                    ),
+                    child: Container(
+                      height: 60,
+                      width: MediaQuery.of(context).size.width,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          physics: const BouncingScrollPhysics(
+                              parent: AlwaysScrollableScrollPhysics()),
+                          itemCount: userInfo[0].businessCategory.length,
+                          itemBuilder: (context, index) {
+                            return Row(
+                              children: [
+                                Container(
+                                  width: 20,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: color[index],
                                   ),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  Text(userInfo[0].collections[index],
-                                      style: TextStyle(
-                                          fontSize: 20.0,
-                                          color: CustomColors().black,
-                                          fontWeight: FontWeight.w700)),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                ],
-                              );
-                            },
-                          ),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(userInfo[0].businessCategory[index],
+                                    style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: CustomColors().blue,
+                                        fontWeight: FontWeight.w700)),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
                     ),

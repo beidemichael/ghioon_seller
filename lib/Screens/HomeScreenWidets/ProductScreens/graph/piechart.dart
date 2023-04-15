@@ -41,16 +41,31 @@ class PieChart2State extends State {
   initializeCollection(collection, products) {
     percentCounter.clear();
     for (int i = 0; i < collection.length; i++) {
+      print(collection[i]);
+      print("Category **************");
       int counter = 0;
       for (int j = 0; j < products.length; j++) {
-        if (products[j].Product_collection == collection[i]) {
+        // if (products[j].Product_collection == collection[i]) {
+        //   counter++;
+        // }
+        print(products[j].category);
+        print("product category **************");
+        if (products[j].category == collection[i]) {
           counter++;
+          print("added");
+        }
+        else{
+          print("not added");
         }
       }
       percentCounter.add(counter);
+      print(counter);
+      print("=======================================");
     }
     for (int i = 0; i < percentCounter.length; i++) {
       total = total + percentCounter[i];
+      print("total+++++++++++++++++");
+      print(total);
     }
     for (int i = 0; i < percentCounter.length; i++) {
       percentCounterPercent.add(((percentCounter[i] / total) * 100).toInt());
@@ -80,7 +95,8 @@ class PieChart2State extends State {
     final userInfo = Provider.of<List<UserInformation>>(context);
     final products = Provider.of<List<Product>>(context);
     if (userInfo.isNotEmpty && products.isNotEmpty) {
-      initializeCollection(userInfo[0].collections, products);
+     // initializeCollection(userInfo[0].collections, products);
+       initializeCollection(userInfo[0].businessCategory, products);
     }
     return percentCounterPercent.isEmpty
         ? Container()
@@ -140,7 +156,7 @@ class PieChart2State extends State {
                           scrollDirection: Axis.horizontal,
                           physics: const BouncingScrollPhysics(
                               parent: AlwaysScrollableScrollPhysics()),
-                          itemCount: userInfo[0].collections.length,
+                          itemCount: userInfo[0].businessCategory.length,
                           itemBuilder: (context, index) {
                             return Row(
                               children: [
@@ -155,7 +171,7 @@ class PieChart2State extends State {
                                 const SizedBox(
                                   width: 5,
                                 ),
-                                Text(userInfo[0].collections[index],
+                                Text(userInfo[0].businessCategory[index],
                                     style: TextStyle(
                                         fontSize: 20.0,
                                         color: CustomColors().blue,

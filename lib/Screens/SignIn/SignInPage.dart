@@ -1,7 +1,7 @@
 // ignore_for_file: file_names, prefer_const_constructors_in_immutables, prefer_function_declarations_over_variables, avoid_print
 
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -151,7 +151,14 @@ class _SignInPageState extends State<SignInPage> {
 
     print("New Country selected: $countryCode");
   }
-
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      
+    });
+  }
   @override
   Widget build(BuildContext context) {
     var languageprov = Provider.of<LanguageProvider>(context);

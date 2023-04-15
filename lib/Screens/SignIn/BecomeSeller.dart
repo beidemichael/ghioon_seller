@@ -6,9 +6,11 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Screens/SignIn/Address.dart';
 import 'package:ghioon_seller/Screens/components/BlueButton.dart';
 import 'package:ghioon_seller/Service/lastId.dart';
 import 'package:ghioon_seller/Service/registerDatabase.dart';
+import 'package:ghioon_seller/Shared/customColors.dart';
 import 'package:ghioon_seller/Shared/dimensions.dart';
 import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +32,12 @@ class _BecomeSellerState extends State<BecomeSeller> {
   String businessNo = '';
   String address = '';
   int businessCategory = 10000;
+  var region =null;
+ int regionIndex = 0;
+  var zone = null;
+  String woreeda = '';
+  
+
   //String businessType = '';
     List<String> businessType = [];
   bool categoryOpen = false;
@@ -39,8 +47,11 @@ class _BecomeSellerState extends State<BecomeSeller> {
   List collection_description = [''];
   List collection_images = [''];
 
+
+
   @override
   Widget build(BuildContext context) {
+   
     final categories = Provider.of<List<Categories>>(context);
     final lastid = Provider.of<List<LastId>>(context);
     var languageprov = Provider.of<LanguageProvider>(context);
@@ -83,18 +94,13 @@ class _BecomeSellerState extends State<BecomeSeller> {
                       'email',
                       false),
                   //=======================================
-                  Divider(
-                    thickness: 0.5,
-                    height: Dimensions.width20,
-                    indent: Dimensions.width30,
-                    endIndent: Dimensions.width30,
-                  ),
+               
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
                         padding: EdgeInsets.fromLTRB(
-                            Dimensions.width30, 5, Dimensions.width10, 5),
+                            Dimensions.width30, 5, Dimensions.width10, 0),
                         child: Text(
                           Language().address[languageprov.LanguageIndex],
                           style: TextStyle(
@@ -113,12 +119,102 @@ class _BecomeSellerState extends State<BecomeSeller> {
                   ),
 //=======================================
 
-                  TextField(Language().address[languageprov.LanguageIndex],
-                      'address', true),
 
-                  const SizedBox(
-                    height: 20,
+Padding(
+   padding:  EdgeInsets.symmetric(horizontal: Dimensions.width10),
+  child:   DropdownButtonFormField<String>(
+  
+                decoration: InputDecoration(
+                  hintText: Language().select_region[languageprov.LanguageIndex],
+                  enabledBorder: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: CustomColors().lightgrey, width: 2),
+                    borderRadius: BorderRadius.circular(20),
                   ),
+                  border: OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: CustomColors().grey, width: 2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  // filled: false,
+                  // fillColor: Colors.blueAccent,
+                ),
+              value: region =='' ?region : null,
+              validator: (value) => value == null ?  Language().select_region[languageprov.LanguageIndex] : null,
+             items: AddressDetail().regions.map((String value) {
+      return DropdownMenuItem<String>(
+        value: value,
+        child: Text(value,
+        style: TextStyle(fontSize: Dimensions.font14),
+        overflow: TextOverflow.ellipsis,
+            maxLines: 1, ),
+      );
+    }).toList(),
+              onChanged: (value) {
+                  setState(() {
+                     zone = null;
+              region = value!;  
+        regionIndex = AddressDetail().regions.indexOf(value);
+        print(region);
+        print(regionIndex);
+  
+                });
+
+              },
+
+            ),
+),
+SizedBox(height: Dimensions.height10,),
+          Padding(
+           padding:  EdgeInsets.symmetric(horizontal: Dimensions.width10),
+           child: DropdownButtonFormField(
+              decoration: InputDecoration(
+                hintText:  Language().select_zone[languageprov.LanguageIndex],
+                enabledBorder: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: CustomColors().lightgrey, width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                border: OutlineInputBorder(
+                  borderSide:
+                      BorderSide(color: CustomColors().grey, width: 2),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                // filled: false,
+                // fillColor: Colors.blueAccent,
+              ),
+              validator: (value) => value == null ?  Language().select_zone[languageprov.LanguageIndex] : null,
+              dropdownColor: Colors.white,
+              value:zone,
+               onChanged: (value) {
+    setState(() {
+      zone = value!;
+      print(zone);
+    });
+    // Do something with the selected value
+  },
+             items: AddressDetail().Zone[regionIndex].map((String value) {
+    return DropdownMenuItem<String>(
+      value: value,
+      child: Text(value,
+      style: TextStyle(fontSize: Dimensions.font14),
+      overflow: TextOverflow.ellipsis,
+          maxLines: 1, ),
+    );
+  }).toList(),),
+         ),
+
+
+            TextField(Language().additional_address[languageprov.LanguageIndex],
+                      'address', true),
+                       Divider(
+                    thickness: 0.5,
+                    height: Dimensions.width20,
+                    indent: Dimensions.width30,
+                    endIndent: Dimensions.width30,
+                  ),
+
+                 
                   GestureDetector(
                     onTap: () {
                       setState(() {
@@ -126,7 +222,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
                       });
                     },
                     child: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 40.0),
+                      padding:  EdgeInsets.symmetric(horizontal:  Dimensions.width10),
                       child: Container(
                         height: 65,
                         width: MediaQuery.of(context).size.width,
@@ -304,6 +400,8 @@ class _BecomeSellerState extends State<BecomeSeller> {
                                 businessNo,
                                 businessType,
                                 phoneNumber.toString(),
+                                region,
+                                zone,
                                 address,
                                 ghioonId,
                                 collections,
@@ -347,7 +445,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
           height: 20,
         ),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40.0),
+          padding:  EdgeInsets.symmetric(horizontal: Dimensions.width10),
           child: TextFormField(
             onChanged: (val) {
               setState(() {
@@ -375,7 +473,7 @@ class _BecomeSellerState extends State<BecomeSeller> {
               contentPadding:
                   const EdgeInsets.only(left: 20, top: 30, bottom: 10),
               labelText: label,
-              focusColor: Colors.orange[900],
+              focusColor: CustomColors().blue,
               labelStyle: TextStyle(
                   fontWeight: FontWeight.w200,
                   fontSize: 20.0,

@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/SettingPages/LogOut.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/StoreProfile/store_profile.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/account.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/StoreScreens/AccountsWidgets/accountEdit.dart';
@@ -30,6 +31,19 @@ class Store extends StatefulWidget {
 class _StoreState extends State<Store> {
   support(BuildContext context) {
     Support alert = Support();
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+  _showLogoutDialog(BuildContext context) {
+    VoidCallback okCallBack = () => {
+          // Navigator.of(context).pop(),
+        };
+    LogOutMessage alert = LogOutMessage();
 
     showDialog(
       context: context,
@@ -200,6 +214,12 @@ class _StoreState extends State<Store> {
                     },
                     child: StoreList(FontAwesomeIcons.solidCircleQuestion,
                         Language().support[languageprov.LanguageIndex], width)),
+                  GestureDetector(
+              onTap: () async {
+                _showLogoutDialog(context);
+              },
+              child: StoreList(FontAwesomeIcons.rightFromBracket,
+                  Language().logout[languageprov.LanguageIndex], width)),
               ],
             ),
           );

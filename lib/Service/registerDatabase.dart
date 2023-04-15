@@ -15,6 +15,8 @@ class RegisterDatabaseService {
     String businessNo,
     List<String> businessType,
     String phoneNumber,
+    String region,
+    String zone,
     String address,
     int ghioonId,
     List collections,
@@ -43,6 +45,8 @@ class RegisterDatabaseService {
               'businessType': businessType,
               'userUid': userUid,
               'phoneNumber': phoneNumber,
+              'region':region,
+              'zone':zone,
               'address': address,
               'approved': false,
               'active': false,
@@ -93,15 +97,23 @@ class RegisterDatabaseService {
     String email,
     String businessNo,
     String address,
+    String region,
+    String zone,
     var userUid,
     String image,
   ) async {
+    print("|||||||||||||||||||||||||||||||||||||||||||||||||");
+    print(region);
+    print(zone);
+
     return sellersCollection.doc(userUid).update({
       'sellerName': sellerName,
       'businessName': businessName,
       'email': email,
       'businessNo': businessNo,
       'address': address,
+      'region': region,
+      'zone': zone,
       'image': image
     });
   }
@@ -112,15 +124,24 @@ class RegisterDatabaseService {
     String email,
     String businessNo,
     String address,
+    String region,
+    String zone,
     var userUid,
     String image,
   ) async {
-    var uploadedPhoto =
+    print("============================");
+    print(region);
+    print(zone);
+    var uploadedPhoto = '';
+    if(image != ''){
+  uploadedPhoto =
         await uploadImage(File(image), userUid.toString(), 'Profile');
+    }
+   
 
     //}
 
-    uploadToDatabase(sellerName, businessName, email, businessNo, address,
+    uploadToDatabase(sellerName, businessName, email, businessNo, address,region,zone,
         userUid, uploadedPhoto);
     print('done');
   }

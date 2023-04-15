@@ -11,6 +11,8 @@ class CategoryDatabaseService {
     return snapshot.docs.map((doc) {
       return Categories(
         type: (doc.data() as dynamic)['type'] ?? '',
+          image: (doc.data() as dynamic)['image'] ?? '',
+            name: (doc.data() as dynamic)['name'] ?? '',
         documentId: doc.reference.id,
       );
     }).toList();

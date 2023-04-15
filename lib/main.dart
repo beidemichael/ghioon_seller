@@ -8,6 +8,7 @@ import 'package:ghioon_seller/Providers/MapProvider.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Providers/FeedbackProvider.dart';
 import 'package:ghioon_seller/Providers/language_provider.dart';
+import 'package:ghioon_seller/Service/Category/categoryDatabase.dart';
 import 'package:ghioon_seller/Service/Collection/readCollection.dart';
 import 'package:ghioon_seller/Service/Collection/readCollectionItems.dart';
 import 'package:ghioon_seller/Service/Product/readProduct.dart';
@@ -67,6 +68,10 @@ void main() async {
                       initialData: [],
                       value: ControllerDatabaseService().controller,
                     ),
+                    StreamProvider<List<Categories>>.value(
+            initialData: [],
+            value: CategoryDatabaseService().categories,
+          ),
                   ],
                   child: const MyApp(),
                 )
@@ -124,6 +129,10 @@ void main() async {
                     ChangeNotifierProvider(
                       create: (context) => LanguageProvider(),
                     ),
+                    StreamProvider<List<Categories>>.value(
+            initialData: [],
+            value: CategoryDatabaseService().categories,
+          ),
                   ],
                   child: const MyApp(),
                 );

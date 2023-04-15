@@ -21,6 +21,10 @@ class EditProfileData with ChangeNotifier {
   String image = '';
 
   String uploadedImage = '';
+   var region =null;
+ int regionIndex = 0;
+  var zone = null;
+  String woreeda = '';
 
   switchproductDescriptionFilled(bool productDescriptionFilledInput) {
     productDescriptionFilled = productDescriptionFilledInput;
