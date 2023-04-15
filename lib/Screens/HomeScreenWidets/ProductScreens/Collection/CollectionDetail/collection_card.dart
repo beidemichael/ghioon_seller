@@ -19,7 +19,7 @@ class CollectionList extends StatelessWidget {
   Widget build(BuildContext context) {
     final categories = Provider.of<List<Categories>>(context);
     for(Categories x in categories){
-      if (x.name == title){
+      if (x.type == title){
         image = x.image;
       }
 
