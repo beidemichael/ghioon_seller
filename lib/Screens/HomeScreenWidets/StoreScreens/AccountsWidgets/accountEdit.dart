@@ -53,25 +53,24 @@ class _AccountEditState extends State<AccountEdit> {
     // print(widget.appState.uploadedImage);
   }
 
- int regionIndex = 0;
+  int regionIndex = 0;
   @override
   Widget build(BuildContext context) {
     var languageprov = Provider.of<LanguageProvider>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
     print(widget.appState.region);
     print("region ====================");
-     print(widget.appState.zone);
+    print(widget.appState.zone);
     print("region ====================");
-    
+
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
           actions: [
             GestureDetector(
               onTap: () async {
-
-                 print(widget.appState.region);
-                 print( widget.appState.zone);
+                print(widget.appState.region);
+                print(widget.appState.zone);
                 setState(() {
                   loading = true;
                 });
@@ -142,7 +141,7 @@ class _AccountEditState extends State<AccountEdit> {
             appState: widget.appState,
           ),
           Padding(
-            padding:  EdgeInsets.symmetric(horizontal: Dimensions.width10),
+            padding: EdgeInsets.symmetric(horizontal: Dimensions.width10),
             child: Column(
               children: [
                 TextFormFieldWithOutIcon(
@@ -170,93 +169,112 @@ class _AccountEditState extends State<AccountEdit> {
                     widget.appState.address,
                     Language().address[languageprov.LanguageIndex],
                     TextInputType.text),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    border:
+                        Border.all(color: CustomColors().lightgrey, width: 2),
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 5),
+                    child: Row(
+                      children: [
+                        DropdownButton(
+                          icon: const SizedBox(),
+                          underline: SizedBox(),
+                          dropdownColor: Colors.white,
+                          value: widget.appState.region,
+                          onChanged: (value) {
+                            setState(() {
+                              widget.appState.region = value!;
+                              print(widget.appState.region);
 
-
-
-                    
-DropdownButtonFormField(
-   decoration: InputDecoration(
-     hintText:  Language().select_region[languageprov.LanguageIndex],
-     enabledBorder: OutlineInputBorder(
-       borderSide:
-           BorderSide(color: CustomColors().lightgrey, width: 2),
-       borderRadius: BorderRadius.circular(20),
-     ),
-     border: OutlineInputBorder(
-       borderSide:
-           BorderSide(color: CustomColors().grey, width: 2),
-       borderRadius: BorderRadius.circular(20),
-     ),
-     // filled: false,
-     // fillColor: Colors.blueAccent,
-   ),
-   validator: (value) => value == null ?  Language().select_region[languageprov.LanguageIndex] : null,
-   dropdownColor: Colors.white,
-   value: widget.appState.region,
-    onChanged: (value) {
-    setState(() {
-      widget.appState.region = value!;
-      print(widget.appState.region);
-
-widget.appState. zone = null;
-    widget.appState.region = value!;  
-         widget.appState.regionIndex = AddressDetail().regions.indexOf(widget.appState.region);
-        print( widget.appState.region);
-        print(regionIndex);
-    });
-    // Do something with the selected value
-  },
-  items: AddressDetail().regions.map((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text(value,
-      style: TextStyle(fontSize: Dimensions.font14),
-      overflow: TextOverflow.ellipsis,
-          maxLines: 1, ),
-    );
-  }).toList(),),
-SizedBox(height: Dimensions.height10,),
-          DropdownButtonFormField(
-             decoration: InputDecoration(
-               hintText:  Language().select_zone[languageprov.LanguageIndex],
-               enabledBorder: OutlineInputBorder(
-                 borderSide:
-                     BorderSide(color: CustomColors().lightgrey, width: 2),
-                 borderRadius: BorderRadius.circular(20),
-               ),
-               border: OutlineInputBorder(
-                 borderSide:
-                     BorderSide(color: CustomColors().grey, width: 2),
-                 borderRadius: BorderRadius.circular(20),
-               ),
-               // filled: false,
-               // fillColor: Colors.blueAccent,
-             ),
-             validator: (value) => value == null ?  Language().select_zone[languageprov.LanguageIndex] : null,
-             dropdownColor: Colors.white,
-             value: widget.appState.zone,
-              onChanged: (value) {
-    setState(() {
-      widget.appState.zone = value!;
-      print(widget.appState.zone);
-    });
-    // Do something with the selected value
-  },
-            items: AddressDetail().Zone[ AddressDetail().regions.indexOf(widget.appState.region)].map((String value) {
-    return DropdownMenuItem<String>(
-      value: value,
-      child: Text(value,
-      style: TextStyle(fontSize: Dimensions.font14),
-      overflow: TextOverflow.ellipsis,
-          maxLines: 1, ),
-    );
-  }).toList(),),
-
-         
+                              widget.appState.zone = null;
+                              widget.appState.region = value!;
+                              widget.appState.regionIndex = AddressDetail()
+                                  .regions
+                                  .indexOf(widget.appState.region);
+                              print(widget.appState.region);
+                              print(regionIndex);
+                            });
+                            // Do something with the selected value
+                          },
+                          items: AddressDetail().regions.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: TextStyle(fontSize: Dimensions.font14),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                        Expanded(
+                          child: Icon(
+                            FontAwesomeIcons.caretDown,
+                            color: CustomColors().darkGrey,
+                            size: Dimensions.height15,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: Dimensions.height10,
+                ),
+                DropdownButtonFormField(
+                  decoration: InputDecoration(
+                    hintText:
+                        Language().select_zone[languageprov.LanguageIndex],
+                    enabledBorder: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: CustomColors().lightgrey, width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide:
+                          BorderSide(color: CustomColors().grey, width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    // filled: false,
+                    // fillColor: Colors.blueAccent,
+                  ),
+                  validator: (value) => value == null
+                      ? Language().select_zone[languageprov.LanguageIndex]
+                      : null,
+                  dropdownColor: Colors.white,
+                  value: widget.appState.zone,
+                  onChanged: (value) {
+                    setState(() {
+                      widget.appState.zone = value!;
+                      print(widget.appState.zone);
+                    });
+                    // Do something with the selected value
+                  },
+                  items: AddressDetail()
+                      .Zone[AddressDetail()
+                          .regions
+                          .indexOf(widget.appState.region)]
+                      .map((String value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: TextStyle(fontSize: Dimensions.font14),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    );
+                  }).toList(),
+                ),
               ],
             ),
           ),
-
         ],
       ),
     );

@@ -14,8 +14,9 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+      filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
       child: Container(
+        height: height,
         color: Color.fromRGBO(0, 0, 0, 0.2),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(

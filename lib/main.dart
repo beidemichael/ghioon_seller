@@ -19,10 +19,13 @@ import 'package:provider/provider.dart';
 import 'Models/models.dart';
 import 'Providers/EditRangeProvider.dart';
 import 'Providers/RangeProvider.dart';
+import 'Screens/update/forced_update.dart';
+import 'Screens/update/optional_update.dart';
 import 'Screens/wrapper.dart';
 import 'Service/Controller/Controller.dart';
 import 'Service/Orders/OrdersDatabase.dart';
 import 'Service/auth.dart';
+import 'Shared/loading.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -69,9 +72,9 @@ void main() async {
                       value: ControllerDatabaseService().controller,
                     ),
                     StreamProvider<List<Categories>>.value(
-            initialData: [],
-            value: CategoryDatabaseService().categories,
-          ),
+                      initialData: [],
+                      value: CategoryDatabaseService().categories,
+                    ),
                   ],
                   child: const MyApp(),
                 )
@@ -130,9 +133,9 @@ void main() async {
                       create: (context) => LanguageProvider(),
                     ),
                     StreamProvider<List<Categories>>.value(
-            initialData: [],
-            value: CategoryDatabaseService().categories,
-          ),
+                      initialData: [],
+                      value: CategoryDatabaseService().categories,
+                    ),
                   ],
                   child: const MyApp(),
                 );
@@ -142,18 +145,68 @@ void main() async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  ///////////////////
+  int netVersion = 0;
+
+  /////////////////////////// App version
+  int appVersion = 9;
+
+  //////////////////////////  App version
+  ///
+  optionalUpdateActivator(BuildContext context, netVersionInput) {
+    if (netVersionInput == 3 || netVersionInput == 4) {
+      OptionalUpdate alert = OptionalUpdate();
+
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
+    } else {
+      return null;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration(seconds: 4), () {
+      // optionalUpdateActivator(context, netVersion);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final controller = Provider.of<List<Controller>>(context);
+    if (controller.isNotEmpty) {
+      netVersion = controller[0].sellerVersion - appVersion;
+      print('netVersion: ' + netVersion.toString());
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: const Wrapper(),
-      ),
+      home: controller.isEmpty
+          ? Loading()
+          : Scaffold(
+              body: Stack(
+                children: [
+                  const Wrapper(),
+                  Visibility(
+                    visible: netVersion > 4,
+                    child: ForcedUpdate(),
+                  ),
+                ],
+              ),
+            ),
     );
   }
 }

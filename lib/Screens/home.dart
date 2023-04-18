@@ -34,44 +34,11 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  ///////////////////
-  int netVersion = 0;
-  /////////////////////////// App version
-  int appVersion = 8;
-  //////////////////////////  App version
-  ///
-  optionalUpdateActivator(BuildContext context, netVersionInput) {
-    if (netVersionInput == 3 || netVersionInput == 4) {
-      OptionalUpdate alert = OptionalUpdate();
-
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return alert;
-        },
-      );
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration(seconds: 4), () {
-      optionalUpdateActivator(context, netVersion);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     var languageprov = Provider.of<LanguageProvider>(context);
-    final controller = Provider.of<List<Controller>>(context);
-    if (controller.isNotEmpty) {
-      netVersion = controller[0].sellerVersion - appVersion;
-    }
-
-    return controller.isEmpty
-        ? Loading()
-        : Scaffold(
+   return Scaffold(
             bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.shifting,
               iconSize: 25,
@@ -124,10 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     });
                   },
                 ),
-                Visibility(
-                  visible: netVersion > 4,
-                  child: ForcedUpdate(),
-                ),
+                
               ],
             ),
           );

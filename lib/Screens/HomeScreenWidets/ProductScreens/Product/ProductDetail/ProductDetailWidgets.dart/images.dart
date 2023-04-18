@@ -24,7 +24,7 @@ class _ImagesListState extends State<ImagesList> {
   bool play = false;
   bool clear = true;
   double currentOffset = 0;
-double threshold = 50;
+double threshold = 100;
 
   @override
   void initState() {

@@ -67,6 +67,7 @@ class _addProductDetailState extends State<addProductDetail> {
       }
     }
 
+
     if (Allcategories.isNotEmpty) {
       for (int i = 0; i < Allcategories.length; i++) {
         Allcatagories_name.add(Allcategories[i].name);

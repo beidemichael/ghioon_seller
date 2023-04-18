@@ -19,13 +19,14 @@ class PopupDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+        filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
         child: AlertDialog(
           shape:  RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(30.0))),
           contentPadding:  EdgeInsets.all(0),
           content: SizedBox(
             width: 250.0,
+           
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.stretch,

@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ghioon_seller/Screens/components/alertDialog.dart';
-import 'package:ghioon_seller/Service/Compression/image_compression.dart';
 import 'package:ghioon_seller/Service/uploadPhoto.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui';
@@ -141,6 +140,25 @@ class AddProductDetailLogic {
     appState.RefreshState();
   }
 
+  Future<File> compressFile(File file) async {
+    final filePath = file.absolute.path;
+
+    // Create output file path
+    // eg:- "Volume/VM/abcd_out.jpeg"
+    final lastIndex = filePath.lastIndexOf(new RegExp(r'.jp'));
+    final splitted = filePath.substring(0, (lastIndex));
+    final outPath = "${splitted}_out${filePath.substring(lastIndex)}";
+    var result = await FlutterImageCompress.compressAndGetFile(
+      file.absolute.path,
+      outPath,
+      quality: 10,
+    );
+
+    print(file.lengthSync());
+    print(result!.lengthSync());
+
+    return result;
+  }
 
   addProduct(BuildContext context) async {
     print('started uplading');

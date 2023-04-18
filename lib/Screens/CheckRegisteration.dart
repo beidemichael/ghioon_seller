@@ -23,9 +23,9 @@ class CheckRegisteration extends StatelessWidget {
     final userInfo = Provider.of<List<UserInformation>>(context);
     final user = Provider.of<UserAuth?>(context);
 
-    return Scaffold(
+    return Container(
       // ignore: unnecessary_null_comparison
-      body: userInfo == null
+      child: userInfo == null
           ? const Center(
               child: SpinKitCircle(
               color: Colors.black,
