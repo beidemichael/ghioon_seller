@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:ghioon_seller/Service/Compression/image_compression.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 
@@ -67,7 +68,7 @@ class _ViewImageAndVideoState extends State<ViewImageAndVideo> {
         loading = true;
       });
       var uploadedPhoto = await uploadImage(
-          imageTemporary, FirebaseAuth.instance.currentUser!.uid, 'Profile');
+        await compressFile(imageTemporary) , FirebaseAuth.instance.currentUser!.uid, 'Profile');
       ProfileDatabase().addImage(uploadedPhoto, user.documentId);
       setState(() {
         loading = false;

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
+import 'package:ghioon_seller/Service/Compression/image_compression.dart';
 import 'package:ghioon_seller/Shared/language.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +17,7 @@ import '../../../../../../Service/Product/AddProductDatabase.dart';
 import '../../../../../../Service/uploadPhoto.dart';
 import '../../../../../../Shared/customColors.dart';
 import '../../../../../components/alert.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 class EditImageContainer extends StatefulWidget {
   int index;
@@ -50,7 +52,7 @@ class _EditImageContainerState extends State<EditImageContainer> {
         loading = true;
       });
       var uploadedPhoto = await uploadImage(
-          imageTemporary, FirebaseAuth.instance.currentUser!.uid, 'Products');
+           await compressFile(imageTemporary), FirebaseAuth.instance.currentUser!.uid, 'Products');
       AddProductDatabase()
           .addImage(uploadedPhoto, products[widget.index].documentId);
       setState(() {
@@ -68,6 +70,7 @@ class _EditImageContainerState extends State<EditImageContainer> {
         loading = false;
       });
     }
+    
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,

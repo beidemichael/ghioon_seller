@@ -19,6 +19,9 @@ class Language {
   List<String> email = ["Email", "ኢሜይል"];
   List<String> update = ["Update", "አድስ"];
   List<String> no_text_error = ["Please enter some text", "እባክህ ጽሑፍ አስገባ"];
+   List<String> invalid_email = ["Please enter a valid email address", "እባክህን ትክክለኛ ኢሜል አስገባ"];
+    List<String> invalid_letter = ["Please enter letters only", "እባክዎ ፊደላትን ብቻ ያስገቡ"];
+  List<String> number_only = ["Please enter numbers only", "እባክዎ ቁጥሮችን ብቻ ያስገቡ"];
   List<String> saved_address = ["Saved Delivery Address", "የማስረከቢያ አድራሻ"];
   List<String> no_saved_address = [
     "You have no saved address",

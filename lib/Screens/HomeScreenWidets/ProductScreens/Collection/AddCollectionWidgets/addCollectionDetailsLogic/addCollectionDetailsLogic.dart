@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:ghioon_seller/Providers/CollectionProvider.dart';
 import 'package:ghioon_seller/Screens/components/alertDialog.dart';
 import 'package:ghioon_seller/Service/Collection/AddCollectionDatabase.dart';
+import 'package:ghioon_seller/Service/Compression/image_compression.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class AddCollectionLogic {
     final user = FirebaseAuth.instance.currentUser;
 
     var uploadedPhoto = await uploadImage(
-        appState.collectionImage[0].photo, user!.uid.toString(), 'Collections');
+       await compressFile(appState.collectionImage[0].photo!) , user!.uid.toString(), 'Collections');
 
     appState.imageList.add(uploadedPhoto.toString());
     //}

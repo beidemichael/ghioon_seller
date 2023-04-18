@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ghioon_seller/Service/Compression/image_compression.dart';
 import 'package:ghioon_seller/Service/uploadPhoto.dart';
 
 class RegisterDatabaseService {
@@ -135,7 +136,7 @@ class RegisterDatabaseService {
     var uploadedPhoto = '';
     if(image != ''){
   uploadedPhoto =
-        await uploadImage(File(image), userUid.toString(), 'Profile');
+        await uploadImage(await compressFile(File(image)) , userUid.toString(), 'Profile');
     }
    
 

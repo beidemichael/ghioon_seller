@@ -438,7 +438,24 @@ SizedBox(height: Dimensions.height10,),
     );
   }
 
-  Widget TextField(var label, var value, bool validate) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Widget TextField(var label, var value, bool validate) {
+   var languageprov = Provider.of<LanguageProvider>(context);
     return Column(
       children: [
         const SizedBox(
@@ -457,12 +474,35 @@ SizedBox(height: Dimensions.height10,),
               });
             },
             validator: (val) {
+              if(value == "email" && val!.isNotEmpty ){
+                  final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
+                  if (!emailRegex.hasMatch(val)) {
+                     return Language().invalid_email[languageprov.LanguageIndex];
+                  }
+
+              }
+             
               if (validate) {
                 if (val!.isEmpty) {
-                  return 'Please enter some text';
+                  return Language().no_text_error[languageprov.LanguageIndex];
+                } 
+                else {
+                  if (value == "businessNo") {
+                    bool numberOnly = RegExp(r'^[0-9]+$').hasMatch(val!);
+                    if (!numberOnly) {
+                        return Language().number_only[languageprov.LanguageIndex];
+                    }
+                  }
+                  if (value =="sellerName") {
+                    bool letterOnly = RegExp(r'^[a-zA-Z ]+$').hasMatch(val!);
+                    if (!letterOnly) {
+                      return Language().invalid_letter[languageprov.LanguageIndex];
+                    }
+                  }
                 }
-                return null;
+                
               }
+               
               return null;
             },
             style: TextStyle(
@@ -485,9 +525,18 @@ SizedBox(height: Dimensions.height10,),
                   borderRadius: const BorderRadius.all(Radius.circular(20.0)),
                   borderSide: BorderSide(color: Colors.orange.shade200)),
             ),
+            keyboardType: value == "businessNo" ? TextInputType.number : TextInputType.text,
           ),
         ),
       ],
     );
   }
+
+
+
+
+
 }
+
+
+

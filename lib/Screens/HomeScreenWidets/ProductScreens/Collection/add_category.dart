@@ -216,8 +216,7 @@ class _AddCategoryState extends State<AddCategory> {
                           if (businessType.isNotEmpty) {
                            
                               final user = FirebaseAuth.instance.currentUser;
-                              final phoneNumber = user!.phoneNumber;
-                              final userUid = user.uid;
+                              final userUid = user!.uid;
 
                               await AddCategoryDatabase().addCategory(businessType, userUid);
                                Navigator.of(context).pop();

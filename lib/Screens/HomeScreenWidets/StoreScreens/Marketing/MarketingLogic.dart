@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Service/Compression/image_compression.dart';
 
 import '../../../../Service/Marketing/MarketingDatabase.dart';
 import '../../../../Service/uploadPhoto.dart';

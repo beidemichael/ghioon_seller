@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addProductDetailWidgets/1,fixedButton.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addProductDetailWidgets/1,rangeButton.dart';
+import 'package:ghioon_seller/Service/Category/AddCategoryDatabase.dart';
 import 'package:ghioon_seller/Shared/language.dart';
 import 'package:provider/provider.dart';
 import '../../../../../Providers/RangeProvider.dart';
@@ -31,28 +32,7 @@ class addProductDetail extends StatefulWidget {
 }
 
 class _addProductDetailState extends State<addProductDetail> {
-  // dialog() {
-  //   final appState = Provider.of<RangeData>(context, listen: false);
-    
-  //   PopupDialog alert =
-  //       PopupDialog("Are You Sure you want to add the product?", () {
-  //     print(appState.isLoading);
-  //     appState.isLoading = true;
-  //     AddProductDetailLogic()
-  //         .addProduct(context)
-  //         .then((value) => appState.isLoading = false);
-  //   }, () {
-  //     Navigator.pop(context);
-  //     appState.isLoading = false;
-  //   });
-
-  //   showDialog(
-  //     context: context,
-  //     builder: (BuildContext context) {
-  //       return alert;
-  //     },
-  //   );
-  // }
+ 
    String selectedCatagoryValue = '';
 
   @override
@@ -60,6 +40,7 @@ class _addProductDetailState extends State<addProductDetail> {
     var languageprov = Provider.of<LanguageProvider>(context);
     final appState = Provider.of<RangeData>(context);
     final userInfo = Provider.of<List<UserInformation>>(context);
+    final Allcategories = Provider.of<List<Categories>>(context);
 
 // collections
     // List<String> catagories = [];
@@ -73,16 +54,27 @@ class _addProductDetailState extends State<addProductDetail> {
     // }
 
 //make bussiness catagory map to list
-    List<String> catagories = [];
+    List<String> user_catagories = [];
+    List<String> Allcatagories_name = [];
+    List<String> Allcatagories_type = [];
     
     if (userInfo.isNotEmpty) {
       for (int i = 0; i < userInfo[0].businessCategory.length; i++) {
-        catagories.add(userInfo[0].businessCategory[i]);
+        user_catagories.add(userInfo[0].businessCategory[i]);
        
        
        
       }
     }
+
+    if (Allcategories.isNotEmpty) {
+      for (int i = 0; i < Allcategories.length; i++) {
+        Allcatagories_name.add(Allcategories[i].name);
+        Allcatagories_type.add(Allcategories[i].type);
+        
+      }
+    }
+
     
 
     return Padding(
@@ -183,7 +175,7 @@ class _addProductDetailState extends State<addProductDetail> {
             ),
             value: appState.selectedCatagoryValue =='' ?appState. selectedCatagoryValue : null,
             validator: (value) => value == null ? Language().Select_Product_Catagory[languageprov.LanguageIndex] : null,
-            items: catagories.map((String value) {
+            items: Allcatagories_name.map((String value) {
               return DropdownMenuItem<String>(
                 value: value,
                 child: Text(value),
@@ -191,7 +183,8 @@ class _addProductDetailState extends State<addProductDetail> {
             }).toList(),
             onChanged: (value) {
               setState(() {
-              appState. selectedCatagoryValue = value!;
+               
+              appState. selectedCatagoryValue = Allcatagories_type[ Allcatagories_name.indexOf(value!)];
               print(appState.selectedCatagoryValue);
               });
               // Do something with the selected value
@@ -277,9 +270,13 @@ class _addProductDetailState extends State<addProductDetail> {
                     final appState = Provider.of<RangeData>(context, listen: false);
     
                     PopupDialog alert =
-                        PopupDialog("Are You Sure you want to add the product?", () {
+                        PopupDialog("Are You Sure you want to add the product?", ()async {
                       print(appState.isLoading);
                       appState.isLoading = true;
+                      if(!user_catagories.contains(appState. selectedCatagoryValue) ){
+                        List<String> newcataegory = [appState. selectedCatagoryValue];
+                          await AddCategoryDatabase().addCategory(newcataegory, userInfo[0].userUid);
+                      }
                       AddProductDetailLogic()
                           .addProduct(context)
                           .then((value) => appState.isLoading = false);

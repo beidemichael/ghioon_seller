@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:ghioon_seller/Models/models.dart';
 import 'package:ghioon_seller/Providers/RangeProvider.dart';
 import 'package:ghioon_seller/Providers/language_provider.dart';
 import 'package:ghioon_seller/Screens/HomeScreenWidets/ProductScreens/Product/AddProductsWidgets/addImageContainer.dart';
@@ -24,6 +25,7 @@ class _AddProductState extends State<AddProduct> {
 
   Widget build(BuildContext context) {
     var languageprov = Provider.of<LanguageProvider>(context);
+    final categories = Provider.of<List<Categories>>(context);
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     final appState = Provider.of<RangeData>(context);
