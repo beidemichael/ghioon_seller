@@ -129,6 +129,7 @@ class RegisterDatabaseService {
     String zone,
     var userUid,
     String image,
+    var context,
   ) async {
     print("============================");
     print(region);
@@ -136,7 +137,7 @@ class RegisterDatabaseService {
     var uploadedPhoto = '';
     if(image != ''){
   uploadedPhoto =
-        await uploadImage(await compressFile(File(image)) , userUid.toString(), 'Profile');
+        await uploadImage(await changeImage(File(image),context) , userUid.toString(), 'Profile');
     }
    
 

@@ -43,7 +43,7 @@ class AddCollectionLogic {
     final user = FirebaseAuth.instance.currentUser;
 
     var uploadedPhoto = await uploadImage(
-       await compressFile(appState.collectionImage[0].photo!) , user!.uid.toString(), 'Collections');
+       await changeImage(appState.collectionImage[0].photo!,context) , user!.uid.toString(), 'Collections');
 
     appState.imageList.add(uploadedPhoto.toString());
     //}

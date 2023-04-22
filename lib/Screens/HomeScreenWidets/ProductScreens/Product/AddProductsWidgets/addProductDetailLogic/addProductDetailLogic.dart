@@ -7,6 +7,7 @@ import 'package:ghioon_seller/Screens/components/alertDialog.dart';
 import 'package:ghioon_seller/Service/uploadPhoto.dart';
 import 'package:provider/provider.dart';
 import 'dart:ui';
+import 'package:ghioon_seller/Service/Compression/image_compression.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../../../../../../Providers/RangeProvider.dart';
@@ -140,25 +141,25 @@ class AddProductDetailLogic {
     appState.RefreshState();
   }
 
-  Future<File> compressFile(File file) async {
-    final filePath = file.absolute.path;
+  // Future<File> compressFile(File file) async {
+  //   final filePath = file.absolute.path;
 
-    // Create output file path
-    // eg:- "Volume/VM/abcd_out.jpeg"
-    final lastIndex = filePath.lastIndexOf(new RegExp(r'.jp'));
-    final splitted = filePath.substring(0, (lastIndex));
-    final outPath = "${splitted}_out${filePath.substring(lastIndex)}";
-    var result = await FlutterImageCompress.compressAndGetFile(
-      file.absolute.path,
-      outPath,
-      quality: 10,
-    );
+  //   // Create output file path
+  //   // eg:- "Volume/VM/abcd_out.jpeg"
+  //   final lastIndex = filePath.lastIndexOf(new RegExp(r'.jp'));
+  //   final splitted = filePath.substring(0, (lastIndex));
+  //   final outPath = "${splitted}_out${filePath.substring(lastIndex)}";
+  //   var result = await FlutterImageCompress.compressAndGetFile(
+  //     file.absolute.path,
+  //     outPath,
+  //     quality: 10,
+  //   );
 
-    print(file.lengthSync());
-    print(result!.lengthSync());
+  //   print(file.lengthSync());
+  //   print(result!.lengthSync());
 
-    return result;
-  }
+  //   return result;
+  // }
 
   addProduct(BuildContext context) async {
     print('started uplading');
@@ -167,7 +168,7 @@ class AddProductDetailLogic {
     final user = FirebaseAuth.instance.currentUser;
     for (var i = 0; i < appState.Images.length; i++) {
       var uploadedPhoto = await uploadImage(
-          await compressFile(appState.Images[i].photo!),
+          await changeImage(appState.Images[i].photo!,context),
           user!.uid.toString(),
           'Products');
 

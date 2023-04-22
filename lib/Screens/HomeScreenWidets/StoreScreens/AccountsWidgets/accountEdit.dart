@@ -84,7 +84,8 @@ class _AccountEditState extends State<AccountEdit> {
                     widget.appState.region,
                     widget.appState.zone,
                     widget.user.userUid,
-                    widget.appState.image);
+                    widget.appState.image,
+                    context);
 
                 setState(() {
                   loading = false;

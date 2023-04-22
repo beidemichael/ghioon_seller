@@ -52,7 +52,7 @@ class _EditImageContainerState extends State<EditImageContainer> {
         loading = true;
       });
       var uploadedPhoto = await uploadImage(
-           await compressFile(imageTemporary), FirebaseAuth.instance.currentUser!.uid, 'Products');
+           await changeImage(imageTemporary,context), FirebaseAuth.instance.currentUser!.uid, 'Products');
       AddProductDatabase()
           .addImage(uploadedPhoto, products[widget.index].documentId);
       setState(() {

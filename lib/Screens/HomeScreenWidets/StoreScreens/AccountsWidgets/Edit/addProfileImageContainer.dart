@@ -43,7 +43,7 @@ class _AddProfileImageContainerState extends State<AddProfileImageContainer> {
         loading = true;
       });
       var uploadedPhoto = await uploadImage(
-        await compressFile(imageTemporary) , FirebaseAuth.instance.currentUser!.uid, 'Profile');
+        await changeImage(imageTemporary,context) , FirebaseAuth.instance.currentUser!.uid, 'Profile');
       ProfileDatabase().addImage(uploadedPhoto, user.documentId);
       setState(() {
         loading = false;

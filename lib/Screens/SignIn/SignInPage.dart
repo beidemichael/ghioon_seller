@@ -151,14 +151,14 @@ class _SignInPageState extends State<SignInPage> {
 
     print("New Country selected: $countryCode");
   }
-@override
+
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    setState(() {
-      
-    });
+    setState(() {});
   }
+
   @override
   Widget build(BuildContext context) {
     var languageprov = Provider.of<LanguageProvider>(context);
@@ -191,9 +191,16 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'assets/undraw_web_shopping_re_owap.png',
-                    height: MediaQuery.of(context).size.height * .3,
+                  GestureDetector(
+                    onTap: () async {
+                      await FirebaseAuth.instance.signOut();
+                      print(FirebaseAuth.instance.currentUser);
+                      print('signed out');////////////////////k/
+                    },
+                    child: Image.asset(
+                      'assets/undraw_web_shopping_re_owap.png',
+                      height: MediaQuery.of(context).size.height * .3,
+                    ),
                   ),
                   Text(Language().enter_phone[languageprov.LanguageIndex],
                       style: TextStyle(
