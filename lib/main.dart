@@ -157,7 +157,7 @@ class _MyAppState extends State<MyApp> {
   int netVersion = 0;
 
   /////////////////////////// App version
-  int appVersion = 12;
+  int appVersion = 14;
 
   //////////////////////////  App version
   ///

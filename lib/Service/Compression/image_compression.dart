@@ -26,13 +26,12 @@ Future<File> compressFile(File file) async {
   return result;
 }
 
-
 Future<File> changeImage(dynamic imageFile, BuildContext context) async {
   // Request write permission if not granted
   final hasWritePermission = await _requestWritePermission(context);
   if (!hasWritePermission) {
     // throw Exception('User did not grant write permission.');
-    _requestWritePermission( context);
+    _requestWritePermission(context);
   }
 
   // Read the image bytes from the file
@@ -58,7 +57,7 @@ Future<File> changeImage(dynamic imageFile, BuildContext context) async {
   }
 
   // Resize the image to 500x500 pixels
-  final resizedImage = img.copyResize(croppedImage, width: 500, height: 500);
+  final resizedImage = img.copyResize(croppedImage, width: 1000, height: 1000);
 
   // Check if resizing failed
   if (resizedImage == null) {
